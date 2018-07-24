@@ -1,7 +1,7 @@
 <?php 
 namespace Connect;
 
-include "logger.php";
+require "logger.php";
 
 class Product
 {
@@ -53,6 +53,12 @@ class Item
 	var $old_quantity;
 }
 
+class ValueChoice
+{
+	var $value;
+	var $label;
+}
+
 class Param
 {
 	var $id;
@@ -60,6 +66,10 @@ class Param
 	var $description;
 	var $value;
 	var $value_error;
+	
+	/**
+	 * @var ValueChoice{value}
+	 */
 	var $value_choices;
 	
 	function error($msg)
@@ -80,7 +90,11 @@ class Tier
 	var $id;
 	var $externalId;
 	var $name;
-	var $contactInfo;
+
+    /**
+     * @var ContactInfo
+     */
+	var $contact_info;
 }
 
 class Asset
@@ -112,6 +126,41 @@ class Asset
 	 * @var Tier{}
 	 */
 	var $tiers;
+}
+
+class PhoneNumber
+{
+	var $country_code;
+	var $area_code;
+	var $phone_number;
+	var $extension;
+}
+
+class Contact
+{
+	var $email;
+	var $first_name;
+	var $last_name;
+	
+	/**
+	 * @var PhoneNumber
+	 */
+	var $phone_number;
+}
+
+class ContactInfo
+{
+    var $address_line1;
+    var $address_line2;
+    var $city;
+    
+    /**
+     * @var Contact
+     */
+    var $contact;
+    var $country;
+    var $postal_code;
+    var $state;
 }
 
 class Request
@@ -244,6 +293,7 @@ class RequestsProcessor
 	
 	private function parse($structure, $className)
 	{
+	    print "MARC ".$className."\n";
 		// handle Array
 		if (substr($className, -2) === '[]') {
 			
@@ -258,7 +308,7 @@ class RequestsProcessor
 
 		// handle Map
 		if (substr($className, -1) === '}') {
-			$mapTo = null;
+		    $mapTo = null;
 			if (preg_match('/{(\w*)}$/', $className, $m)) {
 				$mapTo = $m[1];
 				$className = substr($className, 0, -strlen($m[0]));
@@ -354,8 +404,10 @@ class RequestsProcessor
 					$this->sendRequest('POST', '/requests/'.$req->id.'/inquire', '{}');
 				} catch (Fail $e) {
 					// fail request
-					$this->sendRequest('POST', '/requests/'.$req->id.'/fail', '{"reason": "'.$e->message.'"}');
-				}
+					$this->sendRequest('POST', '/requests/'.$req->id.'/fail', '{"reason": "'.$e->getMessage().'"}');
+				} catch (Skip $e) {
+				    Logger::get()->debug("Skipping ".$req->id);
+                }
 			}
 		}
 	}
@@ -398,6 +450,18 @@ class Inquire extends Exception
 		$this->params = $params;
 		parent::__construct('Activation parameters are required', 'inqury');
 	}
+}
+
+class Skip extends Exception
+{
+    //var $params;
+
+    public
+    function __construct($message = null)
+    {
+        parent::__construct($message ? $message : 'Request skipped', "skip");
+    }
+
 }
 
 class Fail extends Exception
