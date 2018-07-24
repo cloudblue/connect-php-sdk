@@ -53,7 +53,7 @@ class Item
 	var $old_quantity;
 }
 
-class ValueChoice
+class ValueOption
 {
 	var $value;
 	var $label;
@@ -68,7 +68,7 @@ class Param
 	var $value_error;
 	
 	/**
-	 * @var ValueChoice{value}
+	 * @var ValueOption{value}
 	 */
 	var $value_choices;
 	
