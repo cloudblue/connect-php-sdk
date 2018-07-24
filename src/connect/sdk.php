@@ -88,7 +88,7 @@ class Param
 class Tier
 {
 	var $id;
-	var $externalId;
+	var $external_id;
 	var $name;
 
     /**
@@ -100,7 +100,7 @@ class Tier
 class Asset
 {
 	var $id;
-	var $externalId;
+	var $external_id;
 	
 	/**
 	 * @var Product
