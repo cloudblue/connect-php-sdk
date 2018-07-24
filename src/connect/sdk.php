@@ -293,7 +293,6 @@ class RequestsProcessor
 	
 	private function parse($structure, $className)
 	{
-	    print "MARC ".$className."\n";
 		// handle Array
 		if (substr($className, -2) === '[]') {
 			
@@ -454,14 +453,11 @@ class Inquire extends Exception
 
 class Skip extends Exception
 {
-    //var $params;
-
     public
     function __construct($message = null)
     {
         parent::__construct($message ? $message : 'Request skipped', "skip");
     }
-
 }
 
 class Fail extends Exception
