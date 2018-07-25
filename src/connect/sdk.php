@@ -422,7 +422,17 @@ class RequestsProcessor
 		$plist = array();
 		foreach ($parray as $p) {
 			$parr = (array)$p;
+
 			unset($parr['value_choices']);
+
+			foreach ($parr as $k => $v) {
+				if (!$v)
+					unset($parr[$k]);
+
+				if ($k == 'value' && !$v)
+					$parr[$k] = '';
+			}
+
 			$plist[] = $parr;
 		}
 	
