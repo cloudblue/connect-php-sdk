@@ -72,6 +72,12 @@ class Param
 	 */
 	var $value_choices;
 	
+	function __construct($id = null, $value = null)
+	{
+		$this->id = $id;
+		$this->value = $value;
+	}
+
 	function error($msg)
 	{
 		$this->value_error = $msg;
