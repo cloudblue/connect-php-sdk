@@ -388,10 +388,7 @@ class RequestsProcessor
 	public
 	function process()
 	{
-		$reqstr = $this->sendRequest('GET', '/requests');
-		$reqarr = json_decode($reqstr, true);
-		
-		$reqlist = $this->parse($reqarr, 'Request[]');
+		$reqlist = $this->listRequests();
 
 		foreach($reqlist as $req) {
 			if ($req->status == 'pending') { // actually default filter is pending 
@@ -417,6 +414,27 @@ class RequestsProcessor
 		}
 	}
 	
+	/**
+	 * List requests
+	 * @param array $filters Filter for listing key->value or key->array(value1, value2)
+	 */
+	public
+	function listRequests($filters = null)
+	{
+		$query = '';
+		if ($filters) {
+			$query = http_build_query($filters);
+
+			// process case when value for filter is array
+			$query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
+		}
+
+		$reqstr = $this->sendRequest('GET', '/requests'.$query);
+		$reqarr = json_decode($reqstr, true);
+
+		return $this->parse($reqarr, 'Request[]');
+	}
+
 	function updateParameters($req, $parray)
 	{
 		$plist = array();

@@ -27,7 +27,8 @@ class MyAppRequests extends \Connect\RequestsProcessor
 		$req->type;
 
 		$p1 = $req->asset->params['param_a']->error('xxxx');
-		$p2 = $req->asset->params['param_b']->error('yyyy')->value('default');
+// 		$p2 = $req->asset->params['param_b']->error('yyyy')->value('true');
+		$p2 = new \Connect\Param('param_b', 'true');
 		$req->requestProcessor->updateParameters($req, array($p1, $p2));
 		
 		foreach($req->asset->items as $item)
@@ -60,13 +61,15 @@ class MyAppRequests extends \Connect\RequestsProcessor
 		
 // 		if (!isset($req->asset->params['param_a']))
 // 			throw new \Connect\Inquire(array( 'param_a' => 'ActivationID should be set' ));
-			throw new \Connect\Inquire(array( 
-					$req->asset->params['param_a']->error('xxxx'),
-					$req->asset->params['param_b']->error('yyyy')->value('default')
-			));
+// 			throw new \Connect\Inquire(array( 
+// 					$req->asset->params['param_a']->error('xxxx'),
+// 					$req->asset->params['param_b']->error('yyyy')->value('default')
+// 			));
 				
 // 		if (!isset($req->asset->params['param_b']))
 // 			throw new \Connect\Fail(array( 'param_b' => 'Your activation code is already used' ));
+
+		throw new \Connect\Skip();
 
 		return "activation succeeded";
 	}
@@ -76,5 +79,8 @@ class MyAppRequests extends \Connect\RequestsProcessor
 $rp = new MyAppRequests();
 
 $rp->process();
+
+// $rlist = $rp->listRequests(array('status' => 'inquiring'));
+// print_r($rlist);
 
 ?>
