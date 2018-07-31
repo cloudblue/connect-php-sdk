@@ -10,10 +10,7 @@ class MyAppRequests extends \Connect\RequestsProcessor
 {
 	function __construct()
 	{
-		parent::__construct(array(
-				'ApiKey' => 'SU-188-480-658:6a0f50e6c996ebe60cecaaa2ae12bc0eae9dfdbc',
-				'ApiEndpoint' => 'https://api.stage.rnd.host/public/v1'
-		));
+		parent::__construct('config.json');
 	}
 	
 	function processRequest($req)

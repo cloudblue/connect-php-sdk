@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the Cloud Blue Connect SDK.
+ * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Cloud Blue. All Rights Reserved.
+ * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -19,6 +19,14 @@ interface LoggerInterface
 	const LEVEL_INFO  = 2;
 	const LEVEL_ERROR = 1;
 	const LEVEL_FATAL = 0;
+
+	const LEVELS = array(
+			self::LEVEL_FATAL => 'FATAL',
+			self::LEVEL_ERROR => 'ERROR',
+			self::LEVEL_INFO  => 'INFO',
+			self::LEVEL_DEBUG => 'DEBUG',
+			self::LEVEL_TRACE => 'TRACE'
+	);
 
     /**
      * Logs trace messages
@@ -143,14 +151,6 @@ class LogSession
  */
 class Logger implements LoggerInterface
 {
-	const LEVELS = array(
-			self::LEVEL_FATAL => 'FATAL',
-			self::LEVEL_ERROR => 'ERROR',
-			self::LEVEL_INFO  => 'INFO',
-			self::LEVEL_DEBUG => 'DEBUG',
-			self::LEVEL_TRACE => 'TRACE'
-	);
-
     protected static $instance;
 
     protected $logFile;
@@ -176,6 +176,15 @@ class Logger implements LoggerInterface
         if ($this->fp) {
             @fclose($this->fp);
         }
+    }
+
+    /**
+     * Set logger logLevel (one of LEVEL_* constants)
+     * @param int $level
+     */
+    public function setLogLevel($level)
+    {
+		$this->logLevel = $level;
     }
 
     /**

@@ -1,7 +1,14 @@
 <?php 
+/**
+ * This file is part of the Ingram Micro Cloud Blue Connect SDK.
+ *
+ * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ */
+
 namespace Connect;
 
-require "logger.php";
+require_once "config.php";
+require_once "logger.php";
 
 class Product
 {
@@ -229,16 +236,16 @@ class RequestsProcessor
 			curl_setopt($this->ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 			curl_setopt($this->ch, CURLOPT_HEADER, true);
 			curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-// 			curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, self::$timeout);
-// 			curl_setopt($this->ch, CURLOPT_TIMEOUT, self::$timeout);
-// 			curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, $this->config->timeout);
+			curl_setopt($this->ch, CURLOPT_TIMEOUT, $this->config->timeout);
+			curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, $this->config->sslVerifyHost ? 2 : 0);
 // 			curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
 		}
 		
 		$requestId = uniqid('api-request-');
-		$uri = $this->config['ApiEndpoint'] . $path;
+		$uri = $this->config->apiEndpoint . $path;
 		$headers = array();
-		$headers[] = 'Authorization: ApiKey ' . $this->config['ApiKey'];		
+		$headers[] = 'Authorization: ApiKey ' . $this->config->apiKey;		
 		$headers[] = 'Request-ID: '. $requestId;
 		$headers[] = 'Content-Type: application/json';
 		
@@ -376,7 +383,9 @@ class RequestsProcessor
 	public
 	function __construct($config)
 	{
-		$this->config = $config;
+		$this->config = ($config instanceof Config) ? $config : new Config($config);	
+		$this->config->validate();
+		Logger::get()->setLogLevel($this->config->logLevel);
 	}
 	
 	public
