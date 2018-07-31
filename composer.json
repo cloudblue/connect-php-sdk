@@ -1,0 +1,17 @@
+{
+    "name": "cloudblue/connect-sdk",
+    "type": "library",
+    "description": "IngramMicro CloudBlue APS Connect QuickStart SDK",
+    "license": "proprietary",
+    "require": {
+        "php": ">=5.5.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-Reflection": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Connect": "src/connect"
+        }
+    }
+}
