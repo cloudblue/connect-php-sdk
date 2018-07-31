@@ -78,7 +78,15 @@ class MyAppRequests extends \Connect\RequestsProcessor
 
 $rp = new MyAppRequests();
 
-$rp->process();
+try {
+	$rp->process();
+	throw new Exception('Some unexpected error happened');
+} catch (Exception $e) {
+	\Connect\Logger::get()->error($e->getMessage());
+	
+	// Dump to log all level records
+	\Connect\Logger::get()->dump();
+}
 
 // $rlist = $rp->listRequests(array('status' => 'inquiring'));
 // print_r($rlist);

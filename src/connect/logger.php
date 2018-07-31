@@ -14,6 +14,12 @@ namespace Connect;
  */
 interface LoggerInterface
 {
+	const LEVEL_TRACE = 4;
+	const LEVEL_DEBUG = 3;
+	const LEVEL_INFO  = 2;
+	const LEVEL_ERROR = 1;
+	const LEVEL_FATAL = 0;
+
     /**
      * Logs trace messages
      *
@@ -48,6 +54,86 @@ interface LoggerInterface
      * @param string $message
      */
     public function fatal($message);
+
+    /**
+     * Logs message of any level
+     *
+     * @param int    $level   - one of LEVEL_* constants
+     * @param string $message - message to log
+     */
+    public function log($level, $message);
+
+    /**
+     * Write log record into log
+     *
+     * @param LogRecord $record
+     */
+    public function write($record);
+}
+
+/**
+ * LogRecord class, instance created for every logging action
+ *
+ * @package Connect
+ */
+class LogRecord
+{
+	public $level;
+	public $message;
+	public $time;
+
+	public function __construct($level, $message, $time = 0)
+	{
+		$this->level = $level;
+		$this->message = $message;
+		$this->time = ($time === 0) ? time() : $time;
+	}
+}
+
+/**
+ * Collects all log records for one processing batch
+ * In case of exception these records will be added to log for analisys
+ *
+ * @package Connect
+ */
+class LogSession
+{
+	private $sessionLog = array();
+
+	/**
+	 * Add logging record to session log
+	 *
+	 * @param LogRecord $record
+	 */
+	public function addRecord($record)
+	{
+		$this->sessionLog[] = $record;
+	}
+
+	/**
+	 * Reset session log
+	 */
+	public function reset()
+	{
+		$this->sessionLog = array();
+	}
+
+	/**
+	 * Dump session log to specified logger
+	 *
+	 * @param LoggerInterface $log
+	 */
+	public function dumpTo($log)
+	{
+		if (!$this->sessionLog)
+			return;
+
+		$log->write(new LogRecord(null, "=== Detailed session log dump begin ==================", null));
+		foreach($this->sessionLog as $r) {
+			$log->write($r); // historical log dumped with actual event times
+		}
+		$log->write(new LogRecord(null, "=== Detailed session log dump end ====================", null));
+	}
 }
 
  /**
@@ -57,17 +143,20 @@ interface LoggerInterface
  */
 class Logger implements LoggerInterface
 {
-    const LEVEL_TRACE = 'TRACE';
-    const LEVEL_DEBUG = 'DEBUG';
-    const LEVEL_INFO = 'INFO';
-    const LEVEL_ERROR = 'ERROR';
-    const LEVEL_FATAL = 'FATAL';
+	const LEVELS = array(
+			self::LEVEL_FATAL => 'FATAL',
+			self::LEVEL_ERROR => 'ERROR',
+			self::LEVEL_INFO  => 'INFO',
+			self::LEVEL_DEBUG => 'DEBUG',
+			self::LEVEL_TRACE => 'TRACE'
+	);
 
     protected static $instance;
 
     protected $logFile;
     protected $fp;
-    protected $debug = false;
+    protected $logLevel = self::LEVEL_INFO;
+    protected $session;
 
     public function __construct()
     {
@@ -76,8 +165,10 @@ class Logger implements LoggerInterface
         }
 
         if (defined('CONNECT_DEBUG') || isset($_SERVER['CONNECT_DEBUG'])) {
-        	$this->debug = true;
+			$this->logLevel = self::LEVEL_TRACE;
         }
+
+        $this->session = new LogSession();
     }
 
     function __destruct()
@@ -128,9 +219,7 @@ class Logger implements LoggerInterface
      */
     public function trace($message)
     {
-        if ($this->debug) {
-            $this->log(self::LEVEL_TRACE, $message);
-        }
+		$this->log(self::LEVEL_TRACE, $message);
     }
 
     /**
@@ -138,9 +227,7 @@ class Logger implements LoggerInterface
      */
     public function debug($message)
     {
-        if ($this->debug) {
-            $this->log(self::LEVEL_DEBUG, $message);
-        }
+		$this->log(self::LEVEL_DEBUG, $message);
     }
 
     /**
@@ -168,28 +255,55 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param $level
-     * @param $message
+     * Log message of any level
+     *
+     * @param int 	 $level
+     * @param string $message
      */
-    protected function log($level, $message)
+    public function log($level, $message)
     {
-        if ($this->debug) {
-            // recording milliseconds in dev mode
-            $message = '[' . $this->udate('Y-m-d H:i:s.u T') . "] $level " . $message . PHP_EOL;
-        } else {
-            $message = '[' . date('Y/m/d h:i:s') . "] $level " . $message . PHP_EOL;
-        }
+		$record = new LogRecord($level, $message);
 
-        if ($this->fp) {
-            fwrite($this->fp, $message);
-        } else {
-            if (isset($GLOBALS['useErrorLog'])) {
-                error_log($message);
-            } else {
-                file_put_contents('php://stderr', $message, FILE_APPEND);
-            }
-        }
+		// add all messages to session log
+		$this->session->addRecord($record);    	
+
+		// write record into log only if it is enough by level
+		if ($this->logLevel >= $level)
+		$this->write($record);
     }
+
+    /**
+     * Write log record into log
+     * 
+     * @param LogRecord $record
+     */
+    public function write($record)
+    {
+		$logLine = array();
+
+		if ($record->time) {
+			$timestr = ($this->logLevel >= self::LEVEL_DEBUG) ? $this->udate('Y-m-d H:i:s.u T', $record->time) : date('Y/m/d h:i:s', $record->time);
+			$logData[] = "[ $timestr ]";
+		} 
+
+		if ($record->level != null) {
+			$logData[] = self::LEVELS[$record->level];
+		}
+
+		$logData[] = $record->message;
+
+		$message = implode(' ', $logData) . PHP_EOL;
+
+		if ($this->fp) {
+			fwrite($this->fp, $message);
+		} else {
+			if (isset($GLOBALS['useErrorLog'])) {
+				error_log($message);
+			} else {
+				file_put_contents('php://stderr', $message, FILE_APPEND);
+			}
+		} 
+	}
 
     /**
      * @param string $format
@@ -234,4 +348,12 @@ class Logger implements LoggerInterface
     	return self::$instance;
     }
     
+    /**
+     * Dump session log to current log, and reset session
+     */
+    public function dump()
+    {
+		$this->session->dumpTo($this);
+		$this->session->reset();
+    }
 }
