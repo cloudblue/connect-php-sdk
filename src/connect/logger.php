@@ -77,6 +77,12 @@ interface LoggerInterface
      * @param LogRecord $record
      */
     public function write($record);
+
+    /**
+     * Set logger logLevel (one of LEVEL_* constants)
+     * @param int $level
+     */
+    public function setLogLevel($level);
 }
 
 /**

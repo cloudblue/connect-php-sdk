@@ -10,24 +10,40 @@ namespace Connect;
 require_once "config.php";
 require_once "logger.php";
 
+/**
+ * Class Product
+ * @package Connect
+ */
 class Product
 {
 	var $id;
 	var $name;
 }
 
+/**
+ * Class Provider
+ * @package Connect
+ */
 class Provider
 {
 	var $id;
 	var $name;
 }
 
+/**
+ * Class Vendor
+ * @package Connect
+ */
 class Vendor
 {
 	var $id;
 	var $name;
 }
 
+/**
+ * Class Connection
+ * @package Connect
+ */
 class Connection
 {
 	var $id;
@@ -44,6 +60,10 @@ class Connection
 	var $vendor;
 }
 
+/**
+ * Class Item
+ * @package Connect
+ */
 class Item
 {
 	var $id;
@@ -60,12 +80,20 @@ class Item
 	var $old_quantity;
 }
 
+/**
+ * Class ValueOption
+ * @package Connect
+ */
 class ValueOption
 {
 	var $value;
 	var $label;
 }
 
+/**
+ * Class Param
+ * @package Connect
+ */
 class Param
 {
 	var $id;
@@ -98,6 +126,10 @@ class Param
 	}
 }
 
+/**
+ * Class Tier
+ * @package Connect
+ */
 class Tier
 {
 	var $id;
@@ -110,6 +142,10 @@ class Tier
 	var $contact_info;
 }
 
+/**
+ * Class Asset
+ * @package Connect
+ */
 class Asset
 {
 	var $id;
@@ -141,6 +177,10 @@ class Asset
 	var $tiers;
 }
 
+/**
+ * Class PhoneNumber
+ * @package Connect
+ */
 class PhoneNumber
 {
 	var $country_code;
@@ -149,6 +189,10 @@ class PhoneNumber
 	var $extension;
 }
 
+/**
+ * Class Contact
+ * @package Connect
+ */
 class Contact
 {
 	var $email;
@@ -161,6 +205,10 @@ class Contact
 	var $phone_number;
 }
 
+/**
+ * Class ContactInfo
+ * @package Connect
+ */
 class ContactInfo
 {
     var $address_line1;
@@ -176,6 +224,11 @@ class ContactInfo
     var $state;
 }
 
+/**
+ * Class Request
+ *      APS Connect QuickStart Request object
+ * @package Connect
+ */
 class Request
 {
 	/**
@@ -188,10 +241,18 @@ class Request
 	var $created;
 	var $updated;
 	var $status;
-	
+
+    /**
+     * @var RequestsProcessor
+     * @noparse
+     */
 	var $requestProcessor;
-	
-	function getNewItems()
+
+    /**
+     * Get new SKUs purchased in the request
+     * @return Item[]
+     */
+    function getNewItems()
 	{
 		$ret = array();
 		foreach ($this->asset->items as $item) {
@@ -201,7 +262,11 @@ class Request
 		return $ret;
 	}
 
-	function getChangedItems()
+    /**
+     * Get SKUs upgraded in the request
+     * @return Item[]
+     */
+    function getChangedItems()
 	{
 		$ret = array();
 		foreach ($this->asset->items as $item) {
@@ -210,8 +275,12 @@ class Request
 		}
 		return $ret;
 	}
-	
-	function getRemovedItems()
+
+    /**
+     * Get SKUs removed in the request
+     * @return Item[]
+     */
+    function getRemovedItems()
 	{
 		$ret = array();
 		foreach ($this->asset->items as $item) {
@@ -223,12 +292,25 @@ class Request
 	
 }
 
+/**
+ * Class RequestsProcessor
+ *      Process APS Connect QuickStart API Requests
+ * @package Connect
+ */
 class RequestsProcessor
 {
 	private $ch; // curl handle
 	private $config;
-	
-	private 
+
+    /**
+     * Send request to remote API
+     * @param string $verb - GET | POST | PUT | DELETE | PATCH
+     * @param string $path
+     * @param string $body (optional)
+     * @return string
+     * @throws Exception
+     */
+    private
 	function sendRequest($verb, $path, $body = null)
 	{
 		if (!isset($this->ch)) {
@@ -239,7 +321,6 @@ class RequestsProcessor
 			curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, $this->config->timeout);
 			curl_setopt($this->ch, CURLOPT_TIMEOUT, $this->config->timeout);
 			curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, $this->config->sslVerifyHost ? 2 : 0);
-// 			curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
 		}
 		
 		$requestId = uniqid('api-request-');
@@ -303,8 +384,15 @@ class RequestsProcessor
 
 		return $response;
 	}
-	
-	private function parse($structure, $className)
+
+    /**
+     * Parse JSON-based array-structure to tree of objects, recurrent calling
+     * @param array $structure
+     * @param string $className
+     * @return array
+     * @throws \ReflectionException
+     */
+    private function parse($structure, $className)
 	{
 		// handle Array
 		if (substr($className, -2) === '[]') {
@@ -354,7 +442,11 @@ class RequestsProcessor
 				$value = $structure[$prop->getName()];
 				if ($prop->getDocComment()) {
 					$comment = trim($prop->getDocComment());
-					$m = null;
+
+                    if (preg_match('/\@noparse/', $comment))
+                        continue;
+
+                    $m = null;
 					if (preg_match('/\@var\s+(\S+)/', $comment, $m)) {
 						$subClassName = $m[1];
 						switch($subClassName) {
@@ -379,22 +471,43 @@ class RequestsProcessor
 		
 		return $obj;
 	}
-	
-	public
+
+    /**
+     * RequestsProcessor constructor
+     * @param mixed $config
+     *      one of
+     *          Config - A configuration object
+     *          string - ConfigFile path (JSON with config object inside)
+     *          array  - Part of bigger config in format of JSON-parsed array with configuration
+     * @throws ConfigException
+     * @throws ConfigPropertyInvalid
+     * @throws ConfigPropertyMissed
+     */
+    public
 	function __construct($config)
 	{
 		$this->config = ($config instanceof Config) ? $config : new Config($config);	
 		$this->config->validate();
 		Logger::get()->setLogLevel($this->config->logLevel);
 	}
-	
-	public
+
+    /**
+     * Process one request, abstract function
+     * @param Request $req - request being processed
+     * @returns string - returns activation message, optional
+     * @throws Exception
+     */
+    public
 	function processRequest($req)
 	{
-		throw new \Exception('processRequest() method is not implemented');
+		throw new Exception('processRequest() method is not implemented');
 	}
-	
-	public
+
+    /**
+     * Process all requests
+     * @throws Exception
+     */
+    public
 	function process()
 	{
 		$reqlist = $this->listRequests();
@@ -426,6 +539,8 @@ class RequestsProcessor
 	/**
 	 * List requests
 	 * @param array $filters Filter for listing key->value or key->array(value1, value2)
+     * @return Request[]
+     * @throws \Exception
 	 */
 	public
 	function listRequests($filters = null)
@@ -444,7 +559,19 @@ class RequestsProcessor
 		return $this->parse($reqarr, 'Request[]');
 	}
 
-	function updateParameters($req, $parray)
+    /**
+     * Update request parameters
+     * @param Request $req - request being updated
+     * @param Param[] $parray - array of parameters
+     *      Example:
+     *          array(
+     *              $req->asset->params['param_a']->error('xxxx'),
+     *              $req->asset->params['param_b']->value('true'),
+     *              new \Connect\Param('param_c', 'newValue')
+     *          )
+     * @throws Exception
+     */
+    function updateParameters($req, $parray)
 	{
 		$plist = array();
 		foreach ($parray as $p) {
@@ -474,7 +601,7 @@ class Exception extends \Exception
 	var $object;
 	
 	public
-	function __construct($message, $code, $object = null)
+	function __construct($message, $code = 'unknown', $object = null)
 	{
 		$this->code = $code;
 		$this->message = $message;
