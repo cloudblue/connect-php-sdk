@@ -111,7 +111,7 @@ class LogRecord
 
 /**
  * Collects all log records for one processing batch
- * In case of exception these records will be added to log for analisys
+ * In case of exception these records will be added to log for analysis
  *
  * @package Connect
  */

@@ -497,6 +497,7 @@ class RequestsProcessor
      * @throws ConfigException
      * @throws ConfigPropertyInvalid
      * @throws ConfigPropertyMissed
+     * @throws \ReflectionException
      */
     public
 	function __construct($config)
@@ -506,6 +507,7 @@ class RequestsProcessor
 		Logger::get()->setLogLevel($this->config->logLevel);
 	}
 
+	/** @noinspection PhpDocRedundantThrowsInspection */
     /**
      * Process one request, abstract function
      * @param Request $req - request being processed
@@ -531,21 +533,25 @@ class RequestsProcessor
 		foreach($reqlist as $req) {
 			if ($req->status == 'pending') { // actually default filter is pending 
 				try {
-					$msg = $this->processRequest($req);
+                    /** @noinspection PhpVoidFunctionResultUsedInspection */
+                    $msg = $this->processRequest($req);
 				
 					if (!$msg)
 						$msg = 'Activation succeeded';
 					
 					// ok now make request completed
 					$this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg.'"}');
-				} catch (Inquire $e) {
+				} /** @noinspection PhpRedundantCatchClauseInspection */
+				  catch (Inquire $e) {
 					// update parameters and move to inquire
 					$this->updateParameters($req, $e->params);
 					$this->sendRequest('POST', '/requests/'.$req->id.'/inquire', '{}');
-				} catch (Fail $e) {
+				} /** @noinspection PhpRedundantCatchClauseInspection */
+                  catch (Fail $e) {
 					// fail request
 					$this->sendRequest('POST', '/requests/'.$req->id.'/fail', '{"reason": "'.$e->getMessage().'"}');
-				} catch (Skip $e) {
+				} /** @noinspection PhpRedundantCatchClauseInspection */
+                  catch (Skip $e) {
 				    Logger::get()->debug("Skipping ".$req->id);
                 }
 			}
@@ -570,10 +576,10 @@ class RequestsProcessor
 			$query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
 		}
 
-		$reqstr = $this->sendRequest('GET', '/requests'.$query);
-		$reqarr = json_decode($reqstr, true);
+		$body = $this->sendRequest('GET', '/requests'.$query);
+		$structure = json_decode($body, true);
 
-		return $this->parse($reqarr, 'Request[]');
+		return $this->parse($structure, 'Request[]');
 	}
 
     /**
@@ -582,7 +588,7 @@ class RequestsProcessor
      * @param Param[] $parray - array of parameters
      *      Example:
      *          array(
-     *              $req->asset->params['param_a']->error('xxxx'),
+     *              $req->asset->params['param_a']->error('Unknown activation ID was provided'),
      *              $req->asset->params['param_b']->value('true'),
      *              new \Connect\Param('param_c', 'newValue')
      *          )
@@ -612,5 +618,3 @@ class RequestsProcessor
 	}
 	
 }
-
-?>

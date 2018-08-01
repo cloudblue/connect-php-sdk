@@ -77,7 +77,7 @@ class Inquire extends Message
     public function __construct($params)
     {
         $this->params = $params;
-        parent::__construct('Activation parameters are required', 'inqury');
+        parent::__construct('Activation parameters are required', 'inquiry');
     }
 }
 

@@ -7,6 +7,7 @@
 
 namespace Connect;
 
+require_once "exception.php";
 require_once "logger.php";
 
 class Config 
@@ -32,7 +33,7 @@ class Config
 	public $logLevel = LoggerInterface::LEVEL_INFO;
 
 	/**
-	 * @var int - network interaction timeout, secunds
+	 * @var int - network interaction timeout, seconds
 	 */
 	public $timeout = 50;
 	
@@ -54,13 +55,13 @@ class Config
 		if (is_string($config)) {
 			try {
 				$txt = file_get_contents($config);
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				throw new ConfigException("Can't read file $config: " . $e->getMessage());
 			}
 			
 			try {				
 				$config = json_decode($txt, true);
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				throw new ConfigException("Can't parse JSON in file $config: " . $e->getMessage());
 			}
 		}
@@ -81,7 +82,7 @@ class Config
 				$prop->setValue($this, is_array($value) ? $value : array($value));
 			} elseif ($name == 'logLevel') {
 				$found = false;
-				foreach (\Connect\LoggerInterface::LEVELS as $k => $v) {
+				foreach (LoggerInterface::LEVELS as $k => $v) {
 					if (strtoupper($value) == $v) {
 						$prop->setValue($this, $k);
 						$found = true;
@@ -98,8 +99,12 @@ class Config
 			}
 		}
 	}
-	
-	public function validate()
+
+    /**
+     * Validate configuration
+     * @throws ConfigPropertyMissed
+     */
+    public function validate()
 	{
 		if (!isset($this->apiKey))
 			throw new ConfigPropertyMissed('apiKey');
@@ -110,20 +115,32 @@ class Config
 	}
 }
 
-class ConfigException extends \Exception
+/**
+ * Class ConfigException
+ *      Generic configuration exception
+ *
+ * @package Connect
+ */
+class ConfigException extends Exception
 {
 	private $property; 
 	
 	public function __construct($message, $prop = null)
 	{
-		$this->message = $message;
-		$this->property = $prop;
+        parent::__construct($message, 'config');
+        $this->property = $prop;
 		
 		if ($prop)
 			$this->message = $message . " for property " . $prop;
 	}
 }
 
+/**
+ * Class ConfigPropertyMissed
+ *      Configuration property missed exception
+ *
+ * @package Connect
+ */
 class ConfigPropertyMissed extends ConfigException
 {
 	public function __construct($prop)
@@ -132,10 +149,15 @@ class ConfigPropertyMissed extends ConfigException
 	}
 }
 
+/**
+ * Class ConfigPropertyInvalid
+ *      Configuration property invalid exception
+ * @package Connect
+ */
 class ConfigPropertyInvalid	 extends ConfigException
 {
 	public function __construct($message, $prop, $value)
 	{
-		parent::__construct("Invalid property value '$value'", $prop);
+		parent::__construct("Invalid property value '$value' " . $message, $prop);
 	}
 }
