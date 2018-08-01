@@ -475,7 +475,6 @@ class RequestsProcessor
 								$value = (bool)$value;
 								break;
 							default:
-								$subClass = '\\Connect\\' . $subClassName;
 								$value = $this->parse($value, $subClassName);
 								break;
 						}
@@ -512,11 +511,12 @@ class RequestsProcessor
      * @param Request $req - request being processed
      * @returns string - returns activation message, optional
      * @throws Exception
+     * @throws Message
      */
     public
 	function processRequest($req)
 	{
-		throw new Exception('processRequest() method is not implemented');
+		throw new Exception('processRequest() method is not implemented, reqId='.$req->id);
 	}
 
     /**

@@ -40,12 +40,15 @@ class Config
 	 * @var bool - do we need to verify SSL certificate of server
 	 */
 	public $sslVerifyHost = true;
-	
-	/**
-	 * @param mixed $config - 
-	 * 		array  -> has pairs of key/value to fill in config
-	 * 		string -> path to file to read config from 
-	 */
+
+    /**
+     * @param mixed $config -
+     *        array  -> has pairs of key/value to fill in config
+     *        string -> path to file to read config from
+     * @throws ConfigException
+     * @throws ConfigPropertyInvalid
+     * @throws \ReflectionException
+     */
 	public function __construct($config)
 	{
 		if (is_string($config)) {

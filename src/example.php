@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include "connect/sdk.php";
 
