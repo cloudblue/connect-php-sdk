@@ -83,6 +83,11 @@ interface LoggerInterface
      * @param int $level
      */
     public function setLogLevel($level);
+
+    /**
+     * Dump session log to current log, and reset session
+     */
+    public function dump();
 }
 
 /**
@@ -196,7 +201,7 @@ class Logger implements LoggerInterface
     /**
      * @param $filePath
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function setLogFile($filePath)
     {
@@ -208,15 +213,17 @@ class Logger implements LoggerInterface
         if (!file_exists($logDir)) {
             @mkdir($logDir, 0755, true);
             if (!file_exists($logDir)) {
-                throw new \Exception(
-                    sprintf('Can\'t create log directory "%s".', $logDir)
+                throw new Exception(
+                    sprintf('Can\'t create log directory "%s".', $logDir),
+                    'logger'
                 );
             }
         }
 
         if (!$this->fp = fopen($filePath, 'a+')) {
-            throw new \Exception(
-                sprintf('Can\'t create log file "%s".', $filePath)
+            throw new Exception(
+                sprintf('Can\'t create log file "%s".', $filePath),
+                'logger'
             );
         }
     }
@@ -297,17 +304,19 @@ class Logger implements LoggerInterface
 		$logLine = array();
 
 		if ($record->time) {
-			$timestr = ($this->logLevel >= self::LEVEL_DEBUG) ? $this->udate('Y-m-d H:i:s.u T', $record->time) : date('Y/m/d h:i:s', $record->time);
-			$logData[] = "[ $timestr ]";
+			$timestr = ($this->logLevel >= self::LEVEL_DEBUG) ?
+                $this->udate('Y-m-d H:i:s.u T', $record->time) :
+                date('Y/m/d h:i:s', $record->time);
+			$logLine[] = "[ $timestr ]";
 		} 
 
 		if ($record->level != null) {
-			$logData[] = self::LEVELS[$record->level];
+			$logLine[] = self::LEVELS[$record->level];
 		}
 
-		$logData[] = $record->message;
+		$logLine[] = $record->message;
 
-		$message = implode(' ', $logData) . PHP_EOL;
+		$message = implode(' ', $logLine) . PHP_EOL;
 
 		if ($this->fp) {
 			fwrite($this->fp, $message);

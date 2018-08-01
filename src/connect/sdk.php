@@ -7,6 +7,7 @@
 
 namespace Connect;
 
+require_once "exception.php";
 require_once "config.php";
 require_once "logger.php";
 
@@ -106,20 +107,35 @@ class Param
 	 * @var ValueOption{value}
 	 */
 	var $value_choices;
-	
-	function __construct($id = null, $value = null)
+
+    /**
+     * Param constructor
+     * @param string $id - parameter ID (optional)
+     * @param string $value - parameter Value (optional)
+     */
+    function __construct($id = null, $value = null)
 	{
 		$this->id = $id;
 		$this->value = $value;
 	}
 
-	function error($msg)
+    /**
+     * Assign error on parameter
+     * @param string $msg - Error message to assign
+     * @return $this - Same Param object, for chain assignments like $param->error('err')->value('xxx')
+     */
+    function error($msg)
 	{
 		$this->value_error = $msg;
 		return $this;
 	}
-	
-	function value($newValue) 
+
+    /**
+     * Assign value on parameter
+     * @param string $newValue - Value for parameter to assign
+     * @return $this - Same Param object, for chain assignments like $param->error('err')->value('xxx')
+     */
+    function value($newValue)
 	{
 		$this->value = $newValue;
 		return $this;
@@ -505,7 +521,7 @@ class RequestsProcessor
 
     /**
      * Process all requests
-     * @throws Exception
+     * @throws \Exception
      */
     public
 	function process()
@@ -540,7 +556,8 @@ class RequestsProcessor
 	 * List requests
 	 * @param array $filters Filter for listing key->value or key->array(value1, value2)
      * @return Request[]
-     * @throws \Exception
+     * @throws Exception
+     * @throws \ReflectionException
 	 */
 	public
 	function listRequests($filters = null)
@@ -595,49 +612,5 @@ class RequestsProcessor
 	}
 	
 }
-
-class Exception extends \Exception
-{
-	var $object;
-	
-	public
-	function __construct($message, $code = 'unknown', $object = null)
-	{
-		$this->code = $code;
-		$this->message = $message;
-		$this->object = $object;
-	}
-}
-
-class Inquire extends Exception
-{
-	var $params;
-	
-	public
-	function __construct($params)
-	{
-		$this->params = $params;
-		parent::__construct('Activation parameters are required', 'inqury');
-	}
-}
-
-class Skip extends Exception
-{
-    public
-    function __construct($message = null)
-    {
-        parent::__construct($message ? $message : 'Request skipped', "skip");
-    }
-}
-
-class Fail extends Exception
-{
-	public
-	function __construct($message = null)
-	{
-		parent::__construct($message ? $message : 'Request processing failed', 'fail');
-	}
-}
-
 
 ?>

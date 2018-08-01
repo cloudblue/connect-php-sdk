@@ -26,8 +26,8 @@ class MyAppRequests extends \Connect\RequestsProcessor
 		$p1 = $req->asset->params['param_a']->error('xxxx');
 // 		$p2 = $req->asset->params['param_b']->error('yyyy')->value('true');
 		$p2 = new \Connect\Param('param_b', 'true');
-		$req->requestProcessor->updateParameters($req, array($p1, $p2));
-		
+		$req->requestProcessor->updateParameters($req, [$p1, $p2]);
+				
 		foreach($req->asset->items as $item)
 		{
 			// ...
@@ -73,11 +73,13 @@ class MyAppRequests extends \Connect\RequestsProcessor
 }
 
 
-$rp = new MyAppRequests();
-
 try {
-	$rp->process();
+    $rp = new MyAppRequests();
+
+    $rp->process();
+
 	throw new Exception('Some unexpected error happened');
+
 } catch (Exception $e) {
 	\Connect\Logger::get()->error($e->getMessage());
 	
