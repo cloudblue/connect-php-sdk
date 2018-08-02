@@ -531,6 +531,9 @@ class RequestsProcessor
 		$reqlist = $this->listRequests();
 
 		foreach($reqlist as $req) {
+		    if ($this->config->products && !in_array($req->asset->product->id, $this->config->products))
+		        continue;
+
 			if ($req->status == 'pending') { // actually default filter is pending 
 				try {
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
