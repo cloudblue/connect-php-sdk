@@ -572,6 +572,11 @@ class RequestsProcessor
 	function listRequests($filters = null)
 	{
 		$query = '';
+		$filters = $filters ? array_merge($filters) : array();
+
+		if ($this->config->products)
+		    $filters['product_id'] = $this->config->products;
+
 		if ($filters) {
 			$query = http_build_query($filters);
 
