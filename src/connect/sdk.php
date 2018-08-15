@@ -534,8 +534,11 @@ class RequestsProcessor
 		    if ($this->config->products && !in_array($req->asset->product->id, $this->config->products))
 		        continue;
 
-			if ($req->status == 'pending') { // actually default filter is pending 
+			if ($req->status == 'pending') { // actually default filter is pending
+			    $processingResult = 'unknown';
 				try {
+                    Logger::get()->info("Starting processing of request ID=".$req->id);
+
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
 				
@@ -544,19 +547,23 @@ class RequestsProcessor
 					
 					// ok now make request completed
 					$this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg.'"}');
+                    $processingResult = 'succeed ('.$msg.')';
 				} /** @noinspection PhpRedundantCatchClauseInspection */
 				  catch (Inquire $e) {
 					// update parameters and move to inquire
 					$this->updateParameters($req, $e->params);
 					$this->sendRequest('POST', '/requests/'.$req->id.'/inquire', '{}');
+					$processingResult = 'inquire';
 				} /** @noinspection PhpRedundantCatchClauseInspection */
                   catch (Fail $e) {
 					// fail request
 					$this->sendRequest('POST', '/requests/'.$req->id.'/fail', '{"reason": "'.$e->getMessage().'"}');
+					$processingResult = 'fail';
 				} /** @noinspection PhpRedundantCatchClauseInspection */
                   catch (Skip $e) {
-				    Logger::get()->debug("Skipping ".$req->id);
+				    $processingResult = 'skip';
                 }
+                Logger::get()->info("Finished processing of request ID=".$req->id." result=".$processingResult);
 			}
 		}
 	}

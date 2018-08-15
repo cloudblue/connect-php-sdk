@@ -78,7 +78,7 @@ try {
 
     $rp->process();
 
-	throw new Exception('Some unexpected error happened');
+//	throw new Exception('Some unexpected error happened');
 
 } catch (Exception $e) {
 	\Connect\Logger::get()->error($e->getMessage());

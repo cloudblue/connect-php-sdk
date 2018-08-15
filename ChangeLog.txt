@@ -1,0 +1,10 @@
+ChangeLog for APS Connect SDK
+
+vNext
+    Initial version of APS Connect SDK with basic features:
+    - query requests list
+    - invoke user-defined processing procedure
+    - handle processing results
+    - update request parameters if required
+    - logging functionality
+    - collect debug logs in case of failure
