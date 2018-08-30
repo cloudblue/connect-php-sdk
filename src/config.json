@@ -1,6 +1,6 @@
 {
-    "apiKey": "SU-188-480-658:6a0f50e6c996ebe60cecaaa2ae12bc0eae9dfdbc",
-    "apiEndpoint": "https://api.stage.rnd.host/public/v1",
+    "apiKey": "XXX:YYY",
+    "apiEndpoint": "https://host/public/v1",
     "logLevel": "info",
     "timeout": 10,
     "sslVerifyHost": true
