@@ -640,7 +640,7 @@ class RequestsProcessor
     /**
      * Gets Activation template for a given request
      * @param templateId - ID of template requested
-     * @param $request - ID of request or Request object
+     * @param request - ID of request or Request object
      * @return string - Rendered template
      * @throws Exception
      */
