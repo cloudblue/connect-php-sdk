@@ -10,10 +10,10 @@ namespace Connect;
 require_once "exception.php";
 
 /**
- * Class activationResponse
+ * Class ActivationTileResponse
  * @package Connect
  */
-class activationResponse
+class ActivationTileResponse
 {
 
     /**
@@ -22,78 +22,35 @@ class activationResponse
     public $activationTile = "Activation succeeded";
 
     /**
-     * @var null
+     * ActivationTileResponse constructor.
+     * @param null $msg
      */
-    public $templateId;
-
-    /**
-     * activationResponse constructor.
-     * @param null $activationTile
-     * @param null $templateId
-     */
-    public function __construct($responseActivation = null)
+    public function __construct($msg = null)
     {
-        if($responseActivation != null){
-            if(substr( $responseActivation, 0, 3 ) == "TL-")
-            {
-                $this->templateId = $responseActivation;
-            }
-            else
-            {
-                $this->activationTile = $responseActivation;
-            }
+        if($msg){
+            $this->activationTile = $msg;
         }
     }
 
-    /**
-     * @return bool
-     * @throws activationResponseException
-     */
-
-    public function validate()
-    {
-        if(!is_string($this->activationTile)){
-            throw new activationResponseException("Value for activationTile is not valid");
-        }
-        if(strlen($this->activationTile) >= 4096)
-        {
-            throw new activationResponseException("Value of activationTile is too long, maximum length is 4K characters");
-        }
-        if(($this->templateId != null) && (substr( $this->templateId, 0, 3 ) != "TL-"))
-        {
-            throw new activationResponseException("TemplateId parameter is invalid");
-        }
-        return true;
-    }
-
-    public function forActivate()
-    {
-        if($this->validate())
-        {
-            if($this->templateId != null)
-            {
-                return json_decode('{"template_id": "'.$this->templateId.'"}');
-            }
-            else
-            {
-                return json_decode('{"activation_tile": "'.$this->activationTile.'"}');
-            }
-        }
-    }
 }
 
 /**
- * Class activationResponseException
+ * Class ActivationTemplateResponse
  * @package Connect
  */
-class activationResponseException extends Exception
+class ActivationTemplateResponse
 {
     /**
-     * activationResponseException constructor.
-     * @param $message
+     * @var
      */
-    public function __construct($message)
+    public $templateid;
+
+    /**
+     * ActivationTemplateResponse constructor.
+     * @param $templateid
+     */
+    public function __construct($templateid)
     {
-        parent::__construct('Value for '.$prop. 'is not valid.');
+        $this->templateid = $templateid;
     }
 }

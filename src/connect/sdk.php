@@ -541,26 +541,20 @@ class RequestsProcessor
 
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
-                    if(!$msg instanceof activationResponse){
-                        if (!$msg)
-                            $responseActivation = new activationResponse('Activation succeeded');
-                        else{
-                            $responseActivation = new activationResponse($msg);
-                        }
+                    if (!$msg){
+                        $msg = new ActivationTileResponse();
                     }
-                    else{
-                        $responseActivation = $msg;
+                    elseif(is_string($msg)){
+                        $msg = new ActivationTileResponse($msg);
                     }
 
-					//Checking to see if we shall send activation template id or activation tile to mark as completed
-                    $body = $responseActivation->forActivate();
-                    $this->sendRequest('POST', '/requests/'.$req->id.'/approve', json_encode($body));
-                    if(isset($body->template_id))
-                    {
-                        $processingResult = 'succeed (Activated using template ' . $body->template_id . ')';
+                    if ($msg instanceof ActivationTemplateResponse){
+                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"template_id": "'.$msg->templateid.'"}');
+                        $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
                     }
                     else
                     {
+                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"template_id": "'.$msg->templateid.'"}');
                         $processingResult = 'succeed ('.$body->activation_tile.')';
                     }
 				} /** @noinspection PhpRedundantCatchClauseInspection */
