@@ -541,10 +541,7 @@ class RequestsProcessor
 
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
-                    if (!$msg){
-                        $msg = new ActivationTileResponse();
-                    }
-                    elseif(is_string($msg)){
+                    if (!$msg || is_string($msg)){
                         $msg = new ActivationTileResponse($msg);
                     }
 
@@ -554,8 +551,8 @@ class RequestsProcessor
                     }
                     else
                     {
-                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"template_id": "'.$msg->templateid.'"}');
-                        $processingResult = 'succeed ('.$body->activation_tile.')';
+                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg->activationTile.'"}');
+                        $processingResult = 'succeed ('.$msg->activationTile.')';
                     }
 				} /** @noinspection PhpRedundantCatchClauseInspection */
 				  catch (Inquire $e) {
