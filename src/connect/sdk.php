@@ -10,7 +10,7 @@ namespace Connect;
 require_once "exception.php";
 require_once "config.php";
 require_once "logger.php";
-
+require_once "activationResponse.php";
 /**
  * Class Product
  * @package Connect
@@ -541,18 +541,28 @@ class RequestsProcessor
 
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
-				
-					if (!$msg)
-					    $msg = 'Activation succeeded';
-
-					//Checking to see if we shall send activation template id or activation tile to mark as completed
-                    if((substr( strtoupper($msg), 0, 3 ) == "TL-") && (strlen($msg) == 14)){
-                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"template_id": "'.$msg.'"}');
+                    if(!$msg instanceof activationResponse){
+                        if (!$msg)
+                            $responseActivation = new activationResponse('Activation succeeded');
+                        else{
+                            $responseActivation = new activationResponse($msg);
+                        }
                     }
                     else{
-                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg.'"}');
+                        $responseActivation = $msg;
                     }
-					$processingResult = 'succeed ('.$msg.')';
+
+					//Checking to see if we shall send activation template id or activation tile to mark as completed
+                    $body = $responseActivation->forActivate();
+                    $this->sendRequest('POST', '/requests/'.$req->id.'/approve', json_encode($body));
+                    if(isset($body->template_id))
+                    {
+                        $processingResult = 'succeed (Activated using template ' . $body->template_id . ')';
+                    }
+                    else
+                    {
+                        $processingResult = 'succeed ('.$body->activation_tile.')';
+                    }
 				} /** @noinspection PhpRedundantCatchClauseInspection */
 				  catch (Inquire $e) {
 					// update parameters and move to inquire
