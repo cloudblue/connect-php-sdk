@@ -10,7 +10,7 @@ namespace Connect;
 require_once "exception.php";
 require_once "config.php";
 require_once "logger.php";
-
+require_once "activationResponse.php";
 /**
  * Class Product
  * @package Connect
@@ -541,13 +541,28 @@ class RequestsProcessor
 
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
-				
-					if (!$msg)
-						$msg = 'Activation succeeded';
-					
-					// ok now make request completed
-					$this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg.'"}');
-                    $processingResult = 'succeed ('.$msg.')';
+                    if(!$msg instanceof activationResponse){
+                        if (!$msg)
+                            $responseActivation = new activationResponse('Activation succeeded');
+                        else{
+                            $responseActivation = new activationResponse($msg);
+                        }
+                    }
+                    else{
+                        $responseActivation = $msg;
+                    }
+
+					//Checking to see if we shall send activation template id or activation tile to mark as completed
+                    $body = $responseActivation->forActivate();
+                    $this->sendRequest('POST', '/requests/'.$req->id.'/approve', json_encode($body));
+                    if(isset($body->template_id))
+                    {
+                        $processingResult = 'succeed (Activated using template ' . $body->template_id . ')';
+                    }
+                    else
+                    {
+                        $processingResult = 'succeed ('.$body->activation_tile.')';
+                    }
 				} /** @noinspection PhpRedundantCatchClauseInspection */
 				  catch (Inquire $e) {
 					// update parameters and move to inquire
@@ -631,5 +646,18 @@ class RequestsProcessor
 		$body = json_encode(array('asset' => array('params' => $plist)), JSON_PRETTY_PRINT);
 		$this->sendRequest('PUT', '/requests/'.$req->id, $body);
 	}
+
+    /**
+     * Gets Activation template for a given request
+     * @param templateId - ID of template requested
+     * @param request - ID of request or Request object
+     * @return string - Rendered template
+     * @throws Exception
+     */
+    function renderTemplate($templateId, $request)
+    {
+        $query = ($request instanceof Request) ? $request->id : $request;
+        return $this->sendRequest('GET', '/templates/'.$templateId.'/render?request_id='.$query);
+    }
 	
 }
