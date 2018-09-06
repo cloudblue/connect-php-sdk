@@ -10,7 +10,7 @@ namespace Connect;
 require_once "exception.php";
 require_once "config.php";
 require_once "logger.php";
-
+require_once "activationResponse.php";
 /**
  * Class Product
  * @package Connect
@@ -541,13 +541,19 @@ class RequestsProcessor
 
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
-				
-					if (!$msg)
-						$msg = 'Activation succeeded';
-					
-					// ok now make request completed
-					$this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg.'"}');
-                    $processingResult = 'succeed ('.$msg.')';
+                    if (!$msg || is_string($msg)){
+                        $msg = new ActivationTileResponse($msg);
+                    }
+
+                    if ($msg instanceof ActivationTemplateResponse){
+                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"template_id": "'.$msg->templateid.'"}');
+                        $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
+                    }
+                    else
+                    {
+                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg->activationTile.'"}');
+                        $processingResult = 'succeed ('.$msg->activationTile.')';
+                    }
 				} /** @noinspection PhpRedundantCatchClauseInspection */
 				  catch (Inquire $e) {
 					// update parameters and move to inquire
@@ -631,5 +637,18 @@ class RequestsProcessor
 		$body = json_encode(array('asset' => array('params' => $plist)), JSON_PRETTY_PRINT);
 		$this->sendRequest('PUT', '/requests/'.$req->id, $body);
 	}
+
+    /**
+     * Gets Activation template for a given request
+     * @param templateId - ID of template requested
+     * @param request - ID of request or Request object
+     * @return string - Rendered template
+     * @throws Exception
+     */
+    function renderTemplate($templateId, $request)
+    {
+        $query = ($request instanceof Request) ? $request->id : $request;
+        return $this->sendRequest('GET', '/templates/'.$templateId.'/render?request_id='.$query);
+    }
 	
 }
