@@ -528,7 +528,7 @@ class RequestsProcessor
     public
 	function process()
 	{
-		$reqlist = $this->listRequests();
+		$reqlist = $this->listRequests([ 'status' => 'pending' ]);
 
 		foreach($reqlist as $req) {
 		    if ($this->config->products && !in_array($req->asset->product->id, $this->config->products))
