@@ -1,7 +1,7 @@
 {
-    "name": "cloudblue/connect-sdk",
+    "name": "apsconnect/connect-sdk",
     "type": "library",
-    "description": "Ingram Micro CloudBlue APS Connect QuickStart SDK",
+    "description": "APS Connect QuickStart SDK",
     "license": "proprietary",
     "require": {
         "php": ">=5.6.0",
@@ -10,8 +10,12 @@
         "ext-Reflection": "*"
     },
     "autoload": {
-        "psr-0": {
-            "Connect": "src/connect"
-        }
+        "classmap": [
+            "src/connect/sdk.php",
+            "src/connect/activationResponse.php",
+            "src/connect/config.php",
+            "src/connect/exception.php",
+            "src/connect/logger.php"
+        ]
     }
 }
