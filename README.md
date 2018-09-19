@@ -92,6 +92,11 @@ class ProductRequests extends \Connect\RequestsProcessor
                         //Do some provisoning operation
                         //Update the parameters to store data
                         $paramsUpdate[] = new \Connect\Param('ActivationKey', 'somevalue');
+                        //We may use a template defined on vendor portal as activation response, this will be what customer sees on panel
+                        return new \Connect\ActivationTemplateResponse("TL-497-535-242");
+                        // We may use arbitrary output to be returned as approval, this will be seen on customer panel. Please see that output must be in markup format
+                        return new \Connect\ActivationTileResponse('\n# Welcome to Fallball!\n\nYes, you decided to have an account in our amazing service!\n\n');
+                        // If we return empty, is approved with default message
                         return;
                     }
                 }
