@@ -1,6 +1,6 @@
 <?php
 
-include "connect/sdk.php";
+require "../vendor/autoload.php";
 
 // logging library 
 // configuration through ENV references
@@ -89,5 +89,3 @@ try {
 
 // $rlist = $rp->listRequests(array('status' => 'inquiring'));
 // print_r($rlist);
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
@@ -6,33 +7,6 @@
  */
 
 namespace Connect;
-
-require_once "exception.php";
-
-/**
- * Class ActivationTileResponse
- * @package Connect
- */
-class ActivationTileResponse
-{
-
-    /**
-     * @var null|string
-     */
-    public $activationTile = "Activation succeeded";
-
-    /**
-     * ActivationTileResponse constructor.
-     * @param null $msg
-     */
-    public function __construct($msg = null)
-    {
-        if($msg){
-            $this->activationTile = $msg;
-        }
-    }
-
-}
 
 /**
  * Class ActivationTemplateResponse

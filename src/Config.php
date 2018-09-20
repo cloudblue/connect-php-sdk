@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
 *
@@ -6,9 +7,6 @@
 */
 
 namespace Connect;
-
-require_once "exception.php";
-require_once "logger.php";
 
 class Config 
 {
@@ -112,52 +110,5 @@ class Config
 		if (!isset($this->apiEndpoint))
 			throw new ConfigPropertyMissed('apiEndpoint');
 					
-	}
-}
-
-/**
- * Class ConfigException
- *      Generic configuration exception
- *
- * @package Connect
- */
-class ConfigException extends Exception
-{
-	private $property; 
-	
-	public function __construct($message, $prop = null)
-	{
-        parent::__construct($message, 'config');
-        $this->property = $prop;
-		
-		if ($prop)
-			$this->message = $message . " for property " . $prop;
-	}
-}
-
-/**
- * Class ConfigPropertyMissed
- *      Configuration property missed exception
- *
- * @package Connect
- */
-class ConfigPropertyMissed extends ConfigException
-{
-	public function __construct($prop)
-	{
-		parent::__construct('Value is not set ', $prop);
-	}
-}
-
-/**
- * Class ConfigPropertyInvalid
- *      Configuration property invalid exception
- * @package Connect
- */
-class ConfigPropertyInvalid	 extends ConfigException
-{
-	public function __construct($message, $prop, $value)
-	{
-		parent::__construct("Invalid property value '$value' " . $message, $prop);
 	}
 }
