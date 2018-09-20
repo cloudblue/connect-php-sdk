@@ -10,12 +10,8 @@
         "ext-Reflection": "*"
     },
     "autoload": {
-        "classmap": [
-            "src/connect/sdk.php",
-            "src/connect/activationResponse.php",
-            "src/connect/config.php",
-            "src/connect/exception.php",
-            "src/connect/logger.php"
-        ]
+        "psr-4": {
+            "Connect\\": "src/"
+        }
     }
 }
