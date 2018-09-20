@@ -14,6 +14,6 @@ namespace Connect;
  */
 class Provider
 {
-    var $id;
-    var $name;
+    public $id;
+    public $name;
 }

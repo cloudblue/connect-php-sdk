@@ -14,16 +14,16 @@ namespace Connect;
  */
 class Item
 {
-    var $id;
-    var $mpn;
+    public $id;
+    public $mpn;
 
     /**
      * @var int
      */
-    var $quantity;
+    public $quantity;
 
     /**
      * @var int
      */
-    var $old_quantity;
+    public $old_quantity;
 }

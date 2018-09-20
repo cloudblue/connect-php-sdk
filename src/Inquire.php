@@ -10,7 +10,7 @@ namespace Connect;
  */
 class Inquire extends Message
 {
-    var $params;
+    public $params;
 
     /**
      * Inquire constructor

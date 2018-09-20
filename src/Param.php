@@ -14,16 +14,16 @@ namespace Connect;
  */
 class Param
 {
-    var $id;
-    var $name;
-    var $description;
-    var $value;
-    var $value_error;
+    public $id;
+    public $name;
+    public $description;
+    public $value;
+    public $value_error;
 
     /**
      * @var ValueOption{value}
      */
-    var $value_choices;
+    public $value_choices;
 
     /**
      * Param constructor

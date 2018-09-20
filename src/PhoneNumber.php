@@ -14,8 +14,8 @@ namespace Connect;
  */
 class PhoneNumber
 {
-    var $country_code;
-    var $area_code;
-    var $phone_number;
-    var $extension;
+    public $country_code;
+    public $area_code;
+    public $phone_number;
+    public $extension;
 }

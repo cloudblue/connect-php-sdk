@@ -14,16 +14,16 @@ namespace Connect;
  */
 class ContactInfo
 {
-    var $address_line1;
-    var $address_line2;
-    var $city;
+    public $address_line1;
+    public $address_line2;
+    public $city;
     
     /**
      * @var Contact
      */
-    var $contact;
-    var $country;
-    var $postal_code;
-    var $state;
+    public $contact;
+    public $country;
+    public $postal_code;
+    public $state;
 }
 

@@ -18,19 +18,19 @@ class Request
     /**
      * @var Asset
      */
-    var $asset;
+    public $asset;
 
-    var $id;
-    var $type;
-    var $created;
-    var $updated;
-    var $status;
+    public $id;
+    public $type;
+    public $created;
+    public $updated;
+    public $status;
 
     /**
      * @var RequestsProcessor
      * @noparse
      */
-    var $requestProcessor;
+    public $requestProcessor;
 
     /**
      * Get new SKUs purchased in the request

@@ -14,16 +14,16 @@ namespace Connect;
  */
 class Connection
 {
-    var $id;
-    var $name;
+    public $id;
+    public $name;
 
     /**
      * @var Provider
      */
-    var $provider;
+    public $provider;
 
     /**
      * @var Vendor
      */
-    var $vendor;
+    public $vendor;
 }

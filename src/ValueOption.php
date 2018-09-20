@@ -14,6 +14,6 @@ namespace Connect;
  */
 class ValueOption
 {
-    var $value;
-    var $label;
+    public $value;
+    public $label;
 }

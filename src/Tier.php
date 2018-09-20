@@ -14,12 +14,12 @@ namespace Connect;
  */
 class Tier
 {
-    var $id;
-    var $external_id;
-    var $name;
+    public $id;
+    public $external_id;
+    public $name;
 
     /**
      * @var ContactInfo
      */
-    var $contact_info;
+    public $contact_info;
 }

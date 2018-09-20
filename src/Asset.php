@@ -14,31 +14,31 @@ namespace Connect;
  */
 class Asset
 {
-    var $id;
-    var $external_id;
+    public $id;
+    public $external_id;
 
     /**
      * @var Product
      */
-    var $product;
+    public $product;
 
     /**
      * @var Connection
      */
-    var $connection;
+    public $connection;
 
     /**
      * @var Item[]
      */
-    var $items;
+    public $items;
 
     /**
      * @var Param{id}
      */
-    var $params;
+    public $params;
 
     /**
      * @var Tier{}
      */
-    var $tiers;
+    public $tiers;
 }

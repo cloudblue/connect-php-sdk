@@ -14,6 +14,6 @@ namespace Connect;
  */
 class Product
 {
-    var $id;
-    var $name;
+    public $id;
+    public $name;
 }

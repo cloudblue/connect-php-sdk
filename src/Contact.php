@@ -14,12 +14,12 @@ namespace Connect;
  */
 class Contact
 {
-    var $email;
-    var $first_name;
-    var $last_name;
+    public $email;
+    public $first_name;
+    public $last_name;
 
     /**
      * @var PhoneNumber
      */
-    var $phone_number;
+    public $phone_number;
 }
