@@ -1,5 +1,5 @@
 {
-    "name": "cloudblue/connect-sdk",
+    "name": "apsconnect/connect-sdk",
     "type": "library",
     "description": "APS Connect QuickStart SDK",
     "license": "proprietary",
