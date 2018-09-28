@@ -43,8 +43,9 @@ class LogSession
      */
     public function dumpTo($log)
     {
-        if (!$this->sessionLog)
+        if (!$this->sessionLog) {
             return;
+        }
 
         $log->write(new LogRecord(null, "=== Detailed session log dump begin ==================", null));
         foreach ($this->sessionLog as $r) {

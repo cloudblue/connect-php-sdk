@@ -136,8 +136,9 @@ class Logger implements LoggerInterface
         $this->session->addRecord($record);
 
         // write record into log only if it is enough by level
-        if ($this->logLevel >= $level)
+        if ($this->logLevel >= $level) {
             $this->write($record);
+        }
     }
 
     /**

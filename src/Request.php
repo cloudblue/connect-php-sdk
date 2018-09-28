@@ -36,12 +36,13 @@ class Request
      * Get new SKUs purchased in the request
      * @return Item[]
      */
-    function getNewItems()
+    public function getNewItems()
     {
         $ret = array();
         foreach ($this->asset->items as $item) {
-            if (($item->quantity > 0) && ($item->old_quantity == 0))
+            if (($item->quantity > 0) && ($item->old_quantity == 0)) {
                 $ret[] = $item;
+            }
         }
         return $ret;
     }
@@ -50,12 +51,13 @@ class Request
      * Get SKUs upgraded in the request
      * @return Item[]
      */
-    function getChangedItems()
+    public function getChangedItems()
     {
         $ret = array();
         foreach ($this->asset->items as $item) {
-            if (($item->quantity > 0) && ($item->old_quantity > 0))
+            if (($item->quantity > 0) && ($item->old_quantity > 0)) {
                 $ret[] = $item;
+            }
         }
         return $ret;
     }
@@ -64,12 +66,13 @@ class Request
      * Get SKUs removed in the request
      * @return Item[]
      */
-    function getRemovedItems()
+    public function getRemovedItems()
     {
         $ret = array();
         foreach ($this->asset->items as $item) {
-            if (($item->quantity == 0) && ($item->old_quantity > 0))
+            if (($item->quantity == 0) && ($item->old_quantity > 0)) {
                 $ret[] = $item;
+            }
         }
         return $ret;
     }

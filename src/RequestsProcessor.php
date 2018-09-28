@@ -73,10 +73,12 @@ class RequestsProcessor
         $requestHeadersString = join("\n", $headers);
 
         Logger::get()->info("HTTP Request: $verb $uri");
-        if ($requestHeadersString)
+        if ($requestHeadersString) {
             Logger::get()->debug("Request Headers:\n$requestHeadersString");
-        if ($body)
+        }
+        if ($body) {
             Logger::get()->debug("Request Body:\n$body");
+        }
 
         $rawResponse = curl_exec($this->ch);
         $pos = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);
@@ -151,8 +153,9 @@ class RequestsProcessor
             $ret = array();
             foreach ($structure as $key => $el) {
                 $obj = $this->parse($el, $className);
-                if ($mapTo)
+                if ($mapTo) {
                     $key = $el[$mapTo];
+                }
                 $ret[$key] = $obj;
             }
 
@@ -177,8 +180,9 @@ class RequestsProcessor
                 if ($prop->getDocComment()) {
                     $comment = trim($prop->getDocComment());
 
-                    if (preg_match('/\@noparse/', $comment))
+                    if (preg_match('/\@noparse/', $comment)) {
                         continue;
+                    }
 
                     $m = null;
                     if (preg_match('/\@var\s+(\S+)/', $comment, $m)) {
@@ -225,8 +229,9 @@ class RequestsProcessor
         $reqlist = $this->listRequests(['status' => 'pending']);
 
         foreach ($reqlist as $req) {
-            if ($this->config->products && !in_array($req->asset->product->id, $this->config->products))
+            if ($this->config->products && !in_array($req->asset->product->id, $this->config->products)) {
                 continue;
+            }
 
             if ($req->status == 'pending') { // actually default filter is pending
                 $processingResult = 'unknown';
@@ -240,10 +245,12 @@ class RequestsProcessor
                     }
 
                     if ($msg instanceof ActivationTemplateResponse) {
-                        $this->sendRequest('POST', '/requests/' . $req->id . '/approve', '{"template_id": "' . $msg->templateid . '"}');
+                        $this->sendRequest('POST', '/requests/' . $req->id . '/approve',
+                            '{"template_id": "' . $msg->templateid . '"}');
                         $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
                     } else {
-                        $this->sendRequest('POST', '/requests/' . $req->id . '/approve', '{"activation_tile": "' . $msg->activationTile . '"}');
+                        $this->sendRequest('POST', '/requests/' . $req->id . '/approve',
+                            '{"activation_tile": "' . $msg->activationTile . '"}');
                         $processingResult = 'succeed (' . $msg->activationTile . ')';
                     }
                 } /** @noinspection PhpRedundantCatchClauseInspection */
@@ -255,7 +262,8 @@ class RequestsProcessor
                 } /** @noinspection PhpRedundantCatchClauseInspection */
                 catch (Fail $e) {
                     // fail request
-                    $this->sendRequest('POST', '/requests/' . $req->id . '/fail', '{"reason": "' . $e->getMessage() . '"}');
+                    $this->sendRequest('POST', '/requests/' . $req->id . '/fail',
+                        '{"reason": "' . $e->getMessage() . '"}');
                     $processingResult = 'fail';
                 } /** @noinspection PhpRedundantCatchClauseInspection */
                 catch (Skip $e) {
@@ -278,8 +286,9 @@ class RequestsProcessor
         $query = '';
         $filters = $filters ? array_merge($filters) : array();
 
-        if ($this->config->products)
+        if ($this->config->products) {
             $filters['product_id'] = $this->config->products;
+        }
 
         if ($filters) {
             $query = http_build_query($filters);
@@ -315,11 +324,13 @@ class RequestsProcessor
             unset($parr['value_choices']);
 
             foreach ($parr as $k => $v) {
-                if (!$v)
+                if (!$v) {
                     unset($parr[$k]);
+                }
 
-                if ($k == 'value' && !$v)
+                if ($k == 'value' && !$v) {
                     $parr[$k] = '';
+                }
             }
 
             $plist[] = $parr;

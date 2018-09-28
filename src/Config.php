@@ -64,15 +64,17 @@ class Config
             }
         }
 
-        if (!is_array($config))
+        if (!is_array($config)) {
             throw new ConfigException("Invalid argument for \\Connect\\Config class constructor: " . gettype($config));
+        }
 
         $ref = new \ReflectionClass($this);
         foreach ($ref->getProperties() as $prop) {
             $name = $prop->getName();
 
-            if (!isset($config[$name]))
+            if (!isset($config[$name])) {
                 continue;
+            }
 
             $value = $config[$name];
 
@@ -86,11 +88,13 @@ class Config
                         $found = true;
                     }
                 }
-                if (!$found)
+                if (!$found) {
                     throw new ConfigPropertyInvalid('Unknown log level', $name, $value);
+                }
             } elseif ($name == "sslVerifyHost") {
-                if (!is_bool($value))
+                if (!is_bool($value)) {
                     throw new ConfigPropertyInvalid('Should be boolean', $name, $value);
+                }
                 $prop->setValue($this, $value);
             } else {
                 $prop->setValue($this, $value);
@@ -104,11 +108,13 @@ class Config
      */
     public function validate()
     {
-        if (!isset($this->apiKey))
+        if (!isset($this->apiKey)) {
             throw new ConfigPropertyMissed('apiKey');
+        }
 
-        if (!isset($this->apiEndpoint))
+        if (!isset($this->apiEndpoint)) {
             throw new ConfigPropertyMissed('apiEndpoint');
+        }
 
     }
 }
