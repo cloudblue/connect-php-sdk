@@ -26,7 +26,7 @@ class ActivationTileResponse
      */
     public function __construct($msg = null)
     {
-        if($msg){
+        if ($msg) {
             $this->activationTile = $msg;
         }
     }

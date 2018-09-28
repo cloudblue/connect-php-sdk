@@ -23,7 +23,8 @@ class ConfigException extends Exception
         parent::__construct($message, 'config');
         $this->property = $prop;
 
-        if ($prop)
+        if ($prop) {
             $this->message = $message . " for property " . $prop;
+        }
     }
 }

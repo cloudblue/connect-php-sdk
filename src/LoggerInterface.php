@@ -17,14 +17,14 @@ interface LoggerInterface
 {
     const LEVEL_TRACE = 4;
     const LEVEL_DEBUG = 3;
-    const LEVEL_INFO  = 2;
+    const LEVEL_INFO = 2;
     const LEVEL_ERROR = 1;
     const LEVEL_FATAL = 0;
 
     const LEVELS = array(
         self::LEVEL_FATAL => 'FATAL',
         self::LEVEL_ERROR => 'ERROR',
-        self::LEVEL_INFO  => 'INFO',
+        self::LEVEL_INFO => 'INFO',
         self::LEVEL_DEBUG => 'DEBUG',
         self::LEVEL_TRACE => 'TRACE'
     );
@@ -67,7 +67,7 @@ interface LoggerInterface
     /**
      * Logs message of any level
      *
-     * @param int    $level   - one of LEVEL_* constants
+     * @param int $level - one of LEVEL_* constants
      * @param string $message - message to log
      */
     public function log($level, $message);

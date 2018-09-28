@@ -1,7 +1,7 @@
 {
-    "apiKey": "XXX:YYY",
-    "apiEndpoint": "https://host/public/v1",
-    "logLevel": "info",
-    "timeout": 10,
-    "sslVerifyHost": true
+  "apiKey": "XXX:YYY",
+  "apiEndpoint": "https://host/public/v1",
+  "logLevel": "info",
+  "timeout": 10,
+  "sslVerifyHost": true
 }

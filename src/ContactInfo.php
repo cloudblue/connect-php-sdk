@@ -17,7 +17,7 @@ class ContactInfo
     public $address_line1;
     public $address_line2;
     public $city;
-    
+
     /**
      * @var Contact
      */

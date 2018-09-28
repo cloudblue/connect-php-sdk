@@ -15,8 +15,27 @@ namespace Connect;
  */
 class RequestsProcessor
 {
-    private $ch; // curl handle
+    private $ch;
     private $config;
+
+    /**
+     * RequestsProcessor constructor
+     * @param mixed $config
+     *      one of
+     *          Config - A configuration object
+     *          string - ConfigFile path (JSON with config object inside)
+     *          array  - Part of bigger config in format of JSON-parsed array with configuration
+     * @throws ConfigException
+     * @throws ConfigPropertyInvalid
+     * @throws ConfigPropertyMissed
+     * @throws \ReflectionException
+     */
+    public function __construct($config)
+    {
+        $this->config = ($config instanceof Config) ? $config : new Config($config);
+        $this->config->validate();
+        Logger::get()->setLogLevel($this->config->logLevel);
+    }
 
     /**
      * Send request to remote API
@@ -26,8 +45,7 @@ class RequestsProcessor
      * @return string
      * @throws Exception
      */
-    private
-    function sendRequest($verb, $path, $body = null)
+    private function sendRequest($verb, $path, $body = null)
     {
         if (!isset($this->ch)) {
             $this->ch = \curl_init();
@@ -43,7 +61,7 @@ class RequestsProcessor
         $uri = $this->config->apiEndpoint . $path;
         $headers = array();
         $headers[] = 'Authorization: ApiKey ' . $this->config->apiKey;
-        $headers[] = 'Request-ID: '. $requestId;
+        $headers[] = 'Request-ID: ' . $requestId;
         $headers[] = 'Content-Type: application/json';
 
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
@@ -55,10 +73,12 @@ class RequestsProcessor
         $requestHeadersString = join("\n", $headers);
 
         Logger::get()->info("HTTP Request: $verb $uri");
-        if ($requestHeadersString)
+        if ($requestHeadersString) {
             Logger::get()->debug("Request Headers:\n$requestHeadersString");
-        if ($body)
+        }
+        if ($body) {
             Logger::get()->debug("Request Body:\n$body");
+        }
 
         $rawResponse = curl_exec($this->ch);
         $pos = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);
@@ -68,7 +88,7 @@ class RequestsProcessor
         $httpReason = explode(" ", explode("\n", $responseHeadersString, 2)[0], 2)[1];
 
         Logger::get()->info("HTTP Code: $httpReason");
-        Logger::get()->debug("HTTP Response: ".$rawResponse);
+        Logger::get()->debug("HTTP Response: " . $rawResponse);
 
         if ($httpCode >= 299) {
             if (isset($response) and '{' == $response[0]) {
@@ -82,7 +102,7 @@ class RequestsProcessor
             }
 
             throw new Exception(
-                'HTTP Error code='.$httpCode . ' ' . $response . PHP_EOL . curl_error($this->ch),
+                'HTTP Error code=' . $httpCode . ' ' . $response . PHP_EOL . curl_error($this->ch),
                 $httpCode
             );
         }
@@ -114,7 +134,7 @@ class RequestsProcessor
         if (substr($className, -2) === '[]') {
 
             $ret = array();
-            foreach($structure as $el) {
+            foreach ($structure as $el) {
                 $obj = $this->parse($el, substr($className, 0, -2));
                 $ret[] = $obj;
             }
@@ -131,10 +151,11 @@ class RequestsProcessor
             }
 
             $ret = array();
-            foreach($structure as $key => $el) {
+            foreach ($structure as $key => $el) {
                 $obj = $this->parse($el, $className);
-                if ($mapTo)
+                if ($mapTo) {
                     $key = $el[$mapTo];
+                }
                 $ret[$key] = $obj;
             }
 
@@ -159,13 +180,14 @@ class RequestsProcessor
                 if ($prop->getDocComment()) {
                     $comment = trim($prop->getDocComment());
 
-                    if (preg_match('/\@noparse/', $comment))
+                    if (preg_match('/\@noparse/', $comment)) {
                         continue;
+                    }
 
                     $m = null;
                     if (preg_match('/\@var\s+(\S+)/', $comment, $m)) {
                         $subClassName = $m[1];
-                        switch($subClassName) {
+                        switch ($subClassName) {
                             case 'int':
                                 $value = ($value == '') ? null : (int)$value;
                                 break;
@@ -188,88 +210,66 @@ class RequestsProcessor
     }
 
     /**
-     * RequestsProcessor constructor
-     * @param mixed $config
-     *      one of
-     *          Config - A configuration object
-     *          string - ConfigFile path (JSON with config object inside)
-     *          array  - Part of bigger config in format of JSON-parsed array with configuration
-     * @throws ConfigException
-     * @throws ConfigPropertyInvalid
-     * @throws ConfigPropertyMissed
-     * @throws \ReflectionException
-     */
-    public
-    function __construct($config)
-    {
-        $this->config = ($config instanceof Config) ? $config : new Config($config);
-        $this->config->validate();
-        Logger::get()->setLogLevel($this->config->logLevel);
-    }
-
-    /** @noinspection PhpDocRedundantThrowsInspection */
-    /**
      * Process one request, abstract function
      * @param Request $req - request being processed
      * @returns string - returns activation message, optional
      * @throws Exception
-     * @throws Message
      */
-    public
-    function processRequest($req)
+    public function processRequest($req)
     {
-        throw new Exception('processRequest() method is not implemented, reqId='.$req->id);
+        throw new Exception('processRequest() method is not implemented, reqId=' . $req->id);
     }
 
     /**
      * Process all requests
      * @throws \Exception
      */
-    public
-    function process()
+    public function process()
     {
-        $reqlist = $this->listRequests([ 'status' => 'pending' ]);
+        $reqlist = $this->listRequests(['status' => 'pending']);
 
-        foreach($reqlist as $req) {
-            if ($this->config->products && !in_array($req->asset->product->id, $this->config->products))
+        foreach ($reqlist as $req) {
+            if ($this->config->products && !in_array($req->asset->product->id, $this->config->products)) {
                 continue;
+            }
 
             if ($req->status == 'pending') { // actually default filter is pending
                 $processingResult = 'unknown';
                 try {
-                    Logger::get()->info("Starting processing of request ID=".$req->id);
+                    Logger::get()->info("Starting processing of request ID=" . $req->id);
 
                     /** @noinspection PhpVoidFunctionResultUsedInspection */
                     $msg = $this->processRequest($req);
-                    if (!$msg || is_string($msg)){
+                    if (!$msg || is_string($msg)) {
                         $msg = new ActivationTileResponse($msg);
                     }
 
-                    if ($msg instanceof ActivationTemplateResponse){
-                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"template_id": "'.$msg->templateid.'"}');
+                    if ($msg instanceof ActivationTemplateResponse) {
+                        $this->sendRequest('POST', '/requests/' . $req->id . '/approve',
+                            '{"template_id": "' . $msg->templateid . '"}');
                         $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
-                    }
-                    else
-                    {
-                        $this->sendRequest('POST', '/requests/'.$req->id.'/approve', '{"activation_tile": "'.$msg->activationTile.'"}');
-                        $processingResult = 'succeed ('.$msg->activationTile.')';
+                    } else {
+                        $this->sendRequest('POST', '/requests/' . $req->id . '/approve',
+                            '{"activation_tile": "' . $msg->activationTile . '"}');
+                        $processingResult = 'succeed (' . $msg->activationTile . ')';
                     }
                 } /** @noinspection PhpRedundantCatchClauseInspection */
                 catch (Inquire $e) {
                     // update parameters and move to inquire
                     $this->updateParameters($req, $e->params);
-                    $this->sendRequest('POST', '/requests/'.$req->id.'/inquire', '{}');
+                    $this->sendRequest('POST', '/requests/' . $req->id . '/inquire', '{}');
                     $processingResult = 'inquire';
                 } /** @noinspection PhpRedundantCatchClauseInspection */
                 catch (Fail $e) {
                     // fail request
-                    $this->sendRequest('POST', '/requests/'.$req->id.'/fail', '{"reason": "'.$e->getMessage().'"}');
+                    $this->sendRequest('POST', '/requests/' . $req->id . '/fail',
+                        '{"reason": "' . $e->getMessage() . '"}');
                     $processingResult = 'fail';
                 } /** @noinspection PhpRedundantCatchClauseInspection */
                 catch (Skip $e) {
                     $processingResult = 'skip';
                 }
-                Logger::get()->info("Finished processing of request ID=".$req->id." result=".$processingResult);
+                Logger::get()->info("Finished processing of request ID=" . $req->id . " result=" . $processingResult);
             }
         }
     }
@@ -281,14 +281,14 @@ class RequestsProcessor
      * @throws Exception
      * @throws \ReflectionException
      */
-    public
-    function listRequests($filters = null)
+    public function listRequests($filters = null)
     {
         $query = '';
         $filters = $filters ? array_merge($filters) : array();
 
-        if ($this->config->products)
+        if ($this->config->products) {
             $filters['product_id'] = $this->config->products;
+        }
 
         if ($filters) {
             $query = http_build_query($filters);
@@ -297,7 +297,7 @@ class RequestsProcessor
             $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
         }
 
-        $body = $this->sendRequest('GET', '/requests'.$query);
+        $body = $this->sendRequest('GET', '/requests' . $query);
         $structure = json_decode($body, true);
 
         return $this->parse($structure, 'Request[]');
@@ -315,7 +315,7 @@ class RequestsProcessor
      *          )
      * @throws Exception
      */
-    function updateParameters($req, $parray)
+    public function updateParameters($req, $parray)
     {
         $plist = array();
         foreach ($parray as $p) {
@@ -324,31 +324,33 @@ class RequestsProcessor
             unset($parr['value_choices']);
 
             foreach ($parr as $k => $v) {
-                if (!$v)
+                if (!$v) {
                     unset($parr[$k]);
+                }
 
-                if ($k == 'value' && !$v)
+                if ($k == 'value' && !$v) {
                     $parr[$k] = '';
+                }
             }
 
             $plist[] = $parr;
         }
 
         $body = json_encode(array('asset' => array('params' => $plist)), JSON_PRETTY_PRINT);
-        $this->sendRequest('PUT', '/requests/'.$req->id, $body);
+        $this->sendRequest('PUT', '/requests/' . $req->id, $body);
     }
 
     /**
      * Gets Activation template for a given request
-     * @param templateId - ID of template requested
-     * @param request - ID of request or Request object
+     * @param $templateId - ID of template requested
+     * @param $request - ID of request or Request object
      * @return string - Rendered template
      * @throws Exception
      */
-    function renderTemplate($templateId, $request)
+    public function renderTemplate($templateId, $request)
     {
         $query = ($request instanceof Request) ? $request->id : $request;
-        return $this->sendRequest('GET', '/templates/'.$templateId.'/render?request_id='.$query);
+        return $this->sendRequest('GET', '/templates/' . $templateId . '/render?request_id=' . $query);
     }
 
 }

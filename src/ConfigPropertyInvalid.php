@@ -13,7 +13,7 @@ namespace Connect;
  *      Configuration property invalid exception
  * @package Connect
  */
-class ConfigPropertyInvalid	 extends ConfigException
+class ConfigPropertyInvalid extends ConfigException
 {
     public function __construct($message, $prop, $value)
     {

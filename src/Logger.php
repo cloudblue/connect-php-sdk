@@ -8,7 +8,7 @@
 
 namespace Connect;
 
- /**
+/**
  * Default Logger for Cloud Blue Connect SDK.
  *
  * @package Connect
@@ -29,17 +29,10 @@ class Logger implements LoggerInterface
         }
 
         if (defined('CONNECT_DEBUG') || isset($_SERVER['CONNECT_DEBUG'])) {
-			$this->logLevel = self::LEVEL_TRACE;
+            $this->logLevel = self::LEVEL_TRACE;
         }
 
         $this->session = new LogSession();
-    }
-
-    function __destruct()
-    {
-        if ($this->fp) {
-            @fclose($this->fp);
-        }
     }
 
     /**
@@ -48,7 +41,7 @@ class Logger implements LoggerInterface
      */
     public function setLogLevel($level)
     {
-		$this->logLevel = $level;
+        $this->logLevel = $level;
     }
 
     /**
@@ -94,7 +87,7 @@ class Logger implements LoggerInterface
      */
     public function trace($message)
     {
-		$this->log(self::LEVEL_TRACE, $message);
+        $this->log(self::LEVEL_TRACE, $message);
     }
 
     /**
@@ -102,7 +95,7 @@ class Logger implements LoggerInterface
      */
     public function debug($message)
     {
-		$this->log(self::LEVEL_DEBUG, $message);
+        $this->log(self::LEVEL_DEBUG, $message);
     }
 
     /**
@@ -132,55 +125,56 @@ class Logger implements LoggerInterface
     /**
      * Log message of any level
      *
-     * @param int 	 $level
+     * @param int $level
      * @param string $message
      */
     public function log($level, $message)
     {
-		$record = new LogRecord($level, $message);
+        $record = new LogRecord($level, $message);
 
-		// add all messages to session log
-		$this->session->addRecord($record);    	
+        // add all messages to session log
+        $this->session->addRecord($record);
 
-		// write record into log only if it is enough by level
-		if ($this->logLevel >= $level)
-		$this->write($record);
+        // write record into log only if it is enough by level
+        if ($this->logLevel >= $level) {
+            $this->write($record);
+        }
     }
 
     /**
      * Write log record into log
-     * 
+     *
      * @param LogRecord $record
      */
     public function write($record)
     {
-		$logLine = array();
+        $logLine = array();
 
-		if ($record->time) {
-			$timestr = ($this->logLevel >= self::LEVEL_DEBUG) ?
+        if ($record->time) {
+            $timestr = ($this->logLevel >= self::LEVEL_DEBUG) ?
                 $this->udate('Y-m-d H:i:s.u T', $record->time) :
                 date('Y/m/d h:i:s', $record->time);
-			$logLine[] = "[ $timestr ]";
-		} 
+            $logLine[] = "[ $timestr ]";
+        }
 
-		if ($record->level != null) {
-			$logLine[] = self::LEVELS[$record->level];
-		}
+        if ($record->level != null) {
+            $logLine[] = self::LEVELS[$record->level];
+        }
 
-		$logLine[] = $record->message;
+        $logLine[] = $record->message;
 
-		$message = implode(' ', $logLine) . PHP_EOL;
+        $message = implode(' ', $logLine) . PHP_EOL;
 
-		if ($this->fp) {
-			fwrite($this->fp, $message);
-		} else {
-			if (isset($GLOBALS['useErrorLog'])) {
-				error_log($message);
-			} else {
-				file_put_contents('php://stderr', $message, FILE_APPEND);
-			}
-		} 
-	}
+        if ($this->fp) {
+            fwrite($this->fp, $message);
+        } else {
+            if (isset($GLOBALS['useErrorLog'])) {
+                error_log($message);
+            } else {
+                file_put_contents('php://stderr', $message, FILE_APPEND);
+            }
+        }
+    }
 
     /**
      * @param string $format
@@ -199,7 +193,7 @@ class Logger implements LoggerInterface
 
         return date(preg_replace('`(?<!\\\\)u`', $milliseconds, $format), $timestamp);
     }
-    
+
     /**
      * Set global instance of LoggerInterface to be used
      * by Cloud Blue Connect SDK itself.
@@ -208,9 +202,9 @@ class Logger implements LoggerInterface
      */
     public static function set($logger)
     {
-    	self::$instance = $logger;
+        self::$instance = $logger;
     }
-    
+
     /**
      * Retrieve global instance of LoggerInterface to be used by Cloud Blue Connect SDK
      * itself. Returns instance of class Logger if none was set before.
@@ -219,18 +213,25 @@ class Logger implements LoggerInterface
      */
     public static function get()
     {
-    	if (is_null(self::$instance)) {
-    		self::$instance = new self();
-    	}
-    	return self::$instance;
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
-    
+
     /**
      * Dump session log to current log, and reset session
      */
     public function dump()
     {
-		$this->session->dumpTo($this);
-		$this->session->reset();
+        $this->session->dumpTo($this);
+        $this->session->reset();
+    }
+
+    public function __destruct()
+    {
+        if ($this->fp) {
+            @fclose($this->fp);
+        }
     }
 }

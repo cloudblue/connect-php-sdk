@@ -23,8 +23,7 @@ class Exception extends \Exception
      * @param string $code - Exception Code - text exception identifier
      * @param object $object - Exception parameter
      */
-    public
-    function __construct($message, $code = 'unknown', $object = null)
+    public function __construct($message, $code = 'unknown', $object = null)
     {
         $this->code = $code;
         $this->message = $message;
@@ -35,7 +34,7 @@ class Exception extends \Exception
      * Get Exception parameter object
      * @return null|object
      */
-    function getObject()
+    public function getObject()
     {
         return $this->object;
     }
