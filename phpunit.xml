@@ -15,6 +15,18 @@
         </listener>
     </listeners>
     <testsuites>
+        <testsuite name="ContactInfo">
+            <file>tests/Unit/ContactInfoTest.php</file>
+        </testsuite>
+        <testsuite name="FailTest">
+            <file>tests/Unit/FailTest.php</file>
+        </testsuite>
+        <testsuite name="InquireTest">
+            <file>tests/Unit/InquireTest.php</file>
+        </testsuite>
+        <testsuite name="MessageTest">
+            <file>tests/Unit/MessageTest.php</file>
+        </testsuite>
         <testsuite name="Configuration">
             <file>tests/Unit/ConfigurationTest.php</file>
         </testsuite>
