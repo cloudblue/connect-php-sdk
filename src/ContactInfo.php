@@ -12,7 +12,7 @@ namespace Connect;
  * Class ContactInfo
  * @package Connect
  */
-class ContactInfo
+class ContactInfo extends Model
 {
     public $address_line1;
     public $address_line2;

@@ -12,7 +12,7 @@ namespace Connect;
  * Class Contact
  * @package Connect
  */
-class Contact
+class Contact extends Model
 {
     public $email;
     public $first_name;

@@ -12,7 +12,7 @@ namespace Connect;
  * Class Param
  * @package Connect
  */
-class Param
+class Param extends Model
 {
     public $id;
     public $name;
@@ -21,27 +21,16 @@ class Param
     public $value_error;
 
     /**
-     * @var ValueOption{value}
+     * @var ValueChoice{value}
      */
     public $value_choices;
-
-    /**
-     * Param constructor
-     * @param string $id - parameter ID (optional)
-     * @param string $value - parameter Value (optional)
-     */
-    function __construct($id = null, $value = null)
-    {
-        $this->id = $id;
-        $this->value = $value;
-    }
 
     /**
      * Assign error on parameter
      * @param string $msg - Error message to assign
      * @return $this - Same Param object, for chain assignments like $param->error('err')->value('xxx')
      */
-    function error($msg)
+    public function error($msg)
     {
         $this->value_error = $msg;
         return $this;
@@ -52,7 +41,7 @@ class Param
      * @param string $newValue - Value for parameter to assign
      * @return $this - Same Param object, for chain assignments like $param->error('err')->value('xxx')
      */
-    function value($newValue)
+    public function value($newValue)
     {
         $this->value = $newValue;
         return $this;

@@ -9,13 +9,14 @@
 namespace Connect;
 
 /**
- * Class PhoneNumber
+ * Class Tiers
  * @package Connect
  */
-class PhoneNumber extends Model
+class Tiers extends Model
 {
-    public $country_code;
-    public $area_code;
-    public $phone_number;
-    public $extension;
+    public $customer;
+
+    public $tier1;
+
+    public $tier2;
 }

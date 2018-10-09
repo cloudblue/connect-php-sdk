@@ -9,13 +9,11 @@
 namespace Connect;
 
 /**
- * Class PhoneNumber
+ * Class ValueOption
  * @package Connect
  */
-class PhoneNumber extends Model
+class ValueChoice extends Model
 {
-    public $country_code;
-    public $area_code;
-    public $phone_number;
-    public $extension;
+    public $value;
+    public $label;
 }

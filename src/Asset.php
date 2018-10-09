@@ -12,7 +12,7 @@ namespace Connect;
  * Class Asset
  * @package Connect
  */
-class Asset
+class Asset extends Model
 {
     public $id;
     public $external_id;

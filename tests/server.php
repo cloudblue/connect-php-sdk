@@ -6,14 +6,4 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
-
-/**
- * Class Product
- * @package Connect
- */
-class Product extends Model
-{
-    public $id;
-    public $name;
-}
+print trim(file_get_contents(__DIR__ . '/request.json'));

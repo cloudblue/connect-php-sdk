@@ -6,14 +6,10 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
+namespace Test\Unit;
 
-/**
- * Class Product
- * @package Connect
- */
-class Product extends Model
+
+class AppHelper extends \Connect\RequestsProcessor
 {
-    public $id;
-    public $name;
+
 }

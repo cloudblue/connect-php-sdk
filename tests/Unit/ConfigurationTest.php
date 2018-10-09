@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * This file is part of the Ingram Micro Cloud Blue Connect SDK.
+ *
+ * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ */
+
+namespace Test\Unit;
+
+use Connect\Config;
+
+class ConfigurationTest extends \Test\TestCase
+{
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     */
+    public function testInstantiationConfigFile()
+    {
+        $cfg = new Config(__DIR__ . '/cfg.valid.json');
+        $this->assertInstanceOf('\Connect\Config', $cfg);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     */
+    public function testInstantiationArray()
+    {
+        $cfg = new Config([
+            "apiKey" => "ApiKey SU-766-419-989:56fda6081cd5200f089d28f7f9a6d390bf7ffcec",
+            "apiEndpoint" => "https://api.connect.cloud.im/public/v1",
+            "logLevel" => "info",
+            "timeout" => 10,
+            "sslVerifyHost" => true
+        ]);
+        $this->assertInstanceOf('\Connect\Config', $cfg);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     *
+     * @expectedException \Connect\ConfigException
+     */
+    public function testInvalidArguments()
+    {
+        new Config(1);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     *
+     * @expectedException \Connect\ConfigPropertyMissed
+     */
+    public function testValidateApiKey()
+    {
+        new Config(__DIR__ . '/cfg.invalid.noapikey.json');
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     *
+     * @expectedException \Connect\ConfigPropertyMissed
+     */
+    public function testValidateApiEndpoint()
+    {
+        new Config(__DIR__ . '/cfg.invalid.noapiendpoint.json');
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     *
+     * @expectedException \Connect\ConfigException
+     */
+    public function testConfigFileNotFound()
+    {
+        new Config(__DIR__ . '/cfg.notfound.json');
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \Connect\ConfigPropertyInvalid
+     * @throws \ReflectionException
+     *
+     * @expectedException \Connect\ConfigException
+     */
+    public function testConfigFileInvalidFormat()
+    {
+        new Config(__DIR__ . '/cfg.invalid.format.json');
+    }
+}
