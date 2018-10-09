@@ -99,4 +99,5 @@ class ConfigurationTest extends \Test\TestCase
     {
         new Config(__DIR__ . '/cfg.invalid.format.json');
     }
+
 }

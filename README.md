@@ -54,18 +54,7 @@ require_once "vendor/autoload.php";
  */
 class ProductRequests extends \Connect\RequestsProcessor
 {
-    /**
-     * ProductRequests constructor.
-     * @param $config
-     * @throws ReflectionException
-     * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \Connect\ConfigPropertyMissed
-     */
-    function __construct($config)
-    {
-        parent::__construct($config);
-    }
+    
 
     /**
      * @param \Connect\Request $request

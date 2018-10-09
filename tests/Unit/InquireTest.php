@@ -6,11 +6,17 @@ namespace Tests\Unit;
 use Connect\Inquire;
 use Connect\Param;
 
+/**
+ * Class InquireTest
+ * @package Tests\Unit
+ */
 class InquireTest extends \Test\TestCase
 {
+
     /**
-     * @return Message
+     * @return Inquire
      */
+
     public function testInstantiation()
     {
         $param = new Param([

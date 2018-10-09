@@ -5,10 +5,15 @@ namespace Tests\Unit;
 
 use Connect\Fail;
 
+/**
+ * Class FailTest
+ * @package Tests\Unit
+ */
 class FailTest extends \Test\TestCase
 {
+
     /**
-     * @return Message
+     * @return Fail
      */
     public function testInstantiation()
     {

@@ -5,6 +5,10 @@ namespace Tests\Unit;
 
 use Connect\Message;
 
+/**
+ * Class MessageTest
+ * @package Tests\Unit
+ */
 class MessageTest extends \Test\TestCase
 {
     /**

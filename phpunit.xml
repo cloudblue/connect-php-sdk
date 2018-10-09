@@ -27,6 +27,18 @@
         <testsuite name="MessageTest">
             <file>tests/Unit/MessageTest.php</file>
         </testsuite>
+        <testsuite name="SkipTest">
+            <file>tests/Unit/SkipTest.php</file>
+        </testsuite>
+        <testsuite name="ActivationTemplateResponseTest">
+            <file>tests/Unit/ActivationTemplateResponseTest.php</file>
+        </testsuite>
+        <testsuite name="LoggerTest">
+            <file>tests/Unit/LoggerTest.php</file>
+        </testsuite>
+        <testsuite name="ActivationTileResponseTest">
+            <file>tests/Unit/ActivationTileResponse.php</file>
+        </testsuite>
         <testsuite name="Configuration">
             <file>tests/Unit/ConfigurationTest.php</file>
         </testsuite>
