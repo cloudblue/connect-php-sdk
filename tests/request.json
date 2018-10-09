@@ -27,6 +27,18 @@
           "mpn": "TEAM-ST3L2TAC1M",
           "old_quantity": "0",
           "quantity": "200"
+        },
+        {
+          "id": "TEAM_ST3L2TAC1MA",
+          "mpn": "TEAM-ST3L2TAC1MA",
+          "old_quantity": "1",
+          "quantity": "200"
+        },
+        {
+          "id": "TEAM_ST3L2TAC1Mb",
+          "mpn": "TEAM-ST3L2TAC1Mb",
+          "old_quantity": "200",
+          "quantity": "0"
         }
       ],
       "params": [
