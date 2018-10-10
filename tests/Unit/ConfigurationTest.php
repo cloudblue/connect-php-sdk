@@ -14,8 +14,6 @@ class ConfigurationTest extends \Test\TestCase
 {
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
      */
     public function testInstantiationConfigFile()
     {
@@ -25,8 +23,6 @@ class ConfigurationTest extends \Test\TestCase
 
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
      */
     public function testInstantiationArray()
     {
@@ -42,8 +38,6 @@ class ConfigurationTest extends \Test\TestCase
 
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
      *
      * @expectedException \Connect\ConfigException
      */
@@ -54,8 +48,6 @@ class ConfigurationTest extends \Test\TestCase
 
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
      *
      * @expectedException \Connect\ConfigPropertyMissed
      */
@@ -64,10 +56,26 @@ class ConfigurationTest extends \Test\TestCase
         new Config(__DIR__ . '/cfg.invalid.noapikey.json');
     }
 
+    public function testSetRuntimeServices()
+    {
+        $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
+        $this->assertInstanceOf('\Connect\Config', $cfg);
+        $this->assertInternalType('array', $cfg->runtimeServices);
+        $this->assertCount(2, $cfg->runtimeServices);
+    }
+
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetInvalidRuntimeServices()
+    {
+        new Config(__DIR__ . '/cfg.invalid.runtimeservices.json');
+    }
+
+    /**
+     * @throws \Connect\ConfigException
      *
      * @expectedException \Connect\ConfigPropertyMissed
      */
@@ -78,8 +86,6 @@ class ConfigurationTest extends \Test\TestCase
 
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
      *
      * @expectedException \Connect\ConfigException
      */
@@ -90,8 +96,6 @@ class ConfigurationTest extends \Test\TestCase
 
     /**
      * @throws \Connect\ConfigException
-     * @throws \Connect\ConfigPropertyInvalid
-     * @throws \ReflectionException
      *
      * @expectedException \Connect\ConfigException
      */

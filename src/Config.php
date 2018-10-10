@@ -12,6 +12,7 @@ namespace Connect;
  * Class Config
  * @property string $apiKey
  * @property string $apiEndpoint
+ * @property array $runtimeServices
  * @package Connect
  */
 class Config extends Model
@@ -58,14 +59,12 @@ class Config extends Model
      */
     public $sslVerifyHost = true;
 
-
     /**
-     * List of runtime providers
+     * List of runtime services
      * @var array
      */
-    protected $providers = [
-        'curl' => '\Connect\RuntimeProvider\CurlProvider',
-        'logger' => '\Connect\RuntimeProvider\LoggerProvider'
+    protected $runtimeServices = [
+        'logger' => '\Connect\Runtime\Providers\LoggerServiceProvider'
     ];
 
     /**
@@ -74,8 +73,6 @@ class Config extends Model
      *        string -> path to file to read config from
      *
      * @throws ConfigException
-     * @throws ConfigPropertyInvalid
-     * @throws \ReflectionException
      */
     public function __construct($source)
     {
@@ -91,7 +88,6 @@ class Config extends Model
                 }
                 break;
             case 'array':
-            case 'object':
                 break;
             default :
                 throw new ConfigException("Invalid argument for \\Connect\\Config class constructor: " . gettype($source));
@@ -102,7 +98,7 @@ class Config extends Model
 
     /**
      * Validate and set the API Key property
-     * @param $value
+     * @param string $value
      * @throws ConfigPropertyMissed
      */
     public function setApiKey($value)
@@ -115,7 +111,7 @@ class Config extends Model
 
     /**
      * Validate and set the API Endpoint property
-     * @param $value
+     * @param string $value
      * @throws ConfigPropertyMissed
      */
     public function setApiEndpoint($value)
@@ -125,5 +121,18 @@ class Config extends Model
         }
 
         $this->apiEndpoint = trim($value);
+    }
+
+    /**
+     * Reconfigure the service builder list
+     * @param array $runtimeServices
+     */
+    public function setRuntimeServices($runtimeServices)
+    {
+        if (!is_array($runtimeServices)) {
+            throw new \InvalidArgumentException("The service provider list must be an array, given " . gettype($runtimeServices));
+        }
+
+        $this->runtimeServices = array_merge($this->runtimeServices, $runtimeServices);
     }
 }

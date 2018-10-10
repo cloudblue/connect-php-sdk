@@ -13,28 +13,12 @@ namespace Connect;
  *      Process APS Connect QuickStart API Requests
  * @package Connect
  */
-class RequestsProcessor
+class RequestsProcessor extends FulfillmentAutomation
 {
-    private $ch;
-    private $config;
 
-    /**
-     * RequestsProcessor constructor
-     * @param mixed $config
-     *      one of
-     *          Config - A configuration object
-     *          string - ConfigFile path (JSON with config object inside)
-     *          array  - Part of bigger config in format of JSON-parsed array with configuration
-     * @throws ConfigException
-     * @throws ConfigPropertyInvalid
-     * @throws ConfigPropertyMissed
-     * @throws \ReflectionException
-     */
-    public function __construct($config)
+    public function __construct($config = null)
     {
-        $this->config = ($config instanceof Config) ? $config : new Config($config);
-        $this->config->validate();
-        Logger::get()->setLogLevel($this->config->logLevel);
+        parent::__construct(($config instanceof Config) ? $config : new Config($config), null);
     }
 
     /**

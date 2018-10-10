@@ -37,16 +37,13 @@
             <file>tests/Unit/LoggerTest.php</file>
         </testsuite>
         <testsuite name="ActivationTileResponseTest">
-            <file>tests/Unit/ActivationTileResponse.php</file>
-        </testsuite>
-        <testsuite name="requestTest">
-            <file>tests/Unit/requestTest.php</file>
+            <file>tests/Unit/ActivationTileResponseTest.php</file>
         </testsuite>
         <testsuite name="Configuration">
             <file>tests/Unit/ConfigurationTest.php</file>
         </testsuite>
         <testsuite name="Application">
-            <file>tests/Unit/AppTest.php</file>
+            <file>tests/Unit/FulfillmentAutomationTest.php</file>
         </testsuite>
         <testsuite name="Models">
             <file>tests/Unit/ModelTest.php</file>

@@ -8,6 +8,10 @@
 
 namespace Connect;
 
+use Connect\Logger\LoggerInterface;
+use Connect\Logger\LogRecord;
+use Connect\Logger\LogSession;
+
 /**
  * Default Logger for Cloud Blue Connect SDK.
  *
@@ -92,24 +96,27 @@ class Logger implements LoggerInterface
 
     /**
      * @param $message
+     * @param array $context
      */
-    public function debug($message)
+    public function debug($message, array $context = [])
     {
         $this->log(self::LEVEL_DEBUG, $message);
     }
 
     /**
      * @param $message
+     * @param array $context
      */
-    public function info($message)
+    public function info($message, array $context = [])
     {
         $this->log(self::LEVEL_INFO, $message);
     }
 
     /**
      * @param $message
+     * @param array $context
      */
-    public function error($message)
+    public function error($message, array $context = [])
     {
         $this->log(self::LEVEL_ERROR, $message);
     }
@@ -123,12 +130,68 @@ class Logger implements LoggerInterface
     }
 
     /**
+     * Added a log record at the EMERGENCY level.
+     * @param string $message
+     * @param mixed $context
+     * @return string
+     */
+    public function emergency($message, array $context = array())
+    {
+        $this->log(self::LEVEL_FATAL, $message, $context);
+    }
+
+    /**
+     * Added a log record at the ALERT level.
+     * @param string $message
+     * @param array $context
+     * @return string
+     */
+    public function alert($message, array $context = array())
+    {
+        $this->log(self::LEVEL_FATAL, $message, $context);
+    }
+
+    /**
+     * Added a log record at the CRITICAL level.
+     * @param string $message
+     * @param array $context
+     * @return string
+     */
+    public function critical($message, array $context = array())
+    {
+        $this->log(self::LEVEL_FATAL, $message, $context);
+    }
+
+    /**
+     * Added a log record at the WARNING level.
+     * @param string $message
+     * @param array $context
+     * @return string
+     */
+    public function warning($message, array $context = array())
+    {
+        $this->log(self::LEVEL_ERROR, $message, $context);
+    }
+
+    /**
+     * Added a log record at the NOTICE level.
+     * @param string $message
+     * @param array $context
+     * @return string
+     */
+    public function notice($message, array $context = array())
+    {
+        $this->log(self::LEVEL_INFO, $message, $context);
+    }
+
+    /**
      * Log message of any level
      *
      * @param int $level
      * @param string $message
+     * @param array $context
      */
-    public function log($level, $message)
+    public function log($level, $message, array $context = [])
     {
         $record = new LogRecord($level, $message);
 

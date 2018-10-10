@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Test\Unit;
 
 
 use Connect\ContactInfo;
@@ -9,9 +9,6 @@ use Connect\PhoneNumber;
 
 class ContactInfoTest extends \Test\TestCase
 {
-    /**
-     * @return Param
-     */
     public function testInstantiation()
     {
         $phoneNumber = new PhoneNumber([
@@ -46,8 +43,6 @@ class ContactInfoTest extends \Test\TestCase
         $this->assertEquals("state", $contactInfo->state);
         $this->assertInstanceOf('\Connect\Contact', $contactInfo->contact);
         $this->assertInstanceOf('\Connect\PhoneNumber', $contactInfo->contact->phone_number);
-
-        return $contactInfo;
     }
 
 }

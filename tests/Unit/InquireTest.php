@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Test\Unit;
 
 
 use Connect\Inquire;
