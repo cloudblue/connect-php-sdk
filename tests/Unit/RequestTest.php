@@ -15,7 +15,7 @@ class RequestTest extends \Test\TestCase
 {
     public function testgetNewItems()
     {
-        $requests = json_decode(file_get_contents(__DIR__ . '/../request.json'));
+        $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.json'));
         $request = new Request($requests[0]);
 
         $this->assertCount(2,$request->getNewItems());
@@ -25,7 +25,7 @@ class RequestTest extends \Test\TestCase
 
     public function testgetChangedItems()
     {
-        $requests = json_decode(file_get_contents(__DIR__ . '/../request.json'));
+        $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.json'));
         $request = new Request($requests[0]);
 
         $this->assertCount(2,$request->getChangedItems());
@@ -35,7 +35,7 @@ class RequestTest extends \Test\TestCase
 
     public function testgetRemovedItems()
     {
-        $requests = json_decode(file_get_contents(__DIR__ . '/../request.json'));
+        $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.json'));
         $request = new Request($requests[0]);
 
         $this->assertCount(1,$request->getRemovedItems());

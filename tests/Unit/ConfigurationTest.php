@@ -61,7 +61,7 @@ class ConfigurationTest extends \Test\TestCase
         $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
         $this->assertInstanceOf('\Connect\Config', $cfg);
         $this->assertInternalType('array', $cfg->runtimeServices);
-        $this->assertCount(2, $cfg->runtimeServices);
+        $this->assertCount(3, $cfg->runtimeServices);
     }
 
     /**

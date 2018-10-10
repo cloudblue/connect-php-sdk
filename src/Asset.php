@@ -33,12 +33,12 @@ class Asset extends Model
     public $items;
 
     /**
-     * @var Param{id}
+     * @var Param[]
      */
     public $params;
 
     /**
-     * @var Tier{}
+     * @var Tiers
      */
     public $tiers;
 }

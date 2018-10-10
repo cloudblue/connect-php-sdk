@@ -19,7 +19,28 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
 {
     public function processRequest($request)
     {
-        //do magic
+
+
+
+        switch ($request->id) {
+            case 'PR-5620-6510-1234':
+                return "Done";
+            case 'PR-5620-6510-TMPL':
+                return $this->renderTemplate("TL-1234-4321", $request);
+            case 'PR-5620-6510-INQUIRE':
+                throw new \Connect\Inquire([
+                    new \Connect\Param([
+                        'id' => 'howyoufeel',
+                        'value_error' => 'I dont like how you feel today.'
+                    ])
+                ]);
+            case 'PR-5620-6510-FAIL':
+                throw new \Connect\Fail("Testing failures");
+            case 'PR-5620-6510-SKIP':
+                throw new \Connect\Skip("Testing skipping");
+            default:
+                return new \Connect\ActivationTemplateResponse("TL-1234-4321");
+        }
     }
 
     public function getConfig()
@@ -32,9 +53,9 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
         return $this->logger;
     }
 
-    public function getCurl()
+    public function getHttp()
     {
-        return $this->curl;
+        return $this->http;
     }
 
     public function getStd()

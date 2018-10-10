@@ -40,8 +40,35 @@ class FulfillmentAutomationTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\Logger', $app->getLogger());
         $this->assertInstanceOf('\Connect\Logger', $app->logger);
 
+        $this->assertInstanceOf('\GuzzleHttp\Client', $app->getHttp());
+        $this->assertInstanceOf('\GuzzleHttp\Client', $app->http);
+
         $this->assertInstanceOf('\stdClass', $app->getStd());
         $this->assertInstanceOf('\stdClass', $app->std);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function testCommonUseCases()
+    {
+        $app = new FulfillmentAutomationHelper(new Config('./config.mocked.json'));
+        $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
+
+        $app->process();
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function testRenderTemplate()
+    {
+        $app = new FulfillmentAutomationHelper(new Config('./config.mocked.json'));
+        $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
+
+        $app->process();
     }
 
     /**
@@ -49,7 +76,7 @@ class FulfillmentAutomationTest extends \Test\TestCase
      */
     public function testLegacyInstantiationConfigFile()
     {
-        $app = new AppHelperLegacy(__DIR__ . '/cfg.valid.json');
+        $app = new RequestProcessorHelper(__DIR__ . '/cfg.valid.json');
         $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
     }
 
@@ -58,9 +85,9 @@ class FulfillmentAutomationTest extends \Test\TestCase
      */
     public function testLegacyInstantiationObject()
     {
-        $app = new AppHelperLegacy(new Config([
-            "apiKey" => "ApiKey SU-766-419-989:56fda6081cd5200f089d28f7f9a6d390bf7ffcec",
-            "apiEndpoint" => "https://api.connect.cloud.im/public/v1",
+        $app = new RequestProcessorHelper(new Config([
+            "apiKey" => "ApiKey SU-XXX-1234567890",
+            "apiEndpoint" => "http://api.branding.cloud/public/v42",
             "logLevel" => "info",
             "timeout" => 10,
             "sslVerifyHost" => false

@@ -9,7 +9,10 @@
 namespace Test\Unit;
 
 
-class AppHelperLegacy extends \Connect\RequestsProcessor
+class RequestProcessorHelper extends \Connect\RequestsProcessor
 {
-
+    public function processRequest($request)
+    {
+        // just for testing
+    }
 }

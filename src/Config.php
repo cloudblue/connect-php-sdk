@@ -64,7 +64,8 @@ class Config extends Model
      * @var array
      */
     protected $runtimeServices = [
-        'logger' => '\Connect\Runtime\Providers\LoggerServiceProvider'
+        'logger' => '\Connect\Runtime\Providers\LoggerServiceProvider',
+        'http' => '\Connect\Runtime\Providers\HttpServiceProvider',
     ];
 
     /**

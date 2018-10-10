@@ -9,29 +9,32 @@
 namespace Connect\Runtime\Providers;
 
 use Connect\Config;
-use Connect\Logger;
 use Connect\Runtime\ServiceProvider;
+use GuzzleHttp\Client;
 use Pimple\Container;
 
 /**
- * Class LoggerServiceProvider
+ * Class HttpServiceProvider
  * @package Connect\Runtime\Providers
  */
-class LoggerServiceProvider extends ServiceProvider
+class HttpServiceProvider extends ServiceProvider
 {
     /**
-     * Create the Logger Service
+     * Create the Curl Service
      * @param Container $container
-     * @return \Psr\Log\LoggerInterface
+     * @return Client
      */
     public function register(Container $container)
     {
         /** @var Config $configuration */
         $configuration = $container['config'];
 
-        $logger = Logger::get();
-        $logger->setLogLevel($configuration->logLevel);
+        $client = new Client([
+            'base_uri' => $configuration->apiEndpoint,
+            'timeout' => $configuration->timeout,
+            'verify' => $configuration->sslVerifyHost,
+        ]);
 
-        return $logger;
+        return $client;
     }
 }
