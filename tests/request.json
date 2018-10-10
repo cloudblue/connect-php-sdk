@@ -27,6 +27,24 @@
           "mpn": "TEAM-ST3L2TAC1M",
           "old_quantity": "0",
           "quantity": "200"
+        },
+        {
+          "id": "UPSIZE_TEST",
+          "mpn": "UPSIZE_TEST",
+          "old_quantity": "200",
+          "quantity": "201"
+        },
+        {
+          "id": "DOWNSIZE_TEST",
+          "mpn": "DOWNSIZE_TEST",
+          "old_quantity": "200",
+          "quantity": "199"
+        },
+        {
+          "id": "DELETE_TEST",
+          "mpn": "DELETE_TEST",
+          "old_quantity": "200",
+          "quantity": "0"
         }
       ],
       "params": [

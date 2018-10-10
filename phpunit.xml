@@ -39,6 +39,9 @@
         <testsuite name="ActivationTileResponseTest">
             <file>tests/Unit/ActivationTileResponseTest.php</file>
         </testsuite>
+        <testsuite name="RequestTest">
+            <file>tests/Unit/RequestTest.php</file>
+        </testsuite>
         <testsuite name="Configuration">
             <file>tests/Unit/ConfigurationTest.php</file>
         </testsuite>
