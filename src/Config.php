@@ -13,6 +13,7 @@ namespace Connect;
  * @property string $apiKey
  * @property string $apiEndpoint
  * @property array $runtimeServices
+ * @property array $products
  * @package Connect
  */
 class Config extends Model
