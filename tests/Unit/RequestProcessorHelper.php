@@ -13,7 +13,7 @@ use Connect\Request;
 
 class RequestProcessorHelper extends \Connect\RequestsProcessor
 {
-    public function processRequest(Request $request)
+    public function processRequest($request)
     {
         // just for testing
     }
