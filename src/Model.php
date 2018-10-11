@@ -15,7 +15,7 @@ use Doctrine\Common\Inflector\Inflector;
  * Class Model
  * @package Connect
  */
-class Model
+class Model implements \ArrayAccess
 {
     /**
      * Required properties, if the object is instantiated without
@@ -296,6 +296,43 @@ class Model
     public function toJSON($pretty = false)
     {
         return json_encode($this->toArray(), $pretty ? JSON_PRETTY_PRINT : null);
+    }
+
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->{$offset});
+    }
+
+    /**
+     * @param mixed $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->{$offset});
+    }
+
+    /**
+     * @param mixed $offset
+     * @return mixed|null
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->{$offset})
+            ? $this->get($offset)
+            : null;
     }
 
     /**
