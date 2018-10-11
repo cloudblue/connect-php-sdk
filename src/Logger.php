@@ -33,7 +33,7 @@ class Logger implements LoggerInterface
         }
 
         if (defined('CONNECT_DEBUG') || isset($_SERVER['CONNECT_DEBUG'])) {
-            $this->logLevel = self::LEVEL_TRACE;
+            $this->setLogLevel(self::LEVEL_TRACE);
         }
 
         $this->session = new LogSession();
@@ -42,16 +42,19 @@ class Logger implements LoggerInterface
     /**
      * Set logger logLevel (one of LEVEL_* constants)
      * @param int $level
+     * @return $this
      */
     public function setLogLevel($level)
     {
         $this->logLevel = $level;
+        return $this;
     }
 
     /**
+     * Set the log file path
      * @param $filePath
-     *
      * @throws Exception
+     * @return $this
      */
     public function setLogFile($filePath)
     {
@@ -62,20 +65,18 @@ class Logger implements LoggerInterface
         $logDir = dirname($filePath);
         if (!file_exists($logDir)) {
             @mkdir($logDir, 0755, true);
-            if (!file_exists($logDir)) {
-                throw new Exception(
-                    sprintf('Can\'t create log directory "%s".', $logDir),
-                    'logger'
-                );
-            }
         }
 
-        if (!$this->fp = fopen($filePath, 'a+')) {
-            throw new Exception(
-                sprintf('Can\'t create log file "%s".', $filePath),
-                'logger'
-            );
+        if (!file_exists($logDir)) {
+            throw new Exception(sprintf('Can\'t create log directory "%s".', $logDir), 'logger');
         }
+
+        if (!$this->fp = @fopen($filePath, 'a+')) {
+            throw new Exception(sprintf('Can\'t create log file "%s".', $filePath), 'logger');
+        }
+
+        $this->logFile = $filePath;
+        return $this;
     }
 
     /**
@@ -208,8 +209,9 @@ class Logger implements LoggerInterface
      * Write log record into log
      *
      * @param LogRecord $record
+     * @return string
      */
-    public function write($record)
+    public function write(LogRecord $record)
     {
         $logLine = array();
 
@@ -237,6 +239,8 @@ class Logger implements LoggerInterface
                 file_put_contents('php://stderr', $message, FILE_APPEND);
             }
         }
+
+        return $message;
     }
 
     /**
@@ -247,10 +251,7 @@ class Logger implements LoggerInterface
      */
     private function udate($format = 'u', $utimestamp = null)
     {
-        if (is_null($utimestamp)) {
-            $utimestamp = microtime(true);
-        }
-
+        $utimestamp = is_null($utimestamp) ? microtime(true) : $utimestamp;
         $timestamp = floor($utimestamp);
         $milliseconds = round(($utimestamp - $timestamp) * 1000000);
 
@@ -284,11 +285,13 @@ class Logger implements LoggerInterface
 
     /**
      * Dump session log to current log, and reset session
+     * @return $this
      */
     public function dump()
     {
         $this->session->dumpTo($this);
         $this->session->reset();
+        return $this;
     }
 
     public function __destruct()

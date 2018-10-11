@@ -81,7 +81,7 @@ interface LoggerInterface extends \Psr\Log\LoggerInterface
      *
      * @param LogRecord $record
      */
-    public function write($record);
+    public function write(LogRecord $record);
 
     /**
      * Set logger logLevel (one of LEVEL_* constants)

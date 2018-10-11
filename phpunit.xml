@@ -18,25 +18,27 @@
         <testsuite name="ContactInfo">
             <file>tests/Unit/ContactInfoTest.php</file>
         </testsuite>
-        <testsuite name="FailTest">
+        <testsuite name="Fail">
             <file>tests/Unit/FailTest.php</file>
         </testsuite>
-        <testsuite name="InquireTest">
+        <testsuite name="Inquire">
             <file>tests/Unit/InquireTest.php</file>
         </testsuite>
-        <testsuite name="MessageTest">
+        <testsuite name="Message">
             <file>tests/Unit/MessageTest.php</file>
         </testsuite>
-        <testsuite name="SkipTest">
+        <testsuite name="Skip">
             <file>tests/Unit/SkipTest.php</file>
         </testsuite>
-        <testsuite name="ActivationTemplateResponseTest">
+        <testsuite name="ActivationTemplateResponse">
             <file>tests/Unit/ActivationTemplateResponseTest.php</file>
         </testsuite>
-        <testsuite name="LoggerTest">
+        <testsuite name="Logger">
+            <file>tests/Unit/Logger/LogRecordTest.php</file>
+            <file>tests/Unit/Logger/LogSessionTest.php</file>
             <file>tests/Unit/LoggerTest.php</file>
         </testsuite>
-        <testsuite name="ActivationTileResponseTest">
+        <testsuite name="ActivationTileResponse">
             <file>tests/Unit/ActivationTileResponseTest.php</file>
         </testsuite>
         <testsuite name="RequestTest">

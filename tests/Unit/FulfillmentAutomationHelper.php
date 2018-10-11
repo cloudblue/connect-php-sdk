@@ -17,11 +17,16 @@ use Connect\FulfillmentAutomation;
  */
 class FulfillmentAutomationHelper extends FulfillmentAutomation
 {
+    /**
+     * @param $request
+     * @return \Connect\ActivationTemplateResponse|string
+     * @throws \Connect\Fail
+     * @throws \Connect\Inquire
+     * @throws \Connect\Skip
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function processRequest($request)
     {
-
-
-
         switch ($request->id) {
             case 'PR-5620-6510-1234':
                 return "Done";

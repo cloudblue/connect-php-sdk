@@ -108,7 +108,6 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
 
     /**
      * Process all requests
-     * @return bool
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function process()
@@ -167,7 +166,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
      * @return array|Model
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function listRequests($filters = null)
+    public function listRequests(array $filters = null)
     {
         $query = '';
         $filters = $filters ? array_merge($filters) : array();
@@ -199,7 +198,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
      *          )
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function updateParameters($request, $parray)
+    public function updateParameters(Request $request, array $parray)
     {
         $plist = array();
         foreach ($parray as $p) {
@@ -220,7 +219,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
             $plist[] = $parr;
         }
 
-        $body = new \Connect\Asset(['asset' => ['params' => $plist]]);
+        $body = new \Connect\Request(['asset' => ['params' => $plist]]);
         $this->sendRequest('PUT', '/requests/' . $request->id, $body);
     }
 
