@@ -94,4 +94,13 @@ class FulfillmentAutomationTest extends \Test\TestCase
         ]));
         $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
     }
+
+    /**
+     * @throws \Connect\ConfigException
+     */
+    public function testLegacyInstantiationCfgFile()
+    {
+        $app = new RequestProcessorHelper();
+        $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
+    }
 }
