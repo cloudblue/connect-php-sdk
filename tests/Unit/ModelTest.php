@@ -167,6 +167,7 @@ class ModelTest extends \Test\TestCase
 
         $this->assertInstanceOf('\Connect\\Tiers', $model->tiers);
         $this->assertInstanceOf('\Connect\\Tier', $model->tiers->tier1);
+        $this->assertInstanceOf('\Connect\\Tier', $model->tiers['tier1']);
     }
 
     public function testHydrateCollections()
