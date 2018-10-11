@@ -26,7 +26,7 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
      * @throws \Connect\Skip
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function processRequest(Request $request)
+    public function processRequest($request)
     {
         switch ($request->id) {
             case 'PR-5620-6510-1234':

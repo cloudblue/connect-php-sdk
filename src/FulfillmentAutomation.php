@@ -96,7 +96,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
             $this->logger->debug("Request Body:\n" . $body);
         }
 
-        $response = $this->http->request(strtoupper($verb), trim($path), [
+        $response = $this->http->request(strtoupper($verb), trim($this->config->apiEndpoint . $path), [
             'body' => $body,
             'headers' => $headers
         ]);

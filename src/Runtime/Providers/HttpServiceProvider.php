@@ -30,7 +30,6 @@ class HttpServiceProvider extends ServiceProvider
         $configuration = $container['config'];
 
         $client = new Client([
-            'base_uri' => $configuration->apiEndpoint,
             'timeout' => $configuration->timeout,
             'verify' => $configuration->sslVerifyHost,
         ]);

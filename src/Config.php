@@ -121,7 +121,7 @@ class Config extends Model
             throw new ConfigPropertyMissed("Missing required property apiEndpoint.");
         }
 
-        $this->apiEndpoint = trim($value);
+        $this->apiEndpoint = rtrim($value, "/");
     }
 
     /**
