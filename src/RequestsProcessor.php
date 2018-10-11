@@ -24,6 +24,6 @@ abstract class RequestsProcessor extends FulfillmentAutomation
         if (!isset($config)) {
             $config = './config.json';
         }
-        parent::__construct(($config instanceof Config) ? $config : new Config($config);
+        parent::__construct(($config instanceof Config) ? $config : new Config($config));
     }
 }

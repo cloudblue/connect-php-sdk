@@ -14,5 +14,5 @@ namespace Connect;
  */
 interface FulfillmentAutomationInterface
 {
-    public function processRequest($request);
+    public function processRequest(Request $request);
 }
