@@ -9,6 +9,7 @@
 namespace Test\Unit;
 
 use Connect\FulfillmentAutomation;
+use Connect\Request;
 
 /**
  * Class FulfillmentAutomationHelper
@@ -25,7 +26,7 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
      * @throws \Connect\Skip
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function processRequest($request)
+    public function processRequest(Request $request)
     {
         switch ($request->id) {
             case 'PR-5620-6510-1234':
