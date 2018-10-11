@@ -33,7 +33,7 @@ class Config extends Model
      * List of products to work with
      * @var string[]
      */
-    public $products;
+    protected $products;
 
     /**
      * What messages to write to log (legacy)
@@ -135,5 +135,23 @@ class Config extends Model
         }
 
         $this->runtimeServices = array_merge($this->runtimeServices, $runtimeServices);
+    }
+
+    /**
+     * Set the product list
+     * @param string|array $product
+     */
+
+    public function setProducts($product)
+    {
+        if(is_string($product)) {
+            $product = [$product];
+        }
+
+        if (!is_array($product)) {
+            throw new \InvalidArgumentException("The product list must be an string or an array, given " . gettype($product));
+        }
+
+        $this->products = $product;
     }
 }
