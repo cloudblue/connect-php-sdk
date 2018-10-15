@@ -5,14 +5,9 @@ require "../vendor/autoload.php";
 
 class MyAppRequests extends \Connect\RequestsProcessor
 {
-    public function __construct()
-    {
-        parent::__construct('config.json');
-    }
 
     public function processRequest($req)
     {
-
         $req->asset->tiers['customer']->name;
         $req->asset->tiers['tier1']->name;
 
@@ -22,7 +17,7 @@ class MyAppRequests extends \Connect\RequestsProcessor
 
         $p1 = $req->asset->params['param_a']->error('xxxx');
 
-        $p2 = new \Connect\Param('param_b', 'true');
+        $p2 = new \Connect\Param(['param_b' => true]);
         $req->requestProcessor->updateParameters($req, [$p1, $p2]);
 
         foreach ($req->asset->items as $item) {
@@ -49,16 +44,6 @@ class MyAppRequests extends \Connect\RequestsProcessor
 
         $req->asset->params['param_a'];
 
-// 		if (!isset($req->asset->params['param_a']))
-// 			throw new \Connect\Inquire(array( 'param_a' => 'ActivationID should be set' ));
-// 			throw new \Connect\Inquire(array( 
-// 					$req->asset->params['param_a']->error('xxxx'),
-// 					$req->asset->params['param_b']->error('yyyy')->value('default')
-// 			));
-
-// 		if (!isset($req->asset->params['param_b']))
-// 			throw new \Connect\Fail(array( 'param_b' => 'Your activation code is already used' ));
-
         throw new \Connect\Skip();
 
         return "activation succeeded";
@@ -71,14 +56,8 @@ try {
     $rp = new MyAppRequests();
     $rp->process();
 
-    // throw new Exception('Some unexpected error happened');
-
 } catch (Exception $e) {
-
     \Connect\Logger::get()->error($e->getMessage());
-    // Dump to log all level records
     \Connect\Logger::get()->dump();
 }
 
-// $rlist = $rp->listRequests(array('status' => 'inquiring'));
-// print_r($rlist);

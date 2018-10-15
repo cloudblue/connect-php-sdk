@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * This file is part of the Ingram Micro Cloud Blue Connect SDK.
+ *
+ * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ */
+
+namespace Test\Unit;
+
+use Connect\Config;
+
+/**
+ * Class FulfillmentAutomationTest
+ * @package Test\Unit
+ */
+class FulfillmentAutomationTest extends \Test\TestCase
+{
+    protected function setUp()
+    {
+        /**
+         * change the work dir, by default the default config file
+         * must be in the same directory of the entry point.
+         */
+        chdir(__DIR__);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     */
+    public function testInstantiationDefault()
+    {
+        $app = new FulfillmentAutomationHelper();
+        $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
+
+        $this->assertInstanceOf('\Connect\Config', $app->getConfig());
+        $this->assertInstanceOf('\Connect\Config', $app->config);
+        $this->assertNull($app->wrongpropertyorservice);
+
+        $this->assertInstanceOf('\Connect\Logger', $app->getLogger());
+        $this->assertInstanceOf('\Connect\Logger', $app->logger);
+
+        $this->assertInstanceOf('\GuzzleHttp\Client', $app->getHttp());
+        $this->assertInstanceOf('\GuzzleHttp\Client', $app->http);
+
+        $this->assertInstanceOf('\stdClass', $app->getStd());
+        $this->assertInstanceOf('\stdClass', $app->std);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function testCommonUseCases()
+    {
+        $app = new FulfillmentAutomationHelper(new Config('./config.mocked.json'));
+        $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
+
+        $app->process();
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function testRenderTemplate()
+    {
+        $app = new FulfillmentAutomationHelper(new Config('./config.mocked.json'));
+        $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
+
+        $app->process();
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     */
+    public function testLegacyInstantiationConfigFile()
+    {
+        $app = new RequestProcessorHelper(__DIR__ . '/cfg.valid.json');
+        $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     */
+    public function testLegacyInstantiationObject()
+    {
+        $app = new RequestProcessorHelper(new Config([
+            "apiKey" => "ApiKey SU-XXX-1234567890",
+            "apiEndpoint" => "http://api.branding.cloud/public/v42",
+            "logLevel" => "info",
+            "timeout" => 10,
+            "sslVerifyHost" => false
+        ]));
+        $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     */
+    public function testLegacyInstantiationCfgFile()
+    {
+        $app = new RequestProcessorHelper();
+        $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
+    }
+}

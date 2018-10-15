@@ -6,14 +6,14 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
+namespace Connect\Logger;
 
 /**
  * Interface for Logger
  *
  * @package Connect
  */
-interface LoggerInterface
+interface LoggerInterface extends \Psr\Log\LoggerInterface
 {
     const LEVEL_TRACE = 4;
     const LEVEL_DEBUG = 3;
@@ -40,22 +40,25 @@ interface LoggerInterface
      * Logs debug messages
      *
      * @param string $message
+     * @param array $context
      */
-    public function debug($message);
+    public function debug($message, array $context = []);
 
     /**
      * Logs info messages
      *
      * @param string $message
+     * @param array $context
      */
-    public function info($message);
+    public function info($message, array $context = []);
 
     /**
      * Logs error messages
      *
      * @param string $message
+     * @param array $context
      */
-    public function error($message);
+    public function error($message, array $context = []);
 
     /**
      * Logs fatal messages
@@ -69,15 +72,16 @@ interface LoggerInterface
      *
      * @param int $level - one of LEVEL_* constants
      * @param string $message - message to log
+     * @param array $context
      */
-    public function log($level, $message);
+    public function log($level, $message, array $context = []);
 
     /**
      * Write log record into log
      *
      * @param LogRecord $record
      */
-    public function write($record);
+    public function write(LogRecord $record);
 
     /**
      * Set logger logLevel (one of LEVEL_* constants)

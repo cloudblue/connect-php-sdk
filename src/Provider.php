@@ -12,7 +12,7 @@ namespace Connect;
  * Class Provider
  * @package Connect
  */
-class Provider
+class Provider extends Model
 {
     public $id;
     public $name;

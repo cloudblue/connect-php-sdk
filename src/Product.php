@@ -12,7 +12,7 @@ namespace Connect;
  * Class Product
  * @package Connect
  */
-class Product
+class Product extends Model
 {
     public $id;
     public $name;

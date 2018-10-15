@@ -12,7 +12,7 @@ namespace Connect;
  * Class Connection
  * @package Connect
  */
-class Connection
+class Connection extends Model
 {
     public $id;
     public $name;

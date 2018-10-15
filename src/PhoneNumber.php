@@ -12,7 +12,7 @@ namespace Connect;
  * Class PhoneNumber
  * @package Connect
  */
-class PhoneNumber
+class PhoneNumber extends Model
 {
     public $country_code;
     public $area_code;

@@ -1,0 +1,58 @@
+<phpunit bootstrap="vendor/autoload.php" verbose="true" stopOnError="true" stopOnFailure="true">
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="testdox-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="coverage-html" target="tmp/report" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="coverage.xml"/>
+    </logging>
+    <listeners>
+        <listener class="\Mockery\Adapter\Phpunit\TestListener"
+                  file="vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php">
+        </listener>
+    </listeners>
+    <testsuites>
+        <testsuite name="ContactInfo">
+            <file>tests/Unit/ContactInfoTest.php</file>
+        </testsuite>
+        <testsuite name="Fail">
+            <file>tests/Unit/FailTest.php</file>
+        </testsuite>
+        <testsuite name="Inquire">
+            <file>tests/Unit/InquireTest.php</file>
+        </testsuite>
+        <testsuite name="Message">
+            <file>tests/Unit/MessageTest.php</file>
+        </testsuite>
+        <testsuite name="Skip">
+            <file>tests/Unit/SkipTest.php</file>
+        </testsuite>
+        <testsuite name="ActivationTemplateResponse">
+            <file>tests/Unit/ActivationTemplateResponseTest.php</file>
+        </testsuite>
+        <testsuite name="Logger">
+            <file>tests/Unit/Logger/LogRecordTest.php</file>
+            <file>tests/Unit/Logger/LogSessionTest.php</file>
+            <file>tests/Unit/LoggerTest.php</file>
+        </testsuite>
+        <testsuite name="ActivationTileResponse">
+            <file>tests/Unit/ActivationTileResponseTest.php</file>
+        </testsuite>
+        <testsuite name="RequestTest">
+            <file>tests/Unit/RequestTest.php</file>
+        </testsuite>
+        <testsuite name="Configuration">
+            <file>tests/Unit/ConfigurationTest.php</file>
+        </testsuite>
+        <testsuite name="Application">
+            <file>tests/Unit/FulfillmentAutomationTest.php</file>
+        </testsuite>
+        <testsuite name="Models">
+            <file>tests/Unit/ModelTest.php</file>
+            <file>tests/Unit/ParamTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>

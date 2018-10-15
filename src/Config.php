@@ -8,113 +8,151 @@
 
 namespace Connect;
 
-class Config
+/**
+ * Class Config
+ * @property string $apiKey
+ * @property string $apiEndpoint
+ * @property array $runtimeServices
+ * @property array $products
+ * @package Connect
+ */
+class Config extends Model
 {
     /**
-     * @var - string Connect QuickStart API Key
+     * Connect QuickStart API Key
+     * @var string
      */
-    public $apiKey;
+    protected $apiKey;
 
     /**
-     * @var string - Connect QuickStart API Endpoint URI
+     * Connect QuickStart API Endpoint URI
+     * @var string
      */
-    public $apiEndpoint;
+    protected $apiEndpoint;
 
     /**
-     * @var array of strings - list of products to work with
+     * List of products to work with
+     * @var string[]
      */
-    public $products;
+    protected $products;
 
     /**
-     * @var int - logLevel - what messages to write to log
+     * What messages to write to log (legacy)
+     * @var int
      */
-    public $logLevel = LoggerInterface::LEVEL_INFO;
+    public $logLevel = 2;
 
     /**
-     * @var int - network interaction timeout, seconds
+     * Enable the debug mode
+     * @var bool
+     */
+    public $debug = false;
+
+    /**
+     * Network interaction timeout, seconds
+     * @var int
      */
     public $timeout = 50;
 
     /**
-     * @var bool - do we need to verify SSL certificate of server
+     * Do we need to verify SSL certificate of server
+     * @var bool
      */
     public $sslVerifyHost = true;
 
     /**
-     * @param mixed $config -
+     * List of runtime services
+     * @var array
+     */
+    protected $runtimeServices = [
+        'logger' => '\Connect\Runtime\Providers\LoggerServiceProvider',
+        'http' => '\Connect\Runtime\Providers\HttpServiceProvider',
+    ];
+
+    /**
+     * @param array|object|string $source
      *        array  -> has pairs of key/value to fill in config
      *        string -> path to file to read config from
+     *
      * @throws ConfigException
-     * @throws ConfigPropertyInvalid
-     * @throws \ReflectionException
      */
-    public function __construct($config)
+    public function __construct($source)
     {
-        if (is_string($config)) {
-            try {
-                $txt = file_get_contents($config);
-            } catch (\Exception $e) {
-                throw new ConfigException("Can't read file $config: " . $e->getMessage());
-            }
+        switch (gettype($source)) {
+            case 'string':
 
-            try {
-                $config = json_decode($txt, true);
-            } catch (\Exception $e) {
-                throw new ConfigException("Can't parse JSON in file $config: " . $e->getMessage());
-            }
+                if (!is_readable($source)) {
+                    throw new ConfigException("Can't read file $source");
+                }
+                $source = json_decode(file_get_contents($source), true);
+                if (!isset($source)) {
+                    throw new ConfigException("Can't parse JSON config file.");
+                }
+                break;
+            case 'array':
+                break;
+            default :
+                throw new ConfigException("Invalid argument for \\Connect\\Config class constructor: " . gettype($source));
         }
 
-        if (!is_array($config)) {
-            throw new ConfigException("Invalid argument for \\Connect\\Config class constructor: " . gettype($config));
-        }
-
-        $ref = new \ReflectionClass($this);
-        foreach ($ref->getProperties() as $prop) {
-            $name = $prop->getName();
-
-            if (!isset($config[$name])) {
-                continue;
-            }
-
-            $value = $config[$name];
-
-            if ($name == 'products') {
-                $prop->setValue($this, is_array($value) ? $value : array($value));
-            } elseif ($name == 'logLevel') {
-                $found = false;
-                foreach (LoggerInterface::LEVELS as $k => $v) {
-                    if (strtoupper($value) == $v) {
-                        $prop->setValue($this, $k);
-                        $found = true;
-                    }
-                }
-                if (!$found) {
-                    throw new ConfigPropertyInvalid('Unknown log level', $name, $value);
-                }
-            } elseif ($name == "sslVerifyHost") {
-                if (!is_bool($value)) {
-                    throw new ConfigPropertyInvalid('Should be boolean', $name, $value);
-                }
-                $prop->setValue($this, $value);
-            } else {
-                $prop->setValue($this, $value);
-            }
-        }
+        parent::__construct($source);
     }
 
     /**
-     * Validate configuration
+     * Validate and set the API Key property
+     * @param string $value
      * @throws ConfigPropertyMissed
      */
-    public function validate()
+    public function setApiKey($value)
     {
-        if (!isset($this->apiKey)) {
-            throw new ConfigPropertyMissed('apiKey');
+        if (empty($value)) {
+            throw new ConfigPropertyMissed("Missing required property apiKey.");
+        }
+        $this->apiKey = trim($value);
+    }
+
+    /**
+     * Validate and set the API Endpoint property
+     * @param string $value
+     * @throws ConfigPropertyMissed
+     */
+    public function setApiEndpoint($value)
+    {
+        if (empty($value)) {
+            throw new ConfigPropertyMissed("Missing required property apiEndpoint.");
         }
 
-        if (!isset($this->apiEndpoint)) {
-            throw new ConfigPropertyMissed('apiEndpoint');
+        $this->apiEndpoint = rtrim($value, "/");
+    }
+
+    /**
+     * Reconfigure the service builder list
+     * @param array $runtimeServices
+     */
+    public function setRuntimeServices($runtimeServices)
+    {
+        if (!is_array($runtimeServices)) {
+            throw new \InvalidArgumentException("The service provider list must be an array, given " . gettype($runtimeServices));
         }
 
+        $this->runtimeServices = array_merge($this->runtimeServices, $runtimeServices);
+    }
+
+    /**
+     * Set the product list
+     * @param string|array $product
+     */
+
+    public function setProducts($product)
+    {
+        if(is_string($product)) {
+            $product = [$product];
+        }
+
+        if (!is_array($product)) {
+            throw new \InvalidArgumentException("The product list must be an string or an array, given " . gettype($product));
+        }
+
+        $this->products = $product;
     }
 }

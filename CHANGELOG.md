@@ -1,5 +1,11 @@
 # Connect PHP fulfillment SDK Change Log
 
+## 1.1.0
+    - Added autotesting coverage
+    - Introduced new FulfillmentAutomation interface instead of former RequestsProcessor
+    - Removed php Reflection as performance improvement
+    - New Model system
+    - Added Guzzle as defult http client
 ## 1.0.4
     - Deprecation of var for public on accessible variables to be compilant with latest standards
     - moved to psr-4 instead of psr-1

@@ -12,7 +12,7 @@ namespace Connect;
  * Class Tier
  * @package Connect
  */
-class Tier
+class Tier extends Model
 {
     public $id;
     public $external_id;

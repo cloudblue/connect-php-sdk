@@ -224,3 +224,6 @@ fabric.properties
 # composer
 /vendor
 composer.lock
+
+# codecov
+coverage.xml

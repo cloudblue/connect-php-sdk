@@ -6,7 +6,7 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
+namespace Connect\Logger;
 
 /**
  * LogRecord class, instance created for every logging action

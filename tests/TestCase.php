@@ -6,14 +6,10 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
+namespace Test;
 
-/**
- * Class ValueOption
- * @package Connect
- */
-class ValueOption
+
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    public $value;
-    public $label;
+
 }

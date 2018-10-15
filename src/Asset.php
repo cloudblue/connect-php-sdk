@@ -12,7 +12,7 @@ namespace Connect;
  * Class Asset
  * @package Connect
  */
-class Asset
+class Asset extends Model
 {
     public $id;
     public $external_id;
@@ -33,12 +33,12 @@ class Asset
     public $items;
 
     /**
-     * @var Param{id}
+     * @var Param[]
      */
     public $params;
 
     /**
-     * @var Tier{}
+     * @var Tiers
      */
     public $tiers;
 }

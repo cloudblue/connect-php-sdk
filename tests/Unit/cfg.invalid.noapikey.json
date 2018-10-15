@@ -1,0 +1,7 @@
+{
+  "apiKey": null,
+  "apiEndpoint": "https://api.connect.cloud.im/public/v1",
+  "logLevel": "info",
+  "timeout": 10,
+  "sslVerifyHost": false
+}

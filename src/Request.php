@@ -13,7 +13,7 @@ namespace Connect;
  *      APS Connect QuickStart Request object
  * @package Connect
  */
-class Request
+class Request extends Model
 {
     /**
      * @var Asset
