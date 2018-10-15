@@ -9,6 +9,8 @@
 namespace Test\Unit;
 
 
+use Connect\Model;
+
 class ModelTest extends \Test\TestCase
 {
     public function testInstantiation()
@@ -168,6 +170,16 @@ class ModelTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\\Tiers', $model->tiers);
         $this->assertInstanceOf('\Connect\\Tier', $model->tiers->tier1);
         $this->assertInstanceOf('\Connect\\Tier', $model->tiers['tier1']);
+    }
+
+    public function testOffsets()
+    {
+        $model = new Model();
+        $model->offsetSet("test", "test");
+        $this->assertEquals("test", $model->offsetGet("test"));
+        $this->assertEquals(true, $model->offsetExists("test"));
+        $model->offsetUnset("test");
+        $this->assertEquals(false, $model->offsetExists("test"));
     }
 
     public function testHydrateCollections()

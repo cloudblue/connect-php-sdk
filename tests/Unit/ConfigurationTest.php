@@ -122,7 +122,7 @@ class ConfigurationTest extends \Test\TestCase
     /**
      * @throws \Connect\ConfigException
      */
-    
+
     public function testSetProductAsString()
     {
         $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
