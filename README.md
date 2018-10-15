@@ -72,7 +72,7 @@ class ProductRequests extends \Connect\FulfillmentAutomation
      * @throws \Connect\Inquire   
      */
     
-    public function processRequest(\Connect\Request $request)
+    public function processRequest($request)
     {
         $this->logger->info("Processing Request: " . $request->id . " for asset: " . $request->asset->id);
         switch ($request->type) {
