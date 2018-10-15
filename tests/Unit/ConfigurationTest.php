@@ -56,6 +56,9 @@ class ConfigurationTest extends \Test\TestCase
         new Config(__DIR__ . '/cfg.invalid.noapikey.json');
     }
 
+    /**
+     * @throws \Connect\ConfigException
+     */
     public function testSetRuntimeServices()
     {
         $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
@@ -104,4 +107,26 @@ class ConfigurationTest extends \Test\TestCase
         new Config(__DIR__ . '/cfg.invalid.format.json');
     }
 
+    /**
+     * @throws \Connect\ConfigException
+     *
+     * @expectedException \InvalidArgumentException
+     */
+
+    public function testInvalidProductType()
+    {
+        $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
+        $cfg->setProducts((int) 10);
+    }
+
+    /**
+     * @throws \Connect\ConfigException
+     */
+    
+    public function testSetProductAsString()
+    {
+        $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
+        $cfg->setProducts((string)"CN-123-123");
+        $this->assertEquals("CN-123-123", $cfg->products[0]);
+    }
 }
