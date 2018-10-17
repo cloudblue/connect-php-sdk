@@ -41,4 +41,32 @@ class Asset extends Model
      * @var Tiers
      */
     public $tiers;
+
+    /**
+     * Return a Param by ID
+     * @param $id
+     * @return Param
+     */
+    public function getParameterByID($id)
+    {
+        $param = current(array_filter($this->params, function (Param $param) use ($id) {
+            return ($param->id === $id);
+        }));
+
+        return ($param) ? $param : null;
+    }
+
+    /**
+     * Return a Param by ID
+     * @param $id
+     * @return Param
+     */
+    public function getItemByID($id)
+    {
+        $item = current(array_filter($this->items, function (Item $item) use ($id) {
+            return ($item->id === $id);
+        }));
+
+        return ($item) ? $item : null;
+    }
 }

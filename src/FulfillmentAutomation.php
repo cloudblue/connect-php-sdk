@@ -112,52 +112,64 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
      */
     public function process()
     {
-        $requests = $this->listRequests(['status' => 'pending']);
+        foreach ($this->listRequests(['status' => 'pending']) as $request) {
+            $this->dispatch($request);
+        }
+    }
 
-        foreach ($requests as $request) {
+    /**
+     * @param Request $request
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function dispatch($request)
+    {
+        try {
 
             if ($this->config->products && !in_array($request->asset->product->id, $this->config->products)) {
-                continue;
+                return 'Invalid product';
             }
 
-            if ($request->status == 'pending') { // actually default filter is pending
-                $processingResult = 'unknown';
-                try {
-                    $this->logger->info("Starting processing of request ID=" . $request->id);
+            $processingResult = 'unknown';
 
-                    /** @noinspection PhpVoidFunctionResultUsedInspection */
-                    $msg = $this->processRequest($request);
-                    if (!$msg || is_string($msg)) {
-                        $msg = new ActivationTileResponse($msg);
-                    }
+            $this->logger->info("Starting processing of request ID=" . $request->id);
 
-                    if ($msg instanceof ActivationTemplateResponse) {
-                        $this->sendRequest('POST', '/requests/' . $request->id . '/approve',
-                            '{"template_id": "' . $msg->templateid . '"}');
-                        $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
-                    } else {
-                        $this->sendRequest('POST', '/requests/' . $request->id . '/approve',
-                            '{"activation_tile": "' . $msg->activationTile . '"}');
-                        $processingResult = 'succeed (' . $msg->activationTile . ')';
-                    }
-
-                } catch (Inquire $e) {
-                    // update parameters and move to inquire
-                    $this->updateParameters($request, $e->params);
-                    $this->sendRequest('POST', '/requests/' . $request->id . '/inquire', '{}');
-                    $processingResult = 'inquire';
-                } catch (Fail $e) {
-                    // fail request
-                    $this->sendRequest('POST', '/requests/' . $request->id . '/fail',
-                        '{"reason": "' . $e->getMessage() . '"}');
-                    $processingResult = 'fail';
-                } catch (Skip $e) {
-                    $processingResult = 'skip';
-                }
-
-                $this->logger->info("Finished processing of request ID=" . $request->id . " result=" . $processingResult);
+            /** @noinspection PhpVoidFunctionResultUsedInspection */
+            $msg = $this->processRequest($request);
+            if (!$msg || is_string($msg)) {
+                $msg = new ActivationTileResponse($msg);
             }
+
+            if ($msg instanceof ActivationTemplateResponse) {
+                $this->sendRequest('POST', '/requests/' . $request->id . '/approve',
+                    '{"template_id": "' . $msg->templateid . '"}');
+                $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
+            } else {
+                $this->sendRequest('POST', '/requests/' . $request->id . '/approve',
+                    '{"activation_tile": "' . $msg->activationTile . '"}');
+                $processingResult = 'succeed (' . $msg->activationTile . ')';
+            }
+
+        } catch (Inquire $e) {
+            // update parameters and move to inquire
+            $this->updateParameters($request, $e->params);
+            $this->sendRequest('POST', '/requests/' . $request->id . '/inquire', '{}');
+            $processingResult = 'inquire';
+
+        } catch (Fail $e) {
+            // fail request
+            $this->sendRequest('POST', '/requests/' . $request->id . '/fail',
+                '{"reason": "' . $e->getMessage() . '"}');
+            $processingResult = 'fail';
+
+        } catch (Skip $e) {
+            $processingResult = 'skip';
+
         }
+
+        $this->logger->info("Finished processing of request ID=" . $request->id . " result=" . $processingResult);
+
+        return $processingResult;
     }
 
     /**
@@ -183,43 +195,31 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
         }
 
         $body = $this->sendRequest('GET', '/requests' . $query);
-        return Model::modelize('requests', json_decode($body));
+
+        /** @var Request[] $models */
+        $models = Model::modelize('requests', json_decode($body));
+        foreach ($models as $index => $model) {
+            $models[$index]->requestProcessor = $this;
+        }
+
+        return $models;
     }
 
     /**
      * Update request parameters
      * @param Request $request - request being updated
-     * @param Param[] $parray - array of parameters
+     * @param Param[] $params - array of parameters
      *      Example:
      *          array(
      *              $request->asset->params['param_a']->error('Unknown activation ID was provided'),
      *              $request->asset->params['param_b']->value('true'),
-     *              new \Connect\Param('param_c', 'newValue')
+     *              new \Connect\Param(['id' => 'param_c', 'newValue'])
      *          )
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function updateParameters(Request $request, array $parray)
+    public function updateParameters(Request $request, array $params)
     {
-        $plist = array();
-        foreach ($parray as $p) {
-            $parr = (array)$p;
-
-            unset($parr['value_choices']);
-
-            foreach ($parr as $k => $v) {
-                if (!$v) {
-                    unset($parr[$k]);
-                }
-
-                if ($k == 'value' && !$v) {
-                    $parr[$k] = '';
-                }
-            }
-
-            $plist[] = $parr;
-        }
-
-        $body = new \Connect\Request(['asset' => ['params' => $plist]]);
+        $body = new \Connect\Request(['asset' => ['params' => $params]]);
         $this->sendRequest('PUT', '/requests/' . $request->id, $body);
     }
 
