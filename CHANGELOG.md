@@ -1,5 +1,9 @@
 # Connect PHP fulfillment SDK Change Log
 
+## 1.1.1
+    - Fixed issue with array access
+    - Introduced new methods: getItemByID and getParamByID for easy access
+    
 ## 1.1.0
     - Added autotesting coverage
     - Introduced new FulfillmentAutomation interface instead of former RequestsProcessor
