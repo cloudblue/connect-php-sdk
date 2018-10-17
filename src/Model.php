@@ -221,13 +221,7 @@ class Model implements \ArrayAccess
                  * of original array.
                  */
                 foreach ($value as $index => $item) {
-                    $tmp = self::modelize(is_int($index) ? $key : $index, $item);
-                    if (isset($tmp->id)) {
-                        $array[$tmp->id] = $tmp;
-
-                    } else {
-                        $array[$index] = $tmp;
-                    }
+                    $array[$index] = self::modelize(is_int($index) ? $key : $index, $item);
                 }
 
                 return $array;

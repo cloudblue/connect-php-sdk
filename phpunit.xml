@@ -53,6 +53,7 @@
         <testsuite name="Models">
             <file>tests/Unit/ModelTest.php</file>
             <file>tests/Unit/ParamTest.php</file>
+            <file>tests/Unit/AssetTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
