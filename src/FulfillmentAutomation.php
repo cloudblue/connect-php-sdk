@@ -208,37 +208,18 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     /**
      * Update request parameters
      * @param Request $request - request being updated
-     * @param Param[] $parray - array of parameters
+     * @param Param[] $params - array of parameters
      *      Example:
      *          array(
      *              $request->asset->params['param_a']->error('Unknown activation ID was provided'),
      *              $request->asset->params['param_b']->value('true'),
-     *              new \Connect\Param('param_c', 'newValue')
+     *              new \Connect\Param(['id' => 'param_c', 'newValue'])
      *          )
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function updateParameters(Request $request, array $parray)
+    public function updateParameters(Request $request, array $params)
     {
-        $plist = array();
-        foreach ($parray as $p) {
-            $parr = (array)$p;
-
-            unset($parr['value_choices']);
-
-            foreach ($parr as $k => $v) {
-                if (!$v) {
-                    unset($parr[$k]);
-                }
-
-                if ($k == 'value' && !$v) {
-                    $parr[$k] = '';
-                }
-            }
-
-            $plist[] = $parr;
-        }
-
-        $body = new \Connect\Request(['asset' => ['params' => $plist]]);
+        $body = new \Connect\Request(['asset' => ['params' => $params]]);
         $this->sendRequest('PUT', '/requests/' . $request->id, $body);
     }
 

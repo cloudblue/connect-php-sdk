@@ -258,13 +258,7 @@ class Model implements \ArrayAccess
 
         $array = [];
         foreach ($value as $key => $item) {
-
-            if (stripos($key, '_hidden') !== false) {
-                continue;
-            }
-
             if (!in_array(trim($key), $forbidden)) {
-
                 switch (gettype($item)) {
                     case 'object':
                     case 'array':
