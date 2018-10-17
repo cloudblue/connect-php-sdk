@@ -221,7 +221,7 @@ class Model implements \ArrayAccess
                  * of original array.
                  */
                 foreach ($value as $index => $item) {
-                    $tmp = self::modelize($key, $item);
+                    $tmp = self::modelize(is_int($index) ? $key : $index, $item);
                     if (isset($tmp->id)) {
                         $array[$tmp->id] = $tmp;
 
@@ -245,6 +245,47 @@ class Model implements \ArrayAccess
     }
 
     /**
+     * Transform the given structure into array
+     * @param mixed $value
+     * @return array
+     */
+    public static function arrayize($value)
+    {
+        $forbidden = [];
+        if ($value instanceof \Connect\Model) {
+            $forbidden = $value->getHidden();
+        }
+
+        $array = [];
+        foreach ($value as $key => $item) {
+
+            if (stripos($key, '_hidden') !== false) {
+                continue;
+            }
+
+            if (!in_array(trim($key), $forbidden)) {
+
+                switch (gettype($item)) {
+                    case 'object':
+                    case 'array':
+                        $buffer = self::arrayize($item);
+                        if (!empty($buffer)) {
+                            $array[trim($key)] = $buffer;
+                        }
+
+                        break;
+                    default:
+                        if (isset($item)) {
+                            $array[trim($key)] = $item;
+                        }
+                }
+            }
+        }
+
+        return $array;
+    }
+
+    /**
      * Check if the required properties exists
      * @return array List of missing properties
      */
@@ -256,42 +297,12 @@ class Model implements \ArrayAccess
     }
 
     /**
-     * Return all the filled properties/arrays and Model objects
-     * @param mixed $value
+     * Transform the \Connect\Model into array
      * @return array
      */
-    public function toArray($value = null)
+    public function toArray()
     {
-        if (!isset($value)) {
-            $value = $this;
-        }
-
-        $forbidden = [];
-        if ($value instanceof \Connect\Model) {
-            $forbidden = $value->getHidden();
-        }
-
-        $array = [];
-        foreach ($value as $key => $item) {
-            if (!in_array($key, $forbidden)) {
-                switch (gettype($item)) {
-                    case 'object':
-                    case 'array':
-                        $buffer = $this->toArray($item);
-                        if (!empty($buffer)) {
-                            $array[$key] = $buffer;
-                        }
-
-                        break;
-                    default:
-                        if (isset($item)) {
-                            $array[$key] = $item;
-                        }
-                }
-            }
-        }
-
-        return $array;
+        return self::arrayize($this);
     }
 
     /**
