@@ -61,6 +61,12 @@ class Config extends Model
     public $sslVerifyHost = true;
 
     /**
+     * In case that config contains service offset it will be stored here
+     * @var object
+     */
+    public $service;
+
+    /**
      * List of runtime services
      * @var array
      */
