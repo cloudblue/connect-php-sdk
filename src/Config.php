@@ -90,11 +90,12 @@ class Config extends Model
                 if (!is_readable($source)) {
                     throw new ConfigException("Can't read file $source");
                 }
-                $source = json_decode(file_get_contents($source), true);
+                $source = json_decode(file_get_contents($source));
                 if (!isset($source)) {
                     throw new ConfigException("Can't parse JSON config file.");
                 }
                 break;
+            case 'object':
             case 'array':
                 break;
             default :
@@ -137,11 +138,11 @@ class Config extends Model
      */
     public function setRuntimeServices($runtimeServices)
     {
-        if (!is_array($runtimeServices)) {
-            throw new \InvalidArgumentException("The service provider list must be an array, given " . gettype($runtimeServices));
+        if (!in_array(gettype($runtimeServices), ['array', 'object'])) {
+            throw new \InvalidArgumentException("The service provider list must be an array or an object, given " . gettype($runtimeServices));
         }
 
-        $this->runtimeServices = array_merge($this->runtimeServices, $runtimeServices);
+        $this->runtimeServices = array_merge($this->runtimeServices, (new Model($runtimeServices))->toArray());
     }
 
     /**
