@@ -10,7 +10,7 @@ namespace Test\Unit;
 
 use Connect\Config;
 
-class ConfigurationTest extends \Test\TestCase
+class ConfigTest extends \Test\TestCase
 {
     /**
      * @throws \Connect\ConfigException

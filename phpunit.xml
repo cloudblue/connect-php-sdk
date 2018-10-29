@@ -15,9 +15,6 @@
         </listener>
     </listeners>
     <testsuites>
-        <testsuite name="ContactInfo">
-            <file>tests/Unit/ContactInfoTest.php</file>
-        </testsuite>
         <testsuite name="Fail">
             <file>tests/Unit/FailTest.php</file>
         </testsuite>
@@ -45,7 +42,8 @@
             <file>tests/Unit/RequestTest.php</file>
         </testsuite>
         <testsuite name="Configuration">
-            <file>tests/Unit/ConfigurationTest.php</file>
+            <file>tests/Unit/ConfigTest.php</file>
+            <file>tests/Unit/Config/VaultConfigTest.php</file>
         </testsuite>
         <testsuite name="Application">
             <file>tests/Unit/FulfillmentAutomationTest.php</file>
@@ -54,6 +52,7 @@
             <file>tests/Unit/ModelTest.php</file>
             <file>tests/Unit/ParamTest.php</file>
             <file>tests/Unit/AssetTest.php</file>
+            <file>tests/Unit/ContactInfoTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
