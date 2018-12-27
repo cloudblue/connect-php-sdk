@@ -20,11 +20,17 @@ class Request extends Model
      */
     public $asset;
 
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
     public $id;
     public $type;
     public $created;
     public $updated;
     public $status;
+    public $activation_key;
 
     /**
      * @var RequestsProcessor

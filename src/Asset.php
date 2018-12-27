@@ -16,6 +16,7 @@ class Asset extends Model
 {
     public $id;
     public $external_id;
+    public $external_uid;
 
     /**
      * @var Product
@@ -56,15 +57,31 @@ class Asset extends Model
         return ($param) ? $param : null;
     }
 
+
+
     /**
-     * Return a Param by ID
+     * Return a Item by ID
      * @param $id
-     * @return Param
+     * @return Item
      */
     public function getItemByID($id)
     {
         $item = current(array_filter($this->items, function (Item $item) use ($id) {
             return ($item->id === $id);
+        }));
+
+        return ($item) ? $item : null;
+    }
+
+    /**
+     * Return a Item by MPN
+     * @param $id
+     * @return Item
+     */
+    public function getItemByMPN($mpn)
+    {
+        $item = current(array_filter($this->items, function (Item $item) use ($mpn) {
+            return ($item->mpn === $mpn);
         }));
 
         return ($item) ? $item : null;

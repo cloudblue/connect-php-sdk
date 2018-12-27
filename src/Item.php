@@ -26,4 +26,9 @@ class Item extends Model
      * @var int
      */
     public $old_quantity;
+
+    /**
+     * @var Renewal
+     */
+    public $renewal;
 }
