@@ -9,7 +9,7 @@
 namespace Connect;
 
 /**
- * Class DistribbutionContract
+ * Class DistributionContract
  * @package Connect
  */
 class DistributionContract extends Model
