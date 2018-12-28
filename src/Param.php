@@ -19,6 +19,7 @@ class Param extends Model
     public $description;
     public $value;
     public $value_error;
+    public $type;
 
     /**
      * @var ValueChoice{value}

@@ -15,7 +15,7 @@ namespace Connect;
 class Connection extends Model
 {
     public $id;
-    public $name;
+    public $type;
 
     /**
      * @var Provider

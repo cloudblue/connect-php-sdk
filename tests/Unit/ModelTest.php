@@ -189,13 +189,26 @@ class ModelTest extends \Test\TestCase
             "id": "TEAM_ST3L2T1Y",
             "mpn": "TEAM-ST3L2T1Y",
             "old_quantity": "0",
-            "quantity": "100"
+            "quantity": "100",
+            "renewal": {
+                "from": "2018-12-24T00:00:00Z",
+                "period_delta": 1,
+                "period_uom": "month",
+                "to": "2019-01-24T00:00:00Z"
+            }
+
           },
           {
             "id": "TEAM_ST3L2TAC1M",
             "mpn": "TEAM-ST3L2TAC1M",
             "old_quantity": "0",
-            "quantity": "200"
+            "quantity": "200",
+            "renewal": {
+                "from": "2018-12-24T00:00:00Z",
+                "period_delta": 1,
+                "period_uom": "month",
+                "to": "2019-01-24T00:00:00Z"
+                }
           }
         ]}');
 
@@ -206,6 +219,7 @@ class ModelTest extends \Test\TestCase
 
         foreach ($model->items as $items) {
             $this->assertInstanceOf('\Connect\\Item', $items);
+            $this->assertInstanceOf('\Connect\\Renewal', $items->renewal);
         }
     }
 

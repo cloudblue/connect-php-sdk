@@ -1,0 +1,141 @@
+[{
+  "activation_key": "test",
+  "asset": {
+    "connection": {
+      "id": "CT-9213-9369",
+      "provider": {
+        "id": "PA-425-033",
+        "name": "IMCDemos Testing Account"
+      },
+      "type": "production",
+      "vendor": {
+        "id": "VA-004-290",
+        "name": "Marc FSG"
+      }
+    },
+    "external_id": "1000728",
+    "external_uid": "2ec774dd-219c-4f80-8c87-3c3fc1e3edf9",
+    "id": "AS-277-060-219-3",
+    "items": [
+      {
+        "id": "DISKSPACE",
+        "mpn": "Disc Space",
+        "old_quantity": "10",
+        "quantity": "10",
+        "renewal": {
+          "from": "2018-12-24T00:00:00Z",
+          "period_delta": 1,
+          "period_uom": "month",
+          "to": "2019-01-24T00:00:00Z"
+        }
+      }
+    ],
+    "params": [
+      {
+        "description": "Fallball requires an email address for the administrator of the service",
+        "id": "email",
+        "name": "Especify the email of the administrator",
+        "type": "text",
+        "value": "renewalstest123@gmail.com",
+        "value_choices": [],
+        "value_error": ""
+      },
+      {
+        "description": "Initial administrator password",
+        "id": "password",
+        "name": "Initial administrator password",
+        "type": "text",
+        "value": "XSJcPNrt8c",
+        "value_choices": [],
+        "value_error": ""
+      },
+      {
+        "description": "URL Where customer must access the service",
+        "id": "serviceURL",
+        "name": "Service URL",
+        "type": "text",
+        "value": "http://isvtest1.fall-ball.appspot.com/#/auth",
+        "value_choices": [],
+        "value_error": ""
+      },
+      {
+        "description": "FallBall Client User ID for SSO",
+        "id": "userId",
+        "name": "FallBall Client User Id",
+        "type": "text",
+        "value": "c6538eb1-3d2e-4664-8ded-517be606ee70",
+        "value_choices": [],
+        "value_error": ""
+      }
+    ],
+    "product": {
+      "id": "CN-543-324-128",
+      "name": "fallball QS"
+    },
+    "tiers": {
+      "customer": {
+        "contact_info": {
+          "address_line1": "some address",
+          "address_line2": "",
+          "city": "Schenectady",
+          "contact": {
+            "email": "renewalstest123@gmail.com",
+            "first_name": "Renewals",
+            "last_name": "Test",
+            "phone_number": {
+              "area_code": "123",
+              "country_code": "+1",
+              "extension": "",
+              "phone_number": "4567890"
+            }
+          },
+          "country": "us",
+          "postal_code": "12345",
+          "state": "CA"
+        },
+        "external_id": 1000242,
+        "id": "TA-0-4828-4250-6919",
+        "name": "fallball renewals test"
+      },
+      "tier1": {
+        "contact_info": {
+          "address_line1": "3351 Michelson Drive, Suite 100",
+          "address_line2": "",
+          "city": "Irvine",
+          "contact": {
+            "email": "admin@imcdemos.com",
+            "first_name": "Charlie",
+            "last_name": "Smith",
+            "phone_number": {
+              "area_code": "714",
+              "country_code": "+1",
+              "extension": "",
+              "phone_number": "5661000"
+            }
+          },
+          "country": "us",
+          "postal_code": "92612-0697",
+          "state": "CA"
+        },
+        "external_id": 1,
+        "id": "TA-0-2347-9392-6524",
+        "name": "ServicePro"
+      },
+      "tier2": {}
+    }
+  },
+  "created": "2018-12-24T14:30:19.954503+00:00",
+  "distribution_contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  },
+  "id": "PR-2147-8111-7564",
+  "marketplace": {
+    "id": "MP-00000",
+    "name": "ACME Marketplace"
+  },
+  "reason": "",
+  "status": "approved",
+  "type": "renew",
+  "updated": "2018-12-24T14:30:19.954556+00:00"
+}]
