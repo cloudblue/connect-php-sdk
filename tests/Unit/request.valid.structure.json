@@ -124,11 +124,11 @@
       "tier2": {}
     }
   },
-  "created": "2018-12-24T14:30:19.954503+00:00",
-  "distribution_contract": {
+  "contract": {
     "id": "CRD-00000-00000-00000",
     "name": "ACME Distribution Contract"
   },
+  "created": "2018-12-24T14:30:19.954503+00:00",
   "id": "PR-2147-8111-7564",
   "marketplace": {
     "id": "MP-00000",

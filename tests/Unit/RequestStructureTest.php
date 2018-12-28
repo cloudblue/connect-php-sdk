@@ -48,13 +48,13 @@ class RequestStructureTest extends \Test\TestCase
 
     }
 
-    public function testDistributionContractStructure()
+    public function testContractStructure()
     {
         $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.structure.json'));
         $request = new Request($requests[0]);
-        $this->assertInstanceOf('\Connect\DistributionContract', $request->distribution_contract);
-        $this->assertEquals('CRD-00000-00000-00000', $request->distribution_contract->id);
-        $this->assertEquals('ACME Distribution Contract', $request->distribution_contract->name);
+        $this->assertInstanceOf('\Connect\Contract', $request->contract);
+        $this->assertEquals('CRD-00000-00000-00000', $request->contract->id);
+        $this->assertEquals('ACME Distribution Contract', $request->contract->name);
     }
 
     public function testAssetStructure()

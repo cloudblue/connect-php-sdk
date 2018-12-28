@@ -9,10 +9,10 @@
 namespace Connect;
 
 /**
- * Class DistributionContract
+ * Class Contract
  * @package Connect
  */
-class DistributionContract extends Model
+class Contract extends Model
 {
     public $id;
     public $name;

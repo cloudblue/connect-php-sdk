@@ -26,9 +26,9 @@ class Request extends Model
     public $marketplace;
 
     /**
-     * @var DistributionContract
+     * @var Contract
      */
-    public $distribution_contract;
+    public $contract;
 
     public $id;
     public $type;
