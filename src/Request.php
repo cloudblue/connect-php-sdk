@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -20,11 +20,22 @@ class Request extends Model
      */
     public $asset;
 
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
+    /**
+     * @var Contract
+     */
+    public $contract;
+
     public $id;
     public $type;
     public $created;
     public $updated;
     public $status;
+    public $activation_key;
 
     /**
      * @var RequestsProcessor

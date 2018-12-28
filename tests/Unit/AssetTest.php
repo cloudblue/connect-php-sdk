@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
  */
 
 namespace Test\Unit;
@@ -39,15 +39,18 @@ class AssetTest extends \Test\TestCase
             'items' => [
                 new Item([
                     'id' => 111,
-                    'quantity' => 1
+                    'quantity' => 1,
+                    'mpn' => '111'
                 ]),
                 new Item([
                     'id' => 222,
-                    'quantity' => 2
+                    'quantity' => 2,
+                    'mpn' => '222'
                 ]),
                 new Item([
                     'id' => 333,
-                    'quantity' => 3
+                    'quantity' => 3,
+                    'mpn' => '333'
                 ])
             ],
         ]);
@@ -84,5 +87,18 @@ class AssetTest extends \Test\TestCase
         $this->assertEquals(333, $asset->getItemByID(333)->id);
         $this->assertNull($asset->getItemByID(999));
     }
+
+    /**
+     * @param Asset $asset
+     *
+     * @depends testInstantiation
+     */
+    public function testGetItemByMpn(Asset $asset)
+    {
+        $this->assertInstanceOf('\Connect\Item', $asset->getItemByMPN('333'));
+        $this->assertEquals(333, $asset->getItemByMPN('333')->id);
+        $this->assertNull($asset->getItemByMPN('999'));
+    }
+
 
 }

@@ -54,5 +54,8 @@
             <file>tests/Unit/AssetTest.php</file>
             <file>tests/Unit/ContactInfoTest.php</file>
         </testsuite>
+        <testsuite name="RequestStructure">
+            <file>tests/Unit/RequestStructureTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>

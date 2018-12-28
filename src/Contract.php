@@ -9,14 +9,11 @@
 namespace Connect;
 
 /**
- * Class Tiers
+ * Class Contract
  * @package Connect
  */
-class Tiers extends Model
+class Contract extends Model
 {
-    public $customer;
-
-    public $tier1;
-
-    public $tier2;
+    public $id;
+    public $name;
 }

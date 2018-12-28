@@ -9,14 +9,13 @@
 namespace Connect;
 
 /**
- * Class Tiers
+ * Class Renewal
  * @package Connect
  */
-class Tiers extends Model
+class Renewal extends Model
 {
-    public $customer;
-
-    public $tier1;
-
-    public $tier2;
+    public $from;
+    public $to;
+    public $period_delta;
+    public $period_uom;
 }

@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -26,4 +26,9 @@ class Item extends Model
      * @var int
      */
     public $old_quantity;
+
+    /**
+     * @var Renewal
+     */
+    public $renewal;
 }

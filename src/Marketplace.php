@@ -9,14 +9,11 @@
 namespace Connect;
 
 /**
- * Class Tiers
+ * Class MarketPlace
  * @package Connect
  */
-class Tiers extends Model
+class Marketplace extends Model
 {
-    public $customer;
-
-    public $tier1;
-
-    public $tier2;
+    public $id;
+    public $name;
 }
