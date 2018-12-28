@@ -33,7 +33,7 @@ Connect PHP SDK is available on [Packagist](https://packagist.org/packages/apsco
 ```json
 {
   "require": {
-    "apsconnect/connect-sdk": "^1.0"
+    "apsconnect/connect-sdk": "^14.0"
     }
 }
 ```
