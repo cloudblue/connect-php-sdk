@@ -211,7 +211,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
      * @return array|Model
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function listTierConfigConfigs(array $filters = null)
+    public function listTierConfigs(array $filters = null)
     {
         $query = '';
         $filters = $filters ? array_merge($filters) : array();
