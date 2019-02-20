@@ -206,6 +206,34 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     }
 
     /**
+     * List the pending tier/Config-requests
+     * @param array $filters Filter for listing key->value or key->array(value1, value2)
+     * @return array|Model
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function listTierConfigConfigs(array $filters = null)
+    {
+        $query = '';
+        $filters = $filters ? array_merge($filters) : array();
+
+         if ($filters) {
+            $query = http_build_query($filters);
+
+            // process case when value for filter is array
+            $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
+        }
+
+        $body = $this->sendRequest('GET', '/tier/config-requests' . $query);
+
+        /** @var Request[] $models */
+        $models = Model::modelize('tierconfigrequests', json_decode($body));
+        foreach ($models as $index => $model) {
+            $models[$index]->requestProcessor = $this;
+        }
+
+        return $models;
+    }
+    /**
      * Update request parameters
      * @param Request $request - request being updated
      * @param Param[] $params - array of parameters
