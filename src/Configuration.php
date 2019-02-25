@@ -22,4 +22,37 @@ class Configuration extends Model
      * @var
      */
     public $name;
+
+    /**
+     * @var
+     */
+    public $status;
+
+    /**
+     * @var Account
+     */
+
+    public $account;
+
+    /**
+     * @var Product
+     */
+
+    public $product;
+
+    /**
+     * @var
+     */
+    public $tier_level;
+
+    /**
+     * @var Events
+     */
+
+    public $events;
+
+    /**
+     * @var Param[]
+     */
+    public $params;
 }

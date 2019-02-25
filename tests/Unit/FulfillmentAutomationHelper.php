@@ -49,6 +49,35 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
         }
     }
 
+    /**
+     * @param $tierConfigRequest
+     * @return \Connect\ActivationTileResponse|string
+     */
+    public function processTierConfigRequest($tierConfigRequest)
+    {
+        switch ($tierConfigRequest->id) {
+            case 'TC-105-196-018':
+                return "Done";
+            case 'TCR-381-349-991-inquire':
+                throw new \Connect\Inquire(([
+                    new \Connect\Param([
+                        'id' => 'param_a',
+                        'value_error' => 'Not valid.'
+                    ])
+                ]));
+            case 'TCR-381-349-991-skip':
+                throw new \Connect\Skip("Testing skipping");
+            case 'TCR-381-349-991-fail':
+                throw new \Connect\Fail("Testing failures");
+            case 'TCR-381-349-991-nomessage':
+                return;
+            case 'TCR-381-349-991-templateresponse':
+                return new \Connect\ActivationTemplateResponse('TL-1234-1234');
+            default:
+                return new \Connect\ActivationTileResponse("TL-1234-1234");
+        }
+    }
+
     public function getConfig()
     {
         return $this->config;

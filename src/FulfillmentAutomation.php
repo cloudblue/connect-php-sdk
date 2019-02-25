@@ -112,9 +112,66 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
      */
     public function process()
     {
+        foreach ($this->listTierConfigs(['status' => 'pending']) as $tierConfig) {
+            $this->dispatchTierConfig($tierConfig);
+        }
         foreach ($this->listRequests(['status' => 'pending']) as $request) {
             $this->dispatch($request);
         }
+    }
+
+    /**
+     * @param TierConfigRequest $tierConfigRequest
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function dispatchTierConfig($tierConfigRequest)
+    {
+        try {
+            if ($this->config->products && !in_array($tierConfigRequest->configuration->product->id, $this->config->products)) {
+                return 'Invalid product';
+            }
+
+            $processingResult = 'unknown';
+
+            $this->logger->info("Starting processing Tier Config ID=" . $tierConfigRequest->id);
+
+            /** @noinspection PhpVoidFunctionResultUsedInspection */
+            $msg = $this->processTierConfigRequest($tierConfigRequest);
+            if (!$msg || is_string($msg)) {
+                $msg = new ActivationTileResponse($msg);
+            }
+
+            if ($msg instanceof ActivationTemplateResponse) {
+                $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
+                    '{"template": {"id": "' . $msg->templateid . '"}}');
+                $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
+            } else {
+                $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
+                    '{"template": {"representation": "' . $msg->activationTile . '"}}');
+                $processingResult = 'succeed (' . $msg->activationTile . ')';
+            }
+
+        } catch (Inquire $e) {
+            // update parameters and move to inquire
+            $this->updateTierConfigRequestParameters($tierConfigRequest, $e->params);//WORKING HERE!
+            $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/inquire', '{}');
+            $processingResult = 'inquire';
+
+        } catch (Fail $e) {
+            // fail request
+            $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/fail',
+                '{"reason": "' . $e->getMessage() . '"}');
+            $processingResult = 'fail';
+
+        } catch (Skip $e) {
+            $processingResult = 'skip';
+
+        }
+
+        $this->logger->info("Finished processing of Tier Config Request with ID=" . $tierConfigRequest->id . " result=" . $processingResult);
+
+        return $processingResult;
     }
 
     /**
@@ -125,7 +182,6 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     protected function dispatch($request)
     {
         try {
-
             if ($this->config->products && !in_array($request->asset->product->id, $this->config->products)) {
                 return 'Invalid product';
             }
@@ -208,7 +264,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     /**
      * List the pending tier/Config-requests
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
-     * @return array|Model
+     * @return array|TierConfigRequest
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listTierConfigs(array $filters = null)
@@ -249,6 +305,18 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     {
         $body = new \Connect\Request(['asset' => ['params' => $params]]);
         $this->sendRequest('PUT', '/requests/' . $request->id, $body);
+    }
+
+    /**
+     * Update tierConfig parameters
+     * @param TierConfigRequest $tierConfigRequest - TierConfigRequest being updated
+     * @param Param[] $params - array of parameters
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function updateTierConfigRequestParameters(TierConfigRequest $tierConfigRequest, array $params)
+    {
+        $body = new \Connect\TierConfigRequest(['params' => $params]);
+        $this->sendRequest('PUT', '/tier/config-requests/' . $tierConfigRequest->id, $body);
     }
 
     /**

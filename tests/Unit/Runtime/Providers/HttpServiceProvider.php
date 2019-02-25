@@ -14,8 +14,24 @@ class HttpServiceProvider extends ServiceProvider
     public function register(Container $container)
     {
         $body = \Mockery::mock('\Psr\Http\Message\StreamInterface');
+
         $body->shouldReceive('getContents')
-            ->andReturn(trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')));
+            ->times(15)
+            ->andReturn(trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')));
 
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getStatusCode')

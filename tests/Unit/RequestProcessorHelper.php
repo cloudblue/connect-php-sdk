@@ -17,4 +17,9 @@ class RequestProcessorHelper extends \Connect\RequestsProcessor
     {
         // just for testing
     }
+
+    public function processTierConfigRequest($tierConfigRequest)
+    {
+        // just for testing
+    }
 }

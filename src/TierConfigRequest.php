@@ -27,34 +27,13 @@ class TierConfigRequest extends Model
      * @var
      */
     public $status;
-    /**
-     * @var
-     */
-    public $tier_level;
+
 
     /**
      * @var Configuration
      */
 
     public $configuration;
-
-    /**
-     * @var Account
-     */
-
-    public $account;
-
-    /**
-     * @var Product
-     */
-
-    public $product;
-
-    /**
-     * @var Events
-     */
-
-    public $events;
 
     /**
      * @var Param[]
