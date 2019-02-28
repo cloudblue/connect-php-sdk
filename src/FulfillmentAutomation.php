@@ -128,7 +128,8 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     protected function dispatchTierConfig($tierConfigRequest)
     {
         try {
-            if ($this->config->products && !in_array($tierConfigRequest->configuration->product->id, $this->config->products)) {
+            if ($this->config->products && !in_array($tierConfigRequest->configuration->product->id,
+                    $this->config->products)) {
                 return 'Invalid product';
             }
 
@@ -237,7 +238,6 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     public function listRequests(array $filters = null)
     {
         $query = '';
-        $filters = $filters ? array_merge($filters) : array();
 
         if ($this->config->products) {
             $filters['product_id'] = $this->config->products;
@@ -270,9 +270,8 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     public function listTierConfigs(array $filters = null)
     {
         $query = '';
-        $filters = $filters ? array_merge($filters) : array();
 
-         if ($filters) {
+        if ($filters) {
             $query = http_build_query($filters);
 
             // process case when value for filter is array
@@ -289,6 +288,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
 
         return $models;
     }
+
     /**
      * Update request parameters
      * @param Request $request - request being updated
@@ -330,5 +330,44 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     {
         $query = ($request instanceof Request) ? $request->id : $request;
         return $this->sendRequest('GET', '/templates/' . $templateId . '/render?request_id=' . $query);
+    }
+
+    /**
+     * @param $tierId - Connect ID of the tier
+     * @param $productId - Product ID
+     * @return array|Param
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getTierConfigByProduct($tierId, $productId)
+    {
+        $body = $this->sendRequest('GET',
+            '/tier/config-requests?status=approved&configuration__product__id=' . $productId . '&configuration__account__id=' . $tierId);
+        print $body;
+        $model = Model::modelize('tierconfigrequests', json_decode($body));
+        if (count($model) > 0) {
+            return $model[0]->configuration;
+        }
+        return $model;
+    }
+
+    /**
+     * @param $parameterId
+     * @param $tierId
+     * @param $productId
+     * @return Param|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getTierParameterByProductAndTierId($parameterId, $tierId, $productId)
+    {
+        $tierConfig = $this->getTierConfigByProduct($tierId, $productId);
+        if(count($tierConfig) == 0){
+            return null;
+        }
+        $param = current(array_filter($tierConfig->params, function (Param $param) use ($parameterId) {
+            return ($param->id === $parameterId);
+        }));
+
+        return ($param) ? $param : null;
+
     }
 }
