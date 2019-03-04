@@ -39,5 +39,7 @@ class TierRequestTest extends \Test\TestCase
         $this->assertEquals('Reseller OLD', $request->configuration->getParameterByID('tier2fulfillment')->value);
         $parameter = $app->getTierParameterByProductAndTierId('tier2fulfillment', 'TA-0-2281-3745-7900', 'PRD-165-377-339');
         $this->assertEquals('Tier 2 Fulfillment', $parameter->title);
+        $this->assertNull($request->configuration->getParameterByID('NotFound'));
+        $this->assertNull($app->getTierParameterByProductAndTierId('tier2fulfillment', 'TA-0-2281-3745-7900', 'PRD-165-377-340'));
     }
 }

@@ -57,5 +57,8 @@
         <testsuite name="RequestStructure">
             <file>tests/Unit/RequestStructureTest.php</file>
         </testsuite>
+        <testsuite name="TierRequests">
+            <file>tests/Unit/TierRequestTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>
