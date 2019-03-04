@@ -359,7 +359,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     public function getTierParameterByProductAndTierId($parameterId, $tierId, $productId)
     {
         $tierConfig = $this->getTierConfigByProduct($tierId, $productId);
-        if(count($tierConfig) == 0){
+        if(!$tierConfig){
             return null;
         }
         $param = current(array_filter($tierConfig->params, function (Param $param) use ($parameterId) {
