@@ -9,10 +9,10 @@
 namespace Connect;
 
 /**
- * Class Account
+ * Class Template
  * @package Connect
  */
-class Account extends Model
+class Template extends Model
 {
     /**
      * @var
@@ -21,23 +21,5 @@ class Account extends Model
     /**
      * @var
      */
-    public $name;
-
-    /**
-     * @var
-     */
-
-    public $external_uid;
-
-    /**
-     * @var
-     */
-    public $external_id;
-
-    /**
-     * @var ContactInfo
-     */
-
-    public $contact_info;
-
+    public $representation;
 }

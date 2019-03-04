@@ -342,7 +342,6 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     {
         $body = $this->sendRequest('GET',
             '/tier/config-requests?status=approved&configuration__product__id=' . $productId . '&configuration__account__id=' . $tierId);
-        print $body;
         $model = Model::modelize('tierconfigrequests', json_decode($body));
         if (count($model) > 0) {
             return $model[0]->configuration;

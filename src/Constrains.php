@@ -9,26 +9,18 @@
 namespace Connect;
 
 /**
- * Class Connection
+ * Class Constrains
  * @package Connect
  */
-class Connection extends Model
+class Constrains extends Model
 {
-    public $id;
-    public $type;
-
     /**
-     * @var Hub
+     * @var
      */
-    public $hub;
-
+    public $hidden;
     /**
-     * @var Provider
+     * @var
      */
-    public $provider;
+    public $required;
 
-    /**
-     * @var Vendor
-     */
-    public $vendor;
 }

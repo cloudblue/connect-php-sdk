@@ -1,0 +1,158 @@
+[
+  {
+    "id": "TCR-872-679-730",
+    "type": "setup",
+    "status": "approved",
+    "configuration": {
+      "id": "TC-382-386-478",
+      "name": "Configuration of TA-0-2281-3745-7900",
+      "status": "approved",
+      "account": {
+        "external_uid": "5ac92c84-d444-4dac-afaf-b1792b71b3be",
+        "external_id": "1",
+        "id": "TA-0-2281-3745-7900",
+        "name": "ServicePro",
+        "contact_info": {
+          "address_line2": "",
+          "city": "Schenectady",
+          "address_line1": "some address",
+          "country": "es",
+          "state": "New York",
+          "contact": {
+            "phone_number": {
+              "phone_number": "234567890",
+              "area_code": "",
+              "extension": "",
+              "country_code": "+1"
+            },
+            "first_name": "Charlie",
+            "last_name": "Root",
+            "email": "spconfig@myinstallation.org"
+          },
+          "postal_code": "12345"
+        }
+      },
+      "product": {
+        "id": "PRD-165-377-339",
+        "name": "Dev P"
+      },
+      "tier_level": 2,
+      "connection": {
+        "id": "CT-5147-0991",
+        "type": "test",
+        "provider": {
+          "id": "PA-491-612",
+          "name": "Enterprise-wide zero administration capacity"
+        },
+        "vendor": {
+          "id": "VA-192-325",
+          "name": "User-friendly holistic portal"
+        },
+        "hub": {
+          "id": "HB-2793-7863",
+          "name": "a.mserrat",
+          "account_id": "PA-491-612",
+          "uuid": "3e93d8fb-5dd9-4ec4-a052-ace10338a5f5"
+        }
+      },
+      "events": {
+        "updated": {
+          "at": "2019-03-04T11:30:01.765979Z",
+          "by": {
+            "id": "UR-718-454-310",
+            "name": "Marc"
+          }
+        },
+        "created": {
+          "at": "2019-03-04T11:14:18.430983Z"
+        }
+      },
+      "params": [
+        {
+          "value": "Tier 2 Ordering per update",
+          "title": "Tier2Ordering",
+          "description": "tier 2 ordering",
+          "type": "text",
+          "scope": "tier2",
+          "phase": "ordering",
+          "constraints": {
+            "hidden": false,
+            "required": true
+          },
+          "id": "Tier2Ordering"
+        },
+        {
+          "value": "Reseller OLD",
+          "title": "Tier 2 Fulfillment",
+          "description": "Tier 2 fulfillment",
+          "type": "text",
+          "scope": "tier2",
+          "phase": "fulfillment",
+          "constraints": {
+            "hidden": false,
+            "required": true
+          },
+          "id": "tier2fulfillment"
+        }
+      ]
+    },
+    "events": {
+      "inquired": {
+        "at": "2019-03-04T11:14:18.463179Z"
+      },
+      "updated": {
+        "at": "2019-03-04T11:30:01.750821Z",
+        "by": {
+          "id": "UR-718-454-310",
+          "name": "Marc"
+        }
+      },
+      "approved": {
+        "at": "2019-03-04T11:30:01.750821Z",
+        "by": {
+          "id": "UR-718-454-310",
+          "name": "Marc"
+        }
+      },
+      "pended": {
+        "at": "2019-03-04T11:14:41.907213Z"
+      },
+      "created": {
+        "at": "2019-03-04T11:14:18.463092Z"
+      }
+    },
+    "params": [
+      {
+        "value": "Tier 2 Ordering per update",
+        "title": "Tier2Ordering",
+        "description": "tier 2 ordering",
+        "type": "text",
+        "scope": "tier2",
+        "phase": "ordering",
+        "constraints": {
+          "hidden": false,
+          "required": true
+        },
+        "id": "Tier2Ordering"
+      },
+      {
+        "value": "Reseller 123",
+        "title": "Tier 2 Fulfillment",
+        "description": "Tier 2 fulfillment",
+        "type": "text",
+        "scope": "tier2",
+        "phase": "fulfillment",
+        "constraints": {
+          "hidden": false,
+          "required": true
+        },
+        "id": "tier2fulfillment"
+      }
+    ],
+    "assignee": {
+      "id": "UR-718-454-310",
+      "name": "Marc"
+    },
+    "environment": "test"
+  }
+]

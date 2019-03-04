@@ -16,10 +16,18 @@ class Param extends Model
 {
     public $id;
     public $name;
+    public $title;
     public $description;
+    public $scope;
     public $value;
     public $value_error;
     public $type;
+
+    /**
+     * @var Constrains
+     */
+
+    public $constrains;
 
     /**
      * @var ValueChoice{value}

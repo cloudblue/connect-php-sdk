@@ -24,11 +24,6 @@ class Configuration extends Model
     public $name;
 
     /**
-     * @var
-     */
-    public $status;
-
-    /**
      * @var Account
      */
 
@@ -46,6 +41,11 @@ class Configuration extends Model
     public $tier_level;
 
     /**
+     * @var Connection
+     */
+    public $connection;
+
+    /**
      * @var Events
      */
 
@@ -55,4 +55,28 @@ class Configuration extends Model
      * @var Param[]
      */
     public $params;
+
+    /**
+     * @var OpenRequest
+     */
+    public $open_request;
+
+    /**
+     * @var Template
+     */
+    public $template;
+
+    /**
+     * Return a Param by ID
+     * @param $id
+     * @return Param
+     */
+    public function getParameterByID($id)
+    {
+        $param = current(array_filter($this->params, function (Param $param) use ($id) {
+            return ($param->id === $id);
+        }));
+
+        return ($param) ? $param : null;
+    }
 }

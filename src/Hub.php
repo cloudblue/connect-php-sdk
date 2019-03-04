@@ -12,12 +12,13 @@ namespace Connect;
  * Class Account
  * @package Connect
  */
-class Account extends Model
+class Hub extends Model
 {
     /**
      * @var
      */
     public $id;
+
     /**
      * @var
      */
@@ -26,18 +27,10 @@ class Account extends Model
     /**
      * @var
      */
-
-    public $external_uid;
+    public $account_id;
 
     /**
      * @var
      */
-    public $external_id;
-
-    /**
-     * @var ContactInfo
-     */
-
-    public $contact_info;
-
+    public $uuid;
 }
