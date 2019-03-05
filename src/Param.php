@@ -24,10 +24,10 @@ class Param extends Model
     public $type;
 
     /**
-     * @var Constrains
+     * @var Constraints
      */
 
-    public $constrains;
+    public $constraints;
 
     /**
      * @var ValueChoice{value}

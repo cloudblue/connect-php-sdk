@@ -9,10 +9,10 @@
 namespace Connect;
 
 /**
- * Class Constrains
+ * Class Constraints
  * @package Connect
  */
-class Constrains extends Model
+class Constraints extends Model
 {
     /**
      * @var
