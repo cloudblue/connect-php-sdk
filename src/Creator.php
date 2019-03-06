@@ -9,12 +9,18 @@
 namespace Connect;
 
 /**
- * Class MarketPlace
+ * Class Creator
  * @package Connect
  */
-class Marketplace extends Model
+class Creator extends Model
 {
+    /**
+     * @var
+     */
     public $id;
+    /**
+     * @var
+     */
     public $name;
-    public $icon;
+
 }

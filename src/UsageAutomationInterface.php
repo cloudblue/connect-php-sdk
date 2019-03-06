@@ -9,12 +9,11 @@
 namespace Connect;
 
 /**
- * Class MarketPlace
+ * Interface UsageAutomationInterface
  * @package Connect
  */
-class Marketplace extends Model
+interface UsageAutomationInterface
 {
-    public $id;
-    public $name;
-    public $icon;
+    public function processUsageforContract($contract);
+
 }
