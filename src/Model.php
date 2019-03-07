@@ -187,6 +187,7 @@ class Model implements \ArrayAccess
                  *
                  *  if any of the user cases from above match, create a single Connect\Model object.
                  */
+
                 $fqcn = '\Connect\\' . ucfirst($key);
                 if (class_exists($fqcn, true)) {
                     return new $fqcn($value);
@@ -195,6 +196,27 @@ class Model implements \ArrayAccess
                 $fqcn = '\Connect\\' . ucfirst(Inflector::singularize($key));
                 if (strpos($key, '_') !== false) {
                     $fqcn = '\Connect\\' . implode('', array_map(function ($word) {
+                            return ucfirst(Inflector::singularize($word));
+                        }, explode('_', $key)));
+                }
+
+                if (class_exists($fqcn, true)) {
+                    return new $fqcn($value);
+                }
+
+                $fqcn = trim($fqcn, '0123456789');
+                if (class_exists($fqcn, true)) {
+                    return new $fqcn($value);
+                }
+
+                $fqcn = '\Connect\\Usage\\' . ucfirst($key);
+                if (class_exists($fqcn, true)) {
+                    return new $fqcn($value);
+                }
+
+                $fqcn = '\Connect\\Usage\\' . ucfirst(Inflector::singularize($key));
+                if (strpos($key, '_') !== false) {
+                    $fqcn = '\Connect\\Usage\\' . implode('', array_map(function ($word) {
                             return ucfirst(Inflector::singularize($word));
                         }, explode('_', $key)));
                 }

@@ -14,6 +14,13 @@ namespace Connect;
  */
 interface UsageAutomationInterface
 {
-    public function processUsageforContract($contract);
+
+    /**
+     * @param $listing
+     * @return boolean
+     * @return string
+     * @throws  \Connect\Usage\FileCreationException
+     */
+    public function processUsageForListing($listing);
 
 }
