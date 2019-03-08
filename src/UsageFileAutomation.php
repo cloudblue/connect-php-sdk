@@ -150,7 +150,7 @@ abstract class UsageFileAutomation implements UsageFileAutomationInterface
             if (is_string($msg)) {
                 $this->logger->warning("ProcessUsageFiles returned $msg while is expected to return Exception of Usage types");
             } elseif ($msg) {
-                $this->logger->warning("ProcessUsageFiles returned instance of " . typeOf($msg) . " while is expected to return Exception of Usage types");
+                $this->logger->warning("ProcessUsageFiles returned instance of " . gettype($msg) . " while is expected to return Exception of Usage types");
             }
 
         } catch (Accept $e) {
@@ -207,7 +207,7 @@ abstract class UsageFileAutomation implements UsageFileAutomationInterface
         $body = $this->sendRequest('GET', '/usage/files/' . $query);
 
         /** @var Request[] $models */
-        $models = Model::modelize('usageFile', json_decode($body));
+        $models = Model::modelize('files', json_decode($body));
         foreach ($models as $index => $model) {
             $models[$index]->requestProcessor = $this;
         }

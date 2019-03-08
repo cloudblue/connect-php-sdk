@@ -375,7 +375,6 @@ abstract class UsageAutomation implements UsageAutomationInterface
      * @throws \Exception
      */
     private function retriveUsageTemplate( $downloadlocation ) {
-        print var_dump($downloadlocation);
         $file = file_get_contents($downloadlocation);
         if ($file === false) {
             throw new \Exception("Error obtaining Usage Template File");

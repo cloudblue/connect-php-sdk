@@ -209,11 +209,13 @@ class Model implements \ArrayAccess
                     return new $fqcn($value);
                 }
                 $fqcn = '\Connect\\Usage\\' . ucfirst(Inflector::singularize($key));
+                /* Not a case currently in Usage space
                 if (strpos($key, '_') !== false) {
                     $fqcn = '\Connect\\Usage\\' . implode('', array_map(function ($word) {
                             return ucfirst(Inflector::singularize($word));
                         }, explode('_', $key)));
                 }
+                */
                 if (class_exists($fqcn, true)) {
                     return new $fqcn($value);
                 }

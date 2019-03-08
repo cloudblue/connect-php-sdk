@@ -15,15 +15,9 @@ namespace Connect\Usage;
  */
 class FileCreationException extends \Connect\Exception
 {
-    private $property;
-
-    public function __construct($message, $prop = null)
+    public function __construct($message)
     {
         parent::__construct($message, 'filecreation');
-        $this->property = $prop;
 
-        if ($prop) {
-            $this->message = $message . " for property " . $prop;
-        }
     }
 }

@@ -223,6 +223,54 @@ class ModelTest extends \Test\TestCase
         }
     }
 
+    public function testHydrateUsageFiles()
+    {
+        $source = json_decode('[{
+          "id": "UF-2019-03-6040-0448",
+          "name": "report4",
+          "status": "pending",
+          "created_by": "mserrat@odin.com",
+          "created_at": "2019-03-06T12:04:46Z",
+          "uploaded_by": "rahul.mondal@ingrammicro.com",
+          "uploaded_at": "2019-03-06T13:30:06Z",
+          "submitted_by": "SU-346-446-172",
+          "submitted_at": "2019-03-07T19:27:08Z",
+          "usage_file_uri": "https://storage.googleapis.com/usage-service-bucket-stage/PRD-638-321-603/UF-2019-03-6040-0448/uploaded/UF-2019-03-6040-0448.xlsx?GoogleAccessId=aps-lite-worker-stage%40odin-ap.iam.gserviceaccount.com&Expires=1552057264&Signature=L4jMICFKb2pzuwvQet7P1OICqrdTTHHPSPmVRyMNrO3uCRiYUboLnas%2FjgMzsWRTogrLAyRgNA0SUEncth%2B4wrqUoX5QizejvjV9FUxzTDli2SVF9FbwoumFlri9O4YNGUCHAZoENuXF3BUeDnlR7DXaVEHr5MsThxIu8hYd5DvMiUP26PFIQxjB%2BQVASpiPocvfkcAlTVSm44nO8qC%2B8DW97SYqTHWBFalTNmblEWrVoQTJWSDHr%2BtjcXjoM5diZDfVZzvWtugD9saAs%2Bk5yyei7lUyUU63NdAyJkgIH5Bji6j0Q6Brj00OVgTg%2FqW%2FfkkFRb%2F4HcKULdWu1Zk2PA%3D%3D&response-content-disposition=attachment%3B+filename%3D%22UF-2019-03-6040-0448.xlsx%22",
+          "processed_file_uri": "https://storage.googleapis.com/usage-service-bucket-stage/PRD-638-321-603/UF-2019-03-6040-0448/processed/UF-2019-03-6040-0448-PROCESSED.xlsx?GoogleAccessId=aps-lite-worker-stage%40odin-ap.iam.gserviceaccount.com&Expires=1552057264&Signature=AOlCTkuYqJRljPcJ2aBNjZTNTBt3MmiyPwINM7yBFtB89okOLd7AMVftCSgsqmqym4gbidSfOrkAPlLTDUTWX%2FwEcill9s99dUv8b%2BjmiBDSJCZmuo0gs3Yug%2BJRxsUIXAUythQLB%2B5lNkeLi3CRZHVDLyMTCxg2Ngt8SsrZOTS5GH%2FOYpOW7KzEpN%2BsGSH6o8tSL0vDCHKzqTUaP2sw6pnhc6PFq6oQcS%2BdPm0lS4LMBchMubFLSzUxoi9IYD6i4SFqiMQ0A8%2BWfdL2nfNcjhq7x5WexwDZAQ9fnTLhod%2BFJHTEK21viSicwONtmBCbkJ2uNEeKoXHIV6%2FwbAJhaQ%3D%3D&response-content-disposition=attachment%3B+filename%3D%22UF-2019-03-6040-0448.xlsx%22",
+          "description": "report 4",
+          "records": {
+            "valid": 5,
+            "invalid": 0
+          },
+          "vendor": {
+            "id": "VA-004-290",
+            "name": "Marc FSG"
+          },
+          "provider": {
+            "id": "PA-425-033",
+            "name": "IMCDemos Testing Account"
+          },
+          "environment": "production",
+          "product": {
+            "id": "PRD-638-321-603",
+            "name": "release15Test"
+          },
+          "contract": {
+            "id": "CRD-99082-45842-69180",
+            "name": "Contract of IMC Demos Spain Distribution Agreement"
+          },
+          "marketplace": {
+            "id": "MP-91673",
+            "name": "IMC demos Marketplace",
+            "icon": "/media/PA-425-033/marketplaces/MP-91673/icon.jpg"
+          }
+        }]');
+        $models = Model::modelize('files', $source);
+        foreach ($models as $file){
+            $this->assertInstanceOf('\Connect\\Usage\\File', $file);
+        }
+    }
+
     public function testHydrateCollectionsCompositeNames()
     {
         $source = json_decode('{"value_choices": [
