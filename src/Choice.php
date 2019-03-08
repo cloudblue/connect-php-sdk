@@ -9,23 +9,18 @@
 namespace Connect;
 
 /**
- * Class Constraints
+ * Class Choice
  * @package Connect
  */
-class Constraints extends Model
+class Choice extends Model
 {
     /**
      * @var
      */
-    public $hidden;
+    public $value;
     /**
      * @var
      */
-    public $required;
-
-    /**
-     * @var Choice[]
-     */
-    public $choices;
+    public $label;
 
 }

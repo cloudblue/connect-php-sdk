@@ -217,7 +217,7 @@ class Model implements \ArrayAccess
                 if (class_exists($fqcn, true)) {
                     return new $fqcn($value);
                 }
-                
+
 
                 return new \Connect\Model($value);
 
