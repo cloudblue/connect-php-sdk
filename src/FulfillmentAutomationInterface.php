@@ -15,4 +15,6 @@ namespace Connect;
 interface FulfillmentAutomationInterface
 {
     public function processRequest($request);
+
+    public function processTierConfigRequest($tierConfigRequest);
 }

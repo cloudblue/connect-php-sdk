@@ -16,4 +16,5 @@ class Marketplace extends Model
 {
     public $id;
     public $name;
+    public $icon;
 }

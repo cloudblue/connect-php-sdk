@@ -18,6 +18,11 @@ class Connection extends Model
     public $type;
 
     /**
+     * @var Hub
+     */
+    public $hub;
+
+    /**
      * @var Provider
      */
     public $provider;

@@ -16,4 +16,35 @@ class Contract extends Model
 {
     public $id;
     public $name;
+    public $type;
+    public $status;
+
+    /**
+     * @var Agreement
+     */
+    public $agreement;
+
+    /**
+     * @var Owner
+     */
+    public $owner;
+
+    public $created;
+    public $updated;
+    public $enrolled;
+
+    public $version;
+
+    /**
+     * @var Signee
+     */
+    public $signee;
+
+    public $version_created;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
 }

@@ -57,5 +57,27 @@
         <testsuite name="RequestStructure">
             <file>tests/Unit/RequestStructureTest.php</file>
         </testsuite>
+        <testsuite name="TierRequests">
+            <file>tests/Unit/TierRequestTest.php</file>
+        </testsuite>
+        <testsuite name="Usage Responses">
+            <file>tests/Unit/AcceptTest.php</file>
+            <file>tests/Unit/AcceptResponseTest.php</file>
+            <file>tests/Unit/CloseTest.php</file>
+            <file>tests/Unit/DeleteTest.php</file>
+            <file>tests/Unit/RejectTest.php</file>
+            <file>tests/Unit/RejectResponseTest.php</file>
+            <file>tests/Unit/UsageSkipTest.php</file>
+            <file>tests/Unit/SubmitTest.php</file>
+            <file>tests/Unit/FileRetrieveExceptionTest.php</file>
+            <file>tests/Unit/FileCreationExceptionTest.php</file>
+        </testsuite>
+        <testsuite name="Usage Automation">
+            <file>tests/Unit/UsageAutomationBasicsTest.php</file>
+            <file>tests/Unit/UsageAutomationTest.php</file>
+        </testsuite>
+        <testsuite name="Usage File Automation">
+            <file>tests/Unit/UsageFileAutomationTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>
