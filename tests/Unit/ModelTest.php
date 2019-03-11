@@ -229,7 +229,7 @@ class ModelTest extends \Test\TestCase
           "id": "UF-2019-03-6040-0448",
           "name": "report4",
           "status": "pending",
-          "created_by": "mserrat@odin.com",
+          "created_by": "unittest@connect.cloudblue.com",
           "created_at": "2019-03-06T12:04:46Z",
           "uploaded_by": "rahul.mondal@ingrammicro.com",
           "uploaded_at": "2019-03-06T13:30:06Z",
