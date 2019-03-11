@@ -126,7 +126,7 @@ abstract class UsageAutomation implements UsageAutomationInterface
      */
     protected function dispatchProductUsageCollection($listing)
     {
-        if ($this->config->products && !in_array($listing->listing->product->id,
+        if ($this->config->products && !in_array($listing->product->id,
                 $this->config->products)) {
             return 'Listing not handled by this processor';
         };
@@ -135,25 +135,23 @@ abstract class UsageAutomation implements UsageAutomationInterface
 
         try {
             $msg = $this->processUsageForListing($listing);
-        }
-        catch (Usage\FileCreationException $e){
+        } catch (Usage\FileCreationException $e) {
             $this->logger->error("Error proocessing Usage for Product " . $listing->product->id . " (" . $listing->product->name . ") on Contract " . $listing->contract->id . " and provider " . $listing->provider->id . "(" . $listing->provider->name . ")");
             $processingResult = "failure";
             return $processingResult;
         }
-        if(is_string($msg))
-        {
-            $this->logger->info("Processing result for usage on listing ".$listing->product->id.":".$msg);
+        if (is_string($msg)) {
+            $this->logger->info("Processing result for usage on listing " . $listing->product->id . ":" . $msg);
             $processingResult = 'success';
             return $processingResult;
-        }
-        else if($msg == true){
-            $this->logger->info("Processing result for usage on listing ".$listing->product->id.":success");
-            $processingResult = 'success';
-        }
-        else{
-            $this->logger->info("processUsageForListing returned object of type ".typeOf($msg).". Expected string for success or boolean");
-            $processingResult = 'failure';
+        } else {
+            if ($msg === true) {
+                $this->logger->info("Processing result for usage on listing " . $listing->product->id . ":success");
+                $processingResult = 'success';
+            } else {
+                $this->logger->info("processUsageForListing returned object of type " . gettype($msg) . ". Expected string for success or boolean");
+                $processingResult = 'unknown';
+            }
         }
         return $processingResult;
 
@@ -218,24 +216,20 @@ abstract class UsageAutomation implements UsageAutomationInterface
      */
     private function createUsageSpreadSheet()
     {
-        try {
-            $spreadSheet = new Spreadsheet();
-            $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadSheet,
-                "usage_records"), 0);
-            $spreadSheet->setActiveSheetIndexByName('usage_records');
-            $spreadSheet->getActiveSheet()->setCellValue('A1', "usage_record_id");
-            $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
-            $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_value");
-            $spreadSheet->getActiveSheet()->setCellValue('D1', "quantity");
-            $spreadSheet->getActiveSheet()->setCellValue('E1', "start_time_utc");
-            $spreadSheet->getActiveSheet()->setCellValue('F1', "end_time_utc");
-            $spreadSheet->getActiveSheet()->setCellValue('G1', "asset_search_criteria");
-            $spreadSheet->getActiveSheet()->setCellValue('H1', "asset_search_value");
-            return $spreadSheet;
-        } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
-            $this->logger->error("Error Creating Spreadsheet:".$e->getMessage());
-            throw new Usage\FileCreationException("Error Creating temporal spreadsheet");
-        }
+        $spreadSheet = new Spreadsheet();
+        $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadSheet,
+            "usage_records"), 0);
+        $spreadSheet->setActiveSheetIndexByName('usage_records');
+        $spreadSheet->getActiveSheet()->setCellValue('A1', "usage_record_id");
+        $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
+        $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('D1', "quantity");
+        $spreadSheet->getActiveSheet()->setCellValue('E1', "start_time_utc");
+        $spreadSheet->getActiveSheet()->setCellValue('F1', "end_time_utc");
+        $spreadSheet->getActiveSheet()->setCellValue('G1', "asset_search_criteria");
+        $spreadSheet->getActiveSheet()->setCellValue('H1', "asset_search_value");
+        return $spreadSheet;
+
     }
 
     /**
@@ -363,7 +357,8 @@ abstract class UsageAutomation implements UsageAutomationInterface
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function getUsageTemplateDownloadLocation( $productId ) {
+    private function getUsageTemplateDownloadLocation($productId)
+    {
         $body = $this->sendRequest('GET',
             '/usage/products/' . $productId . '/template/');
         return json_decode($body)->template_link;
@@ -374,8 +369,9 @@ abstract class UsageAutomation implements UsageAutomationInterface
      * @return false|string
      * @throws \Exception
      */
-    private function retriveUsageTemplate( $downloadlocation ) {
-        $file = file_get_contents($downloadlocation);
+    private function retriveUsageTemplate($downloadlocation)
+    {
+        $file = @file_get_contents($downloadlocation);
         if ($file === false) {
             throw new \Exception("Error obtaining Usage Template File");
         }
@@ -390,7 +386,7 @@ abstract class UsageAutomation implements UsageAutomationInterface
      * @throws Usage\FileRetrieveException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function submitUsage (\Connect\Usage\File $file, $usageRecords)
+    public function submitUsage(\Connect\Usage\File $file, $usageRecords)
     {
         $usageFile = $this->createUsageFile($file);
         $this->uploadUsageRecords($usageFile, $usageRecords);

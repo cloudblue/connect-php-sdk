@@ -74,6 +74,7 @@
         </testsuite>
         <testsuite name="Usage Automation">
             <file>tests/Unit/UsageAutomationBasicsTest.php</file>
+            <file>tests/Unit/UsageAutomationTest.php</file>
         </testsuite>
         <testsuite name="Usage File Automation">
             <file>tests/Unit/UsageFileAutomationTest.php</file>

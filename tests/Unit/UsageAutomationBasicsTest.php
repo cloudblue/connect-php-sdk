@@ -27,14 +27,15 @@ class UsageAutomationBasicsTest extends \Test\TestCase
      * @throws \Connect\ConfigException
      * @throws \Connect\Usage\FileRetrieveException
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @expectedException Connect\Usage\FileRetrieveException
+     * @expectedException \Exception
      */
     public function testGetUsageTemplateFile()
     {
-        $app = new UsageAutomationBasicsHelper(new Config('./config.mocked4usageautomation.json'));
+        $app = new UsageAutomationBasicsHelper(new Config('./config.mocked4usageautomationbasics.json'));
         /* Must be removed the get_file_contents in order to complete properly the test */
         $template = $app->getUsageTemplateFile(new Product(["id" => 'PRD-638-321-603']));
-        
+        $app->getUsageTemplateFile(new Product(["id" => 'PRD-638-321-609']));
+        $app->getUsageTemplateFile(new Product(['id' => 'wrongopenfile']));
         return $template;
     }
 }

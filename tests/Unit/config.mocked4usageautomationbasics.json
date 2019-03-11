@@ -5,11 +5,11 @@
   "timeout": 10,
   "sslVerifyHost": false,
   "products": [
-    "CN-276-025-466"
+    "CN-573-708-587"
   ],
   "runtimeServices": {
     "logger": "Test\\Unit\\Runtime\\Providers\\LoggerServiceProvider",
-    "http": "Test\\Unit\\Runtime\\Providers\\Http4UsageAutomationTestsServiceProvider",
+    "http": "Test\\Unit\\Runtime\\Providers\\Http4UsageAutomationServiceProvider",
     "std": "Test\\Unit\\Runtime\\Providers\\StdClassServiceProvider"
   }
 }
