@@ -2,7 +2,7 @@
     "name": "apsconnect/connect-sdk",
     "type": "library",
     "description": "APS Connect QuickStart SDK",
-    "license": "proprietary",
+    "license": "Apache-2.0",
     "require": {
         "php": ">=5.6.0",
         "ext-curl": "*",
