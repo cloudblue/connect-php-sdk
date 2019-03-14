@@ -240,7 +240,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
         $query = '';
 
         if ($this->config->products) {
-            $filters['product_id'] = $this->config->products;
+            $filters['asset.product.id__in'] = implode(",", $this->config->products);
         }
 
         if ($filters) {
@@ -248,8 +248,9 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
 
             // process case when value for filter is array
             $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
-        }
 
+            $query = urldecode($query);
+        }
         $body = $this->sendRequest('GET', '/requests' . $query);
 
         /** @var Request[] $models */
