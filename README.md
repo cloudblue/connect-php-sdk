@@ -153,6 +153,7 @@ class UploadUsage extends \Connect\UsageAutomation
             date_default_timezone_set('UTC'); //reporting must be always based on UTC
             $usages = [];
             array_push($usages, new Connect\Usage\FileUsageRecord([
+                'record_id' => 'unique record value',
                 'item_search_criteria' => 'item.mpn', //Possible values are item.mpn or item.local_id
                 'item_search_value' => 'SKUA', //Value defined as MPN on vendor portal
                 'quantity' => 1, //Quantity to be reported

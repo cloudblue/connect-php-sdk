@@ -210,9 +210,10 @@ abstract class UsageAutomation implements UsageAutomationInterface
 
     }
 
+
     /**
      * @return Spreadsheet
-     * @throws Usage\FileCreationException
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function createUsageSpreadSheet()
     {
@@ -293,16 +294,14 @@ abstract class UsageAutomation implements UsageAutomationInterface
     /**
      * @param $fileusagerecords
      * @return Spreadsheet
-     * @throws Usage\FileCreationException
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    private function createAndPopulateSpreadSheet(
-        $fileusagerecords
-    ) {
+    private function createAndPopulateSpreadSheet( $fileusagerecords )
+    {
         $spreadSheet = $this->createUsageSpreadSheet();
         $spreadSheet->setActiveSheetIndexByName('usage_records');
         for ($i = 0; $i < count($fileusagerecords); $i++) {
-            $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), $i + 1);
+            $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), $fileusagerecords[$i]->record_id);
             $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $fileusagerecords[$i]->item_search_criteria);
             $spreadSheet->getActiveSheet()->setCellValue('C' . ($i + 2), $fileusagerecords[$i]->item_search_value);
             $spreadSheet->getActiveSheet()->setCellValue('D' . ($i + 2), $fileusagerecords[$i]->quantity);

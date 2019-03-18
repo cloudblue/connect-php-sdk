@@ -14,6 +14,7 @@ namespace Connect\Usage;
  */
 class FileUsageRecord extends \Connect\Model
 {
+    public $record_id;
     public $item_search_criteria;
     public $item_search_value;
     public $quantity;
