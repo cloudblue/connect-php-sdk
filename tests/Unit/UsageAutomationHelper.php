@@ -109,6 +109,7 @@ class UsageAutomationHelper extends UsageAutomation
                 date_default_timezone_set('UTC');
                 $usages = [];
                 array_push($usages, new FileUsageRecord([
+                    'record_id' = '123',
                     'item_search_criteria' => 'item.mpn',
                     'item_search_value' => 'SKUA',
                     'quantity' => 1,
