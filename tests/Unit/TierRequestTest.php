@@ -30,7 +30,7 @@ class TierRequestTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
 
         $list = $app->listTierConfigs();
-        $this->assertCount(1,$list);
+        $this->assertCount(1, $list);
         $this->assertInstanceOf('\Connect\TierConfigRequest', $list[0]);
         $request = $list[0];
         $paramInRequest = $request->getParameterByID('tier2fulfillment');
