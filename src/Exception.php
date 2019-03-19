@@ -25,6 +25,7 @@ class Exception extends \Exception
      */
     public function __construct($message, $code = 'unknown', $object = null)
     {
+        parent::__construct();
         $this->code = $code;
         $this->message = $message;
         $this->object = $object;
