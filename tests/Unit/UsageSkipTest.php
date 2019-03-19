@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\Skip;
 
 /**
@@ -31,5 +30,4 @@ class UsageSkipTest extends \Test\TestCase
         $this->assertEquals(null, $skip->getObject());
         return $skip;
     }
-
 }

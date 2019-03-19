@@ -38,5 +38,4 @@ class Listing extends Model
      * @var Provider;
      */
     public $provider;
-
 }

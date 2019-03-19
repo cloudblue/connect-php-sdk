@@ -20,7 +20,7 @@ class UsageFileAutomationHelper extends UsageFileAutomation
 {
     public function processUsageFiles($usageFile)
     {
-        switch($usageFile->id) {
+        switch ($usageFile->id) {
             case 'UF-2019-03-6040-0448-skip':
                 throw new \Connect\Usage\Skip("Skipping");
             case 'UF-2019-03-6040-0448-accept':

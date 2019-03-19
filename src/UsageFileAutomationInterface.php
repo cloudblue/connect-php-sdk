@@ -14,7 +14,5 @@ namespace Connect;
  */
 interface UsageFileAutomationInterface
 {
-
     public function processUsageFiles($usageFile);
-
 }

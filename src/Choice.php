@@ -22,5 +22,4 @@ class Choice extends Model
      * @var
      */
     public $label;
-
 }

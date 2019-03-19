@@ -98,7 +98,7 @@ class Config extends Model
             case 'object':
             case 'array':
                 break;
-            default :
+            default:
                 throw new ConfigException("Invalid argument for \\Connect\\Config class constructor: " . gettype($source));
         }
 
@@ -152,7 +152,7 @@ class Config extends Model
 
     public function setProducts($product)
     {
-        if(is_string($product)) {
+        if (is_string($product)) {
             $product = [$product];
         }
 

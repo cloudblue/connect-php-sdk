@@ -30,5 +30,4 @@ class RejectResponse
             $this->rejectionnote = $msg;
         }
     }
-
 }

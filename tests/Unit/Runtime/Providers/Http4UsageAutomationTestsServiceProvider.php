@@ -16,13 +16,15 @@ class Http4UsageAutomationTestsServiceProvider extends ServiceProvider
         $body = \Mockery::mock('\Psr\Http\Message\StreamInterface');
         $body->shouldReceive('getContents')
             ->times(6)
-            ->andReturn(trim(file_get_contents(__DIR__ . '/request.valid.usageautomation.json')),
+            ->andReturn(
+                trim(file_get_contents(__DIR__ . '/request.valid.usageautomation.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.usageautomationcreatefile.json')),
-                trim(file_get_contents(__DIR__ . '/request.valid.usageautomationcreatefile.json')));
+                trim(file_get_contents(__DIR__ . '/request.valid.usageautomationcreatefile.json'))
+            );
 
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getStatusCode')
-            ->andReturn(200,200,200,201,500);
+            ->andReturn(200, 200, 200, 201, 500);
 
         $response->shouldReceive('getBody')
             ->andReturn($body);

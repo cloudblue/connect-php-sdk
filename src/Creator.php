@@ -22,5 +22,4 @@ class Creator extends Model
      * @var
      */
     public $name;
-
 }

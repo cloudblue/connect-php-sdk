@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\FileCreationException;
 
 /**
@@ -17,7 +16,6 @@ use Connect\Usage\FileCreationException;
  */
 class FileCreationExceptionTest extends \Test\TestCase
 {
-
     public function testInstantiation()
     {
         $error = new FileCreationException("error");
@@ -29,5 +27,4 @@ class FileCreationExceptionTest extends \Test\TestCase
         $this->assertEquals(null, $error->getObject());
         return $error;
     }
-
 }

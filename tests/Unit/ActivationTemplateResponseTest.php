@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\ActivationTemplateResponse;
 
 /**
@@ -30,5 +29,4 @@ class ActivationTemplateResponseTest extends \Test\TestCase
         $this->assertEquals("TD-123", $responseTemplate->templateid);
         return $responseTemplate;
     }
-
 }

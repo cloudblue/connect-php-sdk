@@ -118,8 +118,10 @@ class ModelHelper extends Model
                 if (array_key_exists($value, $options)) {
                     $this->isAdmin = $options[$value];
                 } else {
-                    throw new \InvalidArgumentException("Invalid value " . $value . " must be one of " . implode(", ",
-                            array_keys($options)));
+                    throw new \InvalidArgumentException("Invalid value " . $value . " must be one of " . implode(
+                        ", ",
+                        array_keys($options)
+                    ));
                 }
 
                 break;

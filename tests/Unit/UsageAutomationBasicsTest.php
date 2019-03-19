@@ -12,7 +12,6 @@ use Connect\Product;
 
 class UsageAutomationBasicsTest extends \Test\TestCase
 {
-
     protected function setUp()
     {
         /**

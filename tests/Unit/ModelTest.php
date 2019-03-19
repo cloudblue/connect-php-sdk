@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Model;
 
 class ModelTest extends \Test\TestCase
@@ -266,7 +265,7 @@ class ModelTest extends \Test\TestCase
           }
         }]');
         $models = Model::modelize('files', $source);
-        foreach ($models as $file){
+        foreach ($models as $file) {
             $this->assertInstanceOf('\Connect\\Usage\\File', $file);
         }
     }
@@ -394,7 +393,6 @@ class ModelTest extends \Test\TestCase
 
         $this->assertInternalType('array', $array['tiers']['tier1']['contact_info']);
         $this->assertCount(7, $array['tiers']['tier1']['contact_info']);
-
     }
 
     public function testToJson()
@@ -407,5 +405,4 @@ class ModelTest extends \Test\TestCase
 
         $this->assertEquals('{"id":"T-JB-001","username":"j.bourne","password":"treadstone"}', $model->toJSON());
     }
-
 }

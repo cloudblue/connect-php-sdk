@@ -91,5 +91,4 @@ class File extends \Connect\Model
     public $rejected_at;
     public $closed_by;
     public $closed_at;
-
 }

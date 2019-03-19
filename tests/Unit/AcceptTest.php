@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\Accept;
 
 /**
@@ -30,5 +29,4 @@ class AcceptTest extends \Test\TestCase
         $this->assertEquals("TD-123", $responseAccept->response);
         return $responseAccept;
     }
-
 }

@@ -22,5 +22,4 @@ interface UsageAutomationInterface
      * @throws  \Connect\Usage\FileCreationException
      */
     public function processUsageForListing($listing);
-
 }

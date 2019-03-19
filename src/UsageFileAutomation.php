@@ -120,7 +120,7 @@ abstract class UsageFileAutomation implements UsageFileAutomationInterface
     public function process($all=false)
     {
         $filter = [];
-        if($all==false){
+        if ($all==false) {
             $filter = ['status' => 'ready'];
         }
         foreach ($this->listUsageFiles($filter) as $usageFile) {
@@ -152,28 +152,40 @@ abstract class UsageFileAutomation implements UsageFileAutomationInterface
             } elseif ($msg) {
                 $this->logger->warning("ProcessUsageFiles returned instance of " . gettype($msg) . " while is expected to return Exception of Usage types");
             }
-
         } catch (Accept $e) {
-            $this->sendRequest('POST', '/usage/files/' . $usageFile->id . '/accept/',
-                '{"acceptance_note": "' . $e->getMessage() . '""}');
+            $this->sendRequest(
+                'POST',
+                '/usage/files/' . $usageFile->id . '/accept/',
+                '{"acceptance_note": "' . $e->getMessage() . '""}'
+            );
             $processingResult = 'accept';
-
         } catch (Close $e) {
-            $this->sendRequest('POST', '/usage/files/' . $usageFile->id . '/close/',
-                '{}');
+            $this->sendRequest(
+                'POST',
+                '/usage/files/' . $usageFile->id . '/close/',
+                '{}'
+            );
             $processingResult = 'close';
         } catch (Delete $e) {
-            $this->sendRequest('POST', '/usage/files/' . $usageFile->id . '/delete/',
-                '{}');
+            $this->sendRequest(
+                'POST',
+                '/usage/files/' . $usageFile->id . '/delete/',
+                '{}'
+            );
             $processingResult = 'delete';
         } catch (Reject $e) {
-            $this->sendRequest('POST', '/usage/files/' . $usageFile->id . '/reject/',
-                '{"rejection_note": "' . $e->getMessage() . '""}');
+            $this->sendRequest(
+                'POST',
+                '/usage/files/' . $usageFile->id . '/reject/',
+                '{"rejection_note": "' . $e->getMessage() . '""}'
+            );
             $processingResult = 'reject';
-
         } catch (Submit $e) {
-            $this->sendRequest('POST', '/usage/files/' . $usageFile->id . '/submit/',
-                '{}');
+            $this->sendRequest(
+                'POST',
+                '/usage/files/' . $usageFile->id . '/submit/',
+                '{}'
+            );
             $processingResult = 'submit';
         } catch (\Connect\Usage\Skip $e) {
             $processingResult = 'skip';

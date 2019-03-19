@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\Close;
 
 /**
@@ -31,5 +30,4 @@ class CloseTest extends \Test\TestCase
         $this->assertEquals(null, $close->getObject());
         return $close;
     }
-
 }

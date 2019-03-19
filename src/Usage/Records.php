@@ -22,5 +22,4 @@ class Records extends \Connect\Model
      * @var
      */
     public $invalid;
-
 }

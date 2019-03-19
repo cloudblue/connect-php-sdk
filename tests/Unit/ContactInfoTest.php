@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\ContactInfo;
 use Connect\Contact;
 use Connect\PhoneNumber;
@@ -50,5 +49,4 @@ class ContactInfoTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\Contact', $contactInfo->contact);
         $this->assertInstanceOf('\Connect\PhoneNumber', $contactInfo->contact->phone_number);
     }
-
 }

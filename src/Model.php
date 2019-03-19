@@ -10,7 +10,6 @@ namespace Connect;
 
 use Doctrine\Common\Inflector\Inflector;
 
-
 /**
  * Class Model
  * @package Connect
@@ -140,7 +139,6 @@ class Model implements \ArrayAccess
     {
         $allowed = array_diff(array_keys(get_class_vars(get_class($this))), $this->_hidden);
         if (empty($allowed) || !empty($allowed) && in_array($key, $allowed)) {
-
             if (method_exists($this, 'get' . ucfirst($key))) {
                 return call_user_func_array([$this, 'get' . ucfirst($key)], [$key]);
             }
@@ -194,8 +192,8 @@ class Model implements \ArrayAccess
                 $fqcn = '\Connect\\' . ucfirst(Inflector::singularize($key));
                 if (strpos($key, '_') !== false) {
                     $fqcn = '\Connect\\' . implode('', array_map(function ($word) {
-                            return ucfirst(Inflector::singularize($word));
-                        }, explode('_', $key)));
+                        return ucfirst(Inflector::singularize($word));
+                    }, explode('_', $key)));
                 }
                 if (class_exists($fqcn, true)) {
                     return new $fqcn($value);

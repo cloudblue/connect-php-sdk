@@ -11,10 +11,8 @@ use Pimple\Container;
  */
 class StdClassServiceProvider extends ServiceProvider
 {
-
     public function register(Container $container)
     {
         return new \stdClass();
     }
-
 }
