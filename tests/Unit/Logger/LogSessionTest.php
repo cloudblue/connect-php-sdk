@@ -59,6 +59,5 @@ class LogSessionTest extends \Test\TestCase
         $this->assertCount(1, $session);
         $this->assertInstanceOf('\Connect\Logger\LogSession', $session->dumpTo($logger));
         $this->assertCount(1, $session);
-
     }
 }

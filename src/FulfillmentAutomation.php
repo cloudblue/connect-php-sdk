@@ -128,8 +128,10 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     protected function dispatchTierConfig($tierConfigRequest)
     {
         try {
-            if ($this->config->products && !in_array($tierConfigRequest->configuration->product->id,
-                    $this->config->products)) {
+            if ($this->config->products && !in_array(
+                $tierConfigRequest->configuration->product->id,
+                $this->config->products
+            )) {
                 return 'Invalid product';
             }
 
@@ -144,30 +146,35 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
             }
 
             if ($msg instanceof ActivationTemplateResponse) {
-                $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
-                    '{"template": {"id": "' . $msg->templateid . '"}}');
+                $this->sendRequest(
+                    'POST',
+                    '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
+                    '{"template": {"id": "' . $msg->templateid . '"}}'
+                );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
-                $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
-                    '{"template": {"representation": "' . $msg->activationTile . '"}}');
+                $this->sendRequest(
+                    'POST',
+                    '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
+                    '{"template": {"representation": "' . $msg->activationTile . '"}}'
+                );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
-
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->updateTierConfigRequestParameters($tierConfigRequest, $e->params);//WORKING HERE!
             $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/inquire', '{}');
             $processingResult = 'inquire';
-
         } catch (Fail $e) {
             // fail request
-            $this->sendRequest('POST', '/tier/config-requests/' . $tierConfigRequest->id . '/fail',
-                '{"reason": "' . $e->getMessage() . '"}');
+            $this->sendRequest(
+                'POST',
+                '/tier/config-requests/' . $tierConfigRequest->id . '/fail',
+                '{"reason": "' . $e->getMessage() . '"}'
+            );
             $processingResult = 'fail';
-
         } catch (Skip $e) {
             $processingResult = 'skip';
-
         }
 
         $this->logger->info("Finished processing of Tier Config Request with ID=" . $tierConfigRequest->id . " result=" . $processingResult);
@@ -198,30 +205,35 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
             }
 
             if ($msg instanceof ActivationTemplateResponse) {
-                $this->sendRequest('POST', '/requests/' . $request->id . '/approve',
-                    '{"template_id": "' . $msg->templateid . '"}');
+                $this->sendRequest(
+                    'POST',
+                    '/requests/' . $request->id . '/approve',
+                    '{"template_id": "' . $msg->templateid . '"}'
+                );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
-                $this->sendRequest('POST', '/requests/' . $request->id . '/approve',
-                    '{"activation_tile": "' . $msg->activationTile . '"}');
+                $this->sendRequest(
+                    'POST',
+                    '/requests/' . $request->id . '/approve',
+                    '{"activation_tile": "' . $msg->activationTile . '"}'
+                );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
-
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->updateParameters($request, $e->params);
             $this->sendRequest('POST', '/requests/' . $request->id . '/inquire', '{}');
             $processingResult = 'inquire';
-
         } catch (Fail $e) {
             // fail request
-            $this->sendRequest('POST', '/requests/' . $request->id . '/fail',
-                '{"reason": "' . $e->getMessage() . '"}');
+            $this->sendRequest(
+                'POST',
+                '/requests/' . $request->id . '/fail',
+                '{"reason": "' . $e->getMessage() . '"}'
+            );
             $processingResult = 'fail';
-
         } catch (Skip $e) {
             $processingResult = 'skip';
-
         }
 
         $this->logger->info("Finished processing of request ID=" . $request->id . " result=" . $processingResult);
@@ -341,8 +353,10 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
      */
     public function getTierConfigByProduct($tierId, $productId)
     {
-        $body = $this->sendRequest('GET',
-            '/tier/config-requests?status=approved&configuration__product__id=' . $productId . '&configuration__account__id=' . $tierId);
+        $body = $this->sendRequest(
+            'GET',
+            '/tier/config-requests?status=approved&configuration__product__id=' . $productId . '&configuration__account__id=' . $tierId
+        );
         $model = Model::modelize('tierconfigrequests', json_decode($body));
         if (count($model) > 0) {
             return $model[0]->configuration;
@@ -360,7 +374,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
     public function getTierParameterByProductAndTierId($parameterId, $tierId, $productId)
     {
         $tierConfig = $this->getTierConfigByProduct($tierId, $productId);
-        if(!$tierConfig){
+        if (!$tierConfig) {
             return null;
         }
         $param = current(array_filter($tierConfig->params, function (Param $param) use ($parameterId) {
@@ -368,6 +382,5 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
         }));
 
         return ($param) ? $param : null;
-
     }
 }

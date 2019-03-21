@@ -46,5 +46,4 @@ class Contract extends Model
      * @var Marketplace
      */
     public $marketplace;
-
 }

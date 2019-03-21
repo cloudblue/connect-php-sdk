@@ -26,4 +26,3 @@ class ContactInfo extends Model
     public $postal_code;
     public $state;
 }
-

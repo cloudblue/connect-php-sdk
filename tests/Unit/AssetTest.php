@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Asset;
 use Connect\Item;
 use Connect\Param;
@@ -99,6 +98,4 @@ class AssetTest extends \Test\TestCase
         $this->assertEquals(333, $asset->getItemByMPN('333')->id);
         $this->assertNull($asset->getItemByMPN('999'));
     }
-
-
 }

@@ -8,9 +8,7 @@
 
 namespace Test\Unit;
 
-
 use Connect\ActivationTileResponse;
-
 
 /**
  * Class ActivationTileResponseTest
@@ -31,5 +29,4 @@ class ActivationTileResponseTest extends \Test\TestCase
         $this->assertEquals("SOME MESSAGE", $responseMessage->activationTile);
         return $responseMessage;
     }
-
 }

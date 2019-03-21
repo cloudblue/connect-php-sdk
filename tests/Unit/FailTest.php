@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Fail;
 
 /**
@@ -32,5 +31,4 @@ class FailTest extends \Test\TestCase
         $this->assertEquals(null, $fail->getObject());
         return $fail;
     }
-
 }

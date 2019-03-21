@@ -10,7 +10,7 @@ namespace Test\Unit;
 
 use Connect\UsageAutomation;
 use Connect\Usage\FileUsageRecord;
-USE \Connect\Usage\File;
+use \Connect\Usage\File;
 
 /**
  * Class UsageAutomationHelper
@@ -119,6 +119,7 @@ class UsageAutomationHelper extends UsageAutomation
                     'asset_search_value' => 'tenant2'
                 ]));
                 $this->submitUsage($usageFile, $usages);
+                // no break
             case 'CRD-99082-45842-69185':
                 return "YES is an string";
             default:

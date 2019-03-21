@@ -22,5 +22,4 @@ class FileUsageRecord extends \Connect\Model
     public $end_time_utc;
     public $asset_search_criteria;
     public $asset_search_value;
-
 }

@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\Delete;
 
 /**
@@ -31,5 +30,4 @@ class DeleteTest extends \Test\TestCase
         $this->assertEquals(null, $delete->getObject());
         return $delete;
     }
-
 }

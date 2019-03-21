@@ -11,7 +11,6 @@ use Connect\Logger;
 
 class LoggerTest extends \Test\TestCase
 {
-
     public function testInstantiation()
     {
         @ini_set('date.timezone', null);
@@ -69,7 +68,6 @@ class LoggerTest extends \Test\TestCase
 
         $i1 = \Connect\Logger::get();
         $this->assertInstanceOf('\Connect\Logger', $i1);
-
     }
 
     /**
@@ -236,7 +234,5 @@ class LoggerTest extends \Test\TestCase
     {
         $this->assertInstanceOf('\Connect\Logger', $logger->dump());
         $this->assertCount(0, $logger->getSession());
-
     }
-
 }

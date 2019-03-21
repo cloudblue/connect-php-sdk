@@ -18,7 +18,8 @@ class Http4UsageAutomationServiceProvider extends ServiceProvider
             ->andReturn(
                 trim(file_get_contents(__DIR__ . '/requestTemplateLocation.json')),
                 trim(file_get_contents(__DIR__ . '/requestTemplateLocation2.json')),
-                trim(file_get_contents(__DIR__ . '/requestTemplateLocation3.json')));
+                trim(file_get_contents(__DIR__ . '/requestTemplateLocation3.json'))
+            );
 
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getStatusCode')

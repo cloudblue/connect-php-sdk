@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Param;
 
 class ParamTest extends \Test\TestCase
@@ -58,5 +57,4 @@ class ParamTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\Param', $param->value('Some new value'));
         $this->assertEquals('Some new value', $param->value);
     }
-
 }

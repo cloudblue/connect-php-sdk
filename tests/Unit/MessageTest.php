@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Message;
 
 /**
@@ -31,5 +30,4 @@ class MessageTest extends \Test\TestCase
         $this->assertEquals(null, $message->getObject());
         return $message;
     }
-
 }

@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\FileRetrieveException;
 
 /**
@@ -17,7 +16,6 @@ use Connect\Usage\FileRetrieveException;
  */
 class FileRetrieveExceptionTest extends \Test\TestCase
 {
-
     public function testInstantiation()
     {
         $error = new FileRetrieveException("error");
@@ -29,5 +27,4 @@ class FileRetrieveExceptionTest extends \Test\TestCase
         $this->assertEquals(null, $error->getObject());
         return $error;
     }
-
 }

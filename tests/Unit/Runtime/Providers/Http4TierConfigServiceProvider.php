@@ -17,9 +17,11 @@ class Http4TierConfigServiceProvider extends ServiceProvider
 
         $body->shouldReceive('getContents')
             ->times(3)
-            ->andReturn(trim(file_get_contents(__DIR__ . '/request.valid.TierConfigTests.json')),
+            ->andReturn(
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfigTests.json')),
-                trim("[]"));
+                trim(file_get_contents(__DIR__ . '/request.valid.TierConfigTests.json')),
+                trim("[]")
+            );
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getStatusCode')
             ->andReturn(200);

@@ -2,7 +2,6 @@
 
 namespace Test\Unit\Logger;
 
-
 use Connect\Logger\LogRecord;
 
 /**

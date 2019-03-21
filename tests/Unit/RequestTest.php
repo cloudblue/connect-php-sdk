@@ -7,9 +7,7 @@
 
 namespace Test\Unit;
 
-
 use Connect\Request;
-
 
 class RequestTest extends \Test\TestCase
 {
@@ -18,7 +16,7 @@ class RequestTest extends \Test\TestCase
         $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.json'));
         $request = new Request($requests[0]);
 
-        $this->assertCount(2,$request->getNewItems());
+        $this->assertCount(2, $request->getNewItems());
 
         return $request;
     }
@@ -28,7 +26,7 @@ class RequestTest extends \Test\TestCase
         $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.json'));
         $request = new Request($requests[0]);
 
-        $this->assertCount(2,$request->getChangedItems());
+        $this->assertCount(2, $request->getChangedItems());
 
         return $request;
     }
@@ -38,7 +36,7 @@ class RequestTest extends \Test\TestCase
         $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.json'));
         $request = new Request($requests[0]);
 
-        $this->assertCount(1,$request->getRemovedItems());
+        $this->assertCount(1, $request->getRemovedItems());
 
         return $request;
     }

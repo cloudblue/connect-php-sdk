@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Inquire;
 use Connect\Param;
 
@@ -41,5 +40,4 @@ class InquireTest extends \Test\TestCase
         $this->assertEquals(null, $inquire->getObject());
         return $inquire;
     }
-
 }

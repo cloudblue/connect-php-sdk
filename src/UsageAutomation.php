@@ -126,8 +126,10 @@ abstract class UsageAutomation implements UsageAutomationInterface
      */
     protected function dispatchProductUsageCollection($listing)
     {
-        if ($this->config->products && !in_array($listing->product->id,
-                $this->config->products)) {
+        if ($this->config->products && !in_array(
+            $listing->product->id,
+            $this->config->products
+        )) {
             return 'Listing not handled by this processor';
         };
         $this->logger->info("Processing Usage for Product " . $listing->product->id . " (" . $listing->product->name . ") on Contract " . $listing->contract->id . " and provider " . $listing->provider->id . "(" . $listing->provider->name . ")");
@@ -154,7 +156,6 @@ abstract class UsageAutomation implements UsageAutomationInterface
             }
         }
         return $processingResult;
-
     }
 
     /**
@@ -203,11 +204,13 @@ abstract class UsageAutomation implements UsageAutomationInterface
         if (!isset($usageFile->description)) {
             $usageFile->description = "";
         }
-        $body = $this->sendRequest('POST',
-            '/usage/files/', $usageFile);
+        $body = $this->sendRequest(
+            'POST',
+            '/usage/files/',
+            $usageFile
+        );
         $model = Model::modelize('file', json_decode($body));
         return $model;
-
     }
 
 
@@ -218,8 +221,10 @@ abstract class UsageAutomation implements UsageAutomationInterface
     private function createUsageSpreadSheet()
     {
         $spreadSheet = new Spreadsheet();
-        $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadSheet,
-            "usage_records"), 0);
+        $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet(
+            $spreadSheet,
+            "usage_records"
+        ), 0);
         $spreadSheet->setActiveSheetIndexByName('usage_records');
         $spreadSheet->getActiveSheet()->setCellValue('A1', "usage_record_id");
         $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
@@ -230,7 +235,6 @@ abstract class UsageAutomation implements UsageAutomationInterface
         $spreadSheet->getActiveSheet()->setCellValue('G1', "asset_search_criteria");
         $spreadSheet->getActiveSheet()->setCellValue('H1', "asset_search_value");
         return $spreadSheet;
-
     }
 
     /**
@@ -272,11 +276,14 @@ abstract class UsageAutomation implements UsageAutomationInterface
             ]
         ];
         try {
-            $response = $this->http->request($verb,
-                trim($this->config->apiEndpoint . "/usage/files/" . $usageFile->id . $path), [
+            $response = $this->http->request(
+                $verb,
+                trim($this->config->apiEndpoint . "/usage/files/" . $usageFile->id . $path),
+                [
                     'multipart' => $multipart,
                     'headers' => $headers
-                ]);
+                ]
+            );
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
             throw new Usage\FileCreationException("Error uploading file:" . $e->getMessage());
         }
@@ -296,7 +303,7 @@ abstract class UsageAutomation implements UsageAutomationInterface
      * @return Spreadsheet
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    private function createAndPopulateSpreadSheet( $fileusagerecords )
+    private function createAndPopulateSpreadSheet($fileusagerecords)
     {
         $spreadSheet = $this->createUsageSpreadSheet();
         $spreadSheet->setActiveSheetIndexByName('usage_records');
@@ -330,7 +337,6 @@ abstract class UsageAutomation implements UsageAutomationInterface
         } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
             throw new Usage\FileCreationException("Error processing usage records: " . $e->getMessage());
         }
-
     }
 
     /**
@@ -358,8 +364,10 @@ abstract class UsageAutomation implements UsageAutomationInterface
      */
     private function getUsageTemplateDownloadLocation($productId)
     {
-        $body = $this->sendRequest('GET',
-            '/usage/products/' . $productId . '/template/');
+        $body = $this->sendRequest(
+            'GET',
+            '/usage/products/' . $productId . '/template/'
+        );
         return json_decode($body)->template_link;
     }
 

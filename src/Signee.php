@@ -22,5 +22,4 @@ class Signee extends Model
      * @var
      */
     public $name;
-
 }

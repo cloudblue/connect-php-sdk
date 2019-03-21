@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\AcceptResponse;
 
 /**
@@ -30,5 +29,4 @@ class AcceptResponseTest extends \Test\TestCase
         $this->assertEquals("Test", $responseAccept->acceptancenote);
         return $responseAccept;
     }
-
 }

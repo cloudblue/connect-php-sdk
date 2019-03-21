@@ -39,5 +39,4 @@ class Account extends Model
      */
 
     public $contact_info;
-
 }

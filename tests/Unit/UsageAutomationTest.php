@@ -10,7 +10,6 @@ namespace Test\Unit;
 use Connect\Config;
 use Connect\Product;
 
-
 class UsageAutomationTest extends \Test\TestCase
 {
     protected function setUp()
@@ -39,5 +38,4 @@ class UsageAutomationTest extends \Test\TestCase
         $app = new UsageAutomationHelper();
         return $app;
     }
-
 }

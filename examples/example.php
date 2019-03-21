@@ -5,7 +5,6 @@ require "../vendor/autoload.php";
 
 class MyAppRequests extends \Connect\RequestsProcessor
 {
-
     public function processRequest($req)
     {
         $req->asset->tiers['customer']->name;
@@ -52,12 +51,9 @@ class MyAppRequests extends \Connect\RequestsProcessor
 
 
 try {
-
     $rp = new MyAppRequests();
     $rp->process();
-
 } catch (Exception $e) {
     \Connect\Logger::get()->error($e->getMessage());
     \Connect\Logger::get()->dump();
 }
-

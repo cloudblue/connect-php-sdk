@@ -22,5 +22,4 @@ class Agreement extends Model
      * @var
      */
     public $name;
-
 }

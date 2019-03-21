@@ -30,5 +30,4 @@ class AcceptResponse
             $this->acceptancenote = $msg;
         }
     }
-
 }

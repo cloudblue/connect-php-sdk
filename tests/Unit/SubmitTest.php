@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\Submit;
 
 /**
@@ -32,5 +31,4 @@ class SubmitTest extends \Test\TestCase
         $this->assertEquals(null, $submit->getObject());
         return $submit;
     }
-
 }

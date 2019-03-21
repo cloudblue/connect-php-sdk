@@ -22,5 +22,4 @@ class Owner extends Model
      * @var
      */
     public $name;
-
 }

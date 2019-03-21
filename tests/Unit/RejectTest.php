@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\Usage\Reject;
 
 /**
@@ -30,5 +29,4 @@ class RejectTest extends \Test\TestCase
         $this->assertEquals("TD-123", $responseReject->response);
         return $responseReject;
     }
-
 }

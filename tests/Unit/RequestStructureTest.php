@@ -7,9 +7,7 @@
 
 namespace Test\Unit;
 
-
 use Connect\Request;
-
 
 /**
  * Class RequestStructureTest
@@ -17,7 +15,6 @@ use Connect\Request;
  */
 class RequestStructureTest extends \Test\TestCase
 {
-
     public function testRequestStructure()
     {
         $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.structure.json'));
@@ -35,7 +32,6 @@ class RequestStructureTest extends \Test\TestCase
 
         $this->assertInstanceOf('\Connect\Tiers', $request->asset->tiers);
         $this->assertInstanceOf('\Connect\Tier', $request->asset->tiers->tier1);
-
     }
 
     public function testMarketPlaceStructure()
@@ -45,7 +41,6 @@ class RequestStructureTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\MarketPlace', $request->marketplace);
         $this->assertEquals('MP-00000', $request->marketplace->id);
         $this->assertEquals('ACME Marketplace', $request->marketplace->name);
-
     }
 
     public function testContractStructure()
@@ -64,7 +59,6 @@ class RequestStructureTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\Asset', $request->asset);
         $this->assertEquals('AS-277-060-219-3', $request->asset->id);
         $this->assertEquals('1000728', $request->asset->external_id);
-
     }
 
     public function testConnectionStructure()
@@ -80,7 +74,6 @@ class RequestStructureTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\Vendor', $request->asset->connection->vendor);
         $this->assertEquals('VA-004-290', $request->asset->connection->vendor->id);
         $this->assertEquals('Marc FSG', $request->asset->connection->vendor->name);
-
     }
 
     public function testProductStructure()
@@ -118,7 +111,7 @@ class RequestStructureTest extends \Test\TestCase
     {
         $requests = json_decode(file_get_contents(__DIR__ . '/request.valid.structure.json'));
         $request = new Request($requests[0]);
-        foreach ($request->asset->params as $param){
+        foreach ($request->asset->params as $param) {
             $this->assertInstanceOf('\Connect\Param', $param);
         }
         $param = $request->asset->getParameterByID('email');
@@ -181,5 +174,4 @@ class RequestStructureTest extends \Test\TestCase
         $this->assertEquals('5661000', $request->asset->tiers->tier1->contact_info->contact->phone_number->phone_number);
         $this->assertEquals('', $request->asset->tiers->tier1->contact_info->contact->phone_number->extension);
     }
-
 }
