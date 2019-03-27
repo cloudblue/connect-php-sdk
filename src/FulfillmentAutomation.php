@@ -294,7 +294,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
         $body = $this->sendRequest('GET', '/tier/config-requests' . $query);
 
         /** @var Request[] $models */
-        $models = Model::modelize('tierconfigrequests', json_decode($body));
+        $models = Model::modelize('tierConfigRequests', json_decode($body));
         foreach ($models as $index => $model) {
             $models[$index]->requestProcessor = $this;
         }
@@ -357,7 +357,7 @@ abstract class FulfillmentAutomation implements FulfillmentAutomationInterface
             'GET',
             '/tier/config-requests?status=approved&configuration__product__id=' . $productId . '&configuration__account__id=' . $tierId
         );
-        $model = Model::modelize('tierconfigrequests', json_decode($body));
+        $model = Model::modelize('tierConfigRequests', json_decode($body));
         if (count($model) > 0) {
             return $model[0]->configuration;
         }
