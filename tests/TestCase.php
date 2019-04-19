@@ -35,4 +35,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
         return $client;
     }
+
+    /**
+     * Tear down function for Mockery integration
+     */
+    public function tearDown() {
+        \Mockery::close();
+    }
 }
