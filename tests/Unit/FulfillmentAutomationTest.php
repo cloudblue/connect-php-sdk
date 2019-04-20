@@ -34,13 +34,16 @@ class FulfillmentAutomationTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\FulfillmentAutomation', $app);
 
         $this->assertInstanceOf('\Connect\Config', $app->getConfig());
+        $this->assertInstanceOf('\Connect\Config', $app->fulfillment->getConfig());
         $this->assertInstanceOf('\Connect\Config', $app->config);
         $this->assertNull($app->wrongpropertyorservice);
 
         $this->assertInstanceOf('\Connect\Logger', $app->getLogger());
+        $this->assertInstanceOf('\Connect\Logger', $app->fulfillment->getLogger());
         $this->assertInstanceOf('\Connect\Logger', $app->logger);
 
         $this->assertInstanceOf('\GuzzleHttp\Client', $app->getHttp());
+        $this->assertInstanceOf('\GuzzleHttp\Client', $app->fulfillment->getHttp());
         $this->assertInstanceOf('\GuzzleHttp\Client', $app->http);
 
         $this->assertInstanceOf('\stdClass', $app->getStd());

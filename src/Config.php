@@ -73,6 +73,9 @@ class Config extends Model
     protected $runtimeServices = [
         'logger' => '\Connect\Runtime\Providers\LoggerServiceProvider',
         'http' => '\Connect\Runtime\Providers\HttpServiceProvider',
+        'fulfillment' => '\Connect\Runtime\Providers\FulfillmentServiceProvider',
+        'tierConfiguration' => '\Connect\Runtime\Providers\TierConfigurationServiceProvider',
+        'usage' => '\Connect\Runtime\Providers\UsageServiceProvider',
     ];
 
     /**

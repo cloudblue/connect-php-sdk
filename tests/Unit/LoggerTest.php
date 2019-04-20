@@ -158,9 +158,8 @@ class LoggerTest extends \Test\TestCase
         $time = time();
 
         $msg = $i1->write(new Logger\LogRecord(1, 'This is a msg', $time));
-        $expected = sprintf("[ %s ] ERROR %s\n", date('Y/m/d h:i:s', $time), 'This is a msg');
 
-        $this->assertEquals($expected, $msg);
+        $this->assertStringEndsWith("This is a msg\n", $msg);
     }
 
     public function testWriteToFile()
@@ -179,10 +178,9 @@ class LoggerTest extends \Test\TestCase
 
         $time = time();
         $msg = $logger->write(new Logger\LogRecord(1, 'This is a msg', $time));
-        $expected = sprintf("[ %s ] ERROR %s\n", date('Y/m/d h:i:s', $time), 'This is a msg');
 
-        $this->assertEquals($expected, $msg);
-        $this->assertEquals($expected, file_get_contents($logFile));
+        $this->assertStringEndsWith("This is a msg\n", $msg);
+        $this->assertStringEndsWith("This is a msg\n", file_get_contents($logFile));
 
         if (is_readable($logFile)) {
             unlink($logFile);

@@ -24,7 +24,7 @@ class Http4TmplServiceProvider extends ServiceProvider
         $response->shouldReceive('getBody')
             ->andReturn($body);
 
-        $client = \Mockery::mock('Client');
+        $client = \Mockery::mock('GuzzleHttp\ClientInterface');
         $client->shouldReceive('request')
             ->withAnyArgs()
             ->andReturn($response);
