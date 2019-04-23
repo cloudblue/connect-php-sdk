@@ -6,14 +6,8 @@
     </filter>
     <logging>
         <log type="testdox-text" target="php://stdout" showUncoveredFiles="false"/>
-        <log type="coverage-html" target="tmp/report" lowUpperBound="35" highLowerBound="70"/>
         <log type="coverage-clover" target="coverage.xml"/>
     </logging>
-    <listeners>
-        <listener class="\Mockery\Adapter\Phpunit\TestListener"
-                  file="vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php">
-        </listener>
-    </listeners>
     <testsuites>
         <testsuite name="Fail">
             <file>tests/Unit/FailTest.php</file>

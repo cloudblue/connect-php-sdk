@@ -170,8 +170,12 @@ class Model implements \ArrayAccess
         switch (gettype($value)) {
             case 'object':
 
+                $namespaces = ['\Connect\\', '\Connect\Usage\\'];
+
                 /**
                  * if the item is an object search if there are any model that match with it:
+                 *
+                 *  foreach tracked namespace do:
                  *
                  *  1. fqcn = base namespace + capitalized property name.
                  *
@@ -185,43 +189,31 @@ class Model implements \ArrayAccess
                  *
                  *  if any of the user cases from above match, create a single Connect\Model object.
                  */
-                $fqcn = '\Connect\\' . ucfirst($key);
-                if (class_exists($fqcn, true)) {
-                    return new $fqcn($value);
-                }
-                $fqcn = '\Connect\\' . ucfirst(Inflector::singularize($key));
-                if (strpos($key, '_') !== false) {
-                    $fqcn = '\Connect\\' . implode('', array_map(function ($word) {
-                        return ucfirst(Inflector::singularize($word));
-                    }, explode('_', $key)));
-                }
-                if (class_exists($fqcn, true)) {
-                    return new $fqcn($value);
-                }
-                $fqcn = trim($fqcn, '0123456789');
-                if (class_exists($fqcn, true)) {
-                    return new $fqcn($value);
-                }
-                $fqcn = '\Connect\\Usage\\' . ucfirst($key);
-                if (class_exists($fqcn, true)) {
-                    return new $fqcn($value);
-                }
-                $fqcn = '\Connect\\Usage\\' . ucfirst(Inflector::singularize($key));
-                /* Not a case currently in Usage space
-                if (strpos($key, '_') !== false) {
-                    $fqcn = '\Connect\\Usage\\' . implode('', array_map(function ($word) {
-                            return ucfirst(Inflector::singularize($word));
-                        }, explode('_', $key)));
-                }
-                */
-                if (class_exists($fqcn, true)) {
-                    return new $fqcn($value);
+                foreach ($namespaces as $namespace) {
+
+                    $fqcn = $namespace . ucfirst($key);
+                    if (class_exists($fqcn, true)) {
+                        return new $fqcn($value);
+                    }
+
+                    $fqcn = $namespace . ucfirst(Inflector::singularize($key));
+                    if (strpos($key, '_') !== false) {
+                        $fqcn = $namespace . implode('', array_map(function ($word) {
+                                return ucfirst(Inflector::singularize($word));
+                            }, explode('_', $key)));
+                    }
+                    if (class_exists($fqcn, true)) {
+                        return new $fqcn($value);
+                    }
+
+                    $fqcn = trim($fqcn, '0123456789');
+                    if (class_exists($fqcn, true)) {
+                        return new $fqcn($value);
+                    }
                 }
 
+                return new Model($value);
 
-                return new \Connect\Model($value);
-
-                break;
             case 'array':
 
                 $array = [];
@@ -257,7 +249,7 @@ class Model implements \ArrayAccess
     public static function arrayize($value)
     {
         $forbidden = [];
-        if ($value instanceof \Connect\Model) {
+        if ($value instanceof Model) {
             $forbidden = $value->getHidden();
         }
 

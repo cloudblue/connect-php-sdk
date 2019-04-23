@@ -8,6 +8,8 @@
 
 namespace Connect;
 
+use \Connect\Usage\FileCreationException;
+
 /**
  * Interface UsageAutomationInterface
  * @package Connect
@@ -19,7 +21,7 @@ interface UsageAutomationInterface
      * @param $listing
      * @return boolean
      * @return string
-     * @throws  \Connect\Usage\FileCreationException
+     * @throws FileCreationException
      */
     public function processUsageForListing($listing);
 }

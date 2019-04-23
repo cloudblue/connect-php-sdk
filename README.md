@@ -59,24 +59,8 @@ Note that the `vendor` folder and the `vendor/autoload.php` script are generated
 
 require_once "vendor/autoload.php";
 
-/**
- * Class ProductRequests
- */
 class ProductRequests extends \Connect\FulfillmentAutomation
 {
-    
-
-    /**
-     * @param \Connect\Request $request
-     * @return string|void
-     * @return \Connect\ActivationTemplateResponse
-     * @return \Connect\ActivationTileResponse  
-     * @throws Exception
-     * @throws \Connect\Exception
-     * @throws \Connect\Fail
-     * @throws \Connect\Skip
-     * @throws \Connect\Inquire   
-     */
     
     public function processRequest($request)
     {
@@ -113,22 +97,27 @@ class ProductRequests extends \Connect\FulfillmentAutomation
                 throw new \Connect\Fail("Operation not supported:".$request->type);
         }
     }
+
     public function processTierConfigRequest($tierConfigRequest){
-        //This method allows processing Tier Requests, in same manner as simple requests. Is requiered to be implemented since v15
+        //This method allows processing Tier Requests, in same manner as simple requests.
+        // Is required to be implemented since v15
     }
 }
 
 //Main Code Block
+
 try {
-    $apiConfig = new \Connect\Config([
+    
+    $requests = new ProductRequests(new \Connect\Config([
         'apiKey' => 'Key_Available_in_ui',
         'apiEndpoint' => 'https://api.connect.cloud.im/public/v1',
         'products' => 'CN-631-322-641' #Optional value
-    ]);
-    $requests = new ProductRequests($apiConfig);
+    ]));
+    
     $requests->process();
     
 } catch (Exception $e) {
+    
     print "Error processing requests:" . $e->getMessage();
 }
 ```
@@ -136,15 +125,13 @@ try {
 ## A Simple Example of reporting Usage Files
 
 ```php
+<?php
+
+require_once "vendor/autoload.php";
+
 class UploadUsage extends \Connect\UsageAutomation
 {
-    /**
-     * @param $listing
-     * @return bool|string
-     * @throws \Connect\Usage\FileCreationException
-     * @throws \Connect\Usage\FileRetrieveException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
+
     public function processUsageForListing($listing)
     {
         //Detect concrete Provider Contract
@@ -182,7 +169,9 @@ class UploadUsage extends \Connect\UsageAutomation
 }
 
 //Main Code Block
+
 try {
+    
     $requests = new UploadUsage();
     $requests->process();
 
@@ -194,15 +183,13 @@ try {
 ## A Simple Example of automating workflow of Usage Files
 
 ```php
-class usagefilesworkflow extends \Connect\UsageFileAutomation
+<?php
+
+require_once "vendor/autoload.php";
+
+class UsageFilesWorkflow extends \Connect\UsageFileAutomation
 {
-    /**
-     * @param $usageFile
-     * @throws \Connect\Usage\Accept
-     * @throws \Connect\Usage\Delete
-     * @throws \Connect\Usage\Skip
-     * @throws \Connect\Usage\Submit
-     */
+    
     public function processUsageFiles($usageFile)
     {
         switch ($usageFile->status){
@@ -222,6 +209,17 @@ class usagefilesworkflow extends \Connect\UsageFileAutomation
     }
 }
 
-$usageWorkflow = new usagefilesworkflow();
-$usageWorkflow->process(); //is possible to ask to process all via parsing true, only applicable for providers who automates own products
+//Main Code Block
+
+try {
+    
+    $usageWorkflow = new UsageFilesWorkflow();
+    
+    // is possible to ask to process all via parsing true, only applicable for
+    // providers who automates own products
+    $usageWorkflow->process(); 
+
+} catch (Exception $e) {
+    print "Error processing usage for active listing requests:" . $e->getMessage();
+}
 ```
