@@ -14,8 +14,13 @@ namespace Connect;
  */
 class Item extends Model
 {
+    public $display_name;
+    public $global_id;
     public $id;
+    public $item_type;
     public $mpn;
+    public $period;
+    public $type;
 
     /**
      * @var int
