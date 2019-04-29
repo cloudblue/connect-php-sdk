@@ -8,17 +8,40 @@
 
 namespace Connect\Modules;
 
+use Connect\Config;
 use Connect\Model;
 use Connect\Param;
 use Connect\Request;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Log\LoggerInterface;
 
 /**
- * Class Fulfilment
+ * Class Fulfillment
  * @package Connect\Modules
  */
-class Fulfilment extends Core
+class Fulfillment extends Core
 {
+    /**
+     * TierConfiguration Service
+     * @var TierConfiguration
+     */
+    public $tierConfiguration;
+
+    /**
+     * Fulfillment constructor.
+     * @param Config $config
+     * @param LoggerInterface $logger
+     * @param ClientInterface $http
+     * @param TierConfiguration $tierConfiguration
+     */
+    public function __construct(Config $config, LoggerInterface $logger, ClientInterface $http, TierConfiguration $tierConfiguration)
+    {
+        parent::__construct($config, $logger, $http);
+
+        $this->tierConfiguration = $tierConfiguration;
+    }
+
     /**
      * List the pending requests
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
@@ -78,5 +101,20 @@ class Fulfilment extends Core
     {
         $query = ($request instanceof Request) ? $request->id : $request;
         return $this->sendRequest('GET', '/templates/' . $templateId . '/render?request_id=' . $query);
+    }
+
+    /**
+     * Dynamically call connect native module functions.
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if (is_callable([$this->tierConfiguration, $name])) {
+            return call_user_func_array([$this->tierConfiguration, $name], $arguments);
+        }
+
+        return null;
     }
 }

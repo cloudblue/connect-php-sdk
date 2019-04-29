@@ -9,7 +9,8 @@
 namespace Connect\Runtime\Providers;
 
 use Connect\Config;
-use Connect\Modules\Fulfilment;
+use Connect\Modules\Fulfillment;
+use Connect\Modules\TierConfiguration;
 use Connect\Runtime\ServiceProvider;
 use GuzzleHttp\Client;
 use Pimple\Container;
@@ -24,7 +25,7 @@ class FulfillmentServiceProvider extends ServiceProvider
     /**
      * Create the Fulfillment Service
      * @param Container $container
-     * @return Fulfilment
+     * @return Fulfillment
      */
     public function register(Container $container)
     {
@@ -37,6 +38,9 @@ class FulfillmentServiceProvider extends ServiceProvider
         /** @var Client $http */
         $http = $container['http'];
 
-        return new Fulfilment($configuration, $logger, $http);
+        /** @var TierConfiguration $tierConfiguration */
+        $tierConfiguration = $container['tierConfiguration'];
+
+        return new Fulfillment($configuration, $logger, $http, $tierConfiguration);
     }
 }

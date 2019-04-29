@@ -15,7 +15,6 @@ class Http4UsageAutomationTestsServiceProvider extends ServiceProvider
     {
         $body = \Mockery::mock('\Psr\Http\Message\StreamInterface');
         $body->shouldReceive('getContents')
-            ->times(6)
             ->andReturn(
                 trim(file_get_contents(__DIR__ . '/request.valid.usageautomation.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.usageautomationcreatefile.json')),

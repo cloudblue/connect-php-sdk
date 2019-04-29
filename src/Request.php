@@ -87,4 +87,18 @@ class Request extends Model
         }
         return $ret;
     }
+
+    public function conversation()
+    {
+        $conversations = $this->requestProcessor->sendRequest('GET', '/conversations?instance_id='.$this->id);
+        $models = Model::modelize('conversations', json_decode($conversations));
+        if (isset($models[0]->id)) {
+            $conversation = $this->requestProcessor->sendRequest('GET', '/conversations/'.$models[0]->id);
+            $conversation = Model::modelize('conversation', json_decode($conversation));
+            $conversation->requestProcessor = $this->requestProcessor;
+            return $conversation;
+        } else {
+            return new Conversation();
+        }
+    }
 }

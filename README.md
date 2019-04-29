@@ -171,8 +171,8 @@ class UploadUsage extends \Connect\UsageAutomation
 
 try {
     
-    $requests = new UploadUsage();
-    $requests->process();
+    $usageAutomation = new UploadUsage();
+    $usageAutomation->process();
 
 } catch (Exception $e) {
     print "Error processing usage for active listing requests:" . $e->getMessage();

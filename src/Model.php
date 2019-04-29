@@ -190,7 +190,6 @@ class Model implements \ArrayAccess
                  *  if any of the user cases from above match, create a single Connect\Model object.
                  */
                 foreach ($namespaces as $namespace) {
-
                     $fqcn = $namespace . ucfirst($key);
                     if (class_exists($fqcn, true)) {
                         return new $fqcn($value);
@@ -199,8 +198,8 @@ class Model implements \ArrayAccess
                     $fqcn = $namespace . ucfirst(Inflector::singularize($key));
                     if (strpos($key, '_') !== false) {
                         $fqcn = $namespace . implode('', array_map(function ($word) {
-                                return ucfirst(Inflector::singularize($word));
-                            }, explode('_', $key)));
+                            return ucfirst(Inflector::singularize($word));
+                        }, explode('_', $key)));
                     }
                     if (class_exists($fqcn, true)) {
                         return new $fqcn($value);

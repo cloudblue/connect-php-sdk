@@ -21,13 +21,6 @@ class UsageAutomationBasicsTest extends \Test\TestCase
         chdir(__DIR__);
     }
 
-    /**
-     * @return false|string
-     * @throws \Connect\ConfigException
-     * @throws \Connect\Usage\FileRetrieveException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @expectedException \Exception
-     */
     public function testGetUsageTemplateFile()
     {
         $app = new UsageAutomationBasicsHelper(new Config('./config.mocked4usageautomationbasics.json'));
