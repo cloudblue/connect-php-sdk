@@ -27,6 +27,7 @@ This library may be consumed in your project in order to automate the fulfillmen
 - Change the status of the requests from it's initial pending state to either inquiring, failed or approved.
 - Generate and upload usage files to report usage for active contracts and listings
 - Process usage file status changes
+- Work with Notes for requests
 - Generate logs
 - Collect debug logs in case of failure
 
@@ -38,7 +39,7 @@ Connect PHP SDK is available on [Packagist](https://packagist.org/packages/apsco
 ```json
 {
   "require": {
-    "apsconnect/connect-sdk": "^15.0"
+    "apsconnect/connect-sdk": "^16.0"
     }
 }
 ```
@@ -157,7 +158,7 @@ class UploadUsage extends \Connect\UsageAutomation
                     ['id' => $listing->contract->id]
                 )
             ]);
-            $this->submitUsage($usageFile, $usages);
+            $this->usage->submitUsage($usageFile, $usages);
             return "processing done"
         }
         else{

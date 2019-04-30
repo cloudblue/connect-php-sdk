@@ -37,6 +37,6 @@ class TierConfigurationServiceProvider extends ServiceProvider
         /** @var Client $http */
         $http = $container['http'];
 
-        return new TierConfiguration($configuration, $logger, $http);
+        return new TierConfiguration($configuration, $logger, $http, $container);
     }
 }

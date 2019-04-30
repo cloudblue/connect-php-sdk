@@ -9,17 +9,19 @@
 namespace Connect;
 
 /**
- * Class Account
+ * Class ConversationMessage
  * @package Connect
  */
-class Assignee extends Model
+class ConversationMessage extends Model
 {
-    /**
-     * @var
-     */
     public $id;
+    public $conversation;
+    public $created;
+    public $text;
+    public $type;
+
     /**
-     * @var
+     * @var Owner
      */
-    public $name;
+    public $creator;
 }

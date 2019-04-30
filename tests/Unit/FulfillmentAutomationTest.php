@@ -106,4 +106,19 @@ class FulfillmentAutomationTest extends \Test\TestCase
         $app = new RequestProcessorHelper();
         $this->assertInstanceOf('\Connect\RequestsProcessor', $app);
     }
+
+    public function testFakeShurtcut()
+    {
+        //to be deprecated, please always use right services and not the shortcuts
+        $app = new RequestProcessorHelper();
+        $app->fulfillment->__call("wrong", array());
+        $app->usage->__call("wrong", array());
+    }
+
+    public function testTemplateRetrive()
+    {
+        $app = new RequestProcessorHelper(__DIR__ . '/config.mocked4tmpl.json');
+        $template = $app->fulfillment->renderTemplate('1','PR-123-123-123');
+        $this->assertStringStartsWith("# tmpl", $template);
+    }
 }

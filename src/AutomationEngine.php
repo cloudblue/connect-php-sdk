@@ -8,7 +8,7 @@
 
 namespace Connect;
 
-use Connect\Modules\Fulfilment;
+use Connect\Modules\Fulfillment;
 use Connect\Modules\TierConfiguration;
 use Connect\Modules\Usage;
 use GuzzleHttp\ClientInterface;
@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
  * @property Config $config
  * @property LoggerInterface $logger
  * @property ClientInterface $http
- * @property Fulfilment $fulfillment
+ * @property Fulfillment $fulfillment
  * @property TierConfiguration $tierConfiguration
  * @property Usage $usage
  * @package Connect

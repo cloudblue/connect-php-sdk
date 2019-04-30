@@ -36,8 +36,8 @@ abstract class UsageAutomation extends AutomationEngine implements UsageAutomati
     protected function dispatchProductUsageCollection($listing)
     {
         if ($this->config->products && !in_array(
-                $listing->product->id,
-                $this->config->products
+            $listing->product->id,
+            $this->config->products
             )) {
             return 'Listing not handled by this processor';
         };
@@ -66,5 +66,4 @@ abstract class UsageAutomation extends AutomationEngine implements UsageAutomati
         }
         return $processingResult;
     }
-
 }

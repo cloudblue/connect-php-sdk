@@ -8,17 +8,19 @@
 
 namespace Connect\Modules;
 
+use Connect\Config;
 use Connect\Listing;
 use Connect\Model;
 use Connect\Product;
-use Connect\Request;
 use Connect\Usage\File;
 use Connect\Usage\FileCreationException;
 use Connect\Usage\FileRetrieveException;
 use Connect\Usage\FileUsageRecord;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Usage
@@ -27,7 +29,35 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Usage extends Core
 {
     /**
-     * List the pending requests
+     * Request Fulfillment service
+     * @var Fulfillment
+     */
+    public $fulfillment;
+
+    /**
+     * TierConfiguration Service
+     * @var TierConfiguration
+     */
+    public $tierConfiguration;
+
+    /**
+     * Fulfillment constructor.
+     * @param Config $config
+     * @param LoggerInterface $logger
+     * @param ClientInterface $http
+     * @param TierConfiguration $tierConfiguration
+     * @param Fulfillment $fulfillment
+     */
+    public function __construct(Config $config, LoggerInterface $logger, ClientInterface $http, TierConfiguration $tierConfiguration, Fulfillment $fulfillment)
+    {
+        parent::__construct($config, $logger, $http);
+
+        $this->tierConfiguration = $tierConfiguration;
+        $this->fulfillment = $fulfillment;
+    }
+
+    /**
+     * Lists the product listings
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
      * @return Listing[]
      * @throws GuzzleException
@@ -56,7 +86,7 @@ class Usage extends Core
     }
 
     /**
-     * List the pending requests
+     * List the usage Files
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
      * @return File[]
      * @throws GuzzleException
@@ -284,5 +314,21 @@ class Usage extends Core
         $usageFile = $this->createUsageFile($file);
         $this->uploadUsageRecords($usageFile, $usageRecords);
         return $usageFile;
+    }
+
+    /**
+     * Dynamically call connect native module functions.
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        $_shortcuts = ['fulfillment', 'tierConfiguration'];
+        foreach ($_shortcuts as $id) {
+            if (is_callable([$this->{$id}, $name])) {
+                return call_user_func_array([$this->{$id}, $name], $arguments);
+            }
+        }
     }
 }

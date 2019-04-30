@@ -40,10 +40,9 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
     protected function dispatchTierConfig($tierConfigRequest)
     {
         try {
-
             if ($this->config->products && !in_array(
-                    $tierConfigRequest->configuration->product->id,
-                    $this->config->products
+                $tierConfigRequest->configuration->product->id,
+                $this->config->products
                 )) {
                 return 'Invalid product';
             }
@@ -74,8 +73,11 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->tierConfiguration->updateTierConfigRequestParameters($tierConfigRequest, $e->params);//WORKING HERE!
-            $this->tierConfiguration->sendRequest('POST',
-                '/tier/config-requests/' . $tierConfigRequest->id . '/inquire', '{}');
+            $this->tierConfiguration->sendRequest(
+                'POST',
+                '/tier/config-requests/' . $tierConfigRequest->id . '/inquire',
+                '{}'
+            );
             $processingResult = 'inquire';
         } catch (Fail $e) {
             // fail request
@@ -102,7 +104,6 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
     protected function dispatch($request)
     {
         try {
-
             if ($this->config->products && !in_array($request->asset->product->id, $this->config->products)) {
                 return 'Invalid product';
             }
@@ -121,6 +122,11 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                     '/requests/' . $request->id . '/approve',
                     '{"template_id": "' . $msg->templateid . '"}'
                 );
+                try {
+                    $request->conversation()->addMessage('Activated using template ' . $msg->templateid);
+                } catch (\Exception $e) {
+                    $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                }
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->fulfillment->sendRequest(
@@ -128,12 +134,22 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                     '/requests/' . $request->id . '/approve',
                     '{"activation_tile": "' . $msg->activationTile . '"}'
                 );
+                try {
+                    $request->conversation()->addMessage('Activated using Custom ActivationTile');
+                } catch (GuzzleException $e) {
+                    $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                }
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->fulfillment->updateParameters($request, $e->params);
             $this->fulfillment->sendRequest('POST', '/requests/' . $request->id . '/inquire', '{}');
+            try {
+                $request->conversation()->addMessage($e->getMessage());
+            } catch (GuzzleException $e) {
+                $this->logger->error("Error while saving result on conversation for request ".$request->id);
+            }
             $processingResult = 'inquire';
         } catch (Fail $e) {
             // fail request
@@ -142,8 +158,18 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 '/requests/' . $request->id . '/fail',
                 '{"reason": "' . $e->getMessage() . '"}'
             );
+            try {
+                $request->conversation()->addMessage($e->getMessage());
+            } catch (\Exception $e) {
+                $this->logger->error("Error while saving result on conversation for request ".$request->id);
+            }
             $processingResult = 'fail';
         } catch (Skip $e) {
+            try {
+                $request->conversation()->addMessage($e->getMessage());
+            } catch (\Exception $e) {
+                $this->logger->error("Error while saving result on conversation for request ".$request->id);
+            }
             $processingResult = 'skip';
         }
 
@@ -151,5 +177,4 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
 
         return $processingResult;
     }
-
 }

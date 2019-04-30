@@ -9,6 +9,8 @@
 namespace Connect\Runtime\Providers;
 
 use Connect\Config;
+use Connect\Modules\Fulfillment;
+use Connect\Modules\TierConfiguration;
 use Connect\Modules\Usage;
 use Connect\Runtime\ServiceProvider;
 use GuzzleHttp\Client;
@@ -37,6 +39,12 @@ class UsageServiceProvider extends ServiceProvider
         /** @var Client $http */
         $http = $container['http'];
 
-        return new Usage($configuration, $logger, $http);
+        /** @var TierConfiguration $tierConfiguration */
+        $tierConfiguration = $container['tierConfiguration'];
+
+        /** @var Fulfillment $fulfillment */
+        $fulfillment = $container['fulfillment'];
+
+        return new Usage($configuration, $logger, $http, $tierConfiguration, $fulfillment);
     }
 }

@@ -9,14 +9,22 @@
 namespace Connect;
 
 /**
- * Interface UsageFileAutomationInterface
+ * Class Account
  * @package Connect
  */
-interface UsageFileAutomationInterface
+class User extends Model
 {
     /**
-     * @param $usageFile
-     * @return mixed
+     * @var
      */
-    public function processUsageFiles($usageFile);
+    public $id;
+    /**
+     * @var
+     */
+    public $name;
+
+    /**
+     * @var
+     */
+    public $email;
 }

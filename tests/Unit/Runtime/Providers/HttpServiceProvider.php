@@ -16,7 +16,7 @@ class HttpServiceProvider extends ServiceProvider
         $body = \Mockery::mock('\Psr\Http\Message\StreamInterface');
 
         $body->shouldReceive('getContents')
-            ->times(15)
+            ->times(23)
             ->andReturn(
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
@@ -26,13 +26,37 @@ class HttpServiceProvider extends ServiceProvider
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
-                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json'))
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.fulfillment.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversations.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversation.json')),
+                trim(file_get_contents(__DIR__ . '/request.valid.conversationMessage.json'))
             );
 
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');
