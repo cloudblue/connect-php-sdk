@@ -12,7 +12,7 @@ namespace Connect;
  * Class Account
  * @package Connect
  */
-class Assignee extends Model
+class User extends Model
 {
     /**
      * @var
@@ -22,4 +22,9 @@ class Assignee extends Model
      * @var
      */
     public $name;
+
+    /**
+     * @var
+     */
+    public $email;
 }

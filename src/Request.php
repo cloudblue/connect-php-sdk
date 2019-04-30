@@ -30,6 +30,11 @@ class Request extends Model
      */
     public $contract;
 
+    /**
+     * @var User
+     */
+    public $assignee;
+
     public $id;
     public $type;
     public $created;

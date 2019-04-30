@@ -19,7 +19,7 @@ class CloseTest extends \Test\TestCase
     /**
      * @return mixed
      */
-    public function testInstantiation()
+    public function testCloseUsageInstantiation()
     {
         $close = new Close();
 

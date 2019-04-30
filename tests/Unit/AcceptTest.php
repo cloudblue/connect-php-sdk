@@ -20,7 +20,7 @@ class AcceptTest extends \Test\TestCase
     /**
      * @return Accept
      */
-    public function testInstantiation()
+    public function testUsageInstantiation()
     {
         $responseAccept = new Accept('TD-123');
 

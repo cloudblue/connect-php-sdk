@@ -47,7 +47,7 @@ class TierConfigRequest extends Model
     public $params;
 
     /**
-     * @var Assignee
+     * @var User
      */
     public $assignee;
 

@@ -14,7 +14,21 @@ namespace Connect;
  */
 interface FulfillmentAutomationInterface
 {
+    /**
+     * @param $request
+     * @return mixed
+     * @throws Skip
+     * @throws Inquire
+     * @throws Fail
+     */
     public function processRequest($request);
 
+    /**
+     * @param $tierConfigRequest
+     * @return mixed
+     * @throws Skip
+     * @throws Inquire
+     * @throws Fail
+     */
     public function processTierConfigRequest($tierConfigRequest);
 }

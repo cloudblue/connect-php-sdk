@@ -124,7 +124,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 );
                 try {
                     $request->conversation()->addMessage('Activated using template ' . $msg->templateid);
-                } catch (GuzzleException $e) {
+                } catch (\Exception $e) {
                     $this->logger->error("Error while saving result on conversation for request ".$request->id);
                 }
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
@@ -160,14 +160,14 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             );
             try {
                 $request->conversation()->addMessage($e->getMessage());
-            } catch (GuzzleException $e) {
+            } catch (\Exception $e) {
                 $this->logger->error("Error while saving result on conversation for request ".$request->id);
             }
             $processingResult = 'fail';
         } catch (Skip $e) {
             try {
                 $request->conversation()->addMessage($e->getMessage());
-            } catch (GuzzleException $e) {
+            } catch (\Exception $e) {
                 $this->logger->error("Error while saving result on conversation for request ".$request->id);
             }
             $processingResult = 'skip';

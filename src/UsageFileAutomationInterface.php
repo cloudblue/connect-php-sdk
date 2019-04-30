@@ -14,5 +14,9 @@ namespace Connect;
  */
 interface UsageFileAutomationInterface
 {
+    /**
+     * @param $usageFile
+     * @return mixed
+     */
     public function processUsageFiles($usageFile);
 }

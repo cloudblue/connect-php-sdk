@@ -57,7 +57,7 @@ class Usage extends Core
     }
 
     /**
-     * List the pending requests
+     * Lists the product listings
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
      * @return Listing[]
      * @throws GuzzleException
@@ -86,7 +86,7 @@ class Usage extends Core
     }
 
     /**
-     * List the pending requests
+     * List the usage Files
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
      * @return File[]
      * @throws GuzzleException
@@ -325,13 +325,10 @@ class Usage extends Core
     public function __call($name, $arguments)
     {
         $_shortcuts = ['fulfillment', 'tierConfiguration'];
-
         foreach ($_shortcuts as $id) {
-            if (isset($this->{$id}) && is_callable([$this->{$id}, $name])) {
+            if (is_callable([$this->{$id}, $name])) {
                 return call_user_func_array([$this->{$id}, $name], $arguments);
             }
         }
-
-        return null;
     }
 }

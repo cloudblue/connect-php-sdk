@@ -43,7 +43,7 @@ class UsageAutomationHelper extends UsageAutomation
                     'asset_search_criteria' => 'parameter.param_b',
                     'asset_search_value' => 'tenant2'
                 ]));
-                $this->submitUsage($usageFile, $usages);
+                $this->usage->submitUsage($usageFile, $usages);
                 return "Processed";
             case 'CRD-99082-45842-69186':
                 $usageFile = new File([
@@ -66,7 +66,7 @@ class UsageAutomationHelper extends UsageAutomation
                     'asset_search_criteria' => 'parameter.param_b',
                     'asset_search_value' => 'tenant2'
                 ]));
-                $this->submitUsage($usageFile, $usages);
+                $this->usage->submitUsage($usageFile, $usages);
                 return "Processed";
             case 'CRD-99082-45842-69187':
                 $usageFile = new File([
@@ -89,7 +89,7 @@ class UsageAutomationHelper extends UsageAutomation
                     'asset_search_criteria' => 'parameter.param_b',
                     'asset_search_value' => 'tenant2'
                 ]));
-                $this->submitUsage($usageFile, $usages);
+                $this->usage->submitUsage($usageFile, $usages);
                 return "Processed";
             case 'CRD-99082-45842-69182':
                 return true;
@@ -118,7 +118,7 @@ class UsageAutomationHelper extends UsageAutomation
                     'asset_search_criteria' => 'parameter.param_b',
                     'asset_search_value' => 'tenant2'
                 ]));
-                $this->submitUsage($usageFile, $usages);
+                $this->usage->submitUsage($usageFile, $usages);
                 // no break
             case 'CRD-99082-45842-69185':
                 return "YES is an string";
