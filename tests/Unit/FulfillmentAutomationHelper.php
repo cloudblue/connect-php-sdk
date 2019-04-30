@@ -32,7 +32,6 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
             case 'PR-5620-6510-1234':
                 return "Done";
             case 'PR-5620-6510-TMPL':
-                //return $this->renderTemplate("TL-1234-4321", $request);
                 throw new \Connect\Skip("Skipping rendertemplate to be tested aside");
             case 'PR-5620-6510-INQUIRE':
                 throw new \Connect\Inquire([
