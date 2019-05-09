@@ -38,7 +38,7 @@ class File extends \Connect\Model
      /**
      * @var 
      */
-    public $status
+    public $status;
 
     /**
      * @var
