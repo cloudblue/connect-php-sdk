@@ -112,6 +112,12 @@ class Model implements \ArrayAccess
             if (method_exists($this, 'set' . ucfirst($key))) {
                 call_user_func_array([$this, 'set' . ucfirst($key)], [$value]);
             } else {
+                if(is_array($value)){
+                    $keys =  array_map(function($param){
+                        return $param->id;
+                    }, $value);
+                    $value = $this->array_fill_keys($keys, $value);
+                }
                 $this->{$key} = self::modelize($key, $value);
             }
         }
@@ -255,14 +261,15 @@ class Model implements \ArrayAccess
         $array = [];
         foreach ($value as $key => $item) {
             if (!in_array(trim($key), $forbidden)) {
+                $buffer = null;
                 switch (gettype($item)) {
-                    case 'object':
                     case 'array':
-                        $buffer = self::arrayize($item);
+                        $buffer = self::arrayize(array_values($item));
+                    case 'object':
+                        $buffer = empty($buffer) ? self::arrayize($item) : $buffer;
                         if (!empty($buffer)) {
                             $array[trim($key)] = $buffer;
                         }
-
                         break;
                     default:
                         if (isset($item)) {
@@ -273,6 +280,23 @@ class Model implements \ArrayAccess
         }
 
         return $array;
+    }
+
+    /**
+     * Override function to replace indices in an array to a desired common
+     * property in the array elements.
+     * @param   array   $keyArray
+     * @param   array   $valueArray
+     * @return  array
+     */
+    private function array_fill_keys($keyArray, $valueArray) {
+        $filledArray = [];
+        if(is_array($keyArray)) {
+            foreach($keyArray as $key => $value) {
+                $filledArray[$value] = $valueArray[$key];
+            }
+        }
+        return $filledArray;
     }
 
     /**
