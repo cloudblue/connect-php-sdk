@@ -84,7 +84,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             $this->tierConfiguration->sendRequest(
                 'POST',
                 '/tier/config-requests/' . $tierConfigRequest->id . '/fail',
-                '{"reason": "' . $e->getMessage() . '"}'
+                json_encode( ['reason' => $e->getMessage()] )
             );
             $processingResult = 'fail';
         } catch (Skip $e) {
@@ -156,7 +156,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             $this->fulfillment->sendRequest(
                 'POST',
                 '/requests/' . $request->id . '/fail',
-                '{"reason": "' . $e->getMessage() . '"}'
+                json_encode( ['reason' => $e->getMessage()] )
             );
             try {
                 $request->conversation()->addMessage($e->getMessage());
