@@ -26,7 +26,7 @@ class AcceptTest extends \Test\TestCase
 
         $this->assertInstanceOf('\Connect\Usage\Accept', $responseAccept);
 
-        $this->assertEquals("TD-123", $responseAccept->response);
+        $this->assertEquals("TD-123", $responseAccept->getMessage());
         return $responseAccept;
     }
 }

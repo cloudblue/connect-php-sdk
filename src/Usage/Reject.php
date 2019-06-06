@@ -14,15 +14,8 @@ namespace Connect\Usage;
  */
 class Reject extends \Connect\Message
 {
-    public $response;
-
-    /**
-     * Accept constructor
-     * @param RejectResponse $response
-     */
-    public function __construct($response)
+    public function __construct($message = null)
     {
-        $this->response = $response;
-        parent::__construct('Accept Response is required', 'rejectresponse');
+        parent::__construct($message ? $message : 'Usage data is not correct', "reject");
     }
 }

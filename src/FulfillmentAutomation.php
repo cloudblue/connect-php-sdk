@@ -59,14 +59,14 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 $this->tierConfiguration->sendRequest(
                     'POST',
                     '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
-                    '{"template": {"id": "' . $msg->templateid . '"}}'
+                    json_encode(['template' => ['id' => $msg->templateid ]])
                 );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->tierConfiguration->sendRequest(
                     'POST',
                     '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
-                    '{"template": {"representation": "' . $msg->activationTile . '"}}'
+                    json_encode(['template' => ['representation' => $msg->activationTile ]])
                 );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
@@ -84,7 +84,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             $this->tierConfiguration->sendRequest(
                 'POST',
                 '/tier/config-requests/' . $tierConfigRequest->id . '/fail',
-                '{"reason": "' . $e->getMessage() . '"}'
+                json_encode(['reason' => $e->getMessage()])
             );
             $processingResult = 'fail';
         } catch (Skip $e) {
@@ -120,7 +120,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 $this->fulfillment->sendRequest(
                     'POST',
                     '/requests/' . $request->id . '/approve',
-                    '{"template_id": "' . $msg->templateid . '"}'
+                    json_encode(['template_id' => $msg->templateid])
                 );
                 try {
                     $request->conversation()->addMessage('Activated using template ' . $msg->templateid);
@@ -132,7 +132,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 $this->fulfillment->sendRequest(
                     'POST',
                     '/requests/' . $request->id . '/approve',
-                    '{"activation_tile": "' . $msg->activationTile . '"}'
+                    json_encode(['activation_tile' => $msg->activationTile])
                 );
                 try {
                     $request->conversation()->addMessage('Activated using Custom ActivationTile');
@@ -156,7 +156,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             $this->fulfillment->sendRequest(
                 'POST',
                 '/requests/' . $request->id . '/fail',
-                '{"reason": "' . $e->getMessage() . '"}'
+                json_encode(['reason' => $e->getMessage()])
             );
             try {
                 $request->conversation()->addMessage($e->getMessage());

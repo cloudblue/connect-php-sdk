@@ -70,7 +70,7 @@ abstract class UsageFileAutomation extends AutomationEngine implements UsageFile
             $this->usage->sendRequest(
                 'POST',
                 '/usage/files/' . $usageFile->id . '/accept/',
-                '{"acceptance_note": "' . $e->getMessage() . '""}'
+                json_encode(['acceptance_note' => $e->getMessage()])
             );
             $processingResult = 'accept';
         } catch (Close $e) {
@@ -91,7 +91,7 @@ abstract class UsageFileAutomation extends AutomationEngine implements UsageFile
             $this->usage->sendRequest(
                 'POST',
                 '/usage/files/' . $usageFile->id . '/reject/',
-                '{"rejection_note": "' . $e->getMessage() . '""}'
+                json_encode(['rejection_note' => $e->getMessage()])
             );
             $processingResult = 'reject';
         } catch (Submit $e) {
