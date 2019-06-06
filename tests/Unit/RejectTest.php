@@ -26,7 +26,7 @@ class RejectTest extends \Test\TestCase
 
         $this->assertInstanceOf('\Connect\Usage\Reject', $responseReject);
 
-        $this->assertEquals("TD-123", $responseReject->response);
+        $this->assertEquals("TD-123", $responseReject->getMessage());
         return $responseReject;
     }
 }

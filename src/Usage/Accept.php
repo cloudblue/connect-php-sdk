@@ -14,15 +14,12 @@ namespace Connect\Usage;
  */
 class Accept extends \Connect\Message
 {
-    public $response;
-
     /**
-     * Accept constructor
-     * @param AcceptResponse $response
+     * Accept constructor.
+     * @param $message
      */
-    public function __construct($response)
+    public function __construct($message = null)
     {
-        $this->response = $response;
-        parent::__construct('Accept Response is required', 'response');
+        parent::__construct($message ? $message : 'Usage data is correct', "accept");
     }
 }
