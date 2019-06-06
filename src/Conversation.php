@@ -39,7 +39,7 @@ class Conversation extends Model
      * @param $message
      * @return array|Model
      */
-    public functaddMessage($message)
+    public function addMessage($message)
     {
         if (isset($this->id)) {
             $request = $this->requestProcessor->sendRequest(
