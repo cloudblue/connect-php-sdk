@@ -34,10 +34,10 @@ class File extends \Connect\Model
      */
 
     public $note;
-    
-     /**
-     * @var 
-     */
+
+    /**
+    * @var
+    */
     public $status;
 
     /**
