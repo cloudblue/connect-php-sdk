@@ -15,22 +15,22 @@ namespace Connect;
 class Account extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $name;
 
     /**
-     * @var
+     * @var string
      */
 
     public $external_uid;
 
     /**
-     * @var
+     * @var string
      */
     public $external_id;
 
