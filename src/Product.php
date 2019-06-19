@@ -16,4 +16,5 @@ class Product extends Model
 {
     public $id;
     public $name;
+    public $icon;
 }

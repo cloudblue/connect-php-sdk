@@ -15,8 +15,14 @@ namespace Connect;
 class Asset extends Model
 {
     public $id;
+    public $status;
+    /**
+     * @var Events[]
+     */
+    public $events;
     public $external_id;
     public $external_uid;
+    public $external_name;
 
     /**
      * @var Product
@@ -85,5 +91,14 @@ class Asset extends Model
         }));
 
         return ($item) ? $item : null;
+    }
+
+    public function getRequests()
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/assets/'.$this->id.'/requests');
+        return Model::modelize('requests', json_decode($body));
     }
 }

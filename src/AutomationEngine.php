@@ -11,6 +11,7 @@ namespace Connect;
 use Connect\Modules\Fulfillment;
 use Connect\Modules\TierConfiguration;
 use Connect\Modules\Usage;
+use Connect\Modules\Directory;
 use GuzzleHttp\ClientInterface;
 use Pimple\Container;
 use Pimple\Psr11\Container as PSRContainer;
@@ -25,6 +26,7 @@ use Psr\Log\LoggerInterface;
  * @property Fulfillment $fulfillment
  * @property TierConfiguration $tierConfiguration
  * @property Usage $usage
+ * @property Directory $directory
  * @package Connect
  */
 abstract class AutomationEngine
@@ -43,8 +45,10 @@ abstract class AutomationEngine
     private $_shorcuts = [
         'fulfillment',
         'tierConfiguration',
-        'usage',
+        'usage'
     ];
+
+    private static $_instance;
 
     /**
      * FulfillmentAutomation constructor.
@@ -98,5 +102,19 @@ abstract class AutomationEngine
                 return call_user_func_array([$this->_container->get($id), $name], $arguments);
             }
         }
+    }
+
+    /**
+     * @param Config|null $configuration
+     * @param Container|null $container
+     * @return AutomationEngine
+     * @throws ConfigException
+     */
+    public static function getInstance(Config $configuration = null, Container $container = null)
+    {
+        if (!(self::$_instance instanceof self)) {
+            self::$_instance = new static($configuration, $container);
+        }
+        return self::$_instance;
     }
 }
