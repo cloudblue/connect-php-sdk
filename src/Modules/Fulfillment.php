@@ -9,6 +9,7 @@
 namespace Connect\Modules;
 
 use Connect\Config;
+use Connect\ConnectClient;
 use Connect\Model;
 use Connect\Param;
 use Connect\Request;
@@ -116,5 +117,11 @@ class Fulfillment extends Core
         }
 
         return null;
+    }
+
+    public function getRequest($requestId)
+    {
+        $body = ConnectClient::getInstance()->fulfillment->sendRequest('GET', '/requests/'.$requestId);
+        return Model::modelize('Request', json_decode($body));
     }
 }

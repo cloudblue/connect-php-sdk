@@ -9,20 +9,23 @@
         <log type="coverage-clover" target="coverage.xml"/>
     </logging>
     <testsuites>
+        <testsuite name="Directory Services">
+            <file> tests/Unit/DirectoryTests/AssetTest.php</file>
+        </testsuite>
         <testsuite name="Fail">
-            <file>tests/Unit/FailTest.php</file>
+            <file>tests/Unit/FulfillmentTests/FailTest.php</file>
         </testsuite>
         <testsuite name="Inquire">
-            <file>tests/Unit/InquireTest.php</file>
+            <file>tests/Unit/FulfillmentTests/InquireTest.php</file>
         </testsuite>
         <testsuite name="Message">
             <file>tests/Unit/MessageTest.php</file>
         </testsuite>
         <testsuite name="Skip">
-            <file>tests/Unit/SkipTest.php</file>
+            <file>tests/Unit/FulfillmentTests/SkipTest.php</file>
         </testsuite>
         <testsuite name="ActivationTemplateResponse">
-            <file>tests/Unit/ActivationTemplateResponseTest.php</file>
+            <file>tests/Unit/FulfillmentTests/ActivationTemplateResponseTest.php</file>
         </testsuite>
         <testsuite name="Logger">
             <file>tests/Unit/Logger/LogRecordTest.php</file>
@@ -30,48 +33,47 @@
             <file>tests/Unit/LoggerTest.php</file>
         </testsuite>
         <testsuite name="ActivationTileResponse">
-            <file>tests/Unit/ActivationTileResponseTest.php</file>
+            <file>tests/Unit/FulfillmentTests/ActivationTileResponseTest.php</file>
         </testsuite>
         <testsuite name="RequestTest">
-            <file>tests/Unit/RequestTest.php</file>
+            <file>tests/Unit/FulfillmentTests/RequestTest.php</file>
         </testsuite>
         <testsuite name="Configuration">
             <file>tests/Unit/ConfigTest.php</file>
             <file>tests/Unit/Config/VaultConfigTest.php</file>
         </testsuite>
         <testsuite name="Application">
-            <file>tests/Unit/FulfillmentAutomationTest.php</file>
+            <file>tests/Unit/FulfillmentTests/FulfillmentAutomationTest.php</file>
         </testsuite>
         <testsuite name="Models">
-            <file>tests/Unit/ModelTest.php</file>
-            <file>tests/Unit/ParamTest.php</file>
-            <file>tests/Unit/AssetTest.php</file>
-            <file>tests/Unit/ContactInfoTest.php</file>
+            <file>tests/Unit/ModelsTests/ModelTest.php</file>
+            <file>tests/Unit/ModelsTests/ParamTest.php</file>
+            <file>tests/Unit/ModelsTests/AssetTest.php</file>
+            <file>tests/Unit/ModelsTests/ContactInfoTest.php</file>
         </testsuite>
         <testsuite name="RequestStructure">
-            <file>tests/Unit/RequestStructureTest.php</file>
+            <file>tests/Unit/ModelsTests/RequestStructureTest.php</file>
         </testsuite>
         <testsuite name="TierRequests">
-            <file>tests/Unit/TierRequestTest.php</file>
+            <file>tests/Unit/FulfillmentTests/TierRequestTest.php</file>
         </testsuite>
         <testsuite name="Usage Responses">
-            <file>tests/Unit/AcceptTest.php</file>
-            <file>tests/Unit/AcceptResponseTest.php</file>
-            <file>tests/Unit/CloseTest.php</file>
-            <file>tests/Unit/DeleteTest.php</file>
-            <file>tests/Unit/RejectTest.php</file>
-            <file>tests/Unit/RejectResponseTest.php</file>
-            <file>tests/Unit/UsageSkipTest.php</file>
-            <file>tests/Unit/SubmitTest.php</file>
-            <file>tests/Unit/FileRetrieveExceptionTest.php</file>
-            <file>tests/Unit/FileCreationExceptionTest.php</file>
+            <file>tests/Unit/UsageTests/AcceptTest.php</file>
+            <file>tests/Unit/UsageTests/AcceptResponseTest.php</file>
+            <file>tests/Unit/UsageTests/CloseTest.php</file>
+            <file>tests/Unit/UsageTests/DeleteTest.php</file>
+            <file>tests/Unit/UsageTests/RejectTest.php</file>
+            <file>tests/Unit/UsageTests/UsageSkipTest.php</file>
+            <file>tests/Unit/UsageTests/SubmitTest.php</file>
+            <file>tests/Unit/UsageTests/FileRetrieveExceptionTest.php</file>
+            <file>tests/Unit/UsageTests/FileCreationExceptionTest.php</file>
         </testsuite>
         <testsuite name="Usage Automation">
-            <file>tests/Unit/UsageAutomationBasicsTest.php</file>
-            <file>tests/Unit/UsageAutomationTest.php</file>
+            <file>tests/Unit/UsageTests/UsageAutomationBasicsTest.php</file>
+            <file>tests/Unit/UsageTests/UsageAutomationTest.php</file>
         </testsuite>
         <testsuite name="Usage File Automation">
-            <file>tests/Unit/UsageFileAutomationTest.php</file>
+            <file>tests/Unit/UsageTests/UsageFileAutomationTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

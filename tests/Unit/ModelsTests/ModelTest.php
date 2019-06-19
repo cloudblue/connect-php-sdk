@@ -10,6 +10,8 @@ namespace Test\Unit;
 
 use Connect\Model;
 
+require_once __DIR__."/ModelHelper.php";
+
 class ModelTest extends \Test\TestCase
 {
     public function testInstantiation()

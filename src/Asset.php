@@ -93,6 +93,11 @@ class Asset extends Model
         return ($item) ? $item : null;
     }
 
+    /**
+     * @return Request[]
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getRequests()
     {
         if ($this->id == null) {

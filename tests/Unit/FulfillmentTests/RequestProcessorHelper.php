@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-use Connect\Request;
 
 class RequestProcessorHelper extends \Connect\RequestsProcessor
 {

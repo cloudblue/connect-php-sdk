@@ -7,6 +7,11 @@
 
 namespace Connect;
 
+/**
+ * Class ConnectClient
+ * @package Connect
+ */
+
 class ConnectClient extends AutomationEngine
 {
 }

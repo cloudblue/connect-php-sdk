@@ -32,5 +32,5 @@ class Hub extends Model
     /**
      * @var
      */
-    public $uuid;
+    public $instance_id;
 }

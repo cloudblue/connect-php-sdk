@@ -9,7 +9,7 @@
 namespace Test\Unit;
 
 use Connect\FulfillmentAutomation;
-use Connect\Request;
+
 
 /**
  * Class FulfillmentAutomationHelper

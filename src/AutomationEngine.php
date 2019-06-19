@@ -75,6 +75,7 @@ abstract class AutomationEngine
         }
 
         $this->_container = new PSRContainer($container);
+        self::$_instance = $this;
     }
 
     /**
@@ -113,7 +114,7 @@ abstract class AutomationEngine
     public static function getInstance(Config $configuration = null, Container $container = null)
     {
         if (!(self::$_instance instanceof self)) {
-            self::$_instance = new static($configuration, $container);
+            new static($configuration, $container);
         }
         return self::$_instance;
     }
