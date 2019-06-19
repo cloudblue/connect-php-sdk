@@ -14,8 +14,20 @@ namespace Connect;
  */
 class PhoneNumber extends Model
 {
+    /**
+     * @var string
+     */
     public $country_code;
+    /**
+     * @var string
+     */
     public $area_code;
+    /**
+     * @var string
+     */
     public $phone_number;
+    /**
+     * @var string
+     */
     public $extension;
 }

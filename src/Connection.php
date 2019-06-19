@@ -14,7 +14,13 @@ namespace Connect;
  */
 class Connection extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $type;
 
     /**

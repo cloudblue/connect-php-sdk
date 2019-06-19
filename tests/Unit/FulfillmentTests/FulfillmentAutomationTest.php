@@ -9,6 +9,7 @@
 namespace Test\Unit;
 
 use Connect\Config;
+
 require_once __DIR__."/FulfillmentAutomationHelper.php";
 require_once __DIR__."/RequestProcessorHelper.php";
 

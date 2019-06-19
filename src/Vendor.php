@@ -14,6 +14,12 @@ namespace Connect;
  */
 class Vendor extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $name;
 }

@@ -14,13 +14,37 @@ namespace Connect;
  */
 class Param extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $name;
+    /**
+     * @var string
+     */
     public $title;
+    /**
+     * @var string
+     */
     public $description;
+    /**
+     * @var string
+     */
     public $scope;
+    /**
+     * @var string |null
+     */
     public $value;
+    /**
+     * @var string | null
+     */
     public $value_error;
+    /**
+     * @var string
+     */
     public $type;
 
     /**

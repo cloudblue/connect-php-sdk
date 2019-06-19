@@ -14,8 +14,17 @@ namespace Connect;
  */
 class Tier extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $external_id;
+    /**
+     * @var string
+     */
     public $name;
 
     /**

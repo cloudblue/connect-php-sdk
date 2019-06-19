@@ -15,16 +15,16 @@ namespace Connect;
 class User extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $name;
 
     /**
-     * @var
+     * @var string
      */
     public $email;
 }

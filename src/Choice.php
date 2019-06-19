@@ -15,11 +15,11 @@ namespace Connect;
 class Choice extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $value;
     /**
-     * @var
+     * @var string
      */
     public $label;
 }

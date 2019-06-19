@@ -16,15 +16,15 @@ namespace Connect;
 class TierConfigRequest extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $type;
     /**
-     * @var
+     * @var string
      */
     public $status;
 

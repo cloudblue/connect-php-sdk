@@ -15,11 +15,11 @@ namespace Connect;
 class Configuration extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $name;
 
@@ -36,7 +36,7 @@ class Configuration extends Model
     public $product;
 
     /**
-     * @var
+     * @var int
      */
     public $tier_level;
 

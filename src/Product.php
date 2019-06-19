@@ -14,7 +14,16 @@ namespace Connect;
  */
 class Product extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $name;
+    /**
+     * @var string|null
+     */
     public $icon;
 }

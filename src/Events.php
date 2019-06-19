@@ -14,7 +14,16 @@ namespace Connect;
  */
 class Events extends Model
 {
+    /**
+     * @var string|null
+     */
     public $inquired;
+    /**
+     * @var string|null
+     */
     public $updated;
+    /**
+     * @var string|null
+     */
     public $created;
 }

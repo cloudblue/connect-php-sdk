@@ -14,9 +14,21 @@ namespace Connect;
  */
 class Conversation extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $instance_id;
+    /**
+     * @var string
+     */
     public $created;
+    /**
+     * @var string
+     */
     public $topic;
 
     /**

@@ -15,11 +15,11 @@ namespace Connect;
 class Signee extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $name;
 }

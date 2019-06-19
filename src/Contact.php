@@ -14,8 +14,17 @@ namespace Connect;
  */
 class Contact extends Model
 {
+    /**
+     * @var string | null
+     */
     public $email;
+    /**
+     * @var string | null
+     */
     public $first_name;
+    /**
+     * @var string | null
+     */
     public $last_name;
 
     /**

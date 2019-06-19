@@ -15,11 +15,11 @@ namespace Connect;
 class Agreement extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $name;
 }

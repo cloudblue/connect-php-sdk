@@ -8,7 +8,6 @@
 
 namespace Test\Unit;
 
-
 class RequestProcessorHelper extends \Connect\RequestsProcessor
 {
     public function processRequest($request)

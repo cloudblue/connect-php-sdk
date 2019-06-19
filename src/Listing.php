@@ -14,7 +14,13 @@ namespace Connect;
  */
 class Listing extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $status;
 
     /**
@@ -27,6 +33,9 @@ class Listing extends Model
      */
     public $product;
 
+    /**
+     * @var string|null
+     */
     public $created;
 
     /**

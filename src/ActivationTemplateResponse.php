@@ -15,7 +15,7 @@ namespace Connect;
 class ActivationTemplateResponse
 {
     /**
-     * @var
+     * @var string
      */
     public $templateid;
 

@@ -35,11 +35,29 @@ class Request extends Model
      */
     public $assignee;
 
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $type;
+    /**
+     * @var string
+     */
     public $created;
+    /**
+     * @var string|null
+     */
     public $updated;
+    /**
+     * @var string
+     */
     public $status;
+    /**
+     * @var string|null
+     */
     public $activation_key;
 
     /**

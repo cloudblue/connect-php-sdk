@@ -14,8 +14,20 @@ namespace Connect;
  */
 class Renewal extends Model
 {
+    /**
+     * @var string
+     */
     public $from;
+    /**
+     * @var string
+     */
     public $to;
+    /**
+     * @var int
+     */
     public $period_delta;
+    /**
+     * @var string
+     */
     public $period_uom;
 }

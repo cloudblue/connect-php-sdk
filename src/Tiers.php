@@ -14,9 +14,16 @@ namespace Connect;
  */
 class Tiers extends Model
 {
+    /**
+     * @var Tier
+     */
     public $customer;
-
+    /**
+     * @var Tier
+     */
     public $tier1;
-
+    /**
+     * @var Tier
+     */
     public $tier2;
 }

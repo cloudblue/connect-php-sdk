@@ -14,14 +14,29 @@ namespace Connect;
  */
 class Asset extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $status;
     /**
      * @var Events[]
      */
     public $events;
+    /**
+     * @var string | null
+     */
     public $external_id;
+    /**
+     * @var string | null
+     */
     public $external_uid;
+    /**
+     * @var string | null
+     */
     public $external_name;
 
     /**

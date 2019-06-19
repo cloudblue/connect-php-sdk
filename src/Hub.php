@@ -15,22 +15,22 @@ namespace Connect;
 class Hub extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
 
     /**
-     * @var
+     * @var string
      */
     public $name;
 
     /**
-     * @var
+     * @var string
      */
     public $account_id;
 
     /**
-     * @var
+     * @var string
      */
     public $instance_id;
 }

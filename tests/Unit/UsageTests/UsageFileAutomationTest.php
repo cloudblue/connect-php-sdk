@@ -9,6 +9,7 @@
 namespace Test\Unit;
 
 use Connect\Config;
+
 require_once __DIR__."/UsageFileAutomationHelper.php";
 
 /**

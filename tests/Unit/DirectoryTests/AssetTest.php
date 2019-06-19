@@ -22,8 +22,7 @@ class AssetTest extends \Test\TestCase
     {
         $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.json'));
         $assets = $connectClient->directory->listAssets();
-        foreach ($assets as $asset)
-        {
+        foreach ($assets as $asset) {
             $this->assertInstanceOf("\Connect\Asset", $asset);
         }
         $this->assertEquals(10, count($assets));
@@ -36,20 +35,18 @@ class AssetTest extends \Test\TestCase
         $this->assertInstanceOf('\Connect\Asset', $asset);
         $this->assertEquals('AS-463-716-763-4', $asset->id);
         $requests = $asset->getRequests();
-        foreach ($requests as $request)
-        {
+        foreach ($requests as $request) {
             $this->assertInstanceOf("\Connect\Request", $request);
         }
         $this->assertEquals(1, count($requests));
         $request = $connectClient->fulfillment->getRequest('PR-3505-8841-4044-001');
-        $this->assertInstanceOf('\Connect\Request',$request);
+        $this->assertInstanceOf('\Connect\Request', $request);
     }
 
     public function testNoRequestsDueNewAssetObject()
     {
         $asset = new \Connect\Asset();
         $requests = $asset->getRequests();
-        $this->assertEquals(0,count($requests));
+        $this->assertEquals(0, count($requests));
     }
-
 }

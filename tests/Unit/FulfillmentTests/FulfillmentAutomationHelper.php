@@ -10,7 +10,6 @@ namespace Test\Unit;
 
 use Connect\FulfillmentAutomation;
 
-
 /**
  * Class FulfillmentAutomationHelper
  * @property \stdClass $std
