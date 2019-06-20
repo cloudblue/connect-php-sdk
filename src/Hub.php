@@ -23,14 +23,5 @@ class Hub extends Model
      * @var string
      */
     public $name;
-
-    /**
-     * @var string
-     */
-    public $account_id;
-
-    /**
-     * @var string
-     */
-    public $instance_id;
+    
 }

@@ -15,7 +15,7 @@ namespace Connect;
 interface FulfillmentAutomationInterface
 {
     /**
-     * @param $request
+     * @param Request $request
      * @return mixed
      * @throws Skip
      * @throws Inquire
@@ -24,7 +24,7 @@ interface FulfillmentAutomationInterface
     public function processRequest($request);
 
     /**
-     * @param $tierConfigRequest
+     * @param TierConfigRequest $tierConfigRequest
      * @return mixed
      * @throws Skip
      * @throws Inquire

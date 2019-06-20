@@ -63,7 +63,7 @@ class TierConfigRequest extends Model
 
     /**
      * Return a Param by ID
-     * @param $id
+     * @param string $id
      * @return Param
      */
     public function getParameterByID($id)

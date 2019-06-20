@@ -15,38 +15,38 @@ namespace Connect\Usage;
 class File extends \Connect\Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
 
     /**
-     * @var
+     * @var string
      */
     public $name;
 
     /**
-     * @var
+     * @var string | null
      */
     public $description;
 
     /**
-     * @var
+     * @var string | null
      */
 
     public $note;
 
     /**
-    * @var
+    * @var string
     */
     public $status;
 
     /**
-     * @var
+     * @var string
      */
     public $created_by;
 
     /**
-     * @var
+     * @var string
      */
     public $created_at;
 
@@ -75,10 +75,26 @@ class File extends \Connect\Model
      */
     public $provider;
 
+    /**
+     * @var string | null
+     */
     public $upload_file_uri;
+
+    /**
+     * @var string | null
+     */
     public $processed_file_uri;
+    /**
+     * @var string | null
+     */
     public $acceptance_note;
+    /**
+     * @var string | null
+     */
     public $rejection_note;
+    /**
+     * @var string | null
+     */
     public $error_detail;
 
     /**
@@ -86,14 +102,44 @@ class File extends \Connect\Model
      */
     public $records;
 
+    /**
+     * @var string | null
+     */
     public $uploaded_by;
+    /**
+     * @var string | null
+     */
     public $uploaded_at;
+    /**
+     * @var string | null
+     */
     public $submitted_by;
+    /**
+     * @var string | null
+     */
     public $submitted_at;
+    /**
+     * @var string | null
+     */
     public $accepted_by;
+    /**
+     * @var string | null
+     */
     public $accepted_at;
+    /**
+     * @var string | null
+     */
     public $rejected_by;
+    /**
+     * @var string | null
+     */
     public $rejected_at;
+    /**
+     * @var string | null
+     */
     public $closed_by;
+    /**
+     * @var string | null
+     */
     public $closed_at;
 }

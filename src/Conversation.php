@@ -48,13 +48,15 @@ class Conversation extends Model
     }
 
     /**
-     * @param $message
+     * @param string $message
      * @return array|Model
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function addMessage($message)
     {
         if (isset($this->id)) {
-            $request = $this->requestProcessor->sendRequest(
+            $request = ConnectClient::getInstance()->fulfillment->sendRequest(
                 'POST',
                 "/conversations/" . $this->id . "/messages",
                 json_encode(array("text" => $message))

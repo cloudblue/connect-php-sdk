@@ -19,9 +19,10 @@ class ActivationTemplateResponse
      */
     public $templateid;
 
+
     /**
      * ActivationTemplateResponse constructor.
-     * @param $templateid
+     * @param string $templateid
      */
     public function __construct($templateid)
     {

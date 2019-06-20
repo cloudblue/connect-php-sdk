@@ -18,7 +18,7 @@ abstract class ServiceProvider implements ServiceProviderInterface
 {
     /**
      * Provide the service
-     * @param $container
+     * @param Container $container
      * @return mixed
      */
     public function __invoke(Container $container)

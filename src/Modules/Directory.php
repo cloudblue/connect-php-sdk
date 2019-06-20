@@ -60,7 +60,7 @@ class Directory extends Core
     }
 
     /**
-     * @param $assetID
+     * @param string $assetID
      * @return Asset
      * @throws GuzzleException
      */

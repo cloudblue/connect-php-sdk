@@ -93,8 +93,8 @@ class Fulfillment extends Core
 
     /**
      * Gets Activation template for a given request
-     * @param $templateId - ID of template requested
-     * @param $request - ID of request or Request object
+     * @param string $templateId - ID of template requested
+     * @param string $request - ID of request or Request object
      * @return string - Rendered template
      * @throws GuzzleException
      */

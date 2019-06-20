@@ -66,7 +66,7 @@ class Asset extends Model
 
     /**
      * Return a Param by ID
-     * @param $id
+     * @param string $id
      * @return Param
      */
     public function getParameterByID($id)
@@ -82,7 +82,7 @@ class Asset extends Model
 
     /**
      * Return a Item by ID
-     * @param $id
+     * @param string $id
      * @return Item
      */
     public function getItemByID($id)
@@ -96,7 +96,7 @@ class Asset extends Model
 
     /**
      * Return a Item by MPN
-     * @param $id
+     * @param string $mpn
      * @return Item
      */
     public function getItemByMPN($mpn)

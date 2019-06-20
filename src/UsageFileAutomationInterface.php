@@ -8,6 +8,8 @@
 
 namespace Connect;
 
+use Connect\Usage\File;
+
 /**
  * Interface UsageFileAutomationInterface
  * @package Connect
@@ -15,7 +17,7 @@ namespace Connect;
 interface UsageFileAutomationInterface
 {
     /**
-     * @param $usageFile
+     * @param File $usageFile
      * @return mixed
      */
     public function processUsageFiles($usageFile);
