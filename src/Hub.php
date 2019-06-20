@@ -23,5 +23,4 @@ class Hub extends Model
      * @var string
      */
     public $name;
-    
 }
