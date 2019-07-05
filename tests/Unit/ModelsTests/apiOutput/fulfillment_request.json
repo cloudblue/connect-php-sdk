@@ -1,0 +1,149 @@
+{
+  "activation_key": "# Sample Activation Template\n\nActivation template is used to share details of the **successful** asset creation with the user. Once purchase request is approved, this template is used to generate user-visible notification.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which has scope 'Asset'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is ****\n* The value of **param_b** is ****\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
+  "answered": false,
+  "asset": {
+    "connection": {
+      "hub": {
+        "id": "HB-4163-5107",
+        "name": "oa-isv-1.dev.rnd.host"
+      },
+      "id": "CT-0000-0000-0000",
+      "provider": {
+        "id": "PA-694-901",
+        "name": "IMC Certification Provider"
+      },
+      "type": "preview",
+      "vendor": {
+        "id": "VA-923-389",
+        "name": "Right-sized executive attitude"
+      }
+    },
+    "external_id": "561",
+    "external_name": "",
+    "external_uid": "cd4a51d5-cc4c-4175-ad5d-10bf287e1b03",
+    "id": "AS-613-088-417-3",
+    "items": [
+      {
+        "display_name": "Sku B",
+        "global_id": "PRD-620-338-062-0002",
+        "id": "SKU_B",
+        "item_type": "Reservation",
+        "mpn": "MPN-B",
+        "old_quantity": "0",
+        "period": "Monthly",
+        "quantity": "300",
+        "type": "Devices"
+      },
+      {
+        "display_name": "Sku A",
+        "global_id": "PRD-620-338-062-0001",
+        "id": "SKU_A",
+        "item_type": "Reservation",
+        "mpn": "MPN-A",
+        "old_quantity": "0",
+        "period": "Monthly",
+        "quantity": "300",
+        "type": "Gb"
+      }
+    ],
+    "params": [
+      {
+        "description": "asset_fulfillment",
+        "id": "asset_fulfillment",
+        "name": "asset_fulfillment",
+        "title": "asset_fulfillment",
+        "type": "text",
+        "value": "asdf",
+        "value_choices": [],
+        "value_error": ""
+      },
+      {
+        "description": "asset_order",
+        "id": "asset_order",
+        "name": "asset_order",
+        "title": "asset_order",
+        "type": "text",
+        "value": "aqsf",
+        "value_choices": [],
+        "value_error": ""
+      }
+    ],
+    "product": {
+      "id": "PRD-620-338-062",
+      "name": "test new tier"
+    },
+    "tiers": {
+      "customer": {
+        "contact_info": {
+          "address_line1": "63136 Breanna Fall",
+          "address_line2": "Suite 351",
+          "city": "South Linda",
+          "contact": {
+            "email": "njohnsonrp8l@example.org",
+            "first_name": "Allison",
+            "last_name": "Gregory",
+            "phone_number": {
+              "area_code": "1",
+              "country_code": "+252",
+              "extension": "",
+              "phone_number": "076810"
+            }
+          },
+          "country": "US",
+          "postal_code": "15384",
+          "state": "East Brianberg"
+        },
+        "external_id": "512",
+        "external_uid": "b9c2ef1e-eb30-48af-8d02-13783cb16906",
+        "id": "TA-0-5432-1750-3304",
+        "name": "Lowery, Reeves and Martin"
+      },
+      "tier1": {
+        "contact_info": {
+          "address_line1": "noname",
+          "address_line2": "",
+          "city": "noname",
+          "contact": {
+            "email": "no-reply@acme.example.com",
+            "first_name": "ACME",
+            "last_name": "Reseller",
+            "phone_number": {
+              "area_code": "234",
+              "country_code": "+1",
+              "extension": "",
+              "phone_number": "567890"
+            }
+          },
+          "country": "us",
+          "postal_code": "12111",
+          "state": "Alaska"
+        },
+        "external_id": "1",
+        "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
+        "id": "TA-0-2301-6591-5904",
+        "name": "ACME Reseller"
+      },
+      "tier2": {}
+    }
+  },
+  "assignee": {
+    "email": "mserrat@odin.com",
+    "id": "UR-849-150-569",
+    "name": "Marc"
+  },
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  },
+  "created": "2019-07-05T10:38:35.718236+00:00",
+  "id": "PR-6311-4374-7417-001",
+  "marketplace": {
+    "id": "MP-00000",
+    "name": "ACME Marketplace"
+  },
+  "note": "",
+  "reason": "",
+  "status": "approved",
+  "type": "purchase",
+  "updated": "2019-07-05T10:39:03.644877+00:00"
+}

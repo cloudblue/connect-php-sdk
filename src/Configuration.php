@@ -67,6 +67,12 @@ class Configuration extends Model
     public $template;
 
     /**
+     * @var string
+     */
+
+    public $status;
+
+    /**
      * Return a Param by ID
      * @param string $id
      * @return Param

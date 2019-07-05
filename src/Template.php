@@ -22,4 +22,10 @@ class Template extends Model
      * @var string
      */
     public $representation;
+
+    /**
+     * @var string
+     */
+
+    public $name;
 }

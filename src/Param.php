@@ -48,6 +48,12 @@ class Param extends Model
     public $type;
 
     /**
+     * @var string
+     */
+
+    public $phase;
+
+    /**
      * @var Constraints
      */
 

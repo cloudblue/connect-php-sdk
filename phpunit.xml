@@ -51,6 +51,9 @@
             <file>tests/Unit/ModelsTests/AssetTest.php</file>
             <file>tests/Unit/ModelsTests/ContactInfoTest.php</file>
         </testsuite>
+        <testsuite name="Model API Consistency">
+            <file>tests/Unit/ModelsTests/StructureTest.php</file>
+        </testsuite>
         <testsuite name="RequestStructure">
             <file>tests/Unit/ModelsTests/RequestStructureTest.php</file>
         </testsuite>

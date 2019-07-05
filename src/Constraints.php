@@ -27,4 +27,9 @@ class Constraints extends Model
      * @var Choice[]
      */
     public $choices;
+
+    /**
+     * @var boolean
+     */
+    public $unique;
 }

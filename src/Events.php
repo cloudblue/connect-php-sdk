@@ -26,4 +26,14 @@ class Events extends Model
      * @var string|null
      */
     public $created;
+
+    /**
+     * @var string|null
+     */
+    public $approved;
+
+    /**
+     * @var string|null
+     */
+    public $pended;
 }

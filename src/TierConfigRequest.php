@@ -62,7 +62,28 @@ class TierConfigRequest extends Model
     public $activation;
 
     /**
+     * @var string
+     */
+    public $environment;
+
+    /**
+     * @var Tiers
+     */
+    public $tiers;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
+    /**
+     * @var Contract
+     */
+    public $contract;
+
+    /**
      * Return a Param by ID
+     *
      * @param string $id
      * @return Param
      */
