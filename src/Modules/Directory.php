@@ -66,8 +66,20 @@ class Directory extends Core
      */
     public function getAssetById($assetID)
     {
-        $body = $this->sendRequest('GET', '/assets/'.$assetID);
+        $body = $this->sendRequest('GET', '/assets/' . $assetID);
         $model = Model::modelize('asset', json_decode($body));
         return $model;
+    }
+
+    public function listProducts(array $filters = [])
+    {
+        //Filtering is not possible at this moment on time, requested as feature LITE-9071
+        
+        $body = $this->sendRequest('GET', '/products');
+
+        /** @var Asset[] $models */
+        $models = Model::modelize('products', json_decode($body));
+
+        return $models;
     }
 }

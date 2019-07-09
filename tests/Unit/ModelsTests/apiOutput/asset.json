@@ -1,0 +1,150 @@
+{
+  "id": "AS-613-088-417-3",
+  "status": "active",
+  "external_id": "561",
+  "external_uid": "cd4a51d5-cc4c-4175-ad5d-10bf287e1b03",
+  "product": {
+    "id": "PRD-620-338-062",
+    "icon": "VA-923-389/PRD-620-338-062/media/PRD-620-338-062-logo.png",
+    "name": "test new tier"
+  },
+  "events": {
+    "updated": {
+      "at": "2019-07-05T10:39:03+00:00"
+    },
+    "created": {
+      "at": "2019-07-05T10:38:35+00:00"
+    }
+  },
+  "items": [
+    {
+      "display_name": "Sku A",
+      "name": "SKU_A",
+      "period": "Monthly",
+      "global_id": "PRD-620-338-062-0001",
+      "item_type": "Reservation",
+      "limit": 300,
+      "type": "Gb",
+      "description": "MPN-A"
+    },
+    {
+      "display_name": "Sku B",
+      "name": "SKU_B",
+      "period": "Monthly",
+      "global_id": "PRD-620-338-062-0002",
+      "item_type": "Reservation",
+      "limit": 300,
+      "type": "Devices",
+      "description": "MPN-B"
+    }
+  ],
+  "params": [
+    {
+      "value": "asdf",
+      "value_error": "",
+      "title": "asset_fulfillment",
+      "description": "asset_fulfillment",
+      "type": "text",
+      "scope": "asset",
+      "phase": "fulfillment",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "asset_fulfillment"
+    },
+    {
+      "value": "aqsf",
+      "value_error": "",
+      "title": "asset_order",
+      "description": "asset_order",
+      "type": "text",
+      "scope": "asset",
+      "phase": "ordering",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "asset_order"
+    }
+  ],
+  "tiers": {
+    "customer": {
+      "external_uid": "b9c2ef1e-eb30-48af-8d02-13783cb16906",
+      "external_id": "512",
+      "id": "TA-0-5432-1750-3304",
+      "name": "Lowery, Reeves and Martin",
+      "contact_info": {
+        "address_line2": "Suite 351",
+        "city": "South Linda",
+        "address_line1": "63136 Breanna Fall",
+        "country": "US",
+        "state": "East Brianberg",
+        "contact": {
+          "phone_number": {
+            "phone_number": "076810",
+            "area_code": "1",
+            "extension": "",
+            "country_code": "+252"
+          },
+          "first_name": "Allison",
+          "last_name": "Gregory",
+          "email": "njohnsonrp8l@example.org"
+        },
+        "postal_code": "15384"
+      }
+    },
+    "tier1": {
+      "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
+      "external_id": "1",
+      "id": "TA-0-2301-6591-5904",
+      "name": "ACME Reseller",
+      "contact_info": {
+        "address_line2": "",
+        "city": "noname",
+        "address_line1": "noname",
+        "country": "us",
+        "state": "Alaska",
+        "contact": {
+          "phone_number": {
+            "phone_number": "567890",
+            "area_code": "234",
+            "extension": "",
+            "country_code": "+1"
+          },
+          "first_name": "ACME",
+          "last_name": "Reseller",
+          "email": "no-reply@acme.example.com"
+        },
+        "postal_code": "12111"
+      }
+    },
+    "tier2": {}
+  },
+  "connection": {
+    "type": "preview",
+    "vendor": {
+      "id": "VA-923-389",
+      "name": "Right-sized executive attitude"
+    },
+    "id": "CT-0000-0000-0000",
+    "hub": {
+      "id": "HB-4163-5107",
+      "name": "oa-isv-1.dev.rnd.host"
+    },
+    "provider": {
+      "id": "PA-694-901",
+      "name": "IMC Certification Provider"
+    }
+  },
+  "marketplace": {
+    "id": "MP-00000",
+    "name": "ACME Marketplace"
+  },
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  }
+}

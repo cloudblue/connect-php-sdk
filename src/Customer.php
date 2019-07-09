@@ -31,4 +31,9 @@ class Customer extends Model
      * @var ContactInfo
      */
     public $contact_info;
+
+    /**
+     * @var string
+     */
+    public $external_uid;
 }

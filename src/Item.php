@@ -57,4 +57,9 @@ class Item extends Model
      * @var Renewal
      */
     public $renewal;
+
+    /**
+     * @var name
+     */
+    public $name;
 }

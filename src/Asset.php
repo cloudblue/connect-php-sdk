@@ -64,6 +64,17 @@ class Asset extends Model
      */
     public $tiers;
 
+
+    /**
+     * @var Contract
+     */
+    public $contract;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
     /**
      * Return a Param by ID
      * @param string $id
