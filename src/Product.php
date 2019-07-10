@@ -51,17 +51,20 @@ class Product extends Model
     /**
      * @var ProductConfiguration
      */
-    public $configurations;
+    protected $configurations;
 
     /**
      * @var ProductCustomerUISettings
      */
-    public $customer_ui_settings;
+    protected $customer_ui_settings;
 
-    public function __construct($source = null)
+    public function setConfigurations($configuration)
     {
-        parent::__construct($source);
-        $this->configurations = isset($source->configurations) ? Model::modelize('ProductConfigurations', $source->configurations): $this->configurations;
-        $this->customer_ui_settings = isset($source->customer_ui_settings) ? Model::modelize('ProductCustomerUISettings', $source->customer_ui_settings): $this->customer_ui_settings;
+        $this->configurations = Model::modelize('ProductConfigurations', $configuration);
+    }
+
+    public function setCustomer_ui_settings($ui_settings)
+    {
+        $this->customer_ui_settings = Model::modelize('ProductCustomerUISettings', $ui_settings);
     }
 }
