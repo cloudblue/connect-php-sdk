@@ -22,17 +22,20 @@ class ProductCustomerUISettings extends Model
     /**
      * @var ProductDownloadLink[]
      */
-    public $download_links;
+    protected $download_links;
 
     /**
      * @var ProductDocument[]
      */
-    public $documents;
+    protected $documents;
 
-    public function __construct($source = null)
+    public function setDownload_links($downloadLinks)
     {
-        parent::__construct($source);
-        $this->download_links = Model::modelize('ProductDownloadLink', $this->download_links);
-        $this->documents = Model::modelize('ProductDocument', $this->documents);
+        $this->download_links = Model::modelize('ProductDownloadLink', $downloadLinks);
+    }
+
+    public function setDocuments($documents)
+    {
+        $this->documents = Model::modelize('ProductDocument', $documents);
     }
 }

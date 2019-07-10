@@ -74,7 +74,7 @@ class Directory extends Core
     public function listProducts(array $filters = [])
     {
         //Filtering is not possible at this moment on time, requested as feature LITE-9071
-        
+
         $body = $this->sendRequest('GET', '/products');
 
         /** @var Asset[] $models */
