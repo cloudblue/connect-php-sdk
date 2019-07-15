@@ -9,6 +9,9 @@ namespace Test\Unit\DirectoryTests;
 
 use Connect\Config;
 use Connect\ConnectClient;
+use Connect\Item;
+use Connect\Param;
+use http\Env\Request;
 
 class AssetTest extends \Test\TestCase
 {
@@ -48,5 +51,43 @@ class AssetTest extends \Test\TestCase
         $asset = new \Connect\Asset();
         $requests = $asset->getRequests();
         $this->assertEquals(0, count($requests));
+    }
+
+    public function testCreateRequest()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__.'/config.mocked.createRequest.json'));
+        $items = array(
+            new Item([
+                'quantity' => 900,
+                'global_id' => 'PRD-863-384-534-0001'
+            ]),
+            new Item([
+                'quantity' => 200,
+                'global_id' => 'PRD-863-384-534-0002'
+            ])
+        );
+        $request = new \Connect\Request([
+            "type" => "purchase",
+            "asset" => [
+                "connection" => [
+                    "id" => "CT-0000-0000-0000"
+                ],
+                "external_uid" => "3a477438-e037-4e5a-afaf-b4a56b079d0b",
+                "external_id" => "1",
+                "items" => $items,
+                "params" => array(),
+                "tiers" => [
+                    "customer" => new \Connect\Tier([
+                        "id"=> "TA-0-2431-4295-9364"
+                    ]),
+                    "tier1" => new \Connect\Tier([
+                        "id" => "TA-0-5813-2409-3030"
+                    ])
+                ]
+            ]
+        ]);
+        $postedRequest = $connectClient->fulfillment->createRequest($request);
+        $this->assertInstanceOf('\Connect\Request', $postedRequest);
+        return $this;
     }
 }

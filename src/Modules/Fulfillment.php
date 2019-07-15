@@ -119,9 +119,28 @@ class Fulfillment extends Core
         return null;
     }
 
+    /**
+     * @param $requestId
+     * @return array|Model
+     * @throws GuzzleException
+     * @throws \Connect\ConfigException
+     */
     public function getRequest($requestId)
     {
         $body = ConnectClient::getInstance()->fulfillment->sendRequest('GET', '/requests/'.$requestId);
+        return Model::modelize('Request', json_decode($body));
+    }
+
+    /**
+     * To be used only with provider token
+     * @param Request $request
+     * @return array|Model
+     * @throws GuzzleException
+     * @throws \Connect\ConfigException
+     */
+    public function createRequest(Request $request)
+    {
+        $body = ConnectClient::getInstance()->fulfillment->sendRequest('POST', '/requests', $request);
         return Model::modelize('Request', json_decode($body));
     }
 }

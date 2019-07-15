@@ -143,7 +143,8 @@ abstract class Core
         ]);
 
         $this->logger->info('HTTP Code: ' . $response->getStatusCode());
-
-        return $response->getBody()->getContents();
+        $responseBody = $response->getBody()->getContents();
+        $this->logger->debug('Return Body: ' . $responseBody);
+        return $responseBody;
     }
 }

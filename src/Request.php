@@ -61,6 +61,16 @@ class Request extends Model
     public $activation_key;
 
     /**
+     * @var string|null
+     */
+    public $params_form_url;
+
+    /**
+     * @var string|null
+     */
+    public $reason;
+
+    /**
      * @var RequestsProcessor
      * @noparse
      */
