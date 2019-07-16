@@ -49,7 +49,8 @@ class AssetTest extends \Test\TestCase
                 new Item([
                     'id' => 333,
                     'quantity' => 3,
-                    'mpn' => '333'
+                    'mpn' => '333',
+                    'global_id' => 'PRD-123-123-123-1'
                 ])
             ],
         ]);
@@ -98,4 +99,17 @@ class AssetTest extends \Test\TestCase
         $this->assertEquals(333, $asset->getItemByMPN('333')->id);
         $this->assertNull($asset->getItemByMPN('999'));
     }
+
+    /**
+     * @param Asset $asset
+     *
+     * @depends testInstantiation
+     */
+    public function testGetItemByGlobalID(Asset $asset)
+    {
+        $this->assertInstanceOf('\Connect\Item', $asset->getItemByGlobalID('PRD-123-123-123-1'));
+        $this->assertEquals(333, $asset->getItemByGlobalID('PRD-123-123-123-1')->id);
+        $this->assertNull($asset->getItemByGlobalID('999'));
+    }
 }
+

@@ -120,6 +120,20 @@ class Asset extends Model
     }
 
     /**
+     * Return a Item by Global ID
+     * @param string $global_id
+     * @return Item
+     */
+    public function getItemByGlobalID($global_id)
+    {
+        $item = current(array_filter($this->items, function (Item $item) use ($global_id) {
+            return ($item->global_id === $global_id);
+        }));
+
+        return ($item) ? $item : null;
+    }
+
+    /**
      * @return Request[]
      * @throws ConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
