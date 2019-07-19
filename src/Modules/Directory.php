@@ -82,4 +82,16 @@ class Directory extends Core
 
         return $models;
     }
+
+    /**
+     * @param string $assetID
+     * @return Product
+     * @throws GuzzleException
+     */
+
+    public function getProduct($productID)
+    {
+        $body = $this->sendRequest('GET', '/products/'.$productID);
+        return Model::modelize('product', json_decode($body));
+    }
 }
