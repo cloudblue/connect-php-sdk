@@ -21,4 +21,11 @@ class ProductTest extends \Test\TestCase
         }
         $this->assertEquals(1, count($products));
     }
+
+    public function testGetProduct()
+    {
+        $connectClient = new ConnectClient(new Config( __DIR__ . '/config.mocked.getProduct.json'));
+        $product = $connectClient->directory->getProduct('PRD-086-505-671');
+        $this->assertInstanceOf("\Connect\Product", $product);
+    }
 }
