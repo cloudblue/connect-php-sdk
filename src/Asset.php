@@ -76,6 +76,11 @@ class Asset extends Model
     public $marketplace;
 
     /**
+     * @var Param[]
+     */
+    public $configuration;
+
+    /**
      * Return a Param by ID
      * @param string $id
      * @return Param

@@ -112,4 +112,3 @@ class AssetTest extends \Test\TestCase
         $this->assertNull($asset->getItemByGlobalID('999'));
     }
 }
-

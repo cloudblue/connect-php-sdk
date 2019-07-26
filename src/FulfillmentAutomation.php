@@ -100,6 +100,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
      * @param Request $request
      * @return string
      * @throws GuzzleException
+     * @throws ConfigException
      */
     protected function dispatch($request)
     {

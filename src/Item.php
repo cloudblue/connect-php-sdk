@@ -62,4 +62,10 @@ class Item extends Model
      * @var name
      */
     public $name;
+
+    /**
+     * @var Param[]
+     */
+
+    public $params;
 }

@@ -71,7 +71,7 @@ class Directory extends Core
         return $model;
     }
 
-    public function listProducts(array $filters = [])
+    public function listProducts()
     {
         //Filtering is not possible at this moment on time, requested as feature LITE-9071
 
@@ -84,8 +84,8 @@ class Directory extends Core
     }
 
     /**
-     * @param string $assetID
-     * @return Product
+     * @param string $productID
+     * @return \Connect\Product
      * @throws GuzzleException
      */
 

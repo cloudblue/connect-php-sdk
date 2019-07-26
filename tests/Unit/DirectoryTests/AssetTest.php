@@ -10,8 +10,6 @@ namespace Test\Unit\DirectoryTests;
 use Connect\Config;
 use Connect\ConnectClient;
 use Connect\Item;
-use Connect\Param;
-use http\Env\Request;
 
 class AssetTest extends \Test\TestCase
 {

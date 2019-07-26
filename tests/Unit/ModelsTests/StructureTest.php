@@ -72,7 +72,7 @@ class StructureTest extends \Test\TestCase
 
     public function testAssetModel()
     {
-        $tobediscarted = ['tiers/tier2'];
+        $tobediscarted = ['items/2/params', 'items/1/params', 'tiers/tier2'];
         $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/asset.json'));
         $asset = Model::modelize('asset', $apiOutput);
         $treeWalker = new \TreeWalker(
@@ -91,8 +91,7 @@ class StructureTest extends \Test\TestCase
             fwrite(STDOUT, "New model entries\n");
             fwrite(STDOUT, var_dump($difference['removed']));
         }
-        //SET TO 4 due issue LITE-8995
-        $this->assertCount(4, $difference['removed']);
+        $this->assertCount(0, $difference['removed']);
         return $this;
     }
 

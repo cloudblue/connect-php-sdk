@@ -9,7 +9,6 @@
 namespace Test\Unit;
 
 use Connect\UsageFileAutomation;
-use Connect\Usage\File;
 
 /**
  * Class UsageFileAutomationHelper

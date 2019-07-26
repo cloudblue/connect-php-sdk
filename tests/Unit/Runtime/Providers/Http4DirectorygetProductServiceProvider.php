@@ -10,7 +10,6 @@ namespace Test\Unit\Runtime\Providers;
 use Connect\Runtime\ServiceProvider;
 use Pimple\Container;
 
-
 class Http4DirectorygetProductServiceProvider extends ServiceProvider
 {
     public function register(Container $container)

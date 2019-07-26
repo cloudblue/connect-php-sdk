@@ -23,7 +23,6 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
      * @throws \Connect\Fail
      * @throws \Connect\Inquire
      * @throws \Connect\Skip
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function processRequest($request)
     {
@@ -51,6 +50,9 @@ class FulfillmentAutomationHelper extends FulfillmentAutomation
     /**
      * @param $tierConfigRequest
      * @return \Connect\ActivationTileResponse|string
+     * @throws \Connect\Fail
+     * @throws \Connect\Inquire
+     * @throws \Connect\Skip
      */
     public function processTierConfigRequest($tierConfigRequest)
     {
