@@ -39,7 +39,7 @@ Connect PHP SDK is available on [Packagist](https://packagist.org/packages/apsco
 ```json
 {
   "require": {
-    "apsconnect/connect-sdk": "^16.0"
+    "apsconnect/connect-sdk": "^17.0"
     }
 }
 ```
@@ -54,6 +54,8 @@ Note that the `vendor` folder and the `vendor/autoload.php` script are generated
 
 ## A Simple Example of fulfillment
 
+This example allows the creation of an script that will get all requests in status pending and process them depending of the type of request (Purchase, change, cancel, suspend or resume)
+
 ```php
 <?php
 
@@ -67,20 +69,38 @@ class ProductRequests extends \Connect\FulfillmentAutomation
         $this->logger->info("Processing Request: " . $request->id . " for asset: " . $request->asset->id);
         switch ($request->type) {
             case "purchase":
-                if($request->asset->params['email']->value == ""){
+                //Get value of a parameter with id "email"
+                $email = $request->asset->getParameterByID('email');
+                if($email->value == ""){
                     throw new \Connect\Inquire(array(
                         $request->asset->params['email']->error("Email address has not been provided, please provide one")
                     ));
                 }
+                //Get value for a concrete item using MPN
+                $itemX = $request->asset->getItemByMPN('itemX');
                 foreach ($request->asset->items as $item) {
                     if ($item->quantity > 1000000) {
                         $this->logger->info("Is Not possible to purchase product " . $item->id . " more than 1000000 time, requested: " . $item->quantity);
                         throw new \Connect\Fail("Is Not possible to purchase product " . $item->id . " more than 1000000 time, requested: " . $item->quantity);
                     }
                     else {
-                        //Do some provisoning operation
+                        //Do some provisioning operation
                         //Update the parameters to store data
                         $paramsUpdate[] = new \Connect\Param('ActivationKey', 'somevalue');
+                        $request->requestProcessor->fulfillment->updateParameters($request, $paramsUpdate);
+                        //Potential actions to be done with a request:
+                        // Set a parameter that requires changes and move request to inquire
+                        if($requiresChanges){
+                            throw new \Connect\Inquire([
+                                new \Connect\Param([
+                                     "id" => "email",
+                                     "value_error" => "Invalid email"
+                                ])
+                             ]);
+                        }
+                        //Fail request
+                        throw new \Connect\Fail("Request Can't be processed");
+                        //Approve a template
                         //We may use a template defined on vendor portal as activation response, this will be what customer sees on panel
                         return new \Connect\ActivationTemplateResponse("TL-497-535-242");
                         // We may use arbitrary output to be returned as approval, this will be seen on customer panel. Please see that output must be in markup format
@@ -93,6 +113,12 @@ class ProductRequests extends \Connect\FulfillmentAutomation
                 //Handle cancellation request
             case "change":
                 //Handle change request
+                //get added items:
+                $newItems = $request->getNewItems();
+                // get removed items:
+                $removed = $request->getRemovedItems();
+                // Get changed items, in other words the ones that quantity has been modified
+                $changed = $request->getChangedItems();
             default:
                 throw new \Connect\Fail("Operation not supported:".$request->type);
         }
@@ -107,7 +133,7 @@ class ProductRequests extends \Connect\FulfillmentAutomation
 //Main Code Block
 
 try {
-    
+    //In case Config is not passed into constructor, configuration from config.json is used
     $requests = new ProductRequests(new \Connect\Config([
         'apiKey' => 'Key_Available_in_ui',
         'apiEndpoint' => 'https://api.connect.cloud.im/public/v1',
@@ -204,7 +230,7 @@ class UsageFilesWorkflow extends \Connect\UsageFileAutomation
                 //Provider use case, needs to be reviewed and accept it
                 throw new \Connect\Usage\Accept("File looks good");
             default:
-                throw new \Connect\Usage\Skip("not controled status");
+                throw new \Connect\Usage\Skip("not valid status");
         }
     }
 }
@@ -222,4 +248,96 @@ try {
 } catch (Exception $e) {
     print "Error processing usage for active listing requests:" . $e->getMessage();
 }
+```
+
+## Client class
+
+Starting Connect PHP SDK version 17 Client class has been introduced. This class allows to run multiple operations in Connect like get the list of requests, configurations, etc...
+Client class may be instantiated from any application to obtain information needed to run an operation, like for example get the Asset information in the context of an action.
+Client will provide access to:
+* Directory
+* Fulfillment
+* Tier Configurations
+
+### Creating a Client
+
+This is an example to create a client:
+
+```php
+<?php
+require_once ("./vendor/autoload.php");
+
+##Note that in case of no Configuration passed to constructor, system will check if config.json exists
+$connect = new Connect\ConnectClient(new \Connect\Config([
+    "apiKey" => "SU-677-956-738:ca95348138a3c122943ba968a9b69e42d30bde6c",
+       "apiEndpoint" =>  "https://api.cnct.info/public/v1",
+       "logLevel"=> 7,
+       "timeout" =>  60,
+       "sslVerifyHost"=> false
+]));
+$connect->directory->listTierConfigs()
+```
+
+### Connect Client usage examples:
+
+* Retrive Tier Configurations
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$tierConfigurations = $connect->directory->listTierConfigs();
+$tierConfigurations = $connect->directory->listTierConfigs(["account.id" => 'T-0-123123132123123']);
+```
+
+* Retrieve Tier Configuration
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$tierConfiguration = $connect->directory->getTierConfigById('TC-000-000-000');
+```
+
+* Retrieve list of assets
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$assets = $connect->directory->listAssets();
+$assets = $connect->directory->listAssets(["product.id" => "PRD-XXXX-XXXX-XXXX"]);
+```
+
+* Retrieve an asset
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$asset = $connect->directory->getAssetById('AS-123-123-123');
+```
+
+* Get Products Information
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$products = $connect->directory->listProducts();
+```
+
+* Get Product Information
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$product = $connect->directory->getProduct('PRD-XXXX-XXXX-XXXX');
+```
+
+* List all requests
+
+In case of no filter, pending ones are returned
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$requests = $connect->fulfillment->listRequests();
+$requests = $connect->fulfillment->listRequests(['status' => 'approved']);
+```
+
+* Get Concrete request
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$request = $connect->fulfillment->getRequest('PR-XXXX-XXXX-XXXXX');
 ```
