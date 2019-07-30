@@ -112,6 +112,10 @@ class Directory extends Core
     {
         $query = '';
 
+        if ($this->config->products) {
+            $filters['product.id'] = implode(",", $this->config->products);
+        }
+
         if ($filters) {
             $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
             $query = urldecode($query);
