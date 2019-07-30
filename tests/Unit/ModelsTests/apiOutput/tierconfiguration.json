@@ -73,6 +73,39 @@
       }
     }
   ],
+  "configuration": {
+    "params": [
+      {
+        "id": "param_c",
+        "value": "somevalue",
+        "title": "Title of the Parameter C",
+        "description": "Description of the Parameter C",
+        "type": "text",
+        "scope": "configuration",
+        "constraints": {
+          "hidden": false,
+          "required": true,
+          "unique": false
+        },
+        "marketplace": {
+          "id": "MP-000-000-000",
+          "name": "Marketplace name"
+        },
+        "events": {
+          "created": {
+            "at": "2018-11-21T11:10:29+00:00"
+          },
+          "updated": {
+            "at": "2018-11-21T11:10:29+00:00",
+            "by": {
+              "id": "UR-0001-0001",
+              "name": "User Name"
+            }
+          }
+        }
+      }
+    ]
+  },
   "open_request": {
     "id": "TCR-601-610-438-001"
   },

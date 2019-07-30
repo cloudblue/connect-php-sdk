@@ -83,6 +83,11 @@ class TierConfig extends Model
     public $marketplace;
 
     /**
+     * @var Configuration
+     */
+    public $configuration;
+
+    /**
      * Return a Param by ID
      * @param string $id
      * @return Param
