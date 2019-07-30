@@ -163,4 +163,27 @@ class StructureTest extends \Test\TestCase
         $this->assertCount(0, $difference['removed']);
         return $this;
     }
+
+    public function testListingModel()
+    {
+        $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/listing.json'));
+        $usageFile = Model::modelize('listing', $apiOutput);
+        $treeWalker = new \TreeWalker(
+            array(
+                "debug"=>true,
+                "returntype"=>"array")
+        );
+        $difference = $treeWalker->getdiff($usageFile->toJSON(), $apiOutput);
+        if (count($difference['new']) > 0) {
+            fwrite(STDOUT, "Removed usage file entries\n");
+            fwrite(STDOUT, var_dump($difference['new']));
+        }
+        $this->assertCount(0, $difference['new']);
+        if (count($difference['removed']) > 0) {
+            fwrite(STDOUT, "New model entries\n");
+            fwrite(STDOUT, var_dump($difference['removed']));
+        }
+        $this->assertCount(0, $difference['removed']);
+        return $this;
+    }
 }
