@@ -37,27 +37,39 @@
   },
   "events": {
     "created": {
-      "by": "vendor@null.com",
+      "by": {
+        "id": "SU-123123"
+      },
       "at": "2018-11-21T11:10:29+00:00"
     },
     "uploaded": {
-      "by": "vendor@null.com",
+      "by": {
+        "id": "SU-123123"
+      },
       "at": "2018-11-21T11:10:29+00:00"
     },
     "submitted": {
-      "by": "vendor@null.com",
+      "by": {
+        "id": "SU-123123"
+      },
       "at": "2018-11-21T11:10:29+00:00"
     },
     "accepted": {
-      "by": "admin@provider.com",
+      "by": {
+        "id": "SU-123123"
+      },
       "at": "2018-11-21T11:10:29+00:00"
     },
     "rejected": {
-      "by": "admin@provider.com",
+      "by": {
+        "id": "SU-123123"
+      },
       "at": "2018-11-21T11:10:29+00:00"
     },
     "closed": {
-      "by": "admin@provider.com",
+      "by": {
+        "id": "SU-123123"
+      },
       "at": "2018-11-21T11:10:29+00:00"
     }
   }

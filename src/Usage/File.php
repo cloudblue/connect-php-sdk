@@ -8,6 +8,8 @@
 
 namespace Connect\Usage;
 
+use Connect\Events;
+
 /**
  * Class File
  * @package Connect
@@ -103,43 +105,8 @@ class File extends \Connect\Model
     public $records;
 
     /**
-     * @var string | null
+     * @var Events
      */
-    public $uploaded_by;
-    /**
-     * @var string | null
-     */
-    public $uploaded_at;
-    /**
-     * @var string | null
-     */
-    public $submitted_by;
-    /**
-     * @var string | null
-     */
-    public $submitted_at;
-    /**
-     * @var string | null
-     */
-    public $accepted_by;
-    /**
-     * @var string | null
-     */
-    public $accepted_at;
-    /**
-     * @var string | null
-     */
-    public $rejected_by;
-    /**
-     * @var string | null
-     */
-    public $rejected_at;
-    /**
-     * @var string | null
-     */
-    public $closed_by;
-    /**
-     * @var string | null
-     */
-    public $closed_at;
+    public $events;
+
 }
