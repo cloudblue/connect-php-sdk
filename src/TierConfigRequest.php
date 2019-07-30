@@ -30,10 +30,10 @@ class TierConfigRequest extends Model
 
 
     /**
-     * @var Configuration
+     * @var TierConfig
      */
 
-    public $configuration;
+    protected $configuration;
 
     /**
      * @var Events
@@ -94,5 +94,10 @@ class TierConfigRequest extends Model
         }));
 
         return ($param) ? $param : null;
+    }
+
+    public function setConfiguration($configuration)
+    {
+        $this->configuration = Model::modelize('TierConfig', $configuration);
     }
 }

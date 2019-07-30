@@ -9,10 +9,10 @@
 namespace Connect;
 
 /**
- * Class Configuration
+ * Class TierConfig
  * @package Connect
  */
-class Configuration extends Model
+class TierConfig extends Model
 {
     /**
      * @var string
@@ -71,6 +71,16 @@ class Configuration extends Model
      */
 
     public $status;
+
+    /**
+     * @var Contract
+     */
+    public $contract;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
 
     /**
      * Return a Param by ID

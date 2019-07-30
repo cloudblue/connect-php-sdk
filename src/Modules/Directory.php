@@ -10,6 +10,7 @@ namespace Connect\Modules;
 use Connect\Config;
 use Connect\Model;
 use Connect\Asset;
+use Connect\Product;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerInterface;
@@ -67,17 +68,22 @@ class Directory extends Core
     public function getAssetById($assetID)
     {
         $body = $this->sendRequest('GET', '/assets/' . $assetID);
+        /** @var Asset $model */
         $model = Model::modelize('asset', json_decode($body));
         return $model;
     }
 
+    /**
+     * @return Product[]
+     * @throws GuzzleException
+     */
     public function listProducts()
     {
         //Filtering is not possible at this moment on time, requested as feature LITE-9071
 
         $body = $this->sendRequest('GET', '/products');
 
-        /** @var Asset[] $models */
+        /** @var \Connect\Product[] $models */
         $models = Model::modelize('products', json_decode($body));
 
         return $models;
@@ -92,6 +98,43 @@ class Directory extends Core
     public function getProduct($productID)
     {
         $body = $this->sendRequest('GET', '/products/'.$productID);
-        return Model::modelize('product', json_decode($body));
+        /** @var Product $model */
+        $model = Model::modelize('product', json_decode($body));
+        return $model;
+    }
+
+    /**
+     * @param array $filters
+     * @return \Connect\TierConfig[]
+     * @throws GuzzleException
+     */
+    public function listTierConfigs(array $filters = [])
+    {
+        $query = '';
+
+        if ($filters) {
+            $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
+            $query = urldecode($query);
+        }
+
+        $body = $this->sendRequest('GET', '/tier/configs' . $query);
+
+        /** @var \Connect\TierConfig[] $models */
+        $models = Model::modelize('tierConfig', json_decode($body));
+
+        return $models;
+    }
+
+    /**
+     * @param $id
+     * @return \Connect\TierConfig
+     * @throws GuzzleException
+     */
+    public function getTierConfigById($id)
+    {
+        $body = $this->sendRequest('GET', '/tier/configs/' . $id);
+        /** @var \Connect\TierConfig $model */
+        $model = Model::modelize('tierConfig', json_decode($body));
+        return $model;
     }
 }
