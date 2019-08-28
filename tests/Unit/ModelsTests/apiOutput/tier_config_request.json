@@ -1,0 +1,209 @@
+{
+  "id": "TCR-566-932-029-001",
+  "type": "setup",
+  "status": "approved",
+  "configuration": {
+    "id": "TC-216-555-834",
+    "name": "Configuration of TA-0-2301-6591-5904",
+    "account": {
+      "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
+      "external_id": "1",
+      "id": "TA-0-2301-6591-5904",
+      "name": "ACME Reseller",
+      "contact_info": {
+        "address_line2": "",
+        "city": "noname",
+        "address_line1": "noname",
+        "country": "us",
+        "state": "Alaska",
+        "contact": {
+          "phone_number": {
+            "phone_number": "567890",
+            "area_code": "234",
+            "extension": "",
+            "country_code": "+1"
+          },
+          "first_name": "ACME",
+          "last_name": "Reseller",
+          "email": "no-reply@acme.example.com"
+        },
+        "postal_code": "12111"
+      }
+    },
+    "product": {
+      "id": "PRD-620-338-062",
+      "icon": "VA-923-389/PRD-620-338-062/media/PRD-620-338-062-logo.png",
+      "name": "test new tier"
+    },
+    "tier_level": 1,
+    "events": {
+      "updated": {
+        "at": "2019-07-05T10:25:08+00:00",
+        "by": {
+          "id": "UR-849-150-569",
+          "name": "Marc"
+        }
+      },
+      "created": {
+        "at": "2019-07-05T08:38:31+00:00"
+      }
+    },
+    "params": [
+      {
+        "value": "1",
+        "title": "Title of the Parameter A",
+        "description": "Description of the Parameter A",
+        "type": "text",
+        "scope": "tier1",
+        "phase": "ordering",
+        "constraints": {
+          "hidden": false,
+          "required": true,
+          "unique": false
+        },
+        "id": "param_a"
+      },
+      {
+        "value": "2",
+        "title": "Title of the Parameter B",
+        "description": "Description of the Parameter B",
+        "type": "text",
+        "scope": "tier1",
+        "phase": "fulfillment",
+        "constraints": {
+          "hidden": false,
+          "required": true,
+          "unique": false
+        },
+        "id": "param_b"
+      }
+    ],
+    "template": {
+      "representation": "# Sample Template For Setup of Tier 1\n\nThis template is used to share details of the **successful** setup configuration of reseller of 1st level.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which have scope 'Tier 1'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is **1**\n* The value of **param_b** is **2**\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
+      "id": "TL-927-504-114",
+      "name": "Default Activation Template"
+    },
+    "status": "active",
+    "connection": {
+      "type": "preview",
+      "vendor": {
+        "id": "VA-923-389",
+        "name": "Right-sized executive attitude"
+      },
+      "id": "CT-0000-0000-0000",
+      "hub": {
+        "id": "HB-0000-0000",
+        "name": "ACME Hub"
+      },
+      "provider": {
+        "id": "PA-694-901",
+        "name": "IMC Certification Provider"
+      }
+    }
+  },
+  "events": {
+    "inquired": {
+      "at": "2019-07-05T08:38:31+00:00"
+    },
+    "updated": {
+      "at": "2019-07-05T10:25:08+00:00",
+      "by": {
+        "id": "UR-849-150-569",
+        "name": "Marc"
+      }
+    },
+    "approved": {
+      "at": "2019-07-05T10:25:08+00:00",
+      "by": {
+        "id": "UR-849-150-569",
+        "name": "Marc"
+      }
+    },
+    "pended": {
+      "at": "2019-07-05T10:24:58+00:00",
+      "by": {
+        "id": "UR-849-150-569",
+        "name": "Marc"
+      }
+    },
+    "created": {
+      "at": "2019-07-05T08:38:31+00:00"
+    }
+  },
+  "params": [
+    {
+      "value": "1",
+      "title": "Title of the Parameter A",
+      "description": "Description of the Parameter A",
+      "type": "text",
+      "scope": "tier1",
+      "phase": "ordering",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "param_a"
+    },
+    {
+      "value": "2",
+      "title": "Title of the Parameter B",
+      "description": "Description of the Parameter B",
+      "type": "text",
+      "scope": "tier1",
+      "phase": "fulfillment",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "param_b"
+    }
+  ],
+  "assignee": {
+    "id": "UR-849-150-569",
+    "name": "Marc"
+  },
+  "template": {
+    "representation": "# Sample Template For Setup of Tier 1\n\nThis template is used to share details of the **successful** setup configuration of reseller of 1st level.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which have scope 'Tier 1'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is **1**\n* The value of **param_b** is **2**\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
+    "id": "TL-927-504-114",
+    "name": "Default Activation Template"
+  },
+  "environment": "preview",
+  "tiers": {
+    "tier1": {
+      "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
+      "external_id": "1",
+      "id": "TA-0-2301-6591-5904",
+      "name": "ACME Reseller",
+      "contact_info": {
+        "address_line2": "",
+        "city": "noname",
+        "address_line1": "noname",
+        "country": "us",
+        "state": "Alaska",
+        "contact": {
+          "phone_number": {
+            "phone_number": "567890",
+            "area_code": "234",
+            "extension": "",
+            "country_code": "+1"
+          },
+          "first_name": "ACME",
+          "last_name": "Reseller",
+          "email": "no-reply@acme.example.com"
+        },
+        "postal_code": "12111"
+      }
+    },
+    "tier2": null
+  },
+  "marketplace": {
+    "id": "MP-00000",
+    "name": "ACME Marketplace"
+  },
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  }
+}

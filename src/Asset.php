@@ -14,9 +14,30 @@ namespace Connect;
  */
 class Asset extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
+    public $status;
+    /**
+     * @var Events[]
+     */
+    public $events;
+    /**
+     * @var string | null
+     */
     public $external_id;
+    /**
+     * @var string | null
+     */
     public $external_uid;
+    /**
+     * @var string | null
+     */
+    public $external_name;
 
     /**
      * @var Product
@@ -43,9 +64,25 @@ class Asset extends Model
      */
     public $tiers;
 
+
+    /**
+     * @var Contract
+     */
+    public $contract;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
+    /**
+     * @var Param[]
+     */
+    public $configuration;
+
     /**
      * Return a Param by ID
-     * @param $id
+     * @param string $id
      * @return Param
      */
     public function getParameterByID($id)
@@ -61,7 +98,7 @@ class Asset extends Model
 
     /**
      * Return a Item by ID
-     * @param $id
+     * @param string $id
      * @return Item
      */
     public function getItemByID($id)
@@ -75,7 +112,7 @@ class Asset extends Model
 
     /**
      * Return a Item by MPN
-     * @param $id
+     * @param string $mpn
      * @return Item
      */
     public function getItemByMPN($mpn)
@@ -85,5 +122,33 @@ class Asset extends Model
         }));
 
         return ($item) ? $item : null;
+    }
+
+    /**
+     * Return a Item by Global ID
+     * @param string $global_id
+     * @return Item
+     */
+    public function getItemByGlobalID($global_id)
+    {
+        $item = current(array_filter($this->items, function (Item $item) use ($global_id) {
+            return ($item->global_id === $global_id);
+        }));
+
+        return ($item) ? $item : null;
+    }
+
+    /**
+     * @return Request[]
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getRequests()
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/assets/'.$this->id.'/requests');
+        return Model::modelize('requests', json_decode($body));
     }
 }

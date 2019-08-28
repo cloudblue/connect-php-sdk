@@ -9,17 +9,17 @@
 namespace Connect;
 
 /**
- * Class Creator
+ * Class By
  * @package Connect
  */
-class Creator extends Model
+class By extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $name;
 }

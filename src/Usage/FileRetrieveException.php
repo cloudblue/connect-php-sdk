@@ -15,7 +15,6 @@ namespace Connect\Usage;
  */
 class FileRetrieveException extends \Connect\Exception
 {
-    private $property;
 
     public function __construct($message)
     {

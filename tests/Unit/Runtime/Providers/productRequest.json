@@ -1,0 +1,47 @@
+[
+  {
+    "id": "PRD-086-505-671",
+    "name": "Mega Cloud Backup",
+    "icon": "VA-896-811/PRD-086-505-671/media/PRD-086-505-671-logo_NyKuQfs.png",
+    "short_description": "Cloud Backup is the easier and more reliable way to do workstations backup in the cloud",
+    "detailed_description": "# Overview\n\nCloud Backup is the easier and more reliable way to do workstations backup in the cloud.\n\nService is structured in 3 license types:\n\n* Bronze License: To store up to 10 GB per seat sold\n* Gold License: To store up to 100GB per seat sold\n* Diamond License: To store up to 1TB per seat sold\n\nEach license allows to backup any device that runs:\n\n* Windows (Windows 8 or newer)\n* MacOS X (High Sierra or newer)\n* Android (4.0 or newer)\n* iOS (9 or newer)\n\nBuyers will have a nice interface where to handle their users and the registered devices.",
+    "published_at": "2019-03-18 08:33:51.459015+00:00",
+    "configurations": {
+      "suspend_resume_supported": false,
+      "requires_reseller_information": true
+    },
+    "customer_ui_settings": {
+      "description": "We are happy to provide you the Cloud Backup Service - an ultimate solution for your company. Stop using the legacy on-premises solution on your computer. Move to the cloud with our help.",
+      "getting_started": "You are now ready to use the Cloud Backup Service, the ultimate solution to Backup all your devices. Download apps for Windows Desktop, Windows Phone, Mac OS or Android following one of the links below, or access the service web interface directly.",
+      "download_links": [
+        {
+          "title": "Windows",
+          "url": "https://example.com/download/windows",
+          "visible_for": "admin"
+        },
+        {
+          "title": "macOS",
+          "url": "https://example.com/download/macos",
+          "visible_for": "admin"
+        },
+        {
+          "title": "iPhone",
+          "url": "https://example.com/download/iphone",
+          "visible_for": "admin"
+        },
+        {
+          "title": "Android",
+          "url": "https://example.com/download/android",
+          "visible_for": "admin"
+        }
+      ],
+      "documents": [
+        {
+          "title": "Admin Manual",
+          "url": "https://example.com/manual/admin"
+        }
+      ]
+    },
+    "version": 2
+  }
+]

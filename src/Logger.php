@@ -52,7 +52,7 @@ class Logger implements LoggerInterface
 
     /**
      * Set the log file path
-     * @param $filePath
+     * @param string $filePath
      * @throws Exception
      * @return $this
      */
@@ -88,7 +88,7 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param $message
+     * @param string $message
      */
     public function trace($message)
     {
@@ -96,7 +96,7 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param $message
+     * @param string $message
      * @param array $context
      */
     public function debug($message, array $context = [])
@@ -105,7 +105,7 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param $message
+     * @param string $message
      * @param array $context
      */
     public function info($message, array $context = [])
@@ -114,7 +114,7 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param $message
+     * @param string $message
      * @param array $context
      */
     public function error($message, array $context = [])
@@ -123,7 +123,7 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param $message
+     * @param string $message
      */
     public function fatal($message)
     {

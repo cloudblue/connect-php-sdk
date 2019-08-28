@@ -14,15 +14,33 @@ namespace Connect;
  */
 class ContactInfo extends Model
 {
+    /**
+     * @var string | null
+     */
     public $address_line1;
+    /**
+     * @var string | null
+     */
     public $address_line2;
+    /**
+     * @var string | null
+     */
     public $city;
 
     /**
      * @var Contact
      */
     public $contact;
+    /**
+     * @var string | null
+     */
     public $country;
+    /**
+     * @var string | null
+     */
     public $postal_code;
+    /**
+     * @var string | null
+     */
     public $state;
 }

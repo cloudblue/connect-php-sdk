@@ -15,11 +15,11 @@ namespace Connect;
 class Constraints extends Model
 {
     /**
-     * @var
+     * @var boolean
      */
     public $hidden;
     /**
-     * @var
+     * @var boolean
      */
     public $required;
 
@@ -27,4 +27,9 @@ class Constraints extends Model
      * @var Choice[]
      */
     public $choices;
+
+    /**
+     * @var boolean
+     */
+    public $unique;
 }

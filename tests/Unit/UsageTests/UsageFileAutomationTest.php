@@ -10,6 +10,8 @@ namespace Test\Unit;
 
 use Connect\Config;
 
+require_once __DIR__."/UsageFileAutomationHelper.php";
+
 /**
  * Class UsageFileAutomationTest
  * @package Test\Unit

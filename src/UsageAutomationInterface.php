@@ -18,7 +18,7 @@ interface UsageAutomationInterface
 {
 
     /**
-     * @param $listing
+     * @param Listing $listing
      * @return boolean
      * @return string
      * @throws FileCreationException

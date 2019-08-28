@@ -15,13 +15,14 @@ namespace Connect;
 class ActivationTemplateResponse
 {
     /**
-     * @var
+     * @var string
      */
     public $templateid;
 
+
     /**
      * ActivationTemplateResponse constructor.
-     * @param $templateid
+     * @param string $templateid
      */
     public function __construct($templateid)
     {

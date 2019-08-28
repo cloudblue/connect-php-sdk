@@ -15,11 +15,11 @@ namespace Connect\Usage;
 class Records extends \Connect\Model
 {
     /**
-     * @var
+     * @var string
      */
     public $valid;
     /**
-     * @var
+     * @var string
      */
     public $invalid;
 }

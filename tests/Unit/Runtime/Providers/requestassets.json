@@ -1,0 +1,121 @@
+{
+  "id": "AS-463-716-763-4",
+  "status": "processing",
+  "external_id": "308",
+  "external_uid": "4674e53a-9e52-4e62-b8fb-8de1499fa277",
+  "product": {
+    "id": "PRD-863-384-534",
+    "name": "Test Unique Parameters2"
+  },
+  "events": {
+    "updated": {
+      "at": "2019-06-18T09:41:15+00:00"
+    },
+    "created": {
+      "at": "2019-06-18T09:37:10+00:00"
+    }
+  },
+  "items": [
+    {
+      "display_name": "Sku A",
+      "name": "SKU_A",
+      "period": "Monthly",
+      "global_id": "PRD-863-384-534-0001",
+      "item_type": "Reservation",
+      "limit": 900,
+      "type": "Gb",
+      "description": "MPN-A"
+    },
+    {
+      "display_name": "Sku B",
+      "name": "SKU_B",
+      "period": "Monthly",
+      "global_id": "PRD-863-384-534-0002",
+      "item_type": "Reservation",
+      "limit": 200,
+      "type": "Devices",
+      "description": "MPN-B"
+    }
+  ],
+  "params": [
+    {
+      "value": "",
+      "value_error": "",
+      "title": "Title of the Parameter A",
+      "description": "Description of the Parameter A",
+      "type": "text",
+      "scope": "asset",
+      "phase": "fulfillment",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "param_a"
+    },
+    {
+      "value": "",
+      "value_error": "",
+      "title": "Title of the Parameter B",
+      "description": "Description of the Parameter B",
+      "type": "text",
+      "scope": "asset",
+      "phase": "fulfillment",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "param_b"
+    },
+    {
+      "value": "abcd",
+      "value_error": "",
+      "title": "test_param_a",
+      "description": "test_param_a",
+      "type": "text",
+      "scope": "asset",
+      "phase": "fulfillment",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": true
+      },
+      "id": "test_param_a"
+    }
+  ],
+  "tiers": {
+    "customer": {
+      "id": "TA-0-2431-4295-9364"
+    },
+    "tier1": {
+      "id": "TA-0-5813-2409-3030"
+    }
+  },
+  "connection": {
+    "type": "preview",
+    "vendor": {
+      "id": "PRD-863-384-534",
+      "name": "Test Unique Parameters2"
+    },
+    "id": "CT-0000-0000-0000",
+    "hub": {
+      "instance_id": "3a477438-e037-4e5a-afaf-b4a56b079d0b",
+      "id": "HB-0667-0796",
+      "account_id": "PA-677-560",
+      "name": "oa-isv-1.dev.rnd.host"
+    },
+    "provider": {
+      "id": "PA-177-629",
+      "name": "ACME Provider"
+    }
+  },
+  "marketplace": {
+    "id": "MP-00000",
+    "name": "ACME Marketplace"
+  },
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  }
+}

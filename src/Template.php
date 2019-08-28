@@ -15,11 +15,17 @@ namespace Connect;
 class Template extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $representation;
+
+    /**
+     * @var string
+     */
+
+    public $name;
 }

@@ -16,7 +16,7 @@ class Accept extends \Connect\Message
 {
     /**
      * Accept constructor.
-     * @param $message
+     * @param string $message
      */
     public function __construct($message = null)
     {

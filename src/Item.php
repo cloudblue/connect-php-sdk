@@ -14,12 +14,33 @@ namespace Connect;
  */
 class Item extends Model
 {
+    /**
+     * @var string
+     */
     public $display_name;
+    /**
+     * @var string
+     */
     public $global_id;
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $item_type;
+    /**
+     * @var string
+     */
     public $mpn;
+    /**
+     * @var string
+     */
     public $period;
+    /**
+     * @var string
+     */
     public $type;
 
     /**
@@ -36,4 +57,15 @@ class Item extends Model
      * @var Renewal
      */
     public $renewal;
+
+    /**
+     * @var name
+     */
+    public $name;
+
+    /**
+     * @var Param[]
+     */
+
+    public $params;
 }

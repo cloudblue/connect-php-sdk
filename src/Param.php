@@ -14,14 +14,44 @@ namespace Connect;
  */
 class Param extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $name;
+    /**
+     * @var string
+     */
     public $title;
+    /**
+     * @var string
+     */
     public $description;
+    /**
+     * @var string
+     */
     public $scope;
+    /**
+     * @var string |null
+     */
     public $value;
+    /**
+     * @var string | null
+     */
     public $value_error;
+    /**
+     * @var string
+     */
     public $type;
+
+    /**
+     * @var string
+     */
+
+    public $phase;
 
     /**
      * @var Constraints
@@ -33,6 +63,16 @@ class Param extends Model
      * @var ValueChoice{value}
      */
     public $value_choices;
+
+    /**
+     * @var Events[]
+     */
+    public $events;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
 
     /**
      * Assign error on parameter

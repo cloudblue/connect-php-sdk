@@ -227,3 +227,4 @@ composer.lock
 
 # codecov
 coverage.xml
+.php_cs.cache

@@ -14,12 +14,26 @@ namespace Connect;
  */
 class Customer extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $name;
+    /**
+     * @var string
+     */
     public $external_id;
 
     /**
      * @var ContactInfo
      */
     public $contact_info;
+
+    /**
+     * @var string
+     */
+    public $external_uid;
 }

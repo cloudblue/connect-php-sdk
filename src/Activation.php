@@ -15,7 +15,7 @@ namespace Connect;
 class Activation extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $link;
 }

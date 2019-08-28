@@ -1,0 +1,157 @@
+{
+  "activation_key": "",
+  "answered": false,
+  "asset": {
+    "connection": {
+      "hub": {
+        "account_id": "PA-677-560",
+        "id": "HB-0667-0796",
+        "instance_id": "3a477438-e037-4e5a-afaf-b4a56b079d0b",
+        "name": "oa-isv-1.dev.rnd.host"
+      },
+      "id": "CT-0000-0000-0000",
+      "provider": {
+        "id": "PA-177-629",
+        "name": "ACME Provider"
+      },
+      "type": "preview",
+      "vendor": {
+        "id": "VA-893-979",
+        "name": "IMConnect Dev"
+      }
+    },
+    "external_id": "308",
+    "external_name": "",
+    "external_uid": "4674e53a-9e52-4e62-b8fb-8de1499fa277",
+    "id": "AS-463-716-763-4",
+    "items": [
+      {
+        "display_name": "Sku B",
+        "global_id": "PRD-863-384-534-0002",
+        "id": "SKU_B",
+        "item_type": "Reservation",
+        "mpn": "MPN-B",
+        "old_quantity": "0",
+        "period": "Monthly",
+        "quantity": "200",
+        "type": "Devices"
+      },
+      {
+        "display_name": "Sku A",
+        "global_id": "PRD-863-384-534-0001",
+        "id": "SKU_A",
+        "item_type": "Reservation",
+        "mpn": "MPN-A",
+        "old_quantity": "0",
+        "period": "Monthly",
+        "quantity": "900",
+        "type": "Gb"
+      }
+    ],
+    "params": [
+      {
+        "description": "Description of the Parameter A",
+        "id": "param_a",
+        "name": "param_a",
+        "title": "Title of the Parameter A",
+        "type": "text",
+        "value": "test",
+        "value_choices": [],
+        "value_error": ""
+      },
+      {
+        "description": "Description of the Parameter B",
+        "id": "param_b",
+        "name": "param_b",
+        "title": "Title of the Parameter B",
+        "type": "text",
+        "value": "test",
+        "value_choices": [],
+        "value_error": ""
+      },
+      {
+        "description": "test_param_a",
+        "id": "test_param_a",
+        "name": "test_param_a",
+        "title": "test_param_a",
+        "type": "text",
+        "value": "abcd",
+        "value_choices": [],
+        "value_error": ""
+      }
+    ],
+    "product": {
+      "id": "PRD-863-384-534",
+      "name": "Test Unique Parameters2"
+    },
+    "tiers": {
+      "customer": {
+        "contact_info": {
+          "address_line1": "Jackson Harbor",
+          "address_line2": "",
+          "city": "Danielfort",
+          "contact": {
+            "email": "margaretbrown-2775@VA-893-979.com",
+            "first_name": "Margaret",
+            "last_name": "Brown",
+            "phone_number": {
+              "area_code": "1",
+              "country_code": "+252",
+              "extension": "",
+              "phone_number": "430390"
+            }
+          },
+          "country": "us",
+          "postal_code": "06597",
+          "state": "Wisconsin"
+        },
+        "external_id": "282",
+        "external_uid": "6206fd5b-ffb9-402b-869b-2cb911f4dd28",
+        "id": "TA-0-2431-4295-9364",
+        "name": "Dennis-Frank"
+      },
+      "tier1": {
+        "contact_info": {
+          "address_line1": "noname",
+          "address_line2": "",
+          "city": "noname",
+          "contact": {
+            "email": "no-reply@acme.example.com",
+            "first_name": "ACME",
+            "last_name": "Reseller",
+            "phone_number": {
+              "area_code": "234",
+              "country_code": "+1",
+              "extension": "",
+              "phone_number": "567890"
+            }
+          },
+          "country": "us",
+          "postal_code": "12111",
+          "state": "Alaska"
+        },
+        "external_id": "1",
+        "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
+        "id": "TA-0-5813-2409-3030",
+        "name": "ACME Reseller"
+      },
+      "tier2": {}
+    }
+  },
+  "assignee": "",
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  },
+  "created": "2019-06-18T09:37:10.957078+00:00",
+  "id": "PR-3505-8841-4044-001",
+  "marketplace": {
+    "id": "MP-00000",
+    "name": "ACME Marketplace"
+  },
+  "note": "",
+  "reason": "",
+  "status": "pending",
+  "type": "purchase",
+  "updated": "2019-06-18T09:41:15.530902+00:00"
+}

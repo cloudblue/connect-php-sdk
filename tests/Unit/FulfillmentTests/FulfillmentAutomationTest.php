@@ -10,6 +10,9 @@ namespace Test\Unit;
 
 use Connect\Config;
 
+require_once __DIR__."/FulfillmentAutomationHelper.php";
+require_once __DIR__."/RequestProcessorHelper.php";
+
 /**
  * Class FulfillmentAutomationTest
  * @package Test\Unit
@@ -24,6 +27,7 @@ class FulfillmentAutomationTest extends \Test\TestCase
          */
         chdir(__DIR__);
     }
+
 
     /**
      * @throws \Connect\ConfigException
@@ -118,7 +122,7 @@ class FulfillmentAutomationTest extends \Test\TestCase
     public function testTemplateRetrive()
     {
         $app = new RequestProcessorHelper(__DIR__ . '/config.mocked4tmpl.json');
-        $template = $app->fulfillment->renderTemplate('1','PR-123-123-123');
+        $template = $app->fulfillment->renderTemplate('1', 'PR-123-123-123');
         $this->assertStringStartsWith("# tmpl", $template);
     }
 }

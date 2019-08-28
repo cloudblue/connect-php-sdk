@@ -15,7 +15,7 @@ namespace Connect;
 class OpenRequest extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
 }

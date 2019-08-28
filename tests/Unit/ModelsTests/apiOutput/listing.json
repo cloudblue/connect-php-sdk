@@ -1,0 +1,27 @@
+{
+  "id": "LST-653-347-028",
+  "status": "listed",
+  "contract": {
+    "id": "CRD-25852-19745-24928",
+    "type": "distribution",
+    "name": "Contract of Distribution agreement",
+    "marketplace": {
+      "id": "MP-41136",
+      "name": "Indian Marketplace"
+    }
+  },
+  "product": {
+    "id": "PRD-252-822-847",
+    "icon": "",
+    "name": "MozyPro"
+  },
+  "created": "2019-07-30T08:55:43+00:00",
+  "vendor": {
+    "id": "VA-398-871",
+    "name": "APSConnect Dev"
+  },
+  "provider": {
+    "id": "PA-988-713",
+    "name": "Vision-oriented non-volatile extranet"
+  }
+}

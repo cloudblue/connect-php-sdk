@@ -16,24 +16,24 @@ namespace Connect;
 class TierConfigRequest extends Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
     /**
-     * @var
+     * @var string
      */
     public $type;
     /**
-     * @var
+     * @var string
      */
     public $status;
 
 
     /**
-     * @var Configuration
+     * @var TierConfig
      */
 
-    public $configuration;
+    protected $configuration;
 
     /**
      * @var Events
@@ -62,8 +62,29 @@ class TierConfigRequest extends Model
     public $activation;
 
     /**
+     * @var string
+     */
+    public $environment;
+
+    /**
+     * @var Tiers
+     */
+    public $tiers;
+
+    /**
+     * @var Marketplace
+     */
+    public $marketplace;
+
+    /**
+     * @var Contract
+     */
+    public $contract;
+
+    /**
      * Return a Param by ID
-     * @param $id
+     *
+     * @param string $id
      * @return Param
      */
     public function getParameterByID($id)
@@ -73,5 +94,10 @@ class TierConfigRequest extends Model
         }));
 
         return ($param) ? $param : null;
+    }
+
+    public function setConfiguration($configuration)
+    {
+        $this->configuration = Model::modelize('TierConfig', $configuration);
     }
 }

@@ -1,0 +1,270 @@
+{
+  "id":"AS-380-400-615-2",
+  "status":"processing",
+  "external_id":"1234567890",
+  "external_uid":"14646b4b-af66-4089-ba3b-27241b2ed0aa",
+  "external_name":"FallBall 1234567890",
+  "product":{
+    "id":"PRD-688-232-485",
+    "icon":"",
+    "name":"Sample App"
+  },
+  "events":{
+    "updated":{
+      "at":"2019-07-25T13:16:32+00:00"
+    },
+    "created":{
+      "at":"2019-07-25T13:16:32+00:00"
+    }
+  },
+  "items":[
+    {
+      "period":"",
+      "old_quantity":"200",
+      "display_name":"",
+      "item_type":"",
+      "mpn":"",
+      "params":[
+        {
+          "id":"name-20af98d3a1fe46d88db7f844a89f3b41",
+          "title":"title-20af98d3a1fe46d88db7f844a89f3b41",
+          "type":"text",
+          "scope":"item",
+          "phase":"configuration",
+          "constraints":{
+            "hidden":false,
+            "required":false,
+            "unique":false
+          },
+          "events":{
+            "updated":{
+              "at":"2019-07-25T13:16:32+00:00"
+            },
+            "created":{
+              "at":"2019-07-25T13:16:32+00:00"
+            }
+          }
+        },
+        {
+          "value":"avalue",
+          "id":"name-2c79d484c25540a98d06a73336cd4c02",
+          "title":"title-2c79d484c25540a98d06a73336cd4c02",
+          "type":"text",
+          "scope":"item_marketplace",
+          "phase":"configuration",
+          "constraints":{
+            "hidden":false,
+            "required":false,
+            "unique":false
+          },
+          "marketplace":{
+            "id":"MP-33690",
+            "name":"665840fe5899469cb4cf8114d04ec15b"
+          },
+          "events":{
+            "updated":{
+              "at":"2019-07-25T13:16:32+00:00"
+            },
+            "created":{
+              "at":"2019-07-25T13:16:32+00:00"
+            }
+          }
+        }
+      ],
+      "type":"",
+      "id":"name-49a675f648714d1db3191aed12c07d4d",
+      "global_id":"",
+      "quantity":"200"
+    },
+    {
+      "period":"",
+      "old_quantity":"300",
+      "display_name":"",
+      "item_type":"",
+      "mpn":"",
+      "params":[
+      ],
+      "type":"",
+      "id":"invalid",
+      "global_id":"",
+      "quantity":"300"
+    },
+    {
+      "period":"",
+      "old_quantity":"500",
+      "display_name":"",
+      "item_type":"",
+      "mpn":"",
+      "params":[
+
+      ],
+      "type":"",
+      "id":"name-f49191ac6c084fc8881e4ed440c030db",
+      "global_id":"",
+      "quantity":"500"
+    }
+  ],
+  "params":[
+    {
+      "value":"value",
+      "id":"whatevervemdorwants",
+      "title":"title-2c79d484c25540a98d06a73336cd4c02",
+      "type":"text",
+      "scope":"item_marketplace",
+      "phase":"configuration",
+      "constraints":{
+        "hidden":false,
+        "required":false,
+        "unique":false
+      }
+    }
+  ],
+  "tiers":{
+    "customer": {
+      "contact_info": {
+        "address_line1": "63136 Breanna Fall",
+        "address_line2": "Suite 351",
+        "city": "South Linda",
+        "contact": {
+          "email": "njohnsonrp8l@example.org",
+          "first_name": "Allison",
+          "last_name": "Gregory",
+          "phone_number": {
+            "area_code": "1",
+            "country_code": "+252",
+            "extension": "",
+            "phone_number": "076810"
+          }
+        },
+        "country": "US",
+        "postal_code": "15384",
+        "state": "East Brianberg"
+      },
+      "external_id": "512",
+      "external_uid": "b9c2ef1e-eb30-48af-8d02-13783cb16906",
+      "id": "TA-0-5432-1750-3304",
+      "name": "Lowery, Reeves and Martin"
+    },
+    "tier1": {
+      "contact_info": {
+        "address_line1": "noname",
+        "address_line2": "",
+        "city": "noname",
+        "contact": {
+          "email": "no-reply@acme.example.com",
+          "first_name": "ACME",
+          "last_name": "Reseller",
+          "phone_number": {
+            "area_code": "234",
+            "country_code": "+1",
+            "extension": "",
+            "phone_number": "567890"
+          }
+        },
+        "country": "us",
+        "postal_code": "12111",
+        "state": "Alaska"
+      },
+      "external_id": "1",
+      "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
+      "id": "TA-0-2301-6591-5904",
+      "name": "ACME Reseller"
+    },
+    "tier2": {}
+  },
+  "configuration":{
+    "params":[
+      {
+        "value":"value",
+        "id":"f",
+        "title":"title-406f07adb02147b6b3db9ab2ed1c921b",
+        "type":"text",
+        "scope":"product",
+        "phase":"configuration",
+        "constraints":{
+          "hidden":false,
+          "required":false,
+          "unique":false
+        },
+        "events":{
+          "updated":{
+            "at":"2019-07-25T13:16:32+00:00"
+          },
+          "created":{
+            "at":"2019-07-25T13:16:32+00:00"
+          }
+        }
+      },
+      {
+        "value":"value",
+        "id":"g",
+        "title":"title-cbbde34c736e441c87dee95a1fb172f7",
+        "type":"text",
+        "scope":"product",
+        "phase":"configuration",
+        "constraints":{
+          "hidden":false,
+          "required":false,
+          "unique":false
+        },
+        "events":{
+          "updated":{
+            "at":"2019-07-25T13:16:32+00:00"
+          },
+          "created":{
+            "at":"2019-07-25T13:16:32+00:00"
+          }
+        }
+      },
+      {
+        "value":"value",
+        "id":"name-6218a67a956e4f9d9c6ee59842ad4345",
+        "title":"title-6218a67a956e4f9d9c6ee59842ad4345",
+        "type":"text",
+        "scope":"marketplace",
+        "phase":"configuration",
+        "constraints":{
+          "hidden":false,
+          "required":false,
+          "unique":false
+        },
+        "marketplace":{
+          "id":"MP-33690",
+          "name":"665840fe5899469cb4cf8114d04ec15b"
+        },
+        "events":{
+          "updated":{
+            "at":"2019-07-25T13:16:32+00:00"
+          },
+          "created":{
+            "at":"2019-07-25T13:16:32+00:00"
+          }
+        }
+      }
+    ]
+  },
+  "connection":{
+    "type":"preview",
+    "vendor":{
+      "id":"VA-296-825",
+      "name":"Davis, Cole and Baker"
+    },
+    "id":"CT-0000-0000-0000",
+    "hub":{
+      "id":"HB-6654-6733",
+      "name":"mn.velit.int.zone"
+    },
+    "provider":{
+      "id":"PA-868-971",
+      "name":"Gonzales-Garcia"
+    }
+  },
+  "marketplace":{
+    "id":"MP-33690",
+    "name":"665840fe5899469cb4cf8114d04ec15b"
+  },
+  "contract":{
+    "id":"CRD-00000-00000-00000",
+    "name":"ACME Distribution Contract"
+  }
+}

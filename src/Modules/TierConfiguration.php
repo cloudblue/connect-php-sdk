@@ -58,8 +58,8 @@ class TierConfiguration extends Core
     }
 
     /**
-     * @param $tierId - Connect ID of the tier
-     * @param $productId - Product ID
+     * @param string $tierId - Connect ID of the tier
+     * @param string $productId - Product ID
      * @return TierConfigRequest|Model
      * @throws GuzzleException
      */
@@ -79,9 +79,9 @@ class TierConfiguration extends Core
     }
 
     /**
-     * @param $parameterId
-     * @param $tierId
-     * @param $productId
+     * @param string $parameterId
+     * @param string $tierId
+     * @param string $productId
      * @return Param|null
      * @throws GuzzleException
      */

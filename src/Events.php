@@ -14,7 +14,52 @@ namespace Connect;
  */
 class Events extends Model
 {
+    /**
+     * @var string|null|Event
+     */
     public $inquired;
+    /**
+     * @var string|null|Event
+     */
     public $updated;
+    /**
+     * @var string|null|Event
+     */
     public $created;
+
+    /**
+     * @var string|null|Event
+     */
+    public $approved;
+
+    /**
+     * @var string|null|Event
+     */
+    public $pended;
+
+    /**
+     * @var string|null|Event
+     */
+    public $uploaded;
+
+    /**
+     * @var string|null|Event
+     */
+    public $submitted;
+
+    /**
+     * @var string|null|Event
+     */
+    public $accepted;
+
+    /**
+     * @var string|null|Event
+     */
+    public $rejected;
+
+    /**
+     * @var string|null|Event
+     */
+    public $closed;
+
 }

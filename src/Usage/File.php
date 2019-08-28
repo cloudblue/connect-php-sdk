@@ -8,6 +8,8 @@
 
 namespace Connect\Usage;
 
+use Connect\Events;
+
 /**
  * Class File
  * @package Connect
@@ -15,38 +17,38 @@ namespace Connect\Usage;
 class File extends \Connect\Model
 {
     /**
-     * @var
+     * @var string
      */
     public $id;
 
     /**
-     * @var
+     * @var string
      */
     public $name;
 
     /**
-     * @var
+     * @var string | null
      */
     public $description;
 
     /**
-     * @var
+     * @var string | null
      */
 
     public $note;
 
     /**
-    * @var
+    * @var string
     */
     public $status;
 
     /**
-     * @var
+     * @var string
      */
     public $created_by;
 
     /**
-     * @var
+     * @var string
      */
     public $created_at;
 
@@ -75,10 +77,26 @@ class File extends \Connect\Model
      */
     public $provider;
 
+    /**
+     * @var string | null
+     */
     public $upload_file_uri;
+
+    /**
+     * @var string | null
+     */
     public $processed_file_uri;
+    /**
+     * @var string | null
+     */
     public $acceptance_note;
+    /**
+     * @var string | null
+     */
     public $rejection_note;
+    /**
+     * @var string | null
+     */
     public $error_detail;
 
     /**
@@ -86,14 +104,9 @@ class File extends \Connect\Model
      */
     public $records;
 
-    public $uploaded_by;
-    public $uploaded_at;
-    public $submitted_by;
-    public $submitted_at;
-    public $accepted_by;
-    public $accepted_at;
-    public $rejected_by;
-    public $rejected_at;
-    public $closed_by;
-    public $closed_at;
+    /**
+     * @var Events
+     */
+    public $events;
+
 }

@@ -219,7 +219,7 @@ class Usage extends Core
     }
 
     /**
-     * @param $fileusagerecords
+     * @param array $fileusagerecords
      * @return Spreadsheet
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
@@ -242,7 +242,7 @@ class Usage extends Core
 
     /**
      * @param File $usageFile
-     * @param $fileRecords
+     * @param array $fileRecords
      * @return bool
      * @throws FileCreationException
      * @throws FileRetrieveException
@@ -277,7 +277,7 @@ class Usage extends Core
     }
 
     /**
-     * @param $productId
+     * @param string $productId
      * @return mixed
      * @throws GuzzleException
      */
@@ -288,7 +288,7 @@ class Usage extends Core
     }
 
     /**
-     * @param $downloadlocation
+     * @param string $downloadlocation
      * @return false|string
      * @throws \Exception
      */

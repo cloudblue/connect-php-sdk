@@ -14,6 +14,12 @@ namespace Connect;
  */
 class ValueChoice extends Model
 {
+    /**
+     * @var string
+     */
     public $value;
+    /**
+     * @var string
+     */
     public $label;
 }

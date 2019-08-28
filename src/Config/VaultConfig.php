@@ -55,7 +55,9 @@ class VaultConfig extends \Connect\Config
 
     /**
      * VaultConfig constructor.
-     * @param $source
+     * @param array|object|string $source
+     *        array  -> has pairs of key/value to fill in config
+     *        string -> path to file to read config from
      * @param \GuzzleHttp\Client|null $client
      * @throws \Connect\ConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException

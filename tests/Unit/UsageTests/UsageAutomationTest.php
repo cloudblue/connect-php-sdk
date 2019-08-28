@@ -7,8 +7,8 @@
 
 namespace Test\Unit;
 
+require_once __DIR__."/UsageAutomationHelper.php";
 use Connect\Config;
-use Connect\Product;
 
 class UsageAutomationTest extends \Test\TestCase
 {

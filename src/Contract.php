@@ -14,9 +14,21 @@ namespace Connect;
  */
 class Contract extends Model
 {
+    /**
+     * @var string
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $name;
+    /**
+     * @var string
+     */
     public $type;
+    /**
+     * @var string
+     */
     public $status;
 
     /**
@@ -29,10 +41,22 @@ class Contract extends Model
      */
     public $owner;
 
+    /**
+     * @var string | null
+     */
     public $created;
+    /**
+     * @var string | null
+     */
     public $updated;
+    /**
+     * @var string | null
+     */
     public $enrolled;
 
+    /**
+     * @var int
+     */
     public $version;
 
     /**
@@ -40,6 +64,9 @@ class Contract extends Model
      */
     public $signee;
 
+    /**
+     * @var string
+     */
     public $version_created;
 
     /**
