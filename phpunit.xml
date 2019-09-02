@@ -34,6 +34,9 @@
             <file>tests/Unit/Logger/LogSessionTest.php</file>
             <file>tests/Unit/LoggerTest.php</file>
         </testsuite>
+        <testsuite name="RQL">
+            <file>tests/Unit/RQL/QueryTest.php</file>
+        </testsuite>
         <testsuite name="ActivationTileResponse">
             <file>tests/Unit/FulfillmentTests/ActivationTileResponseTest.php</file>
         </testsuite>

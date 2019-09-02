@@ -19,6 +19,12 @@ class AssetTest extends \Test\TestCase
         $this->assertInternalType("array", $assets);
     }
 
+    public function testGetInstanceBackwardsCompatibility()
+    {
+        $assets = ConnectClient::getInstance(new Config(__DIR__. '/config.mocked.json'))->directory->listAssets(array('marketplace.id' => 'MP-48480'));
+        $this->assertEquals('MP-48480',$assets[0]->marketplace->id);
+    }
+
     public function testGetAssets()
     {
         $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.json'));
