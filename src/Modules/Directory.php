@@ -14,6 +14,7 @@ use Connect\Product;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerInterface;
+use Connect\RQL;
 
 /**
  * Class Directory
@@ -35,24 +36,27 @@ class Directory extends Core
 
     /**
      * List the Assets
-     * @param array $filters Filter for listing key->value or key->array(value1, value2)
+     * @param  $filters, it may be due backwards compatibility an array of key->value
+     *          or object of class \Connect\RQL
      * @return Asset[]
      * @throws GuzzleException
      */
-    public function listAssets(array $filters = [])
+    public function listAssets($filters = null)
     {
-        $query = '';
+        $query = new \Connect\RQL\Query();
 
-        if ($this->config->products) {
-            $filters['asset.product.id__in'] = implode(",", $this->config->products);
+        if(is_array($filters))
+        {
+            $query = new \Connect\RQL\Query($filters);
         }
 
-        if ($filters) {
-            $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
-            $query = urldecode($query);
+        if($this->config->products){
+            $query->in('product.id', is_array($this->config->products)
+                ? $this->config->products
+                : explode(',',$this->config->products));
         }
 
-        $body = $this->sendRequest('GET', '/assets' . $query);
+        $body = $this->sendRequest('GET', '/assets' . $query->compile());
 
         /** @var Asset[] $models */
         $models = Model::modelize('assets', json_decode($body));
@@ -110,18 +114,20 @@ class Directory extends Core
      */
     public function listTierConfigs(array $filters = [])
     {
-        $query = '';
+        $query = new \Connect\RQL\Query();
 
-        if ($this->config->products) {
-            $filters['product.id'] = implode(",", $this->config->products);
+        if(is_array($filters))
+        {
+            $query = new \Connect\RQL\Query($filters);
         }
 
-        if ($filters) {
-            $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
-            $query = urldecode($query);
+        if($this->config->products){
+            $query->in('product.id', is_array($this->config->products)
+                ? $this->config->products
+                : explode(',',$this->config->products));
         }
 
-        $body = $this->sendRequest('GET', '/tier/configs' . $query);
+        $body = $this->sendRequest('GET', '/tier/configs' . $query->compile());
 
         /** @var \Connect\TierConfig[] $models */
         $models = Model::modelize('tierConfig', json_decode($body));
