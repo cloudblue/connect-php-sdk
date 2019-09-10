@@ -28,4 +28,10 @@ class Template extends Model
      */
 
     public $name;
+
+    /**
+     * @var string
+     */
+
+    public $body;
 }

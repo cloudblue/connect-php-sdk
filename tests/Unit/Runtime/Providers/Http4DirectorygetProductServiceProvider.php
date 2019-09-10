@@ -17,7 +17,9 @@ class Http4DirectorygetProductServiceProvider extends ServiceProvider
         $body = \Mockery::mock('\Psr\Http\Message\StreamInterface');
         $body->shouldReceive('getContents')
             ->andReturn(
-                trim(file_get_contents(__DIR__ . '/productGetRequest.json'))
+                trim(file_get_contents(__DIR__ . '/productGetRequest.json')),
+                trim(file_get_contents(__DIR__.'/producttemplates.json')),
+                trim(file_get_contents(__DIR__. '/productConfigurations.json'))
             );
 
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');
