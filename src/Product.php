@@ -67,4 +67,26 @@ class Product extends Model
     {
         $this->customer_ui_settings = Model::modelize('ProductCustomerUISettings', $ui_settings);
     }
+
+    public function getTemplates()
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/'.$this->id.'/templates');
+        return Model::modelize('templates', json_decode($body));
+    }
+
+    public function getProductConfigurations(RQL\Query $filter = null)
+    {
+        if ($this->id == null){
+            return [];
+        }
+        if(!$filter){
+            $filter = new \Connect\RQL\Query();
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/'.$this->id.'/configurations'.$filter->compile());
+        return Model::modelize('ProductConfigurationParameters', json_decode($body));
+
+    }
 }

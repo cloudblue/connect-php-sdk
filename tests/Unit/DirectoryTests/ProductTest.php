@@ -27,5 +27,30 @@ class ProductTest extends \Test\TestCase
         $connectClient = new ConnectClient(new Config(__DIR__ . '/config.mocked.getProduct.json'));
         $product = $connectClient->directory->getProduct('PRD-086-505-671');
         $this->assertInstanceOf("\Connect\Product", $product);
+        $templates = $product->getTemplates();
+        foreach($templates as $template)
+        {
+            $this->assertInstanceOf('\Connect\template', $template);
+        }
+        $configurations = $product->getProductConfigurations();
+        foreach($configurations as $configuration)
+        {
+            $this->assertInstanceOf('\Connect\ProductConfigurationParameter', $configuration);
+        }
     }
+
+    public function testEmptyProductTemplates()
+    {
+        $product = new \Connect\Product();
+        $templates = $product->getTemplates();
+        $this->assertCount(0, $templates);
+    }
+
+    public function testEmptyProductConfigurations()
+    {
+        $product = new \Connect\Product();
+        $configurations = $product->getProductConfigurations();
+        $this->assertCount(0, $configurations);
+    }
+
 }
