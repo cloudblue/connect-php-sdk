@@ -32,4 +32,17 @@ class ProductConfigurationParameter extends Model
      */
 
     public $events;
+
+    /**
+     * @var Item
+     */
+
+    public $item;
+
+    /**
+     * @var Marketplace
+     */
+
+    public $marketplace;
+    
 }
