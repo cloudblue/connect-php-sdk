@@ -76,7 +76,7 @@ class Asset extends Model
     public $marketplace;
 
     /**
-     * @var Param[]
+     * @var Configuration
      */
     public $configuration;
 

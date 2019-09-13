@@ -9,6 +9,7 @@
 namespace Test\Unit;
 
 use Connect\Model;
+use Connect\Request;
 
 class StructureTest extends \Test\TestCase
 {
@@ -185,5 +186,26 @@ class StructureTest extends \Test\TestCase
         }
         $this->assertCount(0, $difference['removed']);
         return $this;
+    }
+
+    public function testGetParamByIdOnConfiguration()
+    {
+        $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/fulfillment_request.json'));
+        $request = Model::modelize('request', $apiOutput);
+        $this->assertEquals('product_value', $request->asset->configuration->getParameterByID('product_configuration')->value);
+    }
+
+    public function testGetParamByIdOnItem()
+    {
+        $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/fulfillment_request.json'));
+        $request = Model::modelize('request', $apiOutput);
+        $this->assertEquals('item', ($request->asset->getItemByMPN('MPN-A'))->getParameterByID('item_per_marketplace')->value);
+    }
+
+    public function getRequestParameter()
+    {
+        $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/fulfillment_request.json'));
+        $request = Model::modelize('request', $apiOutput);
+        $this->assertEquals('Fulfillment param', $request->asset->getParameterByID('fulfillment_param_b')->value);
     }
 }

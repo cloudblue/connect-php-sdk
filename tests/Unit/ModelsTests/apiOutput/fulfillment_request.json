@@ -78,10 +78,10 @@
       "id": "CRD-00000-00000-00000",
       "name": "ACME Distribution Contract"
     },
-    "external_id": "Q2HY9YMNK8",
+    "external_id": "C051UCMB24",
     "external_name": "",
-    "external_uid": "5e28072d-9431-4854-9aeb-c8392f9bdde8",
-    "id": "AS-991-007-860-9",
+    "external_uid": "446428f6-0408-44f9-9ee8-47c36b4d18e8",
+    "id": "AS-935-412-198-9",
     "items": [
       {
         "display_name": "Sku B",
@@ -94,7 +94,7 @@
           {
             "constraints": {
               "hidden": false,
-              "required": true,
+              "required": false,
               "unique": false
             },
             "description": "item_parameter",
@@ -107,15 +107,18 @@
                 }
               },
               "updated": {
-                "at": "2019-08-26T10:43:10+00:00"
+                "at": "2019-09-02T16:00:31+00:00",
+                "by": {
+                  "id": "UR-841-574-187",
+                  "name": "Marc Serrat"
+                }
               }
             },
             "id": "item_parameter",
             "phase": "configuration",
             "scope": "item",
             "title": "item_parameter",
-            "type": "text",
-            "value": "item_parameter"
+            "type": "text"
           },
           {
             "constraints": {
@@ -159,7 +162,7 @@
           {
             "constraints": {
               "hidden": false,
-              "required": true,
+              "required": false,
               "unique": false
             },
             "description": "item_parameter",
@@ -172,7 +175,11 @@
                 }
               },
               "updated": {
-                "at": "2019-08-26T10:42:56+00:00"
+                "at": "2019-08-27T14:21:23+00:00",
+                "by": {
+                  "id": "UR-841-574-187",
+                  "name": "Marc Serrat"
+                }
               }
             },
             "id": "item_parameter",
@@ -180,7 +187,7 @@
             "scope": "item",
             "title": "item_parameter",
             "type": "text",
-            "value": "item_parameter"
+            "value": "Value 1"
           },
           {
             "constraints": {
@@ -226,7 +233,7 @@
         "name": "fulfillment_param_b",
         "title": "Fulfillment Parameter B",
         "type": "text",
-        "value": "sd",
+        "value": "Fulfillment param",
         "value_choices": [],
         "value_error": ""
       },
@@ -236,7 +243,7 @@
         "name": "order_param_a",
         "title": "Order Parameter A",
         "type": "text",
-        "value": "11",
+        "value": "order parameter",
         "value_choices": [],
         "value_error": ""
       }
@@ -249,13 +256,13 @@
     "tiers": {
       "customer": {
         "contact_info": {
-          "address_line1": "Bogan Lodge",
-          "address_line2": "Mann Wall",
+          "address_line1": "Lang Grove",
+          "address_line2": "D'Amore Ports",
           "city": "Baldwin",
           "contact": {
-            "email": "mserrat+Lourdes_Cartwright@odin.com",
-            "first_name": "Lourdes",
-            "last_name": "Cartwright",
+            "email": "mserrat+Austyn_Feeney@odin.com",
+            "first_name": "Austyn",
+            "last_name": "Feeney",
             "phone_number": {
               "area_code": "555",
               "country_code": "+1",
@@ -267,20 +274,20 @@
           "postal_code": "36507",
           "state": "Alabama"
         },
-        "external_id": "2288",
-        "external_uid": "ae898867-5605-4ee2-9dd0-01455859adbf",
-        "id": "TA-0-9721-7483-1788",
-        "name": "Pacocha and Sons"
+        "external_id": "45227",
+        "external_uid": "94e64887-4586-4a6a-b2a5-374e435bb72f",
+        "id": "TA-0-6174-1877-5245",
+        "name": "Kemmer - Wyman"
       },
       "tier1": {
         "contact_info": {
-          "address_line1": "Pink Garden",
-          "address_line2": "Lehner Trail",
+          "address_line1": "Jettie Spring",
+          "address_line2": "Romaguera Plain",
           "city": "Baldwin",
           "contact": {
-            "email": "mserrat+Silas_Tremblay@odin.com",
-            "first_name": "Silas",
-            "last_name": "Tremblay",
+            "email": "mserrat+Raoul_Emard@odin.com",
+            "first_name": "Raoul",
+            "last_name": "Emard",
             "phone_number": {
               "area_code": "555",
               "country_code": "+1",
@@ -292,10 +299,10 @@
           "postal_code": "36507",
           "state": "Alabama"
         },
-        "external_id": "49992",
-        "external_uid": "6784d94e-fdb6-486a-81a0-35041e887d33",
-        "id": "TA-0-4140-3577-7360",
-        "name": "Schinner - Rutherford"
+        "external_id": "47501",
+        "external_uid": "1d1979bb-fc02-4789-8614-1f0823b03a3c",
+        "id": "TA-0-0600-2411-4000",
+        "name": "Goldner - Runolfsdottir"
       },
       "tier2": {}
     }
@@ -309,8 +316,8 @@
     "id": "CRD-00000-00000-00000",
     "name": "ACME Distribution Contract"
   },
-  "created": "2019-08-26T10:46:29.576625+00:00",
-  "id": "PR-2242-3230-6522-001",
+  "created": "2019-09-13T11:40:45.365767+00:00",
+  "id": "PR-6253-0000-7527-001",
   "marketplace": {
     "icon": "/media/PA-855-748/marketplaces/MP-71206/icon.png",
     "id": "MP-71206",
@@ -320,5 +327,5 @@
   "reason": "",
   "status": "approved",
   "type": "purchase",
-  "updated": "2019-08-26T10:54:30.950526+00:00"
+  "updated": "2019-09-13T12:22:11.822008+00:00"
 }

@@ -44,5 +44,5 @@ class ProductConfigurationParameter extends Model
      */
 
     public $marketplace;
-    
+
 }

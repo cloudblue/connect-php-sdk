@@ -68,4 +68,18 @@ class Item extends Model
      */
 
     public $params;
+
+    /**
+     * Return a Param by ID
+     * @param string $id
+     * @return Param
+     */
+    public function getParameterByID($id)
+    {
+        $param = current(array_filter($this->params, function (Param $param) use ($id) {
+            return ($param->id === $id);
+        }));
+
+        return ($param) ? $param : null;
+    }
 }
