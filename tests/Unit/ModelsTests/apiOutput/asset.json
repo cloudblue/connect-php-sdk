@@ -1,270 +1,324 @@
 {
-  "id":"AS-380-400-615-2",
-  "status":"processing",
-  "external_id":"1234567890",
-  "external_uid":"14646b4b-af66-4089-ba3b-27241b2ed0aa",
-  "external_name":"FallBall 1234567890",
-  "product":{
-    "id":"PRD-688-232-485",
-    "icon":"",
-    "name":"Sample App"
+  "id": "AS-935-412-198-9",
+  "status": "active",
+  "external_id": "C051UCMB24",
+  "external_uid": "446428f6-0408-44f9-9ee8-47c36b4d18e8",
+  "product": {
+    "id": "PRD-485-560-439",
+    "icon": "/media/VA-004-290/PRD-485-560-439/media/PRD-485-560-439-logo.png",
+    "name": "Configuration Parameters"
   },
-  "events":{
-    "updated":{
-      "at":"2019-07-25T13:16:32+00:00"
+  "events": {
+    "updated": {
+      "at": "2019-09-13T12:22:11+00:00"
     },
-    "created":{
-      "at":"2019-07-25T13:16:32+00:00"
+    "created": {
+      "at": "2019-09-13T11:40:44+00:00"
     }
   },
-  "items":[
+  "items": [
     {
-      "period":"",
-      "old_quantity":"200",
-      "display_name":"",
-      "item_type":"",
-      "mpn":"",
-      "params":[
+      "period": "Monthly",
+      "old_quantity": "1",
+      "display_name": "Sku A",
+      "item_type": "Reservation",
+      "mpn": "MPN-A",
+      "params": [
         {
-          "id":"name-20af98d3a1fe46d88db7f844a89f3b41",
-          "title":"title-20af98d3a1fe46d88db7f844a89f3b41",
-          "type":"text",
-          "scope":"item",
-          "phase":"configuration",
-          "constraints":{
-            "hidden":false,
-            "required":false,
-            "unique":false
-          },
-          "events":{
-            "updated":{
-              "at":"2019-07-25T13:16:32+00:00"
+          "value": "Value 1",
+          "events": {
+            "updated": {
+              "at": "2019-08-27T14:21:23+00:00",
+              "by": {
+                "id": "UR-841-574-187",
+                "name": "Marc Serrat"
+              }
             },
-            "created":{
-              "at":"2019-07-25T13:16:32+00:00"
+            "created": {
+              "at": "2019-08-26T10:42:56+00:00",
+              "by": {
+                "id": "UR-841-574-187",
+                "name": "Marc Serrat"
+              }
             }
+          },
+          "id": "item_parameter",
+          "title": "item_parameter",
+          "description": "item_parameter",
+          "type": "text",
+          "scope": "item",
+          "phase": "configuration",
+          "constraints": {
+            "hidden": false,
+            "required": false,
+            "unique": false
           }
         },
         {
-          "value":"avalue",
-          "id":"name-2c79d484c25540a98d06a73336cd4c02",
-          "title":"title-2c79d484c25540a98d06a73336cd4c02",
-          "type":"text",
-          "scope":"item_marketplace",
-          "phase":"configuration",
-          "constraints":{
-            "hidden":false,
-            "required":false,
-            "unique":false
-          },
-          "marketplace":{
-            "id":"MP-33690",
-            "name":"665840fe5899469cb4cf8114d04ec15b"
-          },
-          "events":{
-            "updated":{
-              "at":"2019-07-25T13:16:32+00:00"
+          "value": "item",
+          "events": {
+            "updated": {
+              "at": "2019-08-26T10:44:10+00:00"
             },
-            "created":{
-              "at":"2019-07-25T13:16:32+00:00"
+            "created": {
+              "at": "2019-08-26T10:44:10+00:00",
+              "by": {
+                "id": "UR-841-574-187",
+                "name": "Marc Serrat"
+              }
             }
+          },
+          "id": "item_per_marketplace",
+          "title": "item_per_marketplace",
+          "description": "item_per_marketplace",
+          "type": "text",
+          "scope": "item_marketplace",
+          "phase": "configuration",
+          "constraints": {
+            "hidden": false,
+            "required": true,
+            "unique": false
           }
         }
       ],
-      "type":"",
-      "id":"name-49a675f648714d1db3191aed12c07d4d",
-      "global_id":"",
-      "quantity":"200"
+      "type": "Gb",
+      "id": "SKU_A",
+      "global_id": "PRD-485-560-439-0001",
+      "quantity": "1"
     },
     {
-      "period":"",
-      "old_quantity":"300",
-      "display_name":"",
-      "item_type":"",
-      "mpn":"",
-      "params":[
-      ],
-      "type":"",
-      "id":"invalid",
-      "global_id":"",
-      "quantity":"300"
-    },
-    {
-      "period":"",
-      "old_quantity":"500",
-      "display_name":"",
-      "item_type":"",
-      "mpn":"",
-      "params":[
-
-      ],
-      "type":"",
-      "id":"name-f49191ac6c084fc8881e4ed440c030db",
-      "global_id":"",
-      "quantity":"500"
-    }
-  ],
-  "params":[
-    {
-      "value":"value",
-      "id":"whatevervemdorwants",
-      "title":"title-2c79d484c25540a98d06a73336cd4c02",
-      "type":"text",
-      "scope":"item_marketplace",
-      "phase":"configuration",
-      "constraints":{
-        "hidden":false,
-        "required":false,
-        "unique":false
-      }
-    }
-  ],
-  "tiers":{
-    "customer": {
-      "contact_info": {
-        "address_line1": "63136 Breanna Fall",
-        "address_line2": "Suite 351",
-        "city": "South Linda",
-        "contact": {
-          "email": "njohnsonrp8l@example.org",
-          "first_name": "Allison",
-          "last_name": "Gregory",
-          "phone_number": {
-            "area_code": "1",
-            "country_code": "+252",
-            "extension": "",
-            "phone_number": "076810"
+      "period": "Monthly",
+      "old_quantity": "2",
+      "display_name": "Sku B",
+      "item_type": "Reservation",
+      "mpn": "MPN-B",
+      "params": [
+        {
+          "events": {
+            "updated": {
+              "at": "2019-09-02T16:00:31+00:00",
+              "by": {
+                "id": "UR-841-574-187",
+                "name": "Marc Serrat"
+              }
+            },
+            "created": {
+              "at": "2019-08-26T10:43:10+00:00",
+              "by": {
+                "id": "UR-841-574-187",
+                "name": "Marc Serrat"
+              }
+            }
+          },
+          "id": "item_parameter",
+          "title": "item_parameter",
+          "description": "item_parameter",
+          "type": "text",
+          "scope": "item",
+          "phase": "configuration",
+          "constraints": {
+            "hidden": false,
+            "required": false,
+            "unique": false
           }
         },
-        "country": "US",
-        "postal_code": "15384",
-        "state": "East Brianberg"
+        {
+          "value": "item",
+          "events": {
+            "updated": {
+              "at": "2019-08-26T10:44:26+00:00"
+            },
+            "created": {
+              "at": "2019-08-26T10:44:26+00:00",
+              "by": {
+                "id": "UR-841-574-187",
+                "name": "Marc Serrat"
+              }
+            }
+          },
+          "id": "item_per_marketplace",
+          "title": "item_per_marketplace",
+          "description": "item_per_marketplace",
+          "type": "text",
+          "scope": "item_marketplace",
+          "phase": "configuration",
+          "constraints": {
+            "hidden": false,
+            "required": true,
+            "unique": false
+          }
+        }
+      ],
+      "type": "Devices",
+      "id": "SKU_B",
+      "global_id": "PRD-485-560-439-0002",
+      "quantity": "2"
+    }
+  ],
+  "params": [
+    {
+      "value": "Fulfillment param",
+      "value_error": "",
+      "title": "Fulfillment Parameter B",
+      "description": "Fulfillment Parameter B",
+      "type": "text",
+      "scope": "asset",
+      "phase": "fulfillment",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
       },
-      "external_id": "512",
-      "external_uid": "b9c2ef1e-eb30-48af-8d02-13783cb16906",
-      "id": "TA-0-5432-1750-3304",
-      "name": "Lowery, Reeves and Martin"
+      "id": "fulfillment_param_b"
+    },
+    {
+      "value": "order parameter",
+      "value_error": "",
+      "title": "Order Parameter A",
+      "description": "Order Parameter A",
+      "type": "text",
+      "scope": "asset",
+      "phase": "ordering",
+      "constraints": {
+        "hidden": false,
+        "required": true,
+        "unique": false
+      },
+      "id": "order_param_a"
+    }
+  ],
+  "tiers": {
+    "customer": {
+      "external_uid": "94e64887-4586-4a6a-b2a5-374e435bb72f",
+      "external_id": "45227",
+      "id": "TA-0-6174-1877-5245",
+      "name": "Kemmer - Wyman",
+      "contact_info": {
+        "address_line2": "D'Amore Ports",
+        "city": "Baldwin",
+        "address_line1": "Lang Grove",
+        "country": "US",
+        "state": "Alabama",
+        "contact": {
+          "phone_number": {
+            "phone_number": "8677089",
+            "area_code": "555",
+            "extension": "",
+            "country_code": "+1"
+          },
+          "first_name": "Austyn",
+          "last_name": "Feeney",
+          "email": "mserrat+Austyn_Feeney@odin.com"
+        },
+        "postal_code": "36507"
+      }
     },
     "tier1": {
+      "external_uid": "1d1979bb-fc02-4789-8614-1f0823b03a3c",
+      "external_id": "47501",
+      "id": "TA-0-0600-2411-4000",
+      "name": "Goldner - Runolfsdottir",
       "contact_info": {
-        "address_line1": "noname",
-        "address_line2": "",
-        "city": "noname",
+        "address_line2": "Romaguera Plain",
+        "city": "Baldwin",
+        "address_line1": "Jettie Spring",
+        "country": "US",
+        "state": "Alabama",
         "contact": {
-          "email": "no-reply@acme.example.com",
-          "first_name": "ACME",
-          "last_name": "Reseller",
           "phone_number": {
-            "area_code": "234",
-            "country_code": "+1",
+            "phone_number": "8677089",
+            "area_code": "555",
             "extension": "",
-            "phone_number": "567890"
-          }
+            "country_code": "+1"
+          },
+          "first_name": "Raoul",
+          "last_name": "Emard",
+          "email": "mserrat+Raoul_Emard@odin.com"
         },
-        "country": "us",
-        "postal_code": "12111",
-        "state": "Alaska"
-      },
-      "external_id": "1",
-      "external_uid": "3a9a36db-91b4-4742-986b-e18eb43a0874",
-      "id": "TA-0-2301-6591-5904",
-      "name": "ACME Reseller"
+        "postal_code": "36507"
+      }
     },
     "tier2": {}
   },
-  "configuration":{
-    "params":[
+  "configuration": {
+    "params": [
       {
-        "value":"value",
-        "id":"f",
-        "title":"title-406f07adb02147b6b3db9ab2ed1c921b",
-        "type":"text",
-        "scope":"product",
-        "phase":"configuration",
-        "constraints":{
-          "hidden":false,
-          "required":false,
-          "unique":false
-        },
-        "events":{
-          "updated":{
-            "at":"2019-07-25T13:16:32+00:00"
+        "value": "product_value",
+        "events": {
+          "updated": {
+            "at": "2019-08-26T10:42:49+00:00"
           },
-          "created":{
-            "at":"2019-07-25T13:16:32+00:00"
+          "created": {
+            "at": "2019-08-26T10:42:49+00:00",
+            "by": {
+              "id": "UR-841-574-187",
+              "name": "Marc Serrat"
+            }
           }
+        },
+        "id": "product_configuration",
+        "title": "product_configuration",
+        "description": "product_configuration",
+        "type": "text",
+        "scope": "product",
+        "phase": "configuration",
+        "constraints": {
+          "hidden": false,
+          "required": true,
+          "unique": false
         }
       },
       {
-        "value":"value",
-        "id":"g",
-        "title":"title-cbbde34c736e441c87dee95a1fb172f7",
-        "type":"text",
-        "scope":"product",
-        "phase":"configuration",
-        "constraints":{
-          "hidden":false,
-          "required":false,
-          "unique":false
-        },
-        "events":{
-          "updated":{
-            "at":"2019-07-25T13:16:32+00:00"
+        "value": "product_marketplace_config",
+        "events": {
+          "updated": {
+            "at": "2019-08-26T10:43:27+00:00"
           },
-          "created":{
-            "at":"2019-07-25T13:16:32+00:00"
+          "created": {
+            "at": "2019-08-26T10:43:27+00:00",
+            "by": {
+              "id": "UR-841-574-187",
+              "name": "Marc Serrat"
+            }
           }
-        }
-      },
-      {
-        "value":"value",
-        "id":"name-6218a67a956e4f9d9c6ee59842ad4345",
-        "title":"title-6218a67a956e4f9d9c6ee59842ad4345",
-        "type":"text",
-        "scope":"marketplace",
-        "phase":"configuration",
-        "constraints":{
-          "hidden":false,
-          "required":false,
-          "unique":false
         },
-        "marketplace":{
-          "id":"MP-33690",
-          "name":"665840fe5899469cb4cf8114d04ec15b"
-        },
-        "events":{
-          "updated":{
-            "at":"2019-07-25T13:16:32+00:00"
-          },
-          "created":{
-            "at":"2019-07-25T13:16:32+00:00"
-          }
+        "id": "product_Marketplace_configuration",
+        "title": "product_Marketplace_configuration",
+        "description": "product_Marketplace_configuration",
+        "type": "text",
+        "scope": "marketplace",
+        "phase": "configuration",
+        "constraints": {
+          "hidden": false,
+          "required": true,
+          "unique": false
         }
       }
     ]
   },
-  "connection":{
-    "type":"preview",
-    "vendor":{
-      "id":"VA-296-825",
-      "name":"Davis, Cole and Baker"
+  "connection": {
+    "type": "preview",
+    "vendor": {
+      "id": "VA-004-290",
+      "name": "Marc's Staging Vendor"
     },
-    "id":"CT-0000-0000-0000",
-    "hub":{
-      "id":"HB-6654-6733",
-      "name":"mn.velit.int.zone"
+    "id": "CT-0000-0000-0000",
+    "hub": {
+      "id": "HB-0000-0000",
+      "name": "ACME Hub"
     },
-    "provider":{
-      "id":"PA-868-971",
-      "name":"Gonzales-Garcia"
+    "provider": {
+      "id": "PA-855-748",
+      "name": "CB Demo Staging Provider Brand 507"
     }
   },
-  "marketplace":{
-    "id":"MP-33690",
-    "name":"665840fe5899469cb4cf8114d04ec15b"
+  "marketplace": {
+    "id": "MP-71206",
+    "name": "Worldwide Marketplace",
+    "icon": "/media/PA-855-748/marketplaces/MP-71206/icon.png"
   },
-  "contract":{
-    "id":"CRD-00000-00000-00000",
-    "name":"ACME Distribution Contract"
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
   }
 }
