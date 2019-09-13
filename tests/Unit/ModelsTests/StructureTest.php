@@ -199,7 +199,8 @@ class StructureTest extends \Test\TestCase
     {
         $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/fulfillment_request.json'));
         $request = Model::modelize('request', $apiOutput);
-        $this->assertEquals('item', ($request->asset->getItemByMPN('MPN-A'))->getParameterByID('item_per_marketplace')->value);
+        $item = $request->asset->getItemByMPN('MPN-A');
+        $this->assertEquals('item', $item->getParameterByID('item_per_marketplace')->value);
     }
 
     public function getRequestParameter()
