@@ -30,6 +30,10 @@ class TierConfiguration extends Core
     {
         $query = '';
 
+        if ($this->config->products) {
+            $filters['configuration__product__id__in'] = implode(",", $this->config->products);
+        }
+
         if ($filters) {
             $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
         }
