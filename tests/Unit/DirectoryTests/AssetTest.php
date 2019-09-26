@@ -22,13 +22,33 @@ class AssetTest extends \Test\TestCase
     public function testGetInstanceBackwardsCompatibility()
     {
         $assets = ConnectClient::getInstance(new Config(__DIR__. '/config.mocked.json'))->directory->listAssets(array('marketplace.id' => 'MP-48480'));
-        $this->assertEquals('MP-48480',$assets[0]->marketplace->id);
+        $this->assertEquals('MP-48480', $assets[0]->marketplace->id);
     }
 
     public function testGetAssets()
     {
         $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.json'));
         $assets = $connectClient->directory->listAssets();
+        foreach ($assets as $asset) {
+            $this->assertInstanceOf("\Connect\Asset", $asset);
+        }
+        $this->assertEquals(10, count($assets));
+    }
+
+    public function testGetAssetsRQL()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.json'));
+        $assets = $connectClient->directory->listAssets(new \Connect\RQL\Query(['product_id', 'PRD-123-123-123']));
+        foreach ($assets as $asset) {
+            $this->assertInstanceOf("\Connect\Asset", $asset);
+        }
+        $this->assertEquals(10, count($assets));
+    }
+
+    public function testGetAssetsRQLArrayFilters()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.json'));
+        $assets = $connectClient->directory->listAssets(['product_id', 'PRD-123-123-123']);
         foreach ($assets as $asset) {
             $this->assertInstanceOf("\Connect\Asset", $asset);
         }

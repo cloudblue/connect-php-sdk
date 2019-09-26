@@ -45,15 +45,16 @@ class Directory extends Core
     {
         $query = new \Connect\RQL\Query();
 
-        if(is_array($filters))
-        {
+        if (is_array($filters)) {
             $query = new \Connect\RQL\Query($filters);
+        } elseif ($filters instanceof \Connect\RQL\Query) {
+            $query = $filters;
         }
 
-        if($this->config->products){
+        if ($this->config->products) {
             $query->in('product.id', is_array($this->config->products)
                 ? $this->config->products
-                : explode(',',$this->config->products));
+                : explode(',', $this->config->products));
         }
 
         $body = $this->sendRequest('GET', '/assets' . $query->compile());
@@ -112,19 +113,22 @@ class Directory extends Core
      * @return \Connect\TierConfig[]
      * @throws GuzzleException
      */
-    public function listTierConfigs(array $filters = [])
+    public function listTierConfigs($filters = null)
     {
         $query = new \Connect\RQL\Query();
 
-        if(is_array($filters))
-        {
+        if ($filters instanceof \Connect\RQL\Query) {
+            $query = $filters;
+        } elseif (is_array($filters)) {
             $query = new \Connect\RQL\Query($filters);
+        } else {
+            $query = new \Connect\RQL\Query();
         }
 
-        if($this->config->products){
+        if ($this->config->products) {
             $query->in('product.id', is_array($this->config->products)
                 ? $this->config->products
-                : explode(',',$this->config->products));
+                : explode(',', $this->config->products));
         }
 
         $body = $this->sendRequest('GET', '/tier/configs' . $query->compile());

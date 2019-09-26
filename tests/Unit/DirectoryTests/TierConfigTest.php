@@ -22,6 +22,28 @@ class TierConfigTest extends \Test\TestCase
         $this->assertEquals(1, count($tierConfigs));
     }
 
+    public function testGetTierConfigsRql()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.TierConfigList.json'));
+        $tierConfigs = $connectClient->directory->listTierConfigs(new \Connect\RQL\Query(['product.id' => 'PRD-866-415-789']));
+        foreach ($tierConfigs as $tierConfig) {
+            $this->assertInstanceOf("\Connect\TierConfig", $tierConfig);
+            $this->assertEquals('PRD-866-415-789', $tierConfig->product->id);
+        }
+        $this->assertEquals(1, count($tierConfigs));
+    }
+
+    public function testGetTierConfigsRqlOverFilterArray()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.TierConfigList.json'));
+        $tierConfigs = $connectClient->directory->listTierConfigs(['product.id' => 'PRD-866-415-789']);
+        foreach ($tierConfigs as $tierConfig) {
+            $this->assertInstanceOf("\Connect\TierConfig", $tierConfig);
+            $this->assertEquals('PRD-866-415-789', $tierConfig->product->id);
+        }
+        $this->assertEquals(1, count($tierConfigs));
+    }
+
     public function testGetTierConfig()
     {
         $connectClient = new ConnectClient(new Config(__DIR__ . '/config.mocked.getTierConfig.json'));

@@ -7,7 +7,6 @@
 
 namespace Connect\RQL;
 
-
 class Query
 {
     /**
@@ -24,21 +23,40 @@ class Query
 
     /**
      * Limit of elements to return
-     * @var string
+     * @var int
      */
     protected $limit;
 
     /**
-     * List of properties to sort
+     * orderby single property to orderby
+     * @var string
+     */
+    protected $orderby;
+
+    /**
+     * Offset to return
+     * Useful together with limit
+     * @var int
+     */
+    protected $offset;
+
+    /**
+     * List of properties to set ordering
      * @var array
      */
-    protected $sort;
+    protected $ordering;
 
     /**
      * List of properties and patterns
      * @var array
      */
     protected $like;
+
+    /**
+     * List of properties and patterns
+     * @var array
+     */
+    protected $ilike;
 
     /**
      * List of attributes to return
@@ -55,15 +73,16 @@ class Query
 
     public function __construct($input = null)
     {
-        if(is_array($input))
-        {
-            foreach($input as $key => $value)
-            {
-                if(is_array($value)){
-                    $this->in('key', $value);
-                }
-                else{
-                    $this->equal('key', $value);
+        if (is_array($input)) {
+            foreach ($input as $key => $value) {
+                if (property_exists($this, $key)) {
+                    $this->{$key} = $value;
+                } else {
+                    if (is_array($value)) {
+                        $this->in($key, $value);
+                    } else {
+                        $this->equal($key, $value);
+                    }
                 }
             }
         }
@@ -95,29 +114,48 @@ class Query
 
     /**
      * Return the given number of objects from the start position
-     * @param $start
-     * @param $number
+     * @param $amount
      * @return $this
      */
-    public function limit($start, $number)
+    public function limit($amount)
     {
-        $this->limit = array(
-            'start' => $start,
-            'number' => $number
-        );
+        $this->limit = $amount;
         return $this;
     }
 
     /**
-     * Sort a list of objects by the given properties (unlimited number of properties).
-     * The list is sorted first by the first specified property, then by the second, and
-     * so on. The sort order is specified by the prefix: + ascending order, - descending.
+     * Order list by given property
+     * Allows + and - operand for Ascending or Descending
+     * @param $amount
+     * @return $this
+     */
+    public function orderby($property)
+    {
+        $this->orderby = $property;
+        return $this;
+    }
+
+    /**
+     * Offset (page) to return on paged queries
+     * @param $offset
+     * @return $this
+     */
+    public function offset($page)
+    {
+        $this->offset = $page;
+        return $this;
+    }
+
+    /**
+     * Orderlist of objects by the given properties (unlimited number of properties).
+     * The list is ordered first by the first specified property, then by the second, and
+     * so on. The order is specified by the prefix: + ascending order, - descending.
      * @param $propertyList
      * @return $this
      */
-    public function sort(array $propertyList)
+    public function ordering(array $propertyList)
     {
-        $this->sort = $propertyList;
+        $this->ordering = $propertyList;
         return $this;
     }
 
@@ -134,6 +172,18 @@ class Query
     public function like($property, $pattern)
     {
         $this->like[$property] = $pattern;
+        return $this;
+    }
+
+    /**
+     * Same as like but case unsensitive
+    * @param $property
+    * @param $pattern
+    * @return $this
+    */
+    public function ilike($property, $pattern)
+    {
+        $this->ilike[$property] = $pattern;
         return $this;
     }
 
@@ -243,6 +293,12 @@ class Query
             }
         }
 
+        if (isset($this->ilike)) {
+            foreach ($this->ilike as $property => $pattern) {
+                $rql[] = sprintf('ilike(%s,%s)', $property, $pattern);
+            }
+        }
+
         if (isset($this->in)) {
             foreach ($this->in as $property => $inArray) {
                 $rql[] = sprintf('in(%s,(%s))', $property, implode(',', $inArray));
@@ -255,21 +311,31 @@ class Query
             }
         }
 
-        if(isset($this->relationalOperators)){
-            foreach($this->relationalOperators as $operator => $arguments){
-                foreach($arguments as $argument)
-                    $rql[] = sprintf('%s(%s)',$operator,implode(',', $argument));
+        if (isset($this->relationalOperators)) {
+            foreach ($this->relationalOperators as $operator => $arguments) {
+                foreach ($arguments as $argument) {
+                    $rql[] = sprintf('%s(%s)', $operator, implode(',', $argument));
+                }
             }
         }
 
-        if (isset($this->sort)) {
-            $rql[] = sprintf('sort(%s)', implode(',', $this->sort));
+        if (isset($this->ordering)) {
+            $rql[] = sprintf('ordering(%s)', implode(',', $this->ordering));
         }
 
         if (isset($this->limit)) {
-            $rql[] = sprintf('limit(%s)', implode(',', $this->limit));
+            $rql[] = sprintf('limit(%s)', $this->limit);
         }
-        if(count($rql) > 0){
+
+        if (isset($this->orderby)) {
+            $rql[] = sprintf('order_by(%s)', $this->orderby);
+        }
+
+        if (isset($this->offset)) {
+            $rql[] = sprintf('offset(%s)', $this->offset);
+        }
+
+        if (count($rql) > 0) {
             return "?".implode('&', $rql);
         }
         return "";

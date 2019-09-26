@@ -61,5 +61,4 @@ class Events extends Model
      * @var string|null|Event
      */
     public $closed;
-
 }

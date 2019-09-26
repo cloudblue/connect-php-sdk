@@ -108,5 +108,4 @@ class File extends \Connect\Model
      * @var Events
      */
     public $events;
-
 }
