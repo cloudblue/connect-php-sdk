@@ -7,7 +7,6 @@
 
 namespace Connect;
 
-
 class ProductConfigurationParameter extends Model
 {
     /**
@@ -44,5 +43,4 @@ class ProductConfigurationParameter extends Model
      */
 
     public $marketplace;
-
 }

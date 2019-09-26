@@ -79,14 +79,13 @@ class Product extends Model
 
     public function getProductConfigurations(RQL\Query $filter = null)
     {
-        if ($this->id == null){
+        if ($this->id == null) {
             return [];
         }
-        if(!$filter){
+        if (!$filter) {
             $filter = new \Connect\RQL\Query();
         }
         $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/'.$this->id.'/configurations'.$filter->compile());
         return Model::modelize('ProductConfigurationParameters', json_decode($body));
-
     }
 }

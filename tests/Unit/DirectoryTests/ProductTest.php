@@ -28,13 +28,11 @@ class ProductTest extends \Test\TestCase
         $product = $connectClient->directory->getProduct('PRD-086-505-671');
         $this->assertInstanceOf("\Connect\Product", $product);
         $templates = $product->getTemplates();
-        foreach($templates as $template)
-        {
+        foreach ($templates as $template) {
             $this->assertInstanceOf('\Connect\template', $template);
         }
         $configurations = $product->getProductConfigurations();
-        foreach($configurations as $configuration)
-        {
+        foreach ($configurations as $configuration) {
             $this->assertInstanceOf('\Connect\ProductConfigurationParameter', $configuration);
         }
     }
@@ -52,5 +50,4 @@ class ProductTest extends \Test\TestCase
         $configurations = $product->getProductConfigurations();
         $this->assertCount(0, $configurations);
     }
-
 }

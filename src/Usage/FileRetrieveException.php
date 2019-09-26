@@ -15,7 +15,6 @@ namespace Connect\Usage;
  */
 class FileRetrieveException extends \Connect\Exception
 {
-
     public function __construct($message)
     {
         parent::__construct($message, 'fileretrieve');

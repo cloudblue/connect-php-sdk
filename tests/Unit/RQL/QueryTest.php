@@ -20,10 +20,14 @@ class QueryTest extends \Test\TestCase
     public function testArrayBackwardsCompatibilityString()
     {
         $arrayFilters = array(
-            "product.id" => "PRD-123123123"
+            "product.id" => "PRD-123123123",
+            "ordering" => ["test1","test2"],
+            "limit" => 10,
+            "offset" => 4,
+            "orderby" => "property"
         );
         $rql = new Query($arrayFilters);
-        $this->assertEquals('?eq(key,PRD-123123123)', $rql->compile());
+        $this->assertEquals('?eq(product.id,PRD-123123123)&ordering(test1,test2)&limit(10)&order_by(property)&offset(4)', $rql->compile());
     }
 
     public function testArrayBackwardsCompatibilityArray()
@@ -32,13 +36,13 @@ class QueryTest extends \Test\TestCase
             "product.id" => array("PRD-123123123","PRD-123123123")
         );
         $rql = new Query($arrayFilters);
-        $this->assertEquals('?in(key,(PRD-123123123,PRD-123123123))', $rql->compile());
+        $this->assertEquals('?in(product.id,(PRD-123123123,PRD-123123123))', $rql->compile());
     }
 
     public function testEqual()
     {
         $rql = new Query();
-        $rql->equal('key','value');
+        $rql->equal('key', 'value');
         $this->assertEquals('?eq(key,value)', $rql->compile());
     }
 
@@ -59,22 +63,29 @@ class QueryTest extends \Test\TestCase
     public function testLike()
     {
         $rql = new Query();
-        $rql->like('product.id','PR-');
+        $rql->like('product.id', 'PR-');
         $this->assertEquals('?like(product.id,PR-)', $rql->compile());
+    }
+
+    public function testiLike()
+    {
+        $rql = new Query();
+        $rql->ilike('product.id', 'PR-');
+        $this->assertEquals('?ilike(product.id,PR-)', $rql->compile());
     }
 
     public function testOut()
     {
         $rql = new Query();
         $rql->out('product.id', array('PR-','CN-'));
-        $this->assertEquals('?out(product.id,(PR-,CN-))',$rql->compile());
+        $this->assertEquals('?out(product.id,(PR-,CN-))', $rql->compile());
     }
 
-    public function testSort()
+    public function testOrderBy()
     {
         $rql = new Query();
-        $rql->sort(array('date'));
-        $this->assertEquals('?sort(date)', $rql->compile());
+        $rql->orderby('date');
+        $this->assertEquals('?order_by(date)', $rql->compile());
     }
 
     public function testIsNot()
@@ -115,7 +126,21 @@ class QueryTest extends \Test\TestCase
     public function testLimit()
     {
         $rql = new Query();
-        $rql->limit(0,1);
-        $this->assertEquals('?limit(0,1)', $rql->__toString());
+        $rql->limit(10);
+        $this->assertEquals('?limit(10)', $rql->__toString());
+    }
+
+    public function testOffset()
+    {
+        $rql = new Query();
+        $rql->offset(10);
+        $this->assertEquals('?offset(10)', $rql->compile());
+    }
+
+    public function testordering()
+    {
+        $rql = new Query();
+        $rql->ordering(["property1", "property2"]);
+        $this->assertEquals("?ordering(property1,property2)", $rql->compile());
     }
 }
