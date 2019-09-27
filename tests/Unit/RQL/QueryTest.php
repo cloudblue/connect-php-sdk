@@ -27,7 +27,7 @@ class QueryTest extends \Test\TestCase
             "orderby" => "property"
         );
         $rql = new Query($arrayFilters);
-        $this->assertEquals('?eq(product.id,PRD-123123123)&ordering(test1,test2)&limit(10)&order_by(property)&offset(4)', $rql->compile());
+        $this->assertEquals('?eq(product.id,PRD-123123123)&ordering(test1,test2)&limit=10&order_by=property&offset=4', $rql->compile());
     }
 
     public function testArrayBackwardsCompatibilityArray()
@@ -85,7 +85,7 @@ class QueryTest extends \Test\TestCase
     {
         $rql = new Query();
         $rql->orderby('date');
-        $this->assertEquals('?order_by(date)', $rql->compile());
+        $this->assertEquals('?order_by=date', $rql->compile());
     }
 
     public function testIsNot()
@@ -127,14 +127,14 @@ class QueryTest extends \Test\TestCase
     {
         $rql = new Query();
         $rql->limit(10);
-        $this->assertEquals('?limit(10)', $rql->__toString());
+        $this->assertEquals('?limit=10', $rql->__toString());
     }
 
     public function testOffset()
     {
         $rql = new Query();
         $rql->offset(10);
-        $this->assertEquals('?offset(10)', $rql->compile());
+        $this->assertEquals('?offset=10', $rql->compile());
     }
 
     public function testordering()
