@@ -324,7 +324,7 @@ class Query
         }
 
         if (isset($this->limit)) {
-            $rql[] = sprintf('limit(%s)', $this->limit);
+            $rql[] = sprintf('limit=%s', $this->limit);
         }
 
         if (isset($this->orderby)) {
@@ -332,7 +332,7 @@ class Query
         }
 
         if (isset($this->offset)) {
-            $rql[] = sprintf('offset(%s)', $this->offset);
+            $rql[] = sprintf('offset=%s', $this->offset);
         }
 
         if (count($rql) > 0) {
