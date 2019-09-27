@@ -328,7 +328,7 @@ class Query
         }
 
         if (isset($this->orderby)) {
-            $rql[] = sprintf('order_by(%s)', $this->orderby);
+            $rql[] = sprintf('order_by=%s', $this->orderby);
         }
 
         if (isset($this->offset)) {
