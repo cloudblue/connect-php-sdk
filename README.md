@@ -270,7 +270,7 @@ $connect = new Connect\ConnectClient(new \Connect\Config([
     "apiKey" => "SU-677-956-738:ca95348138a3c122943ba968a9b69e42d30bde6c",
        "apiEndpoint" =>  "https://api.cnct.info/public/v1",
        "logLevel"=> 7,
-       "timeout" =>  60,
+       "timeout" =>  120,
        "sslVerifyHost"=> false
 ]));
 $connect->directory->listTierConfigs()

@@ -52,7 +52,7 @@ class Config extends Model
      * Network interaction timeout, seconds
      * @var int
      */
-    public $timeout = 50;
+    public $timeout = 120;
 
     /**
      * Do we need to verify SSL certificate of server
