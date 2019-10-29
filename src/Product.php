@@ -54,6 +54,12 @@ class Product extends Model
     protected $configurations;
 
     /**
+     * @var ProductCategory
+     */
+
+    protected $category;
+
+    /**
      * @var ProductCustomerUISettings
      */
     protected $customer_ui_settings;
@@ -66,6 +72,11 @@ class Product extends Model
     public function setCustomer_ui_settings($ui_settings)
     {
         $this->customer_ui_settings = Model::modelize('ProductCustomerUISettings', $ui_settings);
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = Model::modelize('ProductCategory', $category);
     }
 
     public function getTemplates()
