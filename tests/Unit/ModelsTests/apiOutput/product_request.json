@@ -41,5 +41,9 @@
       }
     ]
   },
-  "version": 2
+  "version": 2,
+  "category": {
+    "id": "CAT-95793",
+    "name": "Communication and Collaboration"
+  }
 }
