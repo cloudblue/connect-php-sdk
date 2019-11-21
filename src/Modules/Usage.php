@@ -149,7 +149,7 @@ class Usage extends Core
             "usage_records"
         ), 0);
         $spreadSheet->setActiveSheetIndexByName('usage_records');
-        $spreadSheet->getActiveSheet()->setCellValue('A1', "usage_record_id");
+        $spreadSheet->getActiveSheet()->setCellValue('A1', "record_id");
         $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
         $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_value");
         $spreadSheet->getActiveSheet()->setCellValue('D1', "quantity");

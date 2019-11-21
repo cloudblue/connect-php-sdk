@@ -56,14 +56,12 @@ class Conversation extends Model
     public function addMessage($message)
     {
         if (isset($this->id)) {
-            if ($this->__checkLastMessageIsNotEqueal($message)) {
-                $request = ConnectClient::getInstance()->fulfillment->sendRequest(
-                    'POST',
-                    "/conversations/" . $this->id . "/messages",
-                    json_encode(array("text" => $message))
-                );
-                return Model::modelize('conversationMessage', json_decode($request));
-            }
+            $request = ConnectClient::getInstance()->fulfillment->sendRequest(
+                'POST',
+                "/conversations/" . $this->id . "/messages",
+                json_encode(array("text" => $message))
+            );
+            return Model::modelize('conversationMessage', json_decode($request));
         }
     }
 

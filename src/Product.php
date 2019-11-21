@@ -49,6 +49,11 @@ class Product extends Model
     public $version;
 
     /**
+     * @var string
+     */
+    public $status;
+
+    /**
      * @var ProductConfiguration
      */
     protected $configurations;
