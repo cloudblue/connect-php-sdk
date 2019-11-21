@@ -7,7 +7,6 @@
 
 namespace Connect;
 
-
 class ProductCategory extends Model
 {
     /**
@@ -20,5 +19,4 @@ class ProductCategory extends Model
      */
 
     public $name;
-
 }

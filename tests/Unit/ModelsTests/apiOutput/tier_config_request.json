@@ -1,19 +1,19 @@
 {
-  "id": "TCR-008-835-493-001",
+  "id": "TCR-604-770-832-001",
   "type": "setup",
   "status": "approved",
   "configuration": {
-    "id": "TC-457-242-797",
-    "name": "Configuration of TA-0-4140-3577-7360",
+    "id": "TC-604-770-832",
+    "name": "Configuration of TA-4432-8481-6123",
     "account": {
-      "external_uid": "6784d94e-fdb6-486a-81a0-35041e887d33",
-      "external_id": "49992",
-      "id": "TA-0-4140-3577-7360",
-      "name": "Schinner - Rutherford",
+      "external_uid": "1d1979bb-fc02-4789-8614-1f0823b03a3c",
+      "external_id": "1",
+      "id": "TA-4432-8481-6123",
+      "name": "Goldner - Runolfsdottir",
       "contact_info": {
-        "address_line2": "Lehner Trail",
+        "address_line2": "Romaguera Plain",
         "city": "Baldwin",
-        "address_line1": "Pink Garden",
+        "address_line1": "Jettie Spring",
         "country": "US",
         "state": "Alabama",
         "contact": {
@@ -23,52 +23,55 @@
             "extension": "",
             "country_code": "+1"
           },
-          "first_name": "Silas",
-          "last_name": "Tremblay",
-          "email": "mserrat+Silas_Tremblay@odin.com"
+          "first_name": "Raoul",
+          "last_name": "Emard",
+          "email": "mserrat+Raoul_Emard@odin.com"
         },
         "postal_code": "36507"
       }
     },
     "product": {
-      "id": "PRD-485-560-439",
-      "icon": "/media/VA-004-290/PRD-485-560-439/media/PRD-485-560-439-logo.png",
-      "name": "Configuration Parameters"
+      "id": "PRD-078-548-680",
+      "icon": "/media/VA-642-215/PRD-078-548-680/media/PRD-078-548-680-logo_nSOnIQG.png",
+      "name": "v18 test 2",
+      "status": "published"
     },
     "tier_level": 1,
     "connection": {
-      "type": "preview",
-      "vendor": {
-        "id": "VA-004-290",
-        "name": "Marc's Staging Vendor"
-      },
-      "id": "CT-0000-0000-0000",
-      "hub": {
-        "id": "HB-0000-0000",
-        "name": "ACME Hub"
-      },
+      "id": "CT-3566-1499",
+      "type": "test",
+      "status": "approved",
       "provider": {
-        "id": "PA-855-748",
-        "name": "CB Demo Staging Provider Brand 507"
-      }
+        "id": "PA-840-838",
+        "name": "New external Distributor"
+      },
+      "vendor": {
+        "id": "VA-642-215",
+        "name": "Vendor company for mserrat"
+      },
+      "hub": {
+        "id": "HB-9561-4852",
+        "name": "api hub"
+      },
+      "created_at": "2019-11-15T14:42:25+00:00"
     },
     "events": {
       "updated": {
-        "at": "2019-08-26T10:52:23+00:00",
+        "at": "2019-11-15T15:57:36+00:00",
         "by": {
-          "id": "UR-841-574-187",
-          "name": "Marc Serrat"
+          "id": "SU-376-975-690",
+          "name": "asdf"
         }
       },
       "created": {
-        "at": "2019-08-26T10:46:29+00:00"
+        "at": "2019-11-15T15:27:18+00:00"
       }
     },
     "params": [
       {
-        "value": "12",
-        "title": "tier Order Parameter",
-        "description": "Tier Order Parameter",
+        "value": "value tier 1",
+        "title": "tier1",
+        "description": "tier1",
         "type": "text",
         "scope": "tier1",
         "phase": "ordering",
@@ -77,48 +80,34 @@
           "required": true,
           "unique": false
         },
-        "id": "tier_order_param"
-      },
-      {
-        "value": "12",
-        "title": "Tier Fulfillment Parameter",
-        "description": "Tier Fulfillment Parameter",
-        "type": "text",
-        "scope": "tier1",
-        "phase": "fulfillment",
-        "constraints": {
-          "hidden": false,
-          "required": true,
-          "unique": false
-        },
-        "id": "tier_fulfillment"
+        "id": "tier1"
       }
     ],
     "template": {
       "representation": "# Sample Template For Setup of Tier 1\n\nThis template is used to share details of the **successful** setup configuration of reseller of 1st level.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which have scope 'Tier 1'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is ****\n* The value of **param_b** is ****\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
-      "id": "TL-790-603-804",
+      "id": "TL-144-273-157",
       "name": "Default Activation Template"
     },
     "status": "active",
     "configuration": {
       "params": [
         {
-          "value": "product_value",
+          "value": "product configuration value",
           "events": {
             "updated": {
-              "at": "2019-08-26T10:42:49+00:00"
+              "at": "2019-11-15T12:51:32+00:00"
             },
             "created": {
-              "at": "2019-08-26T10:42:49+00:00",
+              "at": "2019-11-15T12:51:32+00:00",
               "by": {
-                "id": "UR-841-574-187",
-                "name": "Marc Serrat"
+                "id": "UR-242-357-281",
+                "name": "Marc"
               }
             }
           },
-          "id": "product_configuration",
-          "title": "product_configuration",
-          "description": "product_configuration",
+          "id": "productconfiguration",
+          "title": "product configuration",
+          "description": "product configuration",
           "type": "text",
           "scope": "product",
           "phase": "configuration",
@@ -130,46 +119,49 @@
         }
       ]
     },
+    "contract": {
+      "id": "CRU-56816-18906-58555",
+      "type": "sourcing"
+    },
     "marketplace": {
-      "id": "MP-71206",
-      "name": "Worldwide Marketplace",
-      "icon": "/media/PA-855-748/marketplaces/MP-71206/icon.png"
+      "id": "MP-96821",
+      "name": "My marketplace"
     }
   },
   "events": {
     "inquired": {
-      "at": "2019-08-26T10:46:29+00:00"
+      "at": "2019-11-15T15:27:18+00:00"
     },
     "updated": {
-      "at": "2019-08-26T10:52:23+00:00",
+      "at": "2019-11-15T15:57:36+00:00",
       "by": {
-        "id": "UR-841-574-187",
-        "name": "Marc Serrat"
+        "id": "SU-376-975-690",
+        "name": "asdf"
       }
     },
     "approved": {
-      "at": "2019-08-26T10:52:23+00:00",
+      "at": "2019-11-15T15:57:36+00:00",
       "by": {
-        "id": "UR-841-574-187",
-        "name": "Marc Serrat"
+        "id": "SU-376-975-690",
+        "name": "asdf"
       }
     },
     "pended": {
-      "at": "2019-08-26T10:47:26+00:00",
+      "at": "2019-11-15T15:43:27+00:00",
       "by": {
-        "id": "UR-841-574-187",
-        "name": "Marc Serrat"
+        "id": "UR-242-357-281",
+        "name": "Marc"
       }
     },
     "created": {
-      "at": "2019-08-26T10:46:29+00:00"
+      "at": "2019-11-15T15:27:18+00:00"
     }
   },
   "params": [
     {
-      "value": "12",
-      "title": "tier Order Parameter",
-      "description": "Tier Order Parameter",
+      "value": "value tier 1",
+      "title": "tier1",
+      "description": "tier1",
       "type": "text",
       "scope": "tier1",
       "phase": "ordering",
@@ -178,43 +170,29 @@
         "required": true,
         "unique": false
       },
-      "id": "tier_order_param"
-    },
-    {
-      "value": "12",
-      "title": "Tier Fulfillment Parameter",
-      "description": "Tier Fulfillment Parameter",
-      "type": "text",
-      "scope": "tier1",
-      "phase": "fulfillment",
-      "constraints": {
-        "hidden": false,
-        "required": true,
-        "unique": false
-      },
-      "id": "tier_fulfillment"
+      "id": "tier1"
     }
   ],
   "assignee": {
-    "id": "UR-841-574-187",
-    "name": "Marc Serrat"
+    "id": "SU-376-975-690",
+    "name": "asdf"
   },
   "template": {
     "representation": "# Sample Template For Setup of Tier 1\n\nThis template is used to share details of the **successful** setup configuration of reseller of 1st level.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which have scope 'Tier 1'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is ****\n* The value of **param_b** is ****\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
-    "id": "TL-790-603-804",
+    "id": "TL-144-273-157",
     "name": "Default Activation Template"
   },
-  "environment": "preview",
+  "environment": "test",
   "tiers": {
     "tier1": {
-      "external_uid": "6784d94e-fdb6-486a-81a0-35041e887d33",
-      "external_id": "49992",
-      "id": "TA-0-4140-3577-7360",
-      "name": "Schinner - Rutherford",
+      "external_uid": "1d1979bb-fc02-4789-8614-1f0823b03a3c",
+      "external_id": "1",
+      "id": "TA-4432-8481-6123",
+      "name": "Goldner - Runolfsdottir",
       "contact_info": {
-        "address_line2": "Lehner Trail",
+        "address_line2": "Romaguera Plain",
         "city": "Baldwin",
-        "address_line1": "Pink Garden",
+        "address_line1": "Jettie Spring",
         "country": "US",
         "state": "Alabama",
         "contact": {
@@ -224,9 +202,9 @@
             "extension": "",
             "country_code": "+1"
           },
-          "first_name": "Silas",
-          "last_name": "Tremblay",
-          "email": "mserrat+Silas_Tremblay@odin.com"
+          "first_name": "Raoul",
+          "last_name": "Emard",
+          "email": "mserrat+Raoul_Emard@odin.com"
         },
         "postal_code": "36507"
       }

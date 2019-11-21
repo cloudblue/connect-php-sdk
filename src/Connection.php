@@ -37,4 +37,14 @@ class Connection extends Model
      * @var Vendor
      */
     public $vendor;
+
+    /**
+     * @var string
+     */
+    public $status;
+
+    /**
+     * @var string
+     */
+    public $created_at;
 }
