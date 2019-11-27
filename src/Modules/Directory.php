@@ -82,11 +82,19 @@ class Directory extends Core
      * @return Product[]
      * @throws GuzzleException
      */
-    public function listProducts()
+    public function listProducts($filters = null)
     {
-        //Filtering is not possible at this moment on time, requested as feature LITE-9071
+        $query = new \Connect\RQL\Query();
 
-        $body = $this->sendRequest('GET', '/products');
+        if ($filters instanceof \Connect\RQL\Query) {
+            $query = $filters;
+        } elseif (is_array($filters)) {
+            $query = new \Connect\RQL\Query($filters);
+        } else {
+            $query = new \Connect\RQL\Query();
+        }
+
+        $body = $this->sendRequest('GET', '/products' . $query->compile());
 
         /** @var \Connect\Product[] $models */
         $models = Model::modelize('products', json_decode($body));
