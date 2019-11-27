@@ -9,6 +9,7 @@ namespace Test\Unit\DirectoryTests;
 
 use Connect\Config;
 use Connect\ConnectClient;
+use Connect\RQL\Query;
 
 class ProductTest extends \Test\TestCase
 {
@@ -16,6 +17,29 @@ class ProductTest extends \Test\TestCase
     {
         $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.ProductList.json'));
         $products = $connectClient->directory->listProducts();
+        foreach ($products as $product) {
+            $this->assertInstanceOf("\Connect\Product", $product);
+        }
+        $this->assertEquals(1, count($products));
+    }
+    public function testGetProductsFilter()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.ProductList.json'));
+        $products = $connectClient->directory->listProducts(new Query([
+            'limit' => 1
+        ]));
+        foreach ($products as $product) {
+            $this->assertInstanceOf("\Connect\Product", $product);
+        }
+        $this->assertEquals(1, count($products));
+    }
+
+    public function testGetProductsFilter2()
+    {
+        $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.ProductList.json'));
+        $products = $connectClient->directory->listProducts([
+            'limit' => 1
+        ]);
         foreach ($products as $product) {
             $this->assertInstanceOf("\Connect\Product", $product);
         }

@@ -64,14 +64,4 @@ class Conversation extends Model
             return Model::modelize('conversationMessage', json_decode($request));
         }
     }
-
-    private function __checkLastMessageIsNotEqueal($message)
-    {
-        if (count($this->messages) == 0) {
-            return true;
-        } elseif (end($this->messages)->text == $message) {
-            return false;
-        }
-        return true;
-    }
 }
