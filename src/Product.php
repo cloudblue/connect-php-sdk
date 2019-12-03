@@ -65,6 +65,11 @@ class Product extends Model
     protected $category;
 
     /**
+     * @var Owner
+     */
+    public $owner;
+
+    /**
      * @var ProductCustomerUISettings
      */
     protected $customer_ui_settings;
