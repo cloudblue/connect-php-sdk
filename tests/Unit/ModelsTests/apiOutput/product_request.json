@@ -45,5 +45,16 @@
   "category": {
     "id": "CAT-95793",
     "name": "Communication and Collaboration"
+  },
+  "stats": {
+    "contracts": {
+      "distribution": 1,
+      "sourcing": 0
+    },
+    "listings": 1,
+    "agreements": {
+      "distribution": 1,
+      "sourcing": 0
+    }
   }
 }

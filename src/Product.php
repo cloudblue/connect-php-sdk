@@ -74,6 +74,17 @@ class Product extends Model
      */
     protected $customer_ui_settings;
 
+    /**
+     * @var ProductStats
+     */
+
+    protected $stats;
+
+    public function setStats($stats)
+    {
+        $this->stats = Model::modelize('ProductStats', $stats);
+    }
+
     public function setConfigurations($configuration)
     {
         $this->configurations = Model::modelize('ProductConfigurations', $configuration);
