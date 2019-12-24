@@ -10,8 +10,15 @@ php:
 install:
 - composer install
 
+addons:
+  sonarcloud:
+    organization: "cloudbluesonarcube"
+    token:
+      secure: "Y+iV3l4t7D/+Kp7NugWyMZVlnD049CDmkLLNCHQDq04mA/QzMr6FPswSZhUm6zM3NtKdCqVxVDU7m+4/pxNIZdcsrJTwCatru2S1nPvJd/opdaLGQg6FEVY9VFlq/bOUNpvf5tSxU2Qq1sPwdfCV42AUzbVZxObbS76nxicnLyp2Ck8g1tZENGAOvumLFEaekHN4hF4Nb6mUzM9eI5wl59s8ebp/THuA9k9puFMZqGsmsfXei1IQTf/Y9lxnOZOCwto0FpliT+8jTZWtuhBpEtn6EQTbGTjQteo6YxjZ+SRkXpOjmulQaYzkSip+HLV5wLxAuJDA4g355vJfT3Hz/DVu1g3tCny1LN1pG7KZOFyyIvE5ns5bKqVrSLxOhuw6FzHdBJWLoxnyfTq0foha6hn/mZVOIKWH6UxdcwBF+QeG2bBRW2ZMAa7Tiyb3DKWVpOzm50dx6nvPUtVkz4veSi7sLigKU4EbZZ+0SbbVFR7HgN42EtWxfI2InNACbs4dGA9nIS2hmsZ3SJEGFosIEnBKvueEyVR7cLtlp/X68l/62Y6cJNdvnq/jBzWaL11KWvt0NKNn6yEUip6acqPO4dlHwKaZTHgK0O2jTckL6tyrvfhfZzpgDpcA5sOgGF+SQVP5ZoxBkHo0FpjDvXofvLByvGARxHsj4c+qYDA3960="
+
 script:
 - ./vendor/bin/phpunit -c ./phpunit.xml
+- sonar-scanner
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
