@@ -2,8 +2,8 @@
 
 # Connect PHP SDK
 
-[![Build Status](https://travis-ci.com/cloudblue/connect-php-sdk.svg?branch=master)](https://travis-ci.com/cloudblue/connect-php-sdk) [![Latest Stable Version](https://poser.pugx.org/apsconnect/connect-sdk/v/stable)](https://packagist.org/packages/apsconnect/connect-sdk) [![License](https://poser.pugx.org/apsconnect/connect-sdk/license)](https://packagist.org/packages/apsconnect/connect-sdk) [![codecov](https://codecov.io/gh/cloudblue/connect-php-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudblue/connect-php-sdk)
-[![PHP Version](https://img.shields.io/packagist/php-v/apsconnect/connect-sdk.svg?style=flat&branch=master)](https://packagist.org/packages/apsconnect/connect-sdk)
+[![Build Status](https://travis-ci.org/cloudblue/connect-php-sdk.svg?branch=master)](https://travis-ci.org/cloudblue/connect-php-sdk) [![Latest Stable Version](https://poser.pugx.org/apsconnect/connect-sdk/v/stable)](https://packagist.org/packages/apsconnect/connect-sdk) [![License](https://poser.pugx.org/apsconnect/connect-sdk/license)](https://packagist.org/packages/apsconnect/connect-sdk) [![codecov](https://codecov.io/gh/cloudblue/connect-php-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudblue/connect-php-sdk)
+[![PHP Version](https://img.shields.io/packagist/php-v/apsconnect/connect-sdk.svg?style=flat&branch=master)](https://packagist.org/packages/apsconnect/connect-sdk) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=connectphpsdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=connectphpsdk)
 
 ## Getting Started
 Connect PHP SDK allows an easy and fast integration with [Connect](http://connect.cloud.im/)  Fulfillment and Usage APIs with PHP-based integrations. This SDK enables you to automate fulfillment of orders for your products and report usage data for them.
