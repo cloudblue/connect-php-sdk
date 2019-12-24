@@ -2,7 +2,7 @@
 
 # Connect PHP SDK
 
-[![Build Status](https://travis-ci.com/ingrammicro/connect-php-sdk.svg?branch=master)](https://travis-ci.com/ingrammicro/connect-php-sdk) [![Latest Stable Version](https://poser.pugx.org/apsconnect/connect-sdk/v/stable)](https://packagist.org/packages/apsconnect/connect-sdk) [![License](https://poser.pugx.org/apsconnect/connect-sdk/license)](https://packagist.org/packages/apsconnect/connect-sdk) [![codecov](https://codecov.io/gh/ingrammicro/connect-php-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/ingrammicro/connect-php-sdk)
+[![Build Status](https://travis-ci.com/cloudblue/connect-php-sdk.svg?branch=master)](https://travis-ci.com/cloudblue/connect-php-sdk) [![Latest Stable Version](https://poser.pugx.org/apsconnect/connect-sdk/v/stable)](https://packagist.org/packages/apsconnect/connect-sdk) [![License](https://poser.pugx.org/apsconnect/connect-sdk/license)](https://packagist.org/packages/apsconnect/connect-sdk) [![codecov](https://codecov.io/gh/cloudblue/connect-php-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudblue/connect-php-sdk)
 [![PHP Version](https://img.shields.io/packagist/php-v/apsconnect/connect-sdk.svg?style=flat&branch=master)](https://packagist.org/packages/apsconnect/connect-sdk)
 
 ## Getting Started
@@ -39,7 +39,7 @@ Connect PHP SDK is available through [Packagist](https://packagist.org/packages/
 ```json
 {
   "require": {
-    "apsconnect/connect-sdk": "^17.0"
+    "apsconnect/connect-sdk": "^18.0"
     }
 }
 ```
