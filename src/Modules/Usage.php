@@ -9,6 +9,7 @@
 namespace Connect\Modules;
 
 use Connect\Config;
+use Connect\Constants;
 use Connect\Listing;
 use Connect\Model;
 use Connect\Product;
@@ -105,7 +106,7 @@ class Usage extends Core
             $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
         }
 
-        $body = $this->sendRequest('GET', '/usage/files/' . $query);
+        $body = $this->sendRequest('GET', Constants::USAGE_FILES_ENDPOINT . $query);
 
         /** @var File[] $models */
         $models = Model::modelize('files', json_decode($body));
@@ -132,9 +133,8 @@ class Usage extends Core
             $usageFile->description = "";
         }
 
-        $body = $this->sendRequest('POST', '/usage/files/', $usageFile);
-        $model = Model::modelize('file', json_decode($body));
-        return $model;
+        $body = $this->sendRequest('POST', Constants::USAGE_FILES_ENDPOINT, $usageFile);
+        return Model::modelize('file', json_decode($body));
     }
 
     /**
@@ -146,9 +146,9 @@ class Usage extends Core
         $spreadSheet = new Spreadsheet();
         $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet(
             $spreadSheet,
-            "usage_records"
+            Constants::SPREADSHEET_SHEET_NAME
         ), 0);
-        $spreadSheet->setActiveSheetIndexByName('usage_records');
+        $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
         $spreadSheet->getActiveSheet()->setCellValue('A1', "record_id");
         $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
         $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_value");
@@ -199,7 +199,7 @@ class Usage extends Core
         try {
             $response = $this->http->request(
                 $verb,
-                trim($this->config->apiEndpoint . "/usage/files/" . $usageFile->id . $path),
+                trim($this->config->apiEndpoint . Constants::USAGE_FILES_ENDPOINT . $usageFile->id . $path),
                 [
                     'multipart' => $multipart,
                     'headers' => $headers
@@ -226,7 +226,7 @@ class Usage extends Core
     private function createAndPopulateSpreadSheet($fileusagerecords)
     {
         $spreadSheet = $this->createUsageSpreadSheet();
-        $spreadSheet->setActiveSheetIndexByName('usage_records');
+        $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
         for ($i = 0; $i < count($fileusagerecords); $i++) {
             $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), $fileusagerecords[$i]->record_id);
             $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $fileusagerecords[$i]->item_search_criteria);

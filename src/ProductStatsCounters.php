@@ -7,7 +7,6 @@
 
 namespace Connect;
 
-
 class ProductStatsCounters extends Model
 {
     /**
@@ -21,5 +20,4 @@ class ProductStatsCounters extends Model
      */
 
     public $sourcing;
-
 }

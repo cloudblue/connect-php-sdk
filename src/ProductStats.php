@@ -7,7 +7,6 @@
 
 namespace Connect;
 
-
 class ProductStats extends Model
 {
     /**
@@ -37,5 +36,4 @@ class ProductStats extends Model
     {
         $this->agreements = Model::modelize('ProductStatsCounters', $agreements);
     }
-
 }

@@ -29,11 +29,9 @@ class HttpServiceProvider extends ServiceProvider
         /** @var Config $configuration */
         $configuration = $container['config'];
 
-        $client = new Client([
+        return new Client([
             'timeout' => $configuration->timeout,
             'verify' => $configuration->sslVerifyHost,
         ]);
-
-        return $client;
     }
 }

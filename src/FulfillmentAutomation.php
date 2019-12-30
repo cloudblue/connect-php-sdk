@@ -20,6 +20,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
     /**
      * Process all requests
      * @throws GuzzleException
+     * @throws ConfigException
      */
     public function process()
     {
@@ -58,24 +59,24 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             if ($msg instanceof ActivationTemplateResponse) {
                 $this->tierConfiguration->sendRequest(
                     'POST',
-                    '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
+                    Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::APPROVE,
                     json_encode(['template' => ['id' => $msg->templateid ]])
                 );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->tierConfiguration->sendRequest(
                     'POST',
-                    '/tier/config-requests/' . $tierConfigRequest->id . '/approve',
+                    Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::APPROVE,
                     json_encode(['template' => ['representation' => $msg->activationTile ]])
                 );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
         } catch (Inquire $e) {
             // update parameters and move to inquire
-            $this->tierConfiguration->updateTierConfigRequestParameters($tierConfigRequest, $e->params);//WORKING HERE!
+            $this->tierConfiguration->updateTierConfigRequestParameters($tierConfigRequest, $e->params);
             $this->tierConfiguration->sendRequest(
                 'POST',
-                '/tier/config-requests/' . $tierConfigRequest->id . '/inquire',
+                Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::INQUIRE,
                 '{}'
             );
             $processingResult = 'inquire';
@@ -83,7 +84,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             // fail request
             $this->tierConfiguration->sendRequest(
                 'POST',
-                '/tier/config-requests/' . $tierConfigRequest->id . '/fail',
+                Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::FAIL,
                 json_encode(['reason' => $e->getMessage()])
             );
             $processingResult = 'fail';
@@ -120,56 +121,56 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             if ($msg instanceof ActivationTemplateResponse) {
                 $this->fulfillment->sendRequest(
                     'POST',
-                    '/requests/' . $request->id . '/approve',
+                    Constants::REQUESTS_ENDPOINT . $request->id . Constants::APPROVE,
                     json_encode(['template_id' => $msg->templateid])
                 );
                 try {
                     $request->conversation()->addMessage('Activated using template ' . $msg->templateid);
                 } catch (\Exception $e) {
-                    $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                    $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
                 }
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->fulfillment->sendRequest(
                     'POST',
-                    '/requests/' . $request->id . '/approve',
+                    Constants::REQUESTS_ENDPOINT . $request->id . Constants::APPROVE,
                     json_encode(['activation_tile' => $msg->activationTile])
                 );
                 try {
                     $request->conversation()->addMessage('Activated using Custom ActivationTile');
                 } catch (GuzzleException $e) {
-                    $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                    $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
                 }
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->fulfillment->updateParameters($request, $e->params);
-            $this->fulfillment->sendRequest('POST', '/requests/' . $request->id . '/inquire', '{}');
+            $this->fulfillment->sendRequest('POST', Constants::REQUESTS_ENDPOINT . $request->id . Constants::INQUIRE, ($e->templateId != null) ? json_encode(['template_id' => $msg->templateid]) : '{}');
             try {
                 $request->conversation()->addMessage($e->getMessage());
             } catch (GuzzleException $e) {
-                $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
             }
             $processingResult = 'inquire';
         } catch (Fail $e) {
             // fail request
             $this->fulfillment->sendRequest(
                 'POST',
-                '/requests/' . $request->id . '/fail',
+                Constants::REQUESTS_ENDPOINT . $request->id . Constants::FAIL,
                 json_encode(['reason' => $e->getMessage()])
             );
             try {
                 $request->conversation()->addMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
             }
             $processingResult = 'fail';
         } catch (Skip $e) {
             try {
                 $request->conversation()->addMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->logger->error("Error while saving result on conversation for request ".$request->id);
+                $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
             }
             $processingResult = 'skip';
         }
