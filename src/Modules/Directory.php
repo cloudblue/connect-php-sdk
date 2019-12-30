@@ -60,9 +60,7 @@ class Directory extends Core
         $body = $this->sendRequest('GET', '/assets' . $query->compile());
 
         /** @var Asset[] $models */
-        $models = Model::modelize('assets', json_decode($body));
-
-        return $models;
+        return Model::modelize('assets', json_decode($body));
     }
 
     /**
@@ -74,8 +72,7 @@ class Directory extends Core
     {
         $body = $this->sendRequest('GET', '/assets/' . $assetID);
         /** @var Asset $model */
-        $model = Model::modelize('asset', json_decode($body));
-        return $model;
+        return Model::modelize('asset', json_decode($body));
     }
 
     /**
@@ -84,8 +81,6 @@ class Directory extends Core
      */
     public function listProducts($filters = null)
     {
-        $query = new \Connect\RQL\Query();
-
         if ($filters instanceof \Connect\RQL\Query) {
             $query = $filters;
         } elseif (is_array($filters)) {
@@ -97,9 +92,7 @@ class Directory extends Core
         $body = $this->sendRequest('GET', '/products' . $query->compile());
 
         /** @var \Connect\Product[] $models */
-        $models = Model::modelize('products', json_decode($body));
-
-        return $models;
+        return Model::modelize('products', json_decode($body));
     }
 
     /**
@@ -112,8 +105,7 @@ class Directory extends Core
     {
         $body = $this->sendRequest('GET', '/products/'.$productID);
         /** @var Product $model */
-        $model = Model::modelize('product', json_decode($body));
-        return $model;
+        return Model::modelize('product', json_decode($body));
     }
 
     /**
@@ -123,8 +115,6 @@ class Directory extends Core
      */
     public function listTierConfigs($filters = null)
     {
-        $query = new \Connect\RQL\Query();
-
         if ($filters instanceof \Connect\RQL\Query) {
             $query = $filters;
         } elseif (is_array($filters)) {
@@ -142,9 +132,7 @@ class Directory extends Core
         $body = $this->sendRequest('GET', '/tier/configs' . $query->compile());
 
         /** @var \Connect\TierConfig[] $models */
-        $models = Model::modelize('tierConfig', json_decode($body));
-
-        return $models;
+        return Model::modelize('tierConfig', json_decode($body));
     }
 
     /**
@@ -156,7 +144,6 @@ class Directory extends Core
     {
         $body = $this->sendRequest('GET', '/tier/configs/' . $id);
         /** @var \Connect\TierConfig $model */
-        $model = Model::modelize('tierConfig', json_decode($body));
-        return $model;
+        return Model::modelize('tierConfig', json_decode($body));
     }
 }

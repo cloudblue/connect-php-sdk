@@ -35,12 +35,10 @@ abstract class UsageAutomation extends AutomationEngine implements UsageAutomati
      */
     protected function dispatchProductUsageCollection($listing)
     {
-        if ($this->config->products && !in_array(
-            $listing->product->id,
-            $this->config->products
-            )) {
+        if ($this->config->products && !in_array($listing->product->id, $this->config->products)) {
             return 'Listing not handled by this processor';
-        };
+        }
+
         $this->logger->info("Processing Usage for Product " . $listing->product->id . " (" . $listing->product->name . ") on Contract " . $listing->contract->id . " and provider " . $listing->provider->id . "(" . $listing->provider->name . ")");
         /** @noinspection PhpVoidFunctionResultUsedInspection */
 
@@ -53,8 +51,7 @@ abstract class UsageAutomation extends AutomationEngine implements UsageAutomati
         }
         if (is_string($msg)) {
             $this->logger->info("Processing result for usage on listing " . $listing->product->id . ":" . $msg);
-            $processingResult = 'success';
-            return $processingResult;
+            return 'success';
         } else {
             if ($msg === true) {
                 $this->logger->info("Processing result for usage on listing " . $listing->product->id . ":success");
