@@ -9,12 +9,12 @@ namespace Connect;
 
 class Constants
 {
-    const USAGE_FILES_ENDPOINT = '/usage/files/';
+    const USAGE_FILES_PATH = '/usage/files/';
     const SPREADSHEET_SHEET_NAME = 'usage_records';
-    const TIER_CONFIG_REQUESTS_ENDPOINT = '/tier/config-requests/';
-    const REQUESTS_ENDPOINT = '/requests/';
-    const APPROVE = '/approve';
-    const INQUIRE = '/inquire';
-    const FAIL = '/fail';
+    const TIER_CONFIG_REQUESTS_PATH = '/tier/config-requests/';
+    const REQUESTS_PATH = '/requests/';
+    const APPROVE_SUFFIX = '/approve';
+    const INQUIRE_SUFFIX = '/inquire';
+    const FAIL_SUFFIX = '/fail';
     const GENERIC_CONVERSATION_ERROR_MESSAGE = 'Error while saving result on conversation for request ';
 }

@@ -59,14 +59,14 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             if ($msg instanceof ActivationTemplateResponse) {
                 $this->tierConfiguration->sendRequest(
                     'POST',
-                    Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::APPROVE,
+                    Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::APPROVE_SUFFIX,
                     json_encode(['template' => ['id' => $msg->templateid ]])
                 );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->tierConfiguration->sendRequest(
                     'POST',
-                    Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::APPROVE,
+                    Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::APPROVE_SUFFIX,
                     json_encode(['template' => ['representation' => $msg->activationTile ]])
                 );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
@@ -76,7 +76,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             $this->tierConfiguration->updateTierConfigRequestParameters($tierConfigRequest, $e->params);
             $this->tierConfiguration->sendRequest(
                 'POST',
-                Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::INQUIRE,
+                Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::INQUIRE_SUFFIX,
                 '{}'
             );
             $processingResult = 'inquire';
@@ -84,7 +84,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             // fail request
             $this->tierConfiguration->sendRequest(
                 'POST',
-                Constants::TIER_CONFIG_REQUESTS_ENDPOINT . $tierConfigRequest->id . Constants::FAIL,
+                Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::FAIL_SUFFIX,
                 json_encode(['reason' => $e->getMessage()])
             );
             $processingResult = 'fail';
@@ -121,7 +121,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             if ($msg instanceof ActivationTemplateResponse) {
                 $this->fulfillment->sendRequest(
                     'POST',
-                    Constants::REQUESTS_ENDPOINT . $request->id . Constants::APPROVE,
+                    Constants::REQUESTS_PATH . $request->id . Constants::APPROVE_SUFFIX,
                     json_encode(['template_id' => $msg->templateid])
                 );
                 try {
@@ -133,7 +133,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             } else {
                 $this->fulfillment->sendRequest(
                     'POST',
-                    Constants::REQUESTS_ENDPOINT . $request->id . Constants::APPROVE,
+                    Constants::REQUESTS_PATH . $request->id . Constants::APPROVE_SUFFIX,
                     json_encode(['activation_tile' => $msg->activationTile])
                 );
                 try {
@@ -146,7 +146,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->fulfillment->updateParameters($request, $e->params);
-            $this->fulfillment->sendRequest('POST', Constants::REQUESTS_ENDPOINT . $request->id . Constants::INQUIRE, ($e->templateId != null) ? json_encode(['template_id' => $msg->templateid]) : '{}');
+            $this->fulfillment->sendRequest('POST', Constants::REQUESTS_PATH . $request->id . Constants::INQUIRE_SUFFIX, ($e->templateId != null) ? json_encode(['template_id' => $msg->templateid]) : '{}');
             try {
                 $request->conversation()->addMessage($e->getMessage());
             } catch (GuzzleException $e) {
@@ -157,7 +157,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             // fail request
             $this->fulfillment->sendRequest(
                 'POST',
-                Constants::REQUESTS_ENDPOINT . $request->id . Constants::FAIL,
+                Constants::REQUESTS_PATH . $request->id . Constants::FAIL_SUFFIX,
                 json_encode(['reason' => $e->getMessage()])
             );
             try {

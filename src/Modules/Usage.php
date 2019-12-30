@@ -106,7 +106,7 @@ class Usage extends Core
             $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', $query);
         }
 
-        $body = $this->sendRequest('GET', Constants::USAGE_FILES_ENDPOINT . $query);
+        $body = $this->sendRequest('GET', Constants::USAGE_FILES_PATH . $query);
 
         /** @var File[] $models */
         $models = Model::modelize('files', json_decode($body));
@@ -133,7 +133,7 @@ class Usage extends Core
             $usageFile->description = "";
         }
 
-        $body = $this->sendRequest('POST', Constants::USAGE_FILES_ENDPOINT, $usageFile);
+        $body = $this->sendRequest('POST', Constants::USAGE_FILES_PATH, $usageFile);
         return Model::modelize('file', json_decode($body));
     }
 
@@ -199,7 +199,7 @@ class Usage extends Core
         try {
             $response = $this->http->request(
                 $verb,
-                trim($this->config->apiEndpoint . Constants::USAGE_FILES_ENDPOINT . $usageFile->id . $path),
+                trim($this->config->apiEndpoint . Constants::USAGE_FILES_PATH . $usageFile->id . $path),
                 [
                     'multipart' => $multipart,
                     'headers' => $headers

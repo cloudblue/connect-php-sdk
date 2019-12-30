@@ -69,35 +69,35 @@ abstract class UsageFileAutomation extends AutomationEngine implements UsageFile
         } catch (Accept $e) {
             $this->usage->sendRequest(
                 'POST',
-                Constants::USAGE_FILES_ENDPOINT. $usageFile->id . '/accept/',
+                Constants::USAGE_FILES_PATH. $usageFile->id . '/accept/',
                 json_encode(['acceptance_note' => $e->getMessage()])
             );
             $processingResult = 'accept';
         } catch (Close $e) {
             $this->usage->sendRequest(
                 'POST',
-                Constants::USAGE_FILES_ENDPOINT . $usageFile->id . '/close/',
+                Constants::USAGE_FILES_PATH . $usageFile->id . '/close/',
                 '{}'
             );
             $processingResult = 'close';
         } catch (Delete $e) {
             $this->usage->sendRequest(
                 'POST',
-                Constants::USAGE_FILES_ENDPOINT . $usageFile->id . '/delete/',
+                Constants::USAGE_FILES_PATH . $usageFile->id . '/delete/',
                 '{}'
             );
             $processingResult = 'delete';
         } catch (Reject $e) {
             $this->usage->sendRequest(
                 'POST',
-                Constants::USAGE_FILES_ENDPOINT . $usageFile->id . '/reject/',
+                Constants::USAGE_FILES_PATH . $usageFile->id . '/reject/',
                 json_encode(['rejection_note' => $e->getMessage()])
             );
             $processingResult = 'reject';
         } catch (Submit $e) {
             $this->usage->sendRequest(
                 'POST',
-                Constants::USAGE_FILES_ENDPOINT . $usageFile->id . '/submit/',
+                Constants::USAGE_FILES_PATH . $usageFile->id . '/submit/',
                 '{}'
             );
             $processingResult = 'submit';
