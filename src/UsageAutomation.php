@@ -46,8 +46,7 @@ abstract class UsageAutomation extends AutomationEngine implements UsageAutomati
             $msg = $this->processUsageForListing($listing);
         } catch (FileCreationException $e) {
             $this->logger->error("Error proocessing Usage for Product " . $listing->product->id . " (" . $listing->product->name . ") on Contract " . $listing->contract->id . " and provider " . $listing->provider->id . "(" . $listing->provider->name . ")");
-            $processingResult = "failure";
-            return $processingResult;
+            return "failure";
         }
         if (is_string($msg)) {
             $this->logger->info("Processing result for usage on listing " . $listing->product->id . ":" . $msg);
