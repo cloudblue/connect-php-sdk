@@ -5,14 +5,15 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
+namespace Connect\Product\Capabilities;
 
-class ProductStats extends Model
+
+use Connect\Model;
+
+class PCCart extends Model
 {
     /**
-     * @var int
+     * @var bool
      */
-
-    public $versions;
-
+    public $validation;
 }

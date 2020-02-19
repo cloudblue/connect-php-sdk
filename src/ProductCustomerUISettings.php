@@ -29,6 +29,21 @@ class ProductCustomerUISettings extends Model
      */
     protected $documents;
 
+    /**
+     * @var ProductLanguages[] | null
+     */
+    protected $languages;
+
+    /**
+     * @var string;
+     */
+    public $provisioning_message;
+
+    public function setLanguages($languages)
+    {
+        $this->languages = Model::modelize('ProductLanguage', $languages);
+    }
+
     public function setDownload_links($downloadLinks)
     {
         $this->download_links = Model::modelize('ProductDownloadLink', $downloadLinks);

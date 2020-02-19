@@ -7,12 +7,16 @@
 
 namespace Connect;
 
-class ProductStats extends Model
+class ProductLanguage extends Model
 {
     /**
-     * @var int
+     * @var string
      */
+    public $id;
 
-    public $versions;
+    /**
+     * @var string
+     */
+    public $name;
 
 }

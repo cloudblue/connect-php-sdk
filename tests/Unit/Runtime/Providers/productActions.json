@@ -1,0 +1,9 @@
+[
+  {
+    "id": "sso_action",
+    "title": "Sign In",
+    "type": "button",
+    "scope": "asset",
+    "description": "Sign in into the service by clicking at this button"
+  }
+]

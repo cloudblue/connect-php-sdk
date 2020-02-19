@@ -1,0 +1,66 @@
+[
+  {
+    "id": "PRD-045-171-563-0001",
+    "name": "Sku A",
+    "status": "published",
+    "unit": {
+      "id": "gb",
+      "title": "Gb",
+      "unit": "unit"
+    },
+    "mpn": "MPN-A",
+    "ui": {
+      "visibility": true
+    },
+    "ui_visibility": true,
+    "position": 10000,
+    "type": "reservation",
+    "local_id": "SKU_A",
+    "display_name": "Sku A",
+    "period": "monthly",
+    "precision": "integer",
+    "description": "MPN-A",
+    "depth": 0,
+    "events": {
+      "created": {
+        "at": "2020-02-19T13:41:45+00:00"
+      },
+      "updated": {
+        "at": "2020-02-19T13:41:45+00:00"
+      }
+    },
+    "dynamic": false
+  },
+  {
+    "id": "PRD-045-171-563-0002",
+    "name": "Sku B",
+    "status": "published",
+    "unit": {
+      "id": "devices",
+      "title": "Devices",
+      "unit": "unit"
+    },
+    "mpn": "MPN-B",
+    "ui": {
+      "visibility": true
+    },
+    "ui_visibility": true,
+    "position": 20000,
+    "type": "reservation",
+    "local_id": "SKU_B",
+    "display_name": "Sku B",
+    "period": "monthly",
+    "precision": "integer",
+    "description": "MPN-B",
+    "depth": 0,
+    "events": {
+      "created": {
+        "at": "2020-02-19T13:41:45+00:00"
+      },
+      "updated": {
+        "at": "2020-02-19T13:41:45+00:00"
+      }
+    },
+    "dynamic": false
+  }
+]

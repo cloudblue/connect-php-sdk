@@ -98,6 +98,7 @@ class StructureTest extends \Test\TestCase
 
     public function testProductModel()
     {
+        $tobediscarted = ['customer_ui_settings/languages', 'capabilities/tiers/configs'];
         $apiOutput = json_decode(file_get_contents(__DIR__.'/apiOutput/product_request.json'));
         $product = Model::modelize('product', $apiOutput);
         $treeWalker = new \TreeWalker(
@@ -111,11 +112,13 @@ class StructureTest extends \Test\TestCase
             fwrite(STDOUT, var_dump($difference['new']));
         }
         $this->assertCount(0, $difference['new']);
+        $difference['removed'] = $this->removeDiscarted($difference['removed'], $tobediscarted);
         if (count($difference['removed']) > 0) {
             fwrite(STDOUT, "New model entries\n");
             fwrite(STDOUT, var_dump($difference['removed']));
         }
         $this->assertCount(0, $difference['removed']);
+
         return $this;
     }
 

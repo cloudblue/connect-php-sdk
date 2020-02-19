@@ -170,7 +170,7 @@ class Model implements \ArrayAccess
         switch (gettype($value)) {
             case 'object':
 
-                $namespaces = ['\Connect\\', '\Connect\Usage\\'];
+                $namespaces = ['\Connect\\', '\Connect\Usage\\', '\Connect\Product\Capabilities\\', 'Connect\Product\Actions\\'];
 
                 /**
                  * if the item is an object search if there are any model that match with it:

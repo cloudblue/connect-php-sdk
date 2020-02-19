@@ -16,8 +16,15 @@ class Item extends Model
 {
     /**
      * @var string
+     * @deprecated
      */
     public $display_name;
+
+    /**
+     * @var string
+     */
+    public $name;
+
     /**
      * @var string
      */
@@ -57,11 +64,6 @@ class Item extends Model
      * @var Renewal
      */
     public $renewal;
-
-    /**
-     * @var name
-     */
-    public $name;
 
     /**
      * @var Param[]

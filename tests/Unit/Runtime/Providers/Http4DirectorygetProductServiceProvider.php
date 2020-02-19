@@ -19,7 +19,12 @@ class Http4DirectorygetProductServiceProvider extends ServiceProvider
             ->andReturn(
                 trim(file_get_contents(__DIR__ . '/productGetRequest.json')),
                 trim(file_get_contents(__DIR__.'/producttemplates.json')),
-                trim(file_get_contents(__DIR__. '/productConfigurations.json'))
+                trim(file_get_contents(__DIR__. '/productConfigurations.json')),
+                trim(file_get_contents(__DIR__. '/productMedia.json')),
+                trim(file_get_contents(__DIR__.'/productItems.json')),
+                trim(file_get_contents(__DIR__.'/productAgreements.json')),
+                trim(file_get_contents(__DIR__.'/productActions.json')),
+                trim(file_get_contents(__DIR__.'/productActionLink.json'))
             );
 
         $response = \Mockery::mock('\Psr\Http\Message\ResponseInterface');

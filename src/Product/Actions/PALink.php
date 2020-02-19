@@ -5,14 +5,15 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect;
+namespace Connect\Product\Actions;
 
-class ProductStats extends Model
+
+use Connect\Model;
+
+class PALink extends Model
 {
     /**
-     * @var int
+     * @var string
      */
-
-    public $versions;
-
+    public $link;
 }
