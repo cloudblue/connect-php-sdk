@@ -8,7 +8,6 @@
 namespace Connect;
 
 class ProductMedia extends Model
-
 {
     /**
      * @var int
@@ -35,5 +34,4 @@ class ProductMedia extends Model
      * @var string
      */
     public $url;
-
 }

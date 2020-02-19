@@ -7,7 +7,6 @@
 
 namespace Connect\Product\Capabilities;
 
-
 use Connect\Model;
 
 class PCBilling extends Model

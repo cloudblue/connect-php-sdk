@@ -7,7 +7,6 @@
 
 namespace Connect\Product\Actions;
 
-
 use Connect\Model;
 
 class PALink extends Model

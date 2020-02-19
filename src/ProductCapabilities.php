@@ -64,5 +64,4 @@ class ProductCapabilities extends Model
     {
         $this->billing = Model::modelize('PCBilling', $billing);
     }
-
 }

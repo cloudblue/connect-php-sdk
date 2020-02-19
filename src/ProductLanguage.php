@@ -18,5 +18,4 @@ class ProductLanguage extends Model
      * @var string
      */
     public $name;
-
 }

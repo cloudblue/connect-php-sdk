@@ -141,7 +141,7 @@ class Product extends Model
         if ($this->id == null) {
             return [];
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/' . $this->id . '/templates');
+        $body = ConnectClient::getInstance()->directory->sendRequest('GET', Constants::PRODUCTS_PATH  . $this->id . '/templates');
         return Model::modelize('templates', json_decode($body));
     }
 
@@ -153,8 +153,10 @@ class Product extends Model
         if (!$filter) {
             $filter = new \Connect\RQL\Query();
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET',
-            '/products/' . $this->id . '/configurations' . $filter->compile());
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH . $this->id . '/configurations' . $filter->compile()
+        );
         return Model::modelize('ProductConfigurationParameters', json_decode($body));
     }
 
@@ -166,8 +168,10 @@ class Product extends Model
         if (!$filter) {
             $filter = new \Connect\RQL\Query();
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET',
-            '/products/' . $this->id . '/media' . $filter->compile());
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/media' . $filter->compile()
+        );
         return Model::modelize('ProductMedias', json_decode($body));
     }
 
@@ -179,8 +183,10 @@ class Product extends Model
         if (!$filter) {
             $filter = new \Connect\RQL\Query();
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET',
-            '/products/' . $this->id . '/items' . $filter->compile());
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/items' . $filter->compile()
+        );
         return Model::modelize('Items', json_decode($body));
     }
 
@@ -192,8 +198,10 @@ class Product extends Model
         if (!$filter) {
             $filter = new \Connect\RQL\Query();
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET',
-            '/products/' . $this->id . '/agreements' . $filter->compile());
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/agreements' . $filter->compile()
+        );
         return Model::modelize('Agreements', json_decode($body));
     }
 
@@ -202,8 +210,10 @@ class Product extends Model
         if ($this->id == null) {
             return [];
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET',
-            '/products/' . $this->id . '/actions');
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/actions'
+        );
         return Model::modelize('Actions', json_decode($body));
     }
 }

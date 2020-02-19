@@ -16,5 +16,6 @@ class Constants
     const APPROVE_SUFFIX = '/approve';
     const INQUIRE_SUFFIX = '/inquire';
     const FAIL_SUFFIX = '/fail';
+    const PRODUCTS_PATH = '/products/';
     const GENERIC_CONVERSATION_ERROR_MESSAGE = 'Error while saving result on conversation for request ';
 }

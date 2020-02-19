@@ -7,7 +7,6 @@
 
 namespace Connect;
 
-
 class ProductVisibility extends Model
 {
     /**

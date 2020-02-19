@@ -14,5 +14,4 @@ class ProductStats extends Model
      */
 
     public $versions;
-
 }

@@ -7,7 +7,6 @@
 
 namespace Connect\Product\Actions;
 
-
 use Connect\ConnectClient;
 use Connect\Model;
 
@@ -41,8 +40,8 @@ class Action extends Model
 
     public function getActionLink(\Connect\Asset $asset)
     {
-        if(!isset($this->id)){
-            return;
+        if (!isset($this->id)) {
+            return new PALink();
         }
         $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/'.$asset->product->id.'/actions/'.$this->id.'/actionLink');
         return Model::modelize('PALink', json_decode($body));
