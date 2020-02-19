@@ -119,7 +119,7 @@ class Usage extends Core
 
     /**
      * @param File $usageFile
-     * @return array|Model
+     * @return array|File
      * @throws FileCreationException
      * @throws GuzzleException
      */
@@ -304,7 +304,7 @@ class Usage extends Core
     /**
      * @param File $file
      * @param FileUsageRecord[] $usageRecords
-     * @return array|Model
+     * @return array|File
      * @throws FileCreationException
      * @throws FileRetrieveException
      * @throws GuzzleException

@@ -46,7 +46,7 @@ class Fulfillment extends Core
     /**
      * List the pending requests
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
-     * @return array|Model
+     * @return array|Request
      * @throws GuzzleException
      */
     public function listRequests(array $filters = [])
@@ -121,7 +121,7 @@ class Fulfillment extends Core
 
     /**
      * @param $requestId
-     * @return array|Model
+     * @return array|Request
      * @throws GuzzleException
      * @throws \Connect\ConfigException
      */
@@ -134,7 +134,7 @@ class Fulfillment extends Core
     /**
      * To be used only with provider token
      * @param Request $request
-     * @return array|Model
+     * @return array|Request
      * @throws GuzzleException
      * @throws \Connect\ConfigException
      */

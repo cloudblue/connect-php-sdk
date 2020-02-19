@@ -49,7 +49,7 @@ class Conversation extends Model
 
     /**
      * @param string $message
-     * @return array|Model
+     * @return array|ConversationMessage
      * @throws ConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

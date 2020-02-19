@@ -8,6 +8,8 @@
 
 namespace Connect;
 
+use Connect\Product\Actions\Action;
+
 /**
  * Class Product
  * @package Connect
@@ -136,15 +138,26 @@ class Product extends Model
         $this->category = Model::modelize('ProductCategory', $category);
     }
 
+    /**
+     * @return array|Template
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getTemplates()
     {
         if ($this->id == null) {
             return [];
         }
         $body = ConnectClient::getInstance()->directory->sendRequest('GET', Constants::PRODUCTS_PATH  . $this->id . '/templates');
-        return Model::modelize('templates', json_decode($body));
+        return Model::modelize('Templates', json_decode($body));
     }
 
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|ProductConfigurationParameter
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getProductConfigurations(RQL\Query $filter = null)
     {
         if ($this->id == null) {
@@ -160,6 +173,12 @@ class Product extends Model
         return Model::modelize('ProductConfigurationParameters', json_decode($body));
     }
 
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|ProductMedia
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getAllMedia(RQL\Query $filter = null)
     {
         if ($this->id == null) {
@@ -175,6 +194,12 @@ class Product extends Model
         return Model::modelize('ProductMedias', json_decode($body));
     }
 
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|Item
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getAllItems(RQL\Query $filter = null)
     {
         if ($this->id == null) {
@@ -190,6 +215,12 @@ class Product extends Model
         return Model::modelize('Items', json_decode($body));
     }
 
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|Agreement
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getAllAgreements(RQL\Query $filter = null)
     {
         if ($this->id == null) {
@@ -205,6 +236,11 @@ class Product extends Model
         return Model::modelize('Agreements', json_decode($body));
     }
 
+    /**
+     * @return array|Action
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getAllActions()
     {
         if ($this->id == null) {
