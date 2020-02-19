@@ -108,4 +108,18 @@ class ProductTest extends \Test\TestCase
         $items = $product->getAllItems();
         $this->assertCount(0, $items);
     }
+
+    public function testEmptyAgreements()
+    {
+        $product = new \Connect\Product();
+        $agreements = $product->getAllAgreements();
+        $this->assertCount(0, $agreements);
+    }
+
+    public function testEmptyActions()
+    {
+        $product = new \Connect\Product();
+        $actions = $product->getAllActions();
+        $this->assertCount(0, $actions);
+    }
 }
