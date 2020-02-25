@@ -1,5 +1,3 @@
-![Connect PHP SDK](./assets/connect-logo.png)
-
 # Connect PHP SDK
 
 [![Build Status](https://travis-ci.org/cloudblue/connect-php-sdk.svg?branch=master)](https://travis-ci.org/cloudblue/connect-php-sdk) [![Latest Stable Version](https://poser.pugx.org/apsconnect/connect-sdk/v/stable)](https://packagist.org/packages/apsconnect/connect-sdk) [![License](https://poser.pugx.org/apsconnect/connect-sdk/license)](https://packagist.org/packages/apsconnect/connect-sdk) [![codecov](https://codecov.io/gh/cloudblue/connect-php-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudblue/connect-php-sdk)
