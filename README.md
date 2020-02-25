@@ -4,7 +4,7 @@
 [![PHP Version](https://img.shields.io/packagist/php-v/apsconnect/connect-sdk.svg?style=flat&branch=master)](https://packagist.org/packages/apsconnect/connect-sdk) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=connectphpsdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=connectphpsdk)
 
 ## Getting Started
-Connect PHP SDK allows an easy and fast integration with [Connect](http://connect.cloud.im/)  Fulfillment and Usage APIs with PHP-based integrations. This SDK enables you to automate fulfillment of orders for your products and report usage data for them.
+Connect PHP SDK allows an easy and fast integration with [CloudBlue Connect](https://www.cloudblue.com/connect/)  Fulfillment and Usage APIs with PHP-based integrations. This SDK enables you to automate fulfillment of orders for your products and report usage data for them.
 
 Before using the library, please first to go through the documentation in the Connect knowledge base, which could be used as a source of information on the rest APIs used by this SDK.
 
@@ -134,7 +134,7 @@ try {
     //In case Config is not passed into constructor, configuration from config.json is used
     $requests = new ProductRequests(new \Connect\Config([
         'apiKey' => 'Key_Available_in_ui',
-        'apiEndpoint' => 'https://api.connect.cloud.im/public/v1',
+        'apiEndpoint' => 'https://api.connect.cloudblue.com/public/v1',
         'products' => 'CN-631-322-641' #Optional value
     ]));
     
