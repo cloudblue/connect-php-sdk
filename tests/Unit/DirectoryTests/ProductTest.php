@@ -122,4 +122,10 @@ class ProductTest extends \Test\TestCase
         $actions = $product->getAllActions();
         $this->assertCount(0, $actions);
     }
+
+    public function testEmptyActionLink()
+    {
+        $action = new \Connect\Product\Actions\Action();
+        $this->assertInstanceOf('\Connect\Product\Actions\PALink', $action->getActionLink(new Asset()));
+    }
 }

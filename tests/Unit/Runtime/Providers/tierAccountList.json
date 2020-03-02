@@ -1,0 +1,38 @@
+[
+  {
+    "id": "TA-3633-0299-5209",
+    "environment": "preview",
+    "name": "Wisoky, Mueller and Will",
+    "external_id": "96409",
+    "external_uid": "12b744bb-1b60-4753-87e3-f5cf1252a893",
+    "events": {
+      "created": {
+        "at": "2020-03-02T07:59:13+00:00",
+        "by": {
+          "id": "UR-904-621-770",
+          "name": "Alexandra"
+        }
+      },
+      "updated": {
+        "at": "2020-03-02T07:59:13+00:00",
+        "by": {
+          "id": "UR-413-015-088",
+          "name": "Aleksandr"
+        }
+      }
+    },
+    "scopes": [
+      "customer",
+      "tier1"
+    ],
+    "marketplace": {
+      "id": "MP-28655",
+      "name": "Marketplace M01 for nrudra",
+      "icon": "/media/logo_marketplace_1.png"
+    },
+    "hub": {
+      "id": "HB-0000-0000",
+      "name": "ACME Hub"
+    }
+  }
+]
