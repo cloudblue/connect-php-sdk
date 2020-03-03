@@ -46,5 +46,4 @@ class ResponsesTierAccountRequestsTest extends \Test\TestCase
         $this->assertEquals(null, $ignore->getObject());
         return $ignore;
     }
-
 }

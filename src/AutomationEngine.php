@@ -9,6 +9,7 @@
 namespace Connect;
 
 use Connect\Modules\Fulfillment;
+use Connect\Modules\Subscriptions;
 use Connect\Modules\TierConfiguration;
 use Connect\Modules\Usage;
 use Connect\Modules\Directory;
@@ -27,6 +28,7 @@ use Psr\Log\LoggerInterface;
  * @property TierConfiguration $tierConfiguration
  * @property Usage $usage
  * @property Directory $directory
+ * @property Subscriptions $subscriptions
  * @package Connect
  */
 abstract class AutomationEngine

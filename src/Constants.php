@@ -21,4 +21,6 @@ class Constants
     const TIER_CONFIG_PATH = '/tier/configs/';
     const TIER_ACCOUNT_REQUESTS_PATH = '/tier/account-requests/';
     const GENERIC_CONVERSATION_ERROR_MESSAGE = 'Error while saving result on conversation for request ';
+    const SUBSCRIPTIONS_ASSETS_PATH = '/subscriptions/assets/';
+    const SUBSCRIPTIONS_REQUESTS_PATH = '/subscriptions/requests/';
 }

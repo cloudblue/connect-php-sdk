@@ -76,7 +76,8 @@ class Config extends Model
         'fulfillment' => '\Connect\Runtime\Providers\FulfillmentServiceProvider',
         'tierConfiguration' => '\Connect\Runtime\Providers\TierConfigurationServiceProvider',
         'usage' => '\Connect\Runtime\Providers\UsageServiceProvider',
-        'directory' => '\Connect\Runtime\Providers\DirectoryServiceProvider'
+        'directory' => '\Connect\Runtime\Providers\DirectoryServiceProvider',
+        'subscriptions' => '\Connect\Runtime\Providers\SubscriptionsServiceProvider'
     ];
 
     /**

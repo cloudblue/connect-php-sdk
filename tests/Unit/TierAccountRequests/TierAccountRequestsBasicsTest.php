@@ -94,7 +94,7 @@ class TierAccountRequestsBasicsTest extends \Test\TestCase
             ]
         ]);
         $responses = $client->directory->createTierAccountRequest($tar);
-        foreach($responses as $response) {
+        foreach ($responses as $response) {
             $this->assertInstanceOf('\Connect\TierAccountRequest', $response);
         }
     }

@@ -1,0 +1,181 @@
+{
+  "id": "AS-1611-4204-8054",
+  "status": "active",
+  "events": {
+    "created": {
+      "at": "2020-03-02T14:02:23+00:00"
+    },
+    "updated": {
+      "at": "2020-03-02T14:03:38+00:00"
+    }
+  },
+  "external_id": "QI1MKRTHNB",
+  "external_uid": "6ea4b798-fcda-4936-99d1-b9156d95bdbd",
+  "product": {
+    "id": "PRD-012-832-886",
+    "name": "Wordpress",
+    "status": "published",
+    "icon": ""
+  },
+  "connection": {
+    "id": "CT-0000-0000-0000",
+    "hub": {
+      "id": "HB-0000-0000",
+      "name": "ACME Hub"
+    },
+    "provider": {
+      "id": "PA-931-712",
+      "name": "Provider company for osrivastava"
+    },
+    "vendor": {
+      "id": "VA-394-324",
+      "name": "APSConnect Dev"
+    },
+    "type": ""
+  },
+  "items": [
+    {
+      "id": "SKU_A",
+      "display_name": "Sku A",
+      "global_id": "PRD-012-832-886-0001",
+      "item_type": "reservation",
+      "mpn": "MPN-A",
+      "period": "monthly",
+      "quantity": "72.0",
+      "billing": {
+        "stats": {
+          "vendor": {
+            "last_request": {
+              "id": "BRV-3639-3001-0669",
+              "type": "vendor",
+              "period": {
+                "from": "2020-03-02T13:30:18.295214+00:00",
+                "to": "2020-04-02T13:30:18.295214+00:00",
+                "delta": "1.0",
+                "uom": "monthly"
+              }
+            },
+            "count": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "SKU_B",
+      "display_name": "Sku B",
+      "global_id": "PRD-012-832-886-0002",
+      "item_type": "reservation",
+      "mpn": "MPN-B",
+      "period": "monthly",
+      "quantity": "47.0",
+      "billing": {
+        "stats": {
+          "vendor": {
+            "last_request": {
+              "id": "BRV-3639-3001-0669",
+              "type": "vendor",
+              "period": {
+                "from": "2020-03-02T13:30:18.295214+00:00",
+                "to": "2020-04-02T13:30:18.295214+00:00",
+                "delta": "1.0",
+                "uom": "monthly"
+              }
+            },
+            "count": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "PRD_012_832_886_0003",
+      "display_name": "ppu item",
+      "global_id": "PRD-012-832-886-0003",
+      "item_type": "ppu",
+      "mpn": "dascadsvadsv21313",
+      "period": "monthly",
+      "quantity": "-1.0"
+    }
+  ],
+  "params": [
+    {
+      "id": "param_b",
+      "name": "Title of the Parameter B",
+      "description": "Description of the Parameter B",
+      "type": "text",
+      "value": "fsdfsd"
+    }
+  ],
+  "tiers": {
+    "customer": {
+      "id": "TA-9991-6127-7322",
+      "external_id": "25649",
+      "external_uid": "465ccb6b-f930-433c-a8ea-a9bd01a1279a",
+      "name": "Wisozk and Sons",
+      "contact_info": {
+        "address_line1": "Jordy Plain",
+        "address_line2": "Prosacco Coves",
+        "city": "Anxi County",
+        "state": "Fujian",
+        "postal_code": "362400",
+        "country": "CN",
+        "contact": {
+          "first_name": "Joany",
+          "last_name": "Hermiston",
+          "email": "akataev+Joany_Hermiston@odin.com",
+          "phone_number": {
+            "country_code": "86",
+            "area_code": "155",
+            "phone_number": "55319659"
+          }
+        }
+      }
+    }
+  },
+  "marketplace": {
+    "id": "MP-67458",
+    "name": "China Marketplace",
+    "icon": "/media/PA-931-712/marketplaces/MP-67458/icon.png"
+  },
+  "contract": {
+    "id": "CRD-00000-00000-00000",
+    "name": "ACME Distribution Contract"
+  },
+  "billing": {
+    "period": {
+      "delta": "1.0",
+      "uom": "monthly"
+    },
+    "next_date": "2020-04-02T13:46:58.636199+00:00",
+    "anniversary": {
+      "day": 2
+    },
+    "stats": {
+      "vendor": {
+        "last_request": {
+          "id": "BRV-9900-0013-9967",
+          "type": "vendor",
+          "period": {
+            "from": "2020-03-02T13:46:58.636199+00:00",
+            "to": "2020-04-02T13:46:58.636199+00:00",
+            "delta": "1.0",
+            "uom": "monthly"
+          }
+        },
+        "count": 1
+      },
+      "provider": {
+        "last_request": {
+          "id": "BRV-9900-0013-9968",
+          "type": "provider",
+          "period": {
+            "from": "2020-03-02T13:46:58.636199+00:00",
+            "to": "2020-04-02T13:46:58.636199+00:00",
+            "delta": "1.0",
+            "uom": "monthly"
+          }
+        },
+        "count": 1
+      }
+    }
+  }
+}

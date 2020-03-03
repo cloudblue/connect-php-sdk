@@ -7,7 +7,6 @@
 
 namespace Test\Unit;
 
-
 use Connect\TierAccountRequest;
 use Connect\TierAccountRequestAccept;
 use Connect\TierAccountRequestIgnore;
@@ -25,12 +24,12 @@ class TierAccountRequestsBasicsHelper extends TierAccountRequestsAutomation
      */
     public function processTierAccountRequest(\Connect\TierAccountRequest $request)
     {
-        switch($request->id){
+        switch ($request->id) {
             case 'TAR-2709-2353-6222-008-001':
                 $request->account->diffWithPreviousVersion();
                 throw new TierAccountRequestAccept("YES");
             case 'TAR-2709-2353-6222-008-002':
-                $request->account->diffWithPreviousVersion($request->account->version -1 );
+                $request->account->diffWithPreviousVersion($request->account->version -1);
                 throw new TierAccountRequestIgnore("NO WAY");
             case 'TAR-2709-2353-6222-008-004':
                 return "This will not work and will be skiped";

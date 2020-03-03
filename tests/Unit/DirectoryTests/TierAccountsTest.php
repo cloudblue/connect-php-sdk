@@ -40,5 +40,4 @@ class TierAccountsTest extends \Test\TestCase
         }
         $this->assertInstanceOf("\Connect\TierAccount", $connectClient->directory->getTierAccountById($account->id));
     }
-
 }
