@@ -79,18 +79,6 @@ class SubscriptionItem extends Model
      * @param string $id
      * @return Param
      */
-    /*
-     * Not Implemented in scope of v19
-    public function getParameterByID($id)
-    {
-        $param = current(array_filter($this->params, function (Param $param) use ($id) {
-            return ($param->id === $id);
-        }));
-
-        return ($param) ? $param : null;
-    }
-    */
-
     public function setBilling($billing)
     {
         $this->billing = Model::modelize('Billing', $billing);
