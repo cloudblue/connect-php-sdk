@@ -178,4 +178,60 @@ class Directory extends Core
         /** @var \Connect\TierAccount[] $model */
         return Model::modelize('tierAccount', json_decode($body));
     }
+
+    /**
+     * @param $id
+     * @return array|Model
+     * @throws GuzzleException
+     */
+    public function getTierAccountById($id)
+    {
+        $body = $this->sendRequest('GET', \Connect\Constants::TIER_ACCOUNTS_PATH  . $id);
+        return Model::modelize('tierAccount', json_decode($body));
+    }
+
+    /**
+     * @param null $filters
+     * @return array|Model
+     * @throws GuzzleException
+     * Possible filters:
+     *  -status
+     *  -id
+     *  -product.id
+     *  -product.name
+     *  -vendor.id
+     *  -vendor.name
+     *  -provider.id
+     *  -provider.name
+     *  -account.id
+     *  -account.name
+     *  -account.external_id
+     *  -account.external_uid
+     *  -account.environment
+     *  -account.scopes
+     *  -account.marketplace.id
+     *  -account.marketplace.name
+     *  -account.hub.id
+     *  -account.hub.name
+     */
+    public function listTierAccountRequests($filters = null)
+    {
+        if ($filters instanceof \Connect\RQL\Query) {
+            $query = $filters;
+        } elseif (is_array($filters)) {
+            $query = new \Connect\RQL\Query($filters);
+        } else {
+            $query = new \Connect\RQL\Query();
+        }
+        $body = $this->sendRequest('GET', Constants::TIER_ACCOUNT_REQUESTS_PATH. $query->compile());
+        /** @var \Connect\TierAccountRequest[] $model */
+        return Model::modelize('tierAccountRequest', json_decode($body));
+    }
+
+    public function createTierAccountRequest(\Connect\TierAccountRequest $request)
+    {
+        $body = $this->sendRequest('POST', Constants::TIER_ACCOUNT_REQUESTS_PATH, json_encode($request));
+        /** @var \Connect\TierAccountRequest[] $model */
+        return Model::modelize('tierAccountRequest', json_decode($body));
+    }
 }

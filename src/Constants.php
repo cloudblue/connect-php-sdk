@@ -19,5 +19,6 @@ class Constants
     const PRODUCTS_PATH = '/products/';
     const TIER_ACCOUNTS_PATH = '/tier/accounts/';
     const TIER_CONFIG_PATH = '/tier/configs/';
+    const TIER_ACCOUNT_REQUESTS_PATH = '/tier/account-requests/';
     const GENERIC_CONVERSATION_ERROR_MESSAGE = 'Error while saving result on conversation for request ';
 }

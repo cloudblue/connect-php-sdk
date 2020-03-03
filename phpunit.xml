@@ -10,10 +10,14 @@
     </logging>
     <testsuites>
         <testsuite name="Directory Services">
-            <file> tests/Unit/DirectoryTests/AssetTest.php</file>
-            <file> tests/Unit/DirectoryTests/ProductTest.php</file>
-            <file> tests/Unit/DirectoryTests/TierConfigTest.php</file>
-            <file> tests/Unit/DirectoryTests/TierAccountsTest.php</file>
+            <file>tests/Unit/DirectoryTests/AssetTest.php</file>
+            <file>tests/Unit/DirectoryTests/ProductTest.php</file>
+            <file>tests/Unit/DirectoryTests/TierConfigTest.php</file>
+            <file>tests/Unit/DirectoryTests/TierAccountsTest.php</file>
+        </testsuite>
+        <testsuite name="Tier Account Requests">
+            <file>tests/Unit/TierAccountRequests/ResponsesTest.php</file>
+            <file>tests/Unit/TierAccountRequests/TierAccountRequestsBasicsTest.php</file>
         </testsuite>
         <testsuite name="Fail">
             <file>tests/Unit/FulfillmentTests/FailTest.php</file>

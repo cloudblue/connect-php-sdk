@@ -38,6 +38,7 @@ class TierAccountsTest extends \Test\TestCase
         foreach ($accounts as $account) {
             $this->assertInstanceOf("\Connect\TierAccount", $account);
         }
+        $this->assertInstanceOf("\Connect\TierAccount", $connectClient->directory->getTierAccountById($account->id));
     }
 
 }

@@ -63,16 +63,45 @@ class TierAccount extends Model
     /**
      * @var \Connect\ContactInfo
      */
-    public $account_info;
+    public $contact_info;
+
+    /**
+     * @var int
+     */
+    public $version=1;
+
+    /**
+     * TierAccount constructor.
+     * @param null $source
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
 
     public function __construct($source = null)
     {
         parent::__construct($source);
-        if(is_null($this->account_info))
-        {
+        if (is_null($this->contact_info) && $this->id) {
             $tempAccount = ConnectClient::getInstance()->directory->sendRequest('GET', '/tier/accounts/'.$this->id);
-            $this->account_info = \Connect\Model::modelize('ContactInfo', json_decode($tempAccount)->contact_info);
+            $this->contact_info = \Connect\Model::modelize('ContactInfo', json_decode($tempAccount)->contact_info);
         }
     }
 
+    public function diffWithPreviousVersion($version = null)
+    {
+        $treeWalker = new \TreeWalker(
+            array(
+                "returntype" => "array"
+            )
+        );
+        if ($version == null) {
+            $version = $this->version - 1;
+        }
+        $version = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            '/tier/accounts/' . $this->id . '/versions/' . $version
+        );
+        $diff = $treeWalker->getdiff(json_decode($this->toJSON()), json_decode($version), true);
+        unset($diff['edited']['version']);
+        return $diff;
+    }
 }
