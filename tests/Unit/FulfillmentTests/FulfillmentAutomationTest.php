@@ -117,7 +117,7 @@ class FulfillmentAutomationTest extends \Test\TestCase
         $app = new RequestProcessorHelper();
         $app->fulfillment->__call("wrong", array());
         $app->usage->__call("wrong", array());
-        $this->assertInstanceOf('Test\Unit\RequestProcessorHelper',$app);
+        $this->assertInstanceOf('Test\Unit\RequestProcessorHelper', $app);
     }
 
     public function testTemplateRetrive()

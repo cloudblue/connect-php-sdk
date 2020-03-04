@@ -11,6 +11,7 @@ class Constants
 {
     const USAGE_FILES_PATH = '/usage/files/';
     const SPREADSHEET_SHEET_NAME = 'usage_records';
+    const SPREADSHEET_SHEET_CATEGORIES = 'categories';
     const TIER_CONFIG_REQUESTS_PATH = '/tier/config-requests/';
     const REQUESTS_PATH = '/requests/';
     const APPROVE_SUFFIX = '/approve';
