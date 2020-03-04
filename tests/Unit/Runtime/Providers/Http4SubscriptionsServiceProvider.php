@@ -7,7 +7,6 @@
 
 namespace Test\Unit\Runtime\Providers;
 
-
 use Connect\Runtime\ServiceProvider;
 use Pimple\Container;
 

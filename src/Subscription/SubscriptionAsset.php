@@ -11,13 +11,13 @@ use Connect\Configuration;
 use Connect\Connection;
 use Connect\Contract;
 use Connect\Events;
-use Connect\Model;
 use Connect\Marketplace;
 use Connect\Param;
 use Connect\Product;
 use Connect\Tiers;
+use Connect\Model;
 
-class SubscriptionAsset extends \Connect\Asset
+class SubscriptionAsset extends Model
 {
     /**
      * @var string
@@ -51,7 +51,7 @@ class SubscriptionAsset extends \Connect\Asset
     public $connection;
 
     /**
-     * @var \Connect\Subscription\SubscriptionItem[]
+     * @var SubscriptionItem[]
      */
     public $items;
 
@@ -82,17 +82,17 @@ class SubscriptionAsset extends \Connect\Asset
     public $configuration;
 
     /**
-     * @var \Connect\Subscription\Billing
+     * @var Billing
      */
     public $billing;
 
     public function setItems($items)
     {
-        $this->items = Model::modelize('SubscriptionItems', $items);
+        $this->items = Model::modelize('subscriptionItems', $items);
     }
 
     public function setBilling($billing)
     {
-        $this->billing = Model::modelize('Billing', $billing);
+        $this->billing = Model::modelize('billing', $billing);
     }
 }

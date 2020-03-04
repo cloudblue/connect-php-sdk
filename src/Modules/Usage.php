@@ -126,7 +126,7 @@ class Usage extends Core
     public function createUsageFile(File $usageFile)
     {
         if (!isset($usageFile->name) || !isset($usageFile->product->id) || !isset($usageFile->contract->id)) {
-            throw new FileCreationException("Usage File Creation requieres name, product id, contract id");
+            throw new FileCreationException("Usage File Creation requires name, product id, contract id");
         }
 
         if (!isset($usageFile->description)) {
@@ -150,13 +150,22 @@ class Usage extends Core
         ), 0);
         $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
         $spreadSheet->getActiveSheet()->setCellValue('A1', "record_id");
-        $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
-        $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_value");
-        $spreadSheet->getActiveSheet()->setCellValue('D1', "quantity");
-        $spreadSheet->getActiveSheet()->setCellValue('E1', "start_time_utc");
-        $spreadSheet->getActiveSheet()->setCellValue('F1', "end_time_utc");
-        $spreadSheet->getActiveSheet()->setCellValue('G1', "asset_search_criteria");
-        $spreadSheet->getActiveSheet()->setCellValue('H1', "asset_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('B1', "record_note");
+        $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_criteria");
+        $spreadSheet->getActiveSheet()->setCellValue('D1', "item_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('E1', "amount");
+        $spreadSheet->getActiveSheet()->setCellValue('F1', "quantity");
+        $spreadSheet->getActiveSheet()->setCellValue('G1', "start_time_utc");
+        $spreadSheet->getActiveSheet()->setCellValue('H1', "end_time_utc");
+        $spreadSheet->getActiveSheet()->setCellValue('I1', "asset_search_criteria");
+        $spreadSheet->getActiveSheet()->setCellValue('J1', "asset_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('K1', "item_name");
+        $spreadSheet->getActiveSheet()->setCellValue('L1', "item_mpn");
+        $spreadSheet->getActiveSheet()->setCellValue('M1', "item_precision");
+        $spreadSheet->getActiveSheet()->setCellValue('N1', "category_id");
+        $spreadSheet->getActiveSheet()->setCellValue('O1', "asset_recon_id");
+        $spreadSheet->getActiveSheet()->setCellValue('P1', "tier");
+
         return $spreadSheet;
     }
 
@@ -229,13 +238,21 @@ class Usage extends Core
         $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
         for ($i = 0; $i < count($fileusagerecords); $i++) {
             $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), $fileusagerecords[$i]->record_id);
-            $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $fileusagerecords[$i]->item_search_criteria);
-            $spreadSheet->getActiveSheet()->setCellValue('C' . ($i + 2), $fileusagerecords[$i]->item_search_value);
-            $spreadSheet->getActiveSheet()->setCellValue('D' . ($i + 2), $fileusagerecords[$i]->quantity);
-            $spreadSheet->getActiveSheet()->setCellValue('E' . ($i + 2), $fileusagerecords[$i]->start_time_utc);
-            $spreadSheet->getActiveSheet()->setCellValue('F' . ($i + 2), $fileusagerecords[$i]->end_time_utc);
-            $spreadSheet->getActiveSheet()->setCellValue('G' . ($i + 2), $fileusagerecords[$i]->asset_search_criteria);
-            $spreadSheet->getActiveSheet()->setCellValue('H' . ($i + 2), $fileusagerecords[$i]->asset_search_value);
+            $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $fileusagerecords[$i]->record_note);
+            $spreadSheet->getActiveSheet()->setCellValue('C' . ($i + 2), $fileusagerecords[$i]->item_search_criteria);
+            $spreadSheet->getActiveSheet()->setCellValue('D' . ($i + 2), $fileusagerecords[$i]->item_search_value);
+            $spreadSheet->getActiveSheet()->setCellValue('E' . ($i + 2), (is_null($fileusagerecords[$i]->amount) ? "":$fileusagerecords[$i]->amount));
+            $spreadSheet->getActiveSheet()->setCellValue('F' . ($i + 2), (is_null($fileusagerecords[$i]->quantity) ? "":$fileusagerecords[$i]->quantity));
+            $spreadSheet->getActiveSheet()->setCellValue('G' . ($i + 2), $fileusagerecords[$i]->start_time_utc);
+            $spreadSheet->getActiveSheet()->setCellValue('H' . ($i + 2), $fileusagerecords[$i]->end_time_utc);
+            $spreadSheet->getActiveSheet()->setCellValue('I' . ($i + 2), $fileusagerecords[$i]->asset_search_criteria);
+            $spreadSheet->getActiveSheet()->setCellValue('J' . ($i + 2), $fileusagerecords[$i]->asset_search_value);
+            $spreadSheet->getActiveSheet()->setCellValue('K' . ($i + 2), (is_null($fileusagerecords[$i]->item_name) ? "":$fileusagerecords[$i]->item_name));
+            $spreadSheet->getActiveSheet()->setCellValue('L' . ($i + 2), (is_null($fileusagerecords[$i]->item_mpn) ? "":$fileusagerecords[$i]->item_mpn));
+            $spreadSheet->getActiveSheet()->setCellValue('M' . ($i + 2), (is_null($fileusagerecords[$i]->item_precision) ? "":$fileusagerecords[$i]->item_precision));
+            $spreadSheet->getActiveSheet()->setCellValue('N' . ($i + 2), (is_null($fileusagerecords[$i]->category_id) ? "":$fileusagerecords[$i]->category_id));
+            $spreadSheet->getActiveSheet()->setCellValue('O' . ($i + 2), (is_null($fileusagerecords[$i]->asset_recon_id) ? "":$fileusagerecords[$i]->asset_recon_id));
+            $spreadSheet->getActiveSheet()->setCellValue('P' . ($i + 2), (is_null($fileusagerecords[$i]->tier) ? "":$fileusagerecords[$i]->tier));
         }
         return $spreadSheet;
     }

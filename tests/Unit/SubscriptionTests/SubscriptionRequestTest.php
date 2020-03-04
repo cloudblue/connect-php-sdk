@@ -23,35 +23,31 @@ class SubscriptionRequestTest extends \Test\TestCase
             "something" => "value"
         ]);
         $request->setVendorAttributes($model);
-        $this->assertEquals($request->attributes->vendor->something,"value");
+        $this->assertEquals($request->attributes->vendor->something, "value");
         $request->setProviderAttributes($model);
-        $this->assertEquals($request->attributes->provider->something,"value");
+        $this->assertEquals($request->attributes->provider->something, "value");
     }
 
     public function testOperationsSubscriptions()
     {
         $connectClient = new ConnectClient(new Config(__DIR__. '/config.mocked.testOperations.json'));
         $requests = $connectClient->subscriptions->listSubscriptionRequests();
-        foreach($requests as $request)
-        {
+        foreach ($requests as $request) {
             $this->assertInstanceOf('Connect\Subscription\SubscriptionRequest', $request);
         }
         $requests = $connectClient->subscriptions->listSubscriptionRequests(new Query(['id' => 'BRV-0000-0000-0002']));
-        foreach($requests as $request)
-        {
+        foreach ($requests as $request) {
             $this->assertInstanceOf('Connect\Subscription\SubscriptionRequest', $request);
             $this->assertEquals('BRV-0000-0000-0002', $request->id);
         }
         $requests = $connectClient->subscriptions->listSubscriptionRequests(['id' => 'BRV-0000-0000-0002']);
         $this->assertInstanceOf('Connect\Subscription\SubscriptionRequest', $requests[0]);
         $assetList = $connectClient->subscriptions->listSubscriptionAssets();
-        foreach($assetList as $asset)
-        {
+        foreach ($assetList as $asset) {
             $this->assertInstanceOf('Connect\Subscription\SubscriptionAsset', $asset);
         }
         $assetList = $connectClient->subscriptions->listSubscriptionAssets(new Query(["id" => "AS-1611-4204-8054"]));
-        foreach($assetList as $asset)
-        {
+        foreach ($assetList as $asset) {
             $this->assertInstanceOf('Connect\Subscription\SubscriptionAsset', $asset);
         }
         $assetList = $connectClient->subscriptions->listSubscriptionAssets(["id" => "AS-1611-4204-8054"]);

@@ -21,7 +21,7 @@ class Billing extends Model
     public $stats;
 
     /**
-     * @var Period
+     * @var SubscriptionPeriod
      */
     public $period;
 
@@ -34,4 +34,14 @@ class Billing extends Model
      * @var Anniversary
      */
     public $anniversary;
+
+    public function setStats($stats)
+    {
+        $this->stats = Model::modelize('Subscription\Stats', $stats);
+    }
+
+    public function setPeriod($period)
+    {
+        $this->period = Model::modelize('Subscription\Period', $period);
+    }
 }

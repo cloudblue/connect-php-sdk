@@ -23,4 +23,5 @@ class Event extends Model
      * @var By
      */
     public $by;
+
 }

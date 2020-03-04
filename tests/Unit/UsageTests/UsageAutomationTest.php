@@ -29,6 +29,7 @@ class UsageAutomationTest extends \Test\TestCase
     public function testUsageAutomation()
     {
         $app = new UsageAutomationHelper(new Config('./config.mocked4usageautomation.json'));
+        $this->assertInstanceOf('Test\Unit\UsageAutomationHelper', $app);
         $app->process();
         return $app;
     }
@@ -36,6 +37,7 @@ class UsageAutomationTest extends \Test\TestCase
     public function testUsageConfig()
     {
         $app = new UsageAutomationHelper();
+        $this->assertInstanceOf('Test\Unit\UsageAutomationHelper', $app);
         return $app;
     }
 }

@@ -5,7 +5,7 @@
  * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
-namespace Connect\Subscription;
+namespace Connect\Usage;
 
 use Connect\Model;
 
@@ -14,16 +14,7 @@ class Period extends Model
     /**
      * @var string
      */
-    public $delta;
 
-    /**
-     * @var string
-     */
-    public $uom;
-
-    /**
-     * @var string
-     */
     public $from;
 
     /**

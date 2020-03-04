@@ -49,19 +49,24 @@ class SubscriptionRequest extends Model
     public $attributes;
 
     /**
-     * @var Period
+     * @var SubscriptionPeriod
      */
     public $period;
 
     public function setVendorAttributes(Model $model)
     {
         $output = ConnectClient::getInstance()->subscriptions->sendRequest('PUT', Constants::SUBSCRIPTIONS_REQUESTS_PATH.$this->id.'/attributes', json_encode(array("vendor" => $model->toArray())));
-        $this->attributes->vendor =  Model::modelize('Model',json_decode($output));
+        $this->attributes->vendor =  Model::modelize('Model', json_decode($output));
     }
 
     public function setProviderAttributes(Model $model)
     {
         $output = ConnectClient::getInstance()->subscriptions->sendRequest('PUT', Constants::SUBSCRIPTIONS_REQUESTS_PATH.$this->id.'/attributes', json_encode(array("provider" => $model->toArray())));
         $this->attributes->provider =  Model::modelize('Model', json_decode($output));
+    }
+
+    public function setPeriod($period)
+    {
+        $this->period = Model::modelize('SubscriptionPeriod', $period);
     }
 }

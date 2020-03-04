@@ -22,7 +22,12 @@ class ActorStats extends Model
     public $count;
 
     /**
-     * @var SubscriptionRequests
+     * @var SubscriptionRequest
      */
     public $last_request;
+
+    public function setLast_request($last_request)
+    {
+        $this->last_request = Model::modelize('SubscriptionRequest', $last_request);
+    }
 }

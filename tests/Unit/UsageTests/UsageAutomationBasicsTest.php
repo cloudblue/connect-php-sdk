@@ -44,6 +44,7 @@ class UsageAutomationBasicsTest extends \Test\TestCase
     {
         //to be deprecated
         $app = new UsageAutomationBasicsHelper(new Config('./config.mocked4usageautomationbasics.json'));
+        $this->assertInstanceOf('Test\Unit\UsageAutomationBasicsHelper', $app);
         $app->usage->__call("wrong", array());
     }
 }

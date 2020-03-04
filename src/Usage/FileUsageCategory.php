@@ -1,30 +1,28 @@
 <?php
-
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect\Usage;
 
-/**
- * Class Records
- * @package Connect
- */
-class Records extends \Connect\Model
+use Connect\Model;
+
+class FileUsageCategory extends Model
 {
     /**
      * @var string
      */
-    public $valid;
-    /**
-     * @var string
-     */
-    public $invalid;
+    public $category_id;
 
     /**
      * @var string
      */
-    public $closed;
+    public $category_name;
+
+    /**
+     * @var string
+     */
+    public $category_description;
 }
