@@ -125,10 +125,6 @@ class Usage extends Core
      */
     public function createUsageFile(File $usageFile)
     {
-        if (!isset($usageFile->name) || !isset($usageFile->product->id) || !isset($usageFile->contract->id)) {
-            throw new FileCreationException("Usage File Creation requires name, product id, contract id");
-        }
-
         if (!isset($usageFile->description)) {
             $usageFile->description = "";
         }
