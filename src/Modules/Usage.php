@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect\Modules;
@@ -259,7 +259,7 @@ class Usage extends Core
             $spreadSheet->getActiveSheet()->setCellValue('O' . ($i + 2), (is_null($fileusagerecords[$i]->asset_recon_id) ? "":$fileusagerecords[$i]->asset_recon_id));
             $spreadSheet->getActiveSheet()->setCellValue('P' . ($i + 2), (is_null($fileusagerecords[$i]->tier) ? "":$fileusagerecords[$i]->tier));
         }
-        
+
         return $this->populateCategories($spreadSheet, $categories);
     }
 
