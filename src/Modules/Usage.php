@@ -259,8 +259,8 @@ class Usage extends Core
             $spreadSheet->getActiveSheet()->setCellValue('O' . ($i + 2), (is_null($fileusagerecords[$i]->asset_recon_id) ? "":$fileusagerecords[$i]->asset_recon_id));
             $spreadSheet->getActiveSheet()->setCellValue('P' . ($i + 2), (is_null($fileusagerecords[$i]->tier) ? "":$fileusagerecords[$i]->tier));
         }
-        $spreadSheet = $this->populateCategories($spreadSheet, $categories);
-        return $spreadSheet;
+        
+        return $this->populateCategories($spreadSheet, $categories);
     }
 
     /**
