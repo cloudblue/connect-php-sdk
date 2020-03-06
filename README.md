@@ -254,7 +254,7 @@ try {
 }
 ```
 
-## A simple Exampple of automating workflow for Tier Account Requests
+## A simple Example of automating workflow for Tier Account Requests
 ```php
 
 require_once "vendor/autoload.php";
