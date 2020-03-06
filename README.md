@@ -165,6 +165,7 @@ class UploadUsage extends \Connect\UsageAutomation
             //This is for Provider XYZ, also can be seen from $listing->provider->id and parametrized further via marketplace available at $listing->marketplace->id
             date_default_timezone_set('UTC'); //reporting must be always based on UTC
             $usages = [];
+            //Creating QT SCHEMA records, pplease check Connect\Usage\FileUsageRecord for further possible data to be passed
             array_push($usages, new Connect\Usage\FileUsageRecord([
                 'record_id' => 'unique record value',
                 'item_search_criteria' => 'item.mpn', //Possible values are item.mpn or item.local_id
@@ -176,7 +177,10 @@ class UploadUsage extends \Connect\UsageAutomation
                 'asset_search_value' => 'tenant2'
             ]));
             $usageFile = new \Connect\Usage\File([
-                'name' => 'sdk test',
+                "period" => [
+                        "from"=> date('Y-m-d H:i:s', strtotime("-1 days")),
+                        "to"=> date("Y-m-d H:i:s")
+                    ],
                 'product' => new \Connect\Product(
                     ['id' => $listing->product->id]
                 ),
@@ -247,6 +251,40 @@ try {
 
 } catch (Exception $e) {
     print "Error processing usage for active listing requests:" . $e->getMessage();
+}
+```
+
+## A simple Exampple of automating workflow for Tier Account Requests
+```php
+
+require_once "vendor/autoload.php";
+class ProcessTAR extends \Connect\TierAccountRequestsAutomation
+{
+    public function processTierAccountRequest(\Connect\TierAccountRequest $request)
+    {
+        //$request is instance of \Connect\TierAccountRequest
+       try{
+            //Get changes
+            $changes = $request->account->diffWithPreviousVersion();
+            
+            //Do something with external system to change TA data
+            
+            throw new \Connect\TierAccountRequestAccept("Proocessed");
+       } 
+       catch (Exception $e){
+            throw new \Connect\TierAccountRequestIgnore("Issue while processing, we ignore");
+        }
+    }
+
+}
+
+//Main Code Block
+
+try{
+    $tarProcessor = new ProcessTar();
+    $tarProcessor->process();
+} catch (Exception $e) {
+    print "error ".$e->getMessage();
 }
 ```
 
@@ -338,4 +376,61 @@ $requests = $connect->fulfillment->listRequests(['status' => 'approved']);
 <?php
 $connect = new Connect\ConnectClient();
 $request = $connect->fulfillment->getRequest('PR-XXXX-XXXX-XXXXX');
+```
+
+* List all Tier Accoounts
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+//List all tier accounts from a given marketplace
+$tierAccounts = $connect->directory->listTierAccounts(['marketplace' => 'MP-XXXXXXX']);
+```
+
+* Get concrete Tier Account
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$tierAccounts = $connect->directory->getTierAccountById('TA-XXXXXX-XXXXX');
+```
+
+* List tier account requests
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$tar = $connect->directory->listTierAccountRequests(['status' => 'pending']);
+```
+
+* List Asset Subscriptions
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$billingAssets = $connect->subscriptions->listSubscriptionAssets();
+```
+
+* Get Subscription Asset
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$billingAsset = $connect->subscriptions->getSubscriptionAssetById('AS-1234-1234');
+```
+
+* Get Billing Subscription Requests
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$billingRequests = $connect->subscriptions->listSubscriptionRequests();
+```
+
+* Get concrete Billing request
+
+```php
+<?php
+$connect = new Connect\ConnectClient();
+$billingAsset = $connect->subscriptions->getSubscriptionRequestById('PR-XXXXX-XXXXX-XXXXX');
 ```
