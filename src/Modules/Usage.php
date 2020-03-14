@@ -219,7 +219,7 @@ class Usage extends Core
                 ]
             );
         } catch (GuzzleException $e) {
-            throw new FileCreationException("Error uploading file:" . $e->getMessage());
+            throw new FileCreationException("Error uploading file:" . $e->getResponse()->getBody()->getContents());
         }
         $this->logger->info('HTTP Code: ' . $response->getStatusCode());
 
