@@ -158,9 +158,10 @@ class Usage extends Core
         $spreadSheet->getActiveSheet()->setCellValue('K1', "item_name");
         $spreadSheet->getActiveSheet()->setCellValue('L1', "item_mpn");
         $spreadSheet->getActiveSheet()->setCellValue('M1', "item_precision");
-        $spreadSheet->getActiveSheet()->setCellValue('N1', "category_id");
-        $spreadSheet->getActiveSheet()->setCellValue('O1', "asset_recon_id");
-        $spreadSheet->getActiveSheet()->setCellValue('P1', "tier");
+        $spreadSheet->getActiveSheet()->setCellValue('N1', "item_unit");
+        $spreadSheet->getActiveSheet()->setCellValue('O1', "category_id");
+        $spreadSheet->getActiveSheet()->setCellValue('P1', "asset_recon_id");
+        $spreadSheet->getActiveSheet()->setCellValue('Q1', "tier");
 
         $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet(
             $spreadSheet,
@@ -255,9 +256,10 @@ class Usage extends Core
             $spreadSheet->getActiveSheet()->setCellValue('K' . ($i + 2), (is_null($fileusagerecords[$i]->item_name) ? "":$fileusagerecords[$i]->item_name));
             $spreadSheet->getActiveSheet()->setCellValue('L' . ($i + 2), (is_null($fileusagerecords[$i]->item_mpn) ? "":$fileusagerecords[$i]->item_mpn));
             $spreadSheet->getActiveSheet()->setCellValue('M' . ($i + 2), (is_null($fileusagerecords[$i]->item_precision) ? "":$fileusagerecords[$i]->item_precision));
-            $spreadSheet->getActiveSheet()->setCellValue('N' . ($i + 2), (is_null($fileusagerecords[$i]->category_id) ? "generic_category":$fileusagerecords[$i]->category_id));
-            $spreadSheet->getActiveSheet()->setCellValue('O' . ($i + 2), (is_null($fileusagerecords[$i]->asset_recon_id) ? "":$fileusagerecords[$i]->asset_recon_id));
-            $spreadSheet->getActiveSheet()->setCellValue('P' . ($i + 2), (is_null($fileusagerecords[$i]->tier) ? "":$fileusagerecords[$i]->tier));
+            $spreadSheet->getActiveSheet()->setCellValue('N' . ($i + 2), (is_null($fileusagerecords[$i]->item_unit) ? "":$fileusagerecords[$i]->item_unit));
+            $spreadSheet->getActiveSheet()->setCellValue('O' . ($i + 2), (is_null($fileusagerecords[$i]->category_id) ? "generic_category":$fileusagerecords[$i]->category_id));
+            $spreadSheet->getActiveSheet()->setCellValue('P' . ($i + 2), (is_null($fileusagerecords[$i]->asset_recon_id) ? "":$fileusagerecords[$i]->asset_recon_id));
+            $spreadSheet->getActiveSheet()->setCellValue('Q' . ($i + 2), (is_null($fileusagerecords[$i]->tier) ? "":$fileusagerecords[$i]->tier));
         }
 
         return $this->populateCategories($spreadSheet, $categories);
@@ -285,22 +287,6 @@ class Usage extends Core
         return $spreadSheet;
     }
 
-    private function cleanSpreadSheetEmptyRecordColumns(Spreadsheet $spreadSheet)
-    {
-        $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
-        $toRemove = [];
-        foreach (range('A', 'P') as $char) {
-            if ($spreadSheet->getActiveSheet()->getCell($char.'2')->getValue() == "") {
-                $toRemove[] = $char;
-            }
-        }
-        $toRemove = array_reverse($toRemove);
-        foreach ($toRemove as $column) {
-            $spreadSheet->getActiveSheet()->removeColumn($column);
-        }
-        return $spreadSheet;
-    }
-
     /**
      * @param File $usageFile
      * @param array $fileRecords
@@ -313,7 +299,6 @@ class Usage extends Core
         //Using XLSX mechanism till usage records json api is available
         try {
             $spreadsheet = $this->createAndPopulateSpreadSheet($fileRecords, $usageFile->id, $categories);
-            $spreadsheet = $this->cleanSpreadSheetEmptyRecordColumns($spreadsheet);
             return $this->uploadSpreadSheet($usageFile, $spreadsheet);
         } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
             throw new FileCreationException("Error processing usage records: " . $e->getMessage());
