@@ -44,7 +44,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             if ($this->config->products && !in_array(
                 $tierConfigRequest->configuration->product->id,
                 $this->config->products
-                )) {
+            )) {
                 return 'Invalid product';
             }
 

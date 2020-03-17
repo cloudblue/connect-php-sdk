@@ -24,4 +24,5 @@ class Constants
     const GENERIC_CONVERSATION_ERROR_MESSAGE = 'Error while saving result on conversation for request ';
     const SUBSCRIPTIONS_ASSETS_PATH = '/subscriptions/assets/';
     const SUBSCRIPTIONS_REQUESTS_PATH = '/subscriptions/requests/';
+    const ASSETS_PATH = '/assets/';
 }

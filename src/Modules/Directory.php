@@ -59,7 +59,7 @@ class Directory extends Core
                 : explode(',', $this->config->products));
         }
 
-        $body = $this->sendRequest('GET', '/assets' . $query->compile());
+        $body = $this->sendRequest('GET', \Connect\Constants::ASSETS_PATH . $query->compile());
 
         /** @var Asset[] $models */
         return Model::modelize('assets', json_decode($body));
@@ -72,7 +72,7 @@ class Directory extends Core
      */
     public function getAssetById($assetID)
     {
-        $body = $this->sendRequest('GET', '/assets/' . $assetID);
+        $body = $this->sendRequest('GET', \Connect\Constants::ASSETS_PATH . $assetID);
         /** @var Asset $model */
         return Model::modelize('asset', json_decode($body));
     }
@@ -91,7 +91,7 @@ class Directory extends Core
             $query = new \Connect\RQL\Query();
         }
 
-        $body = $this->sendRequest('GET', '/products' . $query->compile());
+        $body = $this->sendRequest('GET', \Connect\Constants::PRODUCTS_PATH . $query->compile());
 
         /** @var \Connect\Product[] $models */
         return Model::modelize('products', json_decode($body));
@@ -105,7 +105,7 @@ class Directory extends Core
 
     public function getProduct($productID)
     {
-        $body = $this->sendRequest('GET', '/products/' . $productID);
+        $body = $this->sendRequest('GET', \Connect\Constants::PRODUCTS_PATH . $productID);
         /** @var Product $model */
         return Model::modelize('product', json_decode($body));
     }
@@ -131,7 +131,7 @@ class Directory extends Core
                 : explode(',', $this->config->products));
         }
 
-        $body = $this->sendRequest('GET', '/tier/configs' . $query->compile());
+        $body = $this->sendRequest('GET', \Connect\Constants::TIER_CONFIG_PATH . $query->compile());
 
         /** @var \Connect\TierConfig[] $models */
         return Model::modelize('tierConfig', json_decode($body));
