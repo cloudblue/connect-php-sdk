@@ -1,0 +1,82 @@
+{
+  "id": "BRV-0000-0000-0002",
+  "type": "vendor",
+  "events": {
+    "created": {
+      "at": "2021-01-01T00:00:00+00:00"
+    },
+    "updated": {
+      "at": "2021-01-01T00:00:00+00:00"
+    }
+  },
+  "asset": {
+    "id": "AS-0000-0000-0002",
+    "status": "active",
+    "events": {
+      "created": {
+        "at": "2019-12-31T23:00:00+00:00"
+      },
+      "updated": {
+        "at": "2019-12-31T23:00:00+00:00"
+      }
+    },
+    "external_id": "EX000000ID",
+    "external_uid": "00000000-0000-0000-0000-000000000002",
+    "product": {
+      "id": "PRD-000-000-001",
+      "name": "PocketPack",
+      "status": "published",
+      "icon": "/media/VA-000-001/PRD-000-000-001/media/PRD-000-000-001-logo.png"
+    },
+    "connection": {
+      "id": "CT-0000-0001",
+      "hub": {
+        "id": "HB-0000-0001",
+        "name": "Demo hub for vendor"
+      },
+      "provider": {
+        "id": "PA-000-001",
+        "name": "provider"
+      },
+      "vendor": {
+        "id": "VA-000-001",
+        "name": "vendor"
+      },
+      "type": "test"
+    },
+    "marketplace": {
+      "id": "MP-00001",
+      "name": "Marketplace M01 for provider",
+      "icon": "/media/logo_marketplace_1.png"
+    },
+    "contract": {
+      "id": "CRP-00000-00000-00001",
+      "name": "Contract of Program Agreement PA01"
+    }
+  },
+  "items": [
+    {
+      "id": "poor_hounds_002_0001",
+      "global_id": "PRD-000-000-002-0001",
+      "mpn": "MPN-A",
+      "quantity": "4.0",
+      "type": "Gb",
+      "display_name": "Sku A",
+      "period": "yearly",
+      "item_type": "reservation"
+    }
+  ],
+  "attributes": {
+    "vendor": {
+      "CC": "AA",
+      "A": "BB",
+      "Key 3": "Value 3.1"
+    }
+  },
+  "period": {
+    "from": "2019-12-31T23:00:00+00:00",
+    "to": "2020-12-31T23:00:00+00:00",
+    "delta": "1.0",
+    "uom": "year"
+  }
+}

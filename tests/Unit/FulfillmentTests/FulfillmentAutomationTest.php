@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Test\Unit;
@@ -117,6 +117,7 @@ class FulfillmentAutomationTest extends \Test\TestCase
         $app = new RequestProcessorHelper();
         $app->fulfillment->__call("wrong", array());
         $app->usage->__call("wrong", array());
+        $this->assertInstanceOf('Test\Unit\RequestProcessorHelper', $app);
     }
 
     public function testTemplateRetrive()

@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -76,7 +76,8 @@ class Config extends Model
         'fulfillment' => '\Connect\Runtime\Providers\FulfillmentServiceProvider',
         'tierConfiguration' => '\Connect\Runtime\Providers\TierConfigurationServiceProvider',
         'usage' => '\Connect\Runtime\Providers\UsageServiceProvider',
-        'directory' => '\Connect\Runtime\Providers\DirectoryServiceProvider'
+        'directory' => '\Connect\Runtime\Providers\DirectoryServiceProvider',
+        'subscriptions' => '\Connect\Runtime\Providers\SubscriptionsServiceProvider'
     ];
 
     /**

@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect\Modules;
@@ -119,16 +119,12 @@ class Usage extends Core
 
     /**
      * @param File $usageFile
-     * @return array|Model
+     * @return array|File
      * @throws FileCreationException
      * @throws GuzzleException
      */
     public function createUsageFile(File $usageFile)
     {
-        if (!isset($usageFile->name) || !isset($usageFile->product->id) || !isset($usageFile->contract->id)) {
-            throw new FileCreationException("Usage File Creation requieres name, product id, contract id");
-        }
-
         if (!isset($usageFile->description)) {
             $usageFile->description = "";
         }
@@ -150,13 +146,31 @@ class Usage extends Core
         ), 0);
         $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
         $spreadSheet->getActiveSheet()->setCellValue('A1', "record_id");
-        $spreadSheet->getActiveSheet()->setCellValue('B1', "item_search_criteria");
-        $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_value");
-        $spreadSheet->getActiveSheet()->setCellValue('D1', "quantity");
-        $spreadSheet->getActiveSheet()->setCellValue('E1', "start_time_utc");
-        $spreadSheet->getActiveSheet()->setCellValue('F1', "end_time_utc");
-        $spreadSheet->getActiveSheet()->setCellValue('G1', "asset_search_criteria");
-        $spreadSheet->getActiveSheet()->setCellValue('H1', "asset_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('B1', "record_note");
+        $spreadSheet->getActiveSheet()->setCellValue('C1', "item_search_criteria");
+        $spreadSheet->getActiveSheet()->setCellValue('D1', "item_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('E1', "amount");
+        $spreadSheet->getActiveSheet()->setCellValue('F1', "quantity");
+        $spreadSheet->getActiveSheet()->setCellValue('G1', "start_time_utc");
+        $spreadSheet->getActiveSheet()->setCellValue('H1', "end_time_utc");
+        $spreadSheet->getActiveSheet()->setCellValue('I1', "asset_search_criteria");
+        $spreadSheet->getActiveSheet()->setCellValue('J1', "asset_search_value");
+        $spreadSheet->getActiveSheet()->setCellValue('K1', "item_name");
+        $spreadSheet->getActiveSheet()->setCellValue('L1', "item_mpn");
+        $spreadSheet->getActiveSheet()->setCellValue('M1', "item_precision");
+        $spreadSheet->getActiveSheet()->setCellValue('N1', "item_unit");
+        $spreadSheet->getActiveSheet()->setCellValue('O1', "category_id");
+        $spreadSheet->getActiveSheet()->setCellValue('P1', "asset_recon_id");
+        $spreadSheet->getActiveSheet()->setCellValue('Q1', "tier");
+
+        $spreadSheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet(
+            $spreadSheet,
+            Constants::SPREADSHEET_SHEET_CATEGORIES
+        ), 1);
+        $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_CATEGORIES);
+        $spreadSheet->getActiveSheet()->setCellValue('A1', "category_id");
+        $spreadSheet->getActiveSheet()->setCellValue('B1', "category_name");
+        $spreadSheet->getActiveSheet()->setCellValue('C1', "category_description");
         return $spreadSheet;
     }
 
@@ -206,7 +220,7 @@ class Usage extends Core
                 ]
             );
         } catch (GuzzleException $e) {
-            throw new FileCreationException("Error uploading file:" . $e->getMessage());
+            throw new FileCreationException("Error uploading file:" . $e->getResponse()->getBody()->getContents());
         }
         $this->logger->info('HTTP Code: ' . $response->getStatusCode());
 
@@ -220,22 +234,55 @@ class Usage extends Core
 
     /**
      * @param array $fileusagerecords
+     * @param array\FileUsageCategory $categories | null
      * @return Spreadsheet
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    private function createAndPopulateSpreadSheet($fileusagerecords)
+    private function createAndPopulateSpreadSheet($fileusagerecords, $usageFileID, $categories = null)
     {
         $spreadSheet = $this->createUsageSpreadSheet();
         $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_NAME);
         for ($i = 0; $i < count($fileusagerecords); $i++) {
-            $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), $fileusagerecords[$i]->record_id);
-            $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $fileusagerecords[$i]->item_search_criteria);
-            $spreadSheet->getActiveSheet()->setCellValue('C' . ($i + 2), $fileusagerecords[$i]->item_search_value);
-            $spreadSheet->getActiveSheet()->setCellValue('D' . ($i + 2), $fileusagerecords[$i]->quantity);
-            $spreadSheet->getActiveSheet()->setCellValue('E' . ($i + 2), $fileusagerecords[$i]->start_time_utc);
-            $spreadSheet->getActiveSheet()->setCellValue('F' . ($i + 2), $fileusagerecords[$i]->end_time_utc);
-            $spreadSheet->getActiveSheet()->setCellValue('G' . ($i + 2), $fileusagerecords[$i]->asset_search_criteria);
-            $spreadSheet->getActiveSheet()->setCellValue('H' . ($i + 2), $fileusagerecords[$i]->asset_search_value);
+            $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), (is_null($fileusagerecords[$i]->record_id) ? $usageFileID."_record_".$i:$fileusagerecords[$i]->record_id));
+            $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $fileusagerecords[$i]->record_note);
+            $spreadSheet->getActiveSheet()->setCellValue('C' . ($i + 2), $fileusagerecords[$i]->item_search_criteria);
+            $spreadSheet->getActiveSheet()->setCellValue('D' . ($i + 2), $fileusagerecords[$i]->item_search_value);
+            $spreadSheet->getActiveSheet()->setCellValue('E' . ($i + 2), (is_null($fileusagerecords[$i]->amount) ? "":$fileusagerecords[$i]->amount));
+            $spreadSheet->getActiveSheet()->setCellValue('F' . ($i + 2), (is_null($fileusagerecords[$i]->quantity) ? "":$fileusagerecords[$i]->quantity));
+            $spreadSheet->getActiveSheet()->setCellValue('G' . ($i + 2), $fileusagerecords[$i]->start_time_utc);
+            $spreadSheet->getActiveSheet()->setCellValue('H' . ($i + 2), $fileusagerecords[$i]->end_time_utc);
+            $spreadSheet->getActiveSheet()->setCellValue('I' . ($i + 2), $fileusagerecords[$i]->asset_search_criteria);
+            $spreadSheet->getActiveSheet()->setCellValue('J' . ($i + 2), $fileusagerecords[$i]->asset_search_value);
+            $spreadSheet->getActiveSheet()->setCellValue('K' . ($i + 2), (is_null($fileusagerecords[$i]->item_name) ? "":$fileusagerecords[$i]->item_name));
+            $spreadSheet->getActiveSheet()->setCellValue('L' . ($i + 2), (is_null($fileusagerecords[$i]->item_mpn) ? "":$fileusagerecords[$i]->item_mpn));
+            $spreadSheet->getActiveSheet()->setCellValue('M' . ($i + 2), (is_null($fileusagerecords[$i]->item_precision) ? "":$fileusagerecords[$i]->item_precision));
+            $spreadSheet->getActiveSheet()->setCellValue('N' . ($i + 2), (is_null($fileusagerecords[$i]->item_unit) ? "":$fileusagerecords[$i]->item_unit));
+            $spreadSheet->getActiveSheet()->setCellValue('O' . ($i + 2), (is_null($fileusagerecords[$i]->category_id) ? "generic_category":$fileusagerecords[$i]->category_id));
+            $spreadSheet->getActiveSheet()->setCellValue('P' . ($i + 2), (is_null($fileusagerecords[$i]->asset_recon_id) ? "":$fileusagerecords[$i]->asset_recon_id));
+            $spreadSheet->getActiveSheet()->setCellValue('Q' . ($i + 2), (is_null($fileusagerecords[$i]->tier) ? "":$fileusagerecords[$i]->tier));
+        }
+
+        return $this->populateCategories($spreadSheet, $categories);
+    }
+
+    /**
+     * @param $spreadSheet
+     * @param $categories
+     * @return mixed
+     */
+    private function populateCategories($spreadSheet, $categories)
+    {
+        $spreadSheet->setActiveSheetIndexByName(Constants::SPREADSHEET_SHEET_CATEGORIES);
+        if (is_null($categories)) {
+            $spreadSheet->getActiveSheet()->setCellValue('A2', 'generic_category');
+            $spreadSheet->getActiveSheet()->setCellValue('B2', 'Generic Category');
+            $spreadSheet->getActiveSheet()->setCellValue('C2', 'Generic autogenerated category');
+        } else {
+            for ($i = 0; $i < count($categories); $i++) {
+                $spreadSheet->getActiveSheet()->setCellValue('A' . ($i + 2), $categories[$i]->category_id);
+                $spreadSheet->getActiveSheet()->setCellValue('B' . ($i + 2), $categories[$i]->category_name);
+                $spreadSheet->getActiveSheet()->setCellValue('C' . ($i + 2), $categories[$i]->category_description);
+            }
         }
         return $spreadSheet;
     }
@@ -247,11 +294,11 @@ class Usage extends Core
      * @throws FileCreationException
      * @throws FileRetrieveException
      */
-    public function uploadUsageRecords(File $usageFile, $fileRecords)
+    public function uploadUsageRecords(File $usageFile, $fileRecords, $categories = null)
     {
         //Using XLSX mechanism till usage records json api is available
         try {
-            $spreadsheet = $this->createAndPopulateSpreadSheet($fileRecords);
+            $spreadsheet = $this->createAndPopulateSpreadSheet($fileRecords, $usageFile->id, $categories);
             return $this->uploadSpreadSheet($usageFile, $spreadsheet);
         } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
             throw new FileCreationException("Error processing usage records: " . $e->getMessage());
@@ -304,15 +351,15 @@ class Usage extends Core
     /**
      * @param File $file
      * @param FileUsageRecord[] $usageRecords
-     * @return array|Model
+     * @return array|File
      * @throws FileCreationException
      * @throws FileRetrieveException
      * @throws GuzzleException
      */
-    public function submitUsage(File $file, $usageRecords)
+    public function submitUsage(File $file, $usageRecords, $categories=null)
     {
         $usageFile = $this->createUsageFile($file);
-        $this->uploadUsageRecords($usageFile, $usageRecords);
+        $this->uploadUsageRecords($usageFile, $usageRecords, $categories);
         return $usageFile;
     }
 

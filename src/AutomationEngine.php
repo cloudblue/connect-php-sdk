@@ -3,12 +3,13 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
 
 use Connect\Modules\Fulfillment;
+use Connect\Modules\Subscriptions;
 use Connect\Modules\TierConfiguration;
 use Connect\Modules\Usage;
 use Connect\Modules\Directory;
@@ -27,6 +28,7 @@ use Psr\Log\LoggerInterface;
  * @property TierConfiguration $tierConfiguration
  * @property Usage $usage
  * @property Directory $directory
+ * @property Subscriptions $subscriptions
  * @package Connect
  */
 abstract class AutomationEngine

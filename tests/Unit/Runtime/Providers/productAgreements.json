@@ -1,0 +1,39 @@
+[
+  {
+    "id": "AGR-107-526-821",
+    "type": "product-sourcing",
+    "title": "El Ten Eleven",
+    "description": "El Ten Eleven",
+    "created": "2020-02-18T11:56:50+00:00",
+    "updated": "2020-02-18T11:56:50+00:00",
+    "owner": {
+      "id": "PA-239-263",
+      "name": "Devolved stable hardware"
+    },
+    "author": {
+      "id": "UR-398-820-096",
+      "name": "Shagit"
+    },
+    "version": 1,
+    "active": true,
+    "link": "https://example.com",
+    "version_created": "2020-02-18T11:56:50+00:00",
+    "parent": {
+      "id": "AGU-233-635-216",
+      "name": "El Ten Eleven"
+    },
+    "listing": {
+      "id": "LST-107-526-821"
+    },
+    "product": {
+      "id": "PRD-045-171-563",
+      "icon": "",
+      "name": "El Ten Eleven",
+      "status": "published"
+    },
+    "marketplace": {
+      "id": "MP-17540",
+      "name": "El Ten Eleven"
+    }
+  }
+]

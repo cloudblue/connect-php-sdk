@@ -3,10 +3,12 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
+
+use Connect\Product\Actions\Action;
 
 /**
  * Class Product
@@ -80,6 +82,42 @@ class Product extends Model
 
     protected $stats;
 
+    /**
+     * @var ProductMedia
+     */
+
+    protected $media;
+
+    /**
+     * @var ProductVisibility
+     */
+    protected $visibility;
+
+    /**
+     * @var ProductCapabilities
+     */
+    protected $capabilities;
+
+    /**
+     * @var bool
+     */
+    public $latest;
+
+    public function setCapabilities($capabilities)
+    {
+        $this->capabilities = Model::modelize('ProductCapabilities', $capabilities);
+    }
+
+    public function setVisibility($visibility)
+    {
+        $this->visibility = Model::modelize('ProductVisibility', $visibility);
+    }
+
+    public function setMedia($media)
+    {
+        $this->media = Model::modelize('ProductMedia', $media);
+    }
+
     public function setStats($stats)
     {
         $this->stats = Model::modelize('ProductStats', $stats);
@@ -100,15 +138,26 @@ class Product extends Model
         $this->category = Model::modelize('ProductCategory', $category);
     }
 
+    /**
+     * @return array|Template
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getTemplates()
     {
         if ($this->id == null) {
             return [];
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/'.$this->id.'/templates');
-        return Model::modelize('templates', json_decode($body));
+        $body = ConnectClient::getInstance()->directory->sendRequest('GET', Constants::PRODUCTS_PATH  . $this->id . '/templates');
+        return Model::modelize('Templates', json_decode($body));
     }
 
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|ProductConfigurationParameter
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getProductConfigurations(RQL\Query $filter = null)
     {
         if ($this->id == null) {
@@ -117,7 +166,90 @@ class Product extends Model
         if (!$filter) {
             $filter = new \Connect\RQL\Query();
         }
-        $body = ConnectClient::getInstance()->directory->sendRequest('GET', '/products/'.$this->id.'/configurations'.$filter->compile());
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH . $this->id . '/configurations' . $filter->compile()
+        );
         return Model::modelize('ProductConfigurationParameters', json_decode($body));
+    }
+
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|ProductMedia
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAllMedia(RQL\Query $filter = null)
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        if (!$filter) {
+            $filter = new \Connect\RQL\Query();
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/media' . $filter->compile()
+        );
+        return Model::modelize('ProductMedias', json_decode($body));
+    }
+
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|Item
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAllItems(RQL\Query $filter = null)
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        if (!$filter) {
+            $filter = new \Connect\RQL\Query();
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/items' . $filter->compile()
+        );
+        return Model::modelize('Items', json_decode($body));
+    }
+
+    /**
+     * @param RQL\Query|null $filter
+     * @return array|Agreement
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAllAgreements(RQL\Query $filter = null)
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        if (!$filter) {
+            $filter = new \Connect\RQL\Query();
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/agreements' . $filter->compile()
+        );
+        return Model::modelize('Agreements', json_decode($body));
+    }
+
+    /**
+     * @return array|Action
+     * @throws ConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAllActions()
+    {
+        if ($this->id == null) {
+            return [];
+        }
+        $body = ConnectClient::getInstance()->directory->sendRequest(
+            'GET',
+            Constants::PRODUCTS_PATH  . $this->id . '/actions'
+        );
+        return Model::modelize('Actions', json_decode($body));
     }
 }

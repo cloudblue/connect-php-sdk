@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -44,7 +44,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
             if ($this->config->products && !in_array(
                 $tierConfigRequest->configuration->product->id,
                 $this->config->products
-                )) {
+            )) {
                 return 'Invalid product';
             }
 

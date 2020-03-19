@@ -2,11 +2,12 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Test\Unit\DirectoryTests;
 
+use Connect\Asset;
 use Connect\Config;
 use Connect\ConnectClient;
 use Connect\RQL\Query;
@@ -59,6 +60,25 @@ class ProductTest extends \Test\TestCase
         foreach ($configurations as $configuration) {
             $this->assertInstanceOf('\Connect\ProductConfigurationParameter', $configuration);
         }
+        $mediaObject = $product->getAllMedia();
+        foreach ($mediaObject as $media) {
+            $this->assertInstanceOf('\Connect\ProductMedia', $media);
+        }
+        $items = $product->getAllItems();
+        foreach ($items as $item) {
+            $this->assertInstanceOf('\Connect\Item', $item);
+        }
+        $agreements = $product->getAllAgreements();
+        foreach ($agreements as $agreement) {
+            $this->assertInstanceOf('\Connect\Agreement', $agreement);
+        }
+        $actions = $product->getAllActions();
+        foreach ($actions as $action) {
+            $this->assertInstanceOf('Connect\Product\Actions\Action', $action);
+        }
+        $asset = new Asset(json_decode(file_get_contents(__DIR__.'/../Runtime/Providers/requestassets.json')));
+        $link = $actions[0]->getActionLink($asset);
+        $this->assertInstanceOf('Connect\Product\Actions\PALink', $link);
     }
 
     public function testEmptyProductTemplates()
@@ -73,5 +93,39 @@ class ProductTest extends \Test\TestCase
         $product = new \Connect\Product();
         $configurations = $product->getProductConfigurations();
         $this->assertCount(0, $configurations);
+    }
+
+    public function testEmptyProductMedia()
+    {
+        $product = new \Connect\Product();
+        $media = $product->getAllMedia();
+        $this->assertCount(0, $media);
+    }
+
+    public function testEmptyItem()
+    {
+        $product = new \Connect\Product();
+        $items = $product->getAllItems();
+        $this->assertCount(0, $items);
+    }
+
+    public function testEmptyAgreements()
+    {
+        $product = new \Connect\Product();
+        $agreements = $product->getAllAgreements();
+        $this->assertCount(0, $agreements);
+    }
+
+    public function testEmptyActions()
+    {
+        $product = new \Connect\Product();
+        $actions = $product->getAllActions();
+        $this->assertCount(0, $actions);
+    }
+
+    public function testEmptyActionLink()
+    {
+        $action = new \Connect\Product\Actions\Action();
+        $this->assertInstanceOf('\Connect\Product\Actions\PALink', $action->getActionLink(new Asset()));
     }
 }

@@ -2,7 +2,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -28,6 +28,21 @@ class ProductCustomerUISettings extends Model
      * @var ProductDocument[]
      */
     protected $documents;
+
+    /**
+     * @var ProductLanguages[] | null
+     */
+    protected $languages;
+
+    /**
+     * @var string;
+     */
+    public $provisioning_message;
+
+    public function setLanguages($languages)
+    {
+        $this->languages = Model::modelize('ProductLanguage', $languages);
+    }
 
     public function setDownload_links($downloadLinks)
     {

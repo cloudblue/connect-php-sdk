@@ -2,7 +2,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2018. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Test\Unit;
@@ -29,6 +29,7 @@ class UsageAutomationTest extends \Test\TestCase
     public function testUsageAutomation()
     {
         $app = new UsageAutomationHelper(new Config('./config.mocked4usageautomation.json'));
+        $this->assertInstanceOf('Test\Unit\UsageAutomationHelper', $app);
         $app->process();
         return $app;
     }
@@ -36,6 +37,7 @@ class UsageAutomationTest extends \Test\TestCase
     public function testUsageConfig()
     {
         $app = new UsageAutomationHelper();
+        $this->assertInstanceOf('Test\Unit\UsageAutomationHelper', $app);
         return $app;
     }
 }

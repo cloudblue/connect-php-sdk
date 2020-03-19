@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect\Usage;
@@ -43,14 +43,21 @@ class File extends \Connect\Model
     public $status;
 
     /**
-     * @var string
+     * @var Period
      */
-    public $created_by;
+    public $period;
+
+    /**
+     * @var string | null
+     */
+
+    public $currency;
 
     /**
      * @var string
      */
-    public $created_at;
+
+    public $schema;
 
     /**
      * @var \Connect\Product
@@ -80,12 +87,13 @@ class File extends \Connect\Model
     /**
      * @var string | null
      */
-    public $upload_file_uri;
+    public $usage_file_uri;
 
     /**
      * @var string | null
      */
     public $processed_file_uri;
+
     /**
      * @var string | null
      */
@@ -100,6 +108,16 @@ class File extends \Connect\Model
     public $error_detail;
 
     /**
+     * @var string | null
+     */
+    public $external_id;
+
+    /**
+     * @var Stats
+     */
+    public $stats;
+
+    /**
      * @var \Connect\Usage\Records
      */
     public $records;
@@ -108,4 +126,9 @@ class File extends \Connect\Model
      * @var Events
      */
     public $events;
+
+    /**
+     * @var string
+     */
+    public $environment;
 }

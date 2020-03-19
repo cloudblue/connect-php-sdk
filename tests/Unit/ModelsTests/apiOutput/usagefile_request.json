@@ -1,76 +1,76 @@
 {
-  "id": "UF-2018-11-9878764342",
-  "name": "Usage for Feb 2019",
-  "description": "This file contains usage for the product belonging to month Feb 2019",
-  "note": "My personal note",
-  "status": "ready",
-  "product": {
-    "id": "CN-783-317-575",
-    "name": "Google Apps",
-    "icon": "/media/VA-587-127/CN-783-317-575/media/CN-783-317-575-logo.png"
+  "id":"UF-2020-03-8705-3864",
+  "name":"8",
+  "status":"closed",
+  "vendor":{
+    "id":"VA-993-502",
+    "name":"Vendor for ayermakov"
   },
-  "contract": {
-    "id": "CRD-00000-00000-00000",
-    "name": "ACME Distribution Contract"
+  "provider":{
+    "id":"PA-153-558",
+    "name":"Provider for ayermakov"
   },
-  "marketplace": {
-    "id": "MP-198987",
-    "name": "France",
-    "icon": "/media/PA-123-123/marketplaces/MP-12345/image.png"
+  "environment":"production",
+  "marketplace":{
+    "id":"MP-56616",
+    "name":"Germany"
   },
-  "vendor": {
-    "id": "VA-587-127",
-    "name": "Symantec"
+  "product":{
+    "id":"PRD-272-877-838",
+    "name":"Test ARTEM",
+    "icon":""
   },
-  "provider": {
-    "id": "PA-587-127",
-    "name": "ABC Corp"
+  "acceptance_note":"Auto Approved",
+  "schema":"tr",
+  "stats":{
+    "uploaded":2,
+    "validated":0,
+    "pending":0,
+    "accepted":0,
+    "closed":2
   },
-  "upload_file_uri": "<File Location for uploaded file>",
-  "processed_file_uri": "<File Location for generated file>",
-  "acceptance_note": "All usage data is correct",
-  "rejection_note": "Rejected due to wrong usage for item 56",
-  "error_detail": "Error details in case of usage file is marked as invalid",
-  "records": {
-    "valid": 56,
-    "invalid": 0
+  "usage_file_uri":"https://devconnect.blob.core.windows.net/usage-collector-dev/PRD-272-877-838/UF-2020-03-8705-3864/uploaded/UF-2020-03-8705-3864.xlsx?se=2020-03-04T15%3A42%3A12Z&sp=r&sv=2019-02-02&sr=b&sig=IGD/LlmCWiYy7LF2foY9F4%2BN72uCNJZIyt0rHJSmwz0%3D",
+  "processed_file_uri":"https://devconnect.blob.core.windows.net/usage-collector-dev/PRD-272-877-838/UF-2020-03-8705-3864/processed/UF-2020-03-8705-3864-PROCESSED.xlsx?se=2020-03-04T15%3A42%3A12Z&sp=r&sv=2019-02-02&sr=b&sig=J9Z7wSVAaWLHtrnZKWl6A4m3pmkmxz6q2a4/HeRsnU0%3D",
+  "records":{
+    "valid":2,
+    "invalid":0,
+    "closed":2
   },
-  "events": {
-    "created": {
-      "by": {
-        "id": "SU-123123"
-      },
-      "at": "2018-11-21T11:10:29+00:00"
+  "events":{
+    "created":{
+      "at":"2020-03-04T03:24:28.137141+00:00",
+      "by":{
+        "id":"UR-552-340-461",
+        "name":"Artem Yermakov"
+      }
     },
-    "uploaded": {
-      "by": {
-        "id": "SU-123123"
-      },
-      "at": "2018-11-21T11:10:29+00:00"
+    "uploaded":{
+      "at":"2020-03-04T03:40:33.272329+00:00",
+      "by":{
+        "id":"UR-552-340-461",
+        "name":"Artem Yermakov"
+      }
     },
-    "submitted": {
-      "by": {
-        "id": "SU-123123"
-      },
-      "at": "2018-11-21T11:10:29+00:00"
+    "submitted":{
+      "at":"2020-03-04T03:41:35.700804+00:00",
+      "by":{
+        "id":"UR-552-340-461",
+        "name":"Artem Yermakov"
+      }
     },
-    "accepted": {
-      "by": {
-        "id": "SU-123123"
-      },
-      "at": "2018-11-21T11:10:29+00:00"
+    "accepted":{
+      "at":"2020-03-04T03:41:39.269057+00:00"
     },
-    "rejected": {
-      "by": {
-        "id": "SU-123123"
-      },
-      "at": "2018-11-21T11:10:29+00:00"
-    },
-    "closed": {
-      "by": {
-        "id": "SU-123123"
-      },
-      "at": "2018-11-21T11:10:29+00:00"
+    "closed":{
+      "at":"2020-03-04T07:38:17.158668+00:00",
+      "by":{
+        "id":"somebody",
+        "name":"ayermakov+@odin.com"
+      }
     }
+  },
+  "contract":{
+    "id":"CRD-87450-19644-06118",
+    "name":"Contract of Germany Onboarding Agreement"
   }
 }

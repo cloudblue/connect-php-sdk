@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect;
@@ -170,7 +170,12 @@ class Model implements \ArrayAccess
         switch (gettype($value)) {
             case 'object':
 
-                $namespaces = ['\Connect\\', '\Connect\Usage\\'];
+                $namespaces = ['\Connect\\',
+                    '\Connect\Usage\\',
+                    '\Connect\Product\Capabilities\\',
+                    'Connect\Product\Actions\\',
+                    'Connect\Subscription\\'
+                ];
 
                 /**
                  * if the item is an object search if there are any model that match with it:

@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Test\Unit;
@@ -64,7 +64,7 @@ class ConfigTest extends \Test\TestCase
         $cfg = new Config(__DIR__ . '/cfg.valid.runtimeservices.json');
         $this->assertInstanceOf('\Connect\Config', $cfg);
         $this->assertInternalType('array', $cfg->runtimeServices);
-        $this->assertCount(7, $cfg->runtimeServices);
+        $this->assertCount(8, $cfg->runtimeServices);
     }
 
     /**

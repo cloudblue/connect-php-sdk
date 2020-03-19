@@ -3,7 +3,7 @@
 /**
  * This file is part of the Ingram Micro Cloud Blue Connect SDK.
  *
- * @copyright (c) 2019. Ingram Micro. All Rights Reserved.
+ * @copyright (c) 2018-2020. Ingram Micro. All Rights Reserved.
  */
 
 namespace Connect\Modules;
@@ -46,7 +46,7 @@ class Fulfillment extends Core
     /**
      * List the pending requests
      * @param array $filters Filter for listing key->value or key->array(value1, value2)
-     * @return array|Model
+     * @return array|Request
      * @throws GuzzleException
      */
     public function listRequests(array $filters = [])
@@ -121,7 +121,7 @@ class Fulfillment extends Core
 
     /**
      * @param $requestId
-     * @return array|Model
+     * @return array|Request
      * @throws GuzzleException
      * @throws \Connect\ConfigException
      */
@@ -134,7 +134,7 @@ class Fulfillment extends Core
     /**
      * To be used only with provider token
      * @param Request $request
-     * @return array|Model
+     * @return array|Request
      * @throws GuzzleException
      * @throws \Connect\ConfigException
      */
