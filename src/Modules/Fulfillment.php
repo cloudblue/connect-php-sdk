@@ -45,21 +45,26 @@ class Fulfillment extends Core
 
     /**
      * List the pending requests
-     * @param array $filters Filter for listing key->value or key->array(value1, value2)
+     * @param array|\Connect\RQL\Query $filters Filter for listing key->value or key->array(value1, value2)
      * @return array|Request
      * @throws GuzzleException
      */
-    public function listRequests(array $filters = [])
+    public function listRequests($filters = [])
     {
         $query = '';
 
-        if ($this->config->products) {
-            $filters['asset.product.id__in'] = implode(",", $this->config->products);
+        if($filters instanceof \Connect\RQL\Query){
+            $query = $filters->compile();
         }
+        else {
+            if ($this->config->products) {
+                $filters['asset.product.id__in'] = implode(",", $this->config->products);
+            }
 
-        if ($filters) {
-            $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
-            $query = urldecode($query);
+            if ($filters) {
+                $query = '?' . preg_replace('/%5B[0-9]+%5D/simU', '', http_build_query($filters));
+                $query = urldecode($query);
+            }
         }
 
         $body = $this->sendRequest('GET', '/requests' . $query);
