@@ -75,6 +75,11 @@ class Param extends Model
     public $marketplace;
 
     /**
+     * @var boolean
+     */
+    public $reconciliation;
+
+    /**
      * Assign error on parameter
      * @param string $msg - Error message to assign
      * @return $this - Same Param object, for chain assignments like $param->error('err')->value('xxx')
