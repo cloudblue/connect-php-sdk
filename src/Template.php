@@ -33,5 +33,11 @@ class Template extends Model
      * @var string
      */
 
+    public $type;
+
+    /**
+     * @var string
+     */
+
     public $body;
 }
