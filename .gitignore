@@ -101,8 +101,6 @@ Temporary Items
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.devcontainer
-
 ### Eclipse template
 
 .metadata
@@ -230,6 +228,3 @@ composer.lock
 # codecov
 coverage.xml
 .php_cs.cache
-.devcontainer_old/Dockerfile
-.devcontainer_old/devcontainer.json
-.gitignore
