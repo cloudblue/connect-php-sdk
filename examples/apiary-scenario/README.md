@@ -11,14 +11,7 @@ In order to use this template you will need an environment capable to run PHP sc
 
 ## Installation 
 
-You can download the quick start template with Composer `create-project` command in your terminal:
-
-```bash
-composer create-project --prefer-dist apsconnect/connect-quickstart-template project-name
-```
-
-Once you have the skeleton project with the example folder that contains the apiary_scenario folder.  
-After that you must go to the folder and run composer update to get the latest versions of the dependencies and to update the composer.lock
+Once you has pulled the project, go to the folder examples/apiary-scenario and run "composer update" to get the latest versions of the dependencies and to update the file composer.lock
 
 ## PHP
 In the config.php you must to set the API Vendor credentials. 
