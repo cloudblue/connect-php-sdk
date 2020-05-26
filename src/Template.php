@@ -18,6 +18,7 @@ class Template extends Model
      * @var string
      */
     public $id;
+    
     /**
      * @var string
      */
@@ -26,12 +27,15 @@ class Template extends Model
     /**
      * @var string
      */
-
+    public $type;
+    
+    /**
+     * @var string
+     */
     public $name;
 
     /**
      * @var string
      */
-
     public $body;
 }
