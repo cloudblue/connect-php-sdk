@@ -1,0 +1,43 @@
+{
+    "name": "apsconnect/connect-quickstart-template",
+    "homepage": "http://www.ingrammicrocloud.com/",
+    "type": "project",
+    "description": "APS Connect QuickStart Template",
+    "license": "proprietary",
+    "config": {
+      "preferred-install": "dist",
+      "discard-changes": true,
+      "sort-packages": true,
+      "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "support": {
+      "issues": "http://www.ingrammicrocloud.com/support",
+      "docs": "http://www.ingrammicrocloud.com/docs"
+    },
+    "require": {
+      "php": ">=5.6.0",
+      "apsconnect/connect-sdk": ">=19.0"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "^5.7",
+      "mockery/mockery": "^0.9"
+    },
+    "autoload": {
+      "psr-4": {
+        "App\\": "app/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Test\\": "tests/"
+      }
+    },
+    "scripts": {
+      "post-root-package-install": [
+        "@php -r \"file_exists('config.json') || copy('config.example.json', 'config.json');\""
+      ]
+    }
+  }
+  
