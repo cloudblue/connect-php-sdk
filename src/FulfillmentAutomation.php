@@ -146,7 +146,7 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->fulfillment->updateParameters($request, $e->params);
-            $this->fulfillment->sendRequest('POST', Constants::REQUESTS_PATH . $request->id . Constants::INQUIRE_SUFFIX, ($e->templateId != null) ? json_encode(['template_id' => $msg->templateid]) : '{}');
+            $this->fulfillment->sendRequest('POST', Constants::REQUESTS_PATH . $request->id . Constants::INQUIRE_SUFFIX, ($e->templateId != null) ? json_encode(['template_id' => $msg->templateId]) : '{}');
             try {
                 $request->conversation()->addMessage($e->getMessage());
             } catch (GuzzleException $e) {
