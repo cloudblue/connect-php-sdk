@@ -39,4 +39,10 @@ class Account extends Model
      */
 
     public $contact_info;
+
+    /**
+     * @var string
+     */
+
+    public $tax_id;
 }

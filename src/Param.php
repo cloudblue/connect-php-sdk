@@ -80,6 +80,11 @@ class Param extends Model
     public $reconciliation;
 
     /**
+     * @var \stdClass
+     */
+    public $structured_value;
+
+    /**
      * Assign error on parameter
      * @param string $msg - Error message to assign
      * @return $this - Same Param object, for chain assignments like $param->error('err')->value('xxx')
