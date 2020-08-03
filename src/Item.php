@@ -78,6 +78,17 @@ class Item extends Model
     public $unit;
 
     /**
+     * @var string
+     */
+
+    public $description;
+
+    /**
+     * @var \stdClass
+     */
+    public $commitment;
+
+    /**
      * Return a Param by ID
      * @param string $id
      * @return Param
