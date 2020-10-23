@@ -11,7 +11,7 @@
         "psr/container": "^1.0.0",
         "psr/log": "^1.0.0",
         "pimple/pimple": "^3.0",
-        "guzzlehttp/guzzle": "~6.0",
+        "guzzlehttp/guzzle": "~6.0 | ~7.0",
         "phpoffice/phpspreadsheet": "^1.6",
         "lukascivil/treewalker": "^0.9"
     },
