@@ -19,12 +19,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
+      with:
+        fetch-depth: 0
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
-        extensions: mbstring, intl, pcov, gd, zip, curl, json
+        extensions: mbstring, intl, pcov, gd, zip, curl, json, xdebug
         ini-values: post_max_size=256M, short_open_tag=On
         tools: pecl, composer, phpunit:v5.7
     - name: Setup dependencies
@@ -32,13 +33,17 @@ jobs:
         composer install
     - name: Run tests
       run: |
-        phpunit --coverage-clover=coverage-report.clover --log-junit=test-report.xml
+        ./vendor/phpunit/phpunit/phpunit --coverage-clover=coverage-report.clover --log-junit=test-report.xml
     - name: Upload coverage
       uses: codecov/codecov-action@v1
       with:
         file: ./test-report.xml
         fail_ci_if_error: true
         verbose: true
+    - name: Fix coverage report for Sonar
+      run: |
+        sed -i 's/\/home\/runner\/work\/connect-php-sdk\/connect-php-sdk\//\/github\/workspace\//g' phpunit.xml
+        sed -i 's/\/home\/runner\/work\/connect-php-sdk\/connect-php-sdk\//\/github\/workspace\//g' coverage-report.clover
     - name: SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
       env:
