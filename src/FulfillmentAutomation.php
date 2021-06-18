@@ -42,9 +42,9 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
     {
         try {
             if ($this->config->products && !in_array(
-                    $tierConfigRequest->configuration->product->id,
-                    $this->config->products
-                )) {
+                $tierConfigRequest->configuration->product->id,
+                $this->config->products
+            )) {
                 return 'Invalid product';
             }
 
@@ -60,14 +60,14 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 $this->tierConfiguration->sendRequest(
                     'POST',
                     Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::APPROVE_SUFFIX,
-                    json_encode(['template' => ['id' => $msg->templateid]])
+                    json_encode(['template' => ['id' => $msg->templateid ]])
                 );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->tierConfiguration->sendRequest(
                     'POST',
                     Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::APPROVE_SUFFIX,
-                    json_encode(['template' => ['representation' => $msg->activationTile]])
+                    json_encode(['template' => ['representation' => $msg->activationTile ]])
                 );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
