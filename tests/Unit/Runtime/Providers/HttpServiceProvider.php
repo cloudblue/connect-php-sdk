@@ -16,7 +16,7 @@ class HttpServiceProvider extends ServiceProvider
         $body = \Mockery::mock('\Psr\Http\Message\StreamInterface');
 
         $body->shouldReceive('getContents')
-            ->times(23)
+            ->times(17)
             ->andReturn(
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
                 trim(file_get_contents(__DIR__ . '/request.valid.TierConfig.json')),
