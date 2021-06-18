@@ -42,9 +42,9 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
     {
         try {
             if ($this->config->products && !in_array(
-                $tierConfigRequest->configuration->product->id,
-                $this->config->products
-            )) {
+                    $tierConfigRequest->configuration->product->id,
+                    $this->config->products
+                )) {
                 return 'Invalid product';
             }
 
@@ -60,14 +60,14 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 $this->tierConfiguration->sendRequest(
                     'POST',
                     Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::APPROVE_SUFFIX,
-                    json_encode(['template' => ['id' => $msg->templateid ]])
+                    json_encode(['template' => ['id' => $msg->templateid]])
                 );
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->tierConfiguration->sendRequest(
                     'POST',
                     Constants::TIER_CONFIG_REQUESTS_PATH . $tierConfigRequest->id . Constants::APPROVE_SUFFIX,
-                    json_encode(['template' => ['representation' => $msg->activationTile ]])
+                    json_encode(['template' => ['representation' => $msg->activationTile]])
                 );
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
@@ -124,11 +124,6 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                     Constants::REQUESTS_PATH . $request->id . Constants::APPROVE_SUFFIX,
                     json_encode(['template_id' => $msg->templateid])
                 );
-                try {
-                    $request->conversation()->addMessage('Activated using template ' . $msg->templateid);
-                } catch (\Exception $e) {
-                    $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
-                }
                 $processingResult = 'succeed (Activated using template ' . $msg->templateid . ')';
             } else {
                 $this->fulfillment->sendRequest(
@@ -136,22 +131,14 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                     Constants::REQUESTS_PATH . $request->id . Constants::APPROVE_SUFFIX,
                     json_encode(['activation_tile' => $msg->activationTile])
                 );
-                try {
-                    $request->conversation()->addMessage('Activated using Custom ActivationTile');
-                } catch (GuzzleException $e) {
-                    $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
-                }
+
                 $processingResult = 'succeed (' . $msg->activationTile . ')';
             }
         } catch (Inquire $e) {
             // update parameters and move to inquire
             $this->fulfillment->updateParameters($request, $e->params);
             $this->fulfillment->sendRequest('POST', Constants::REQUESTS_PATH . $request->id . Constants::INQUIRE_SUFFIX, ($e->templateId != null) ? json_encode(['template_id' => $msg->templateId]) : '{}');
-            try {
-                $request->conversation()->addMessage($e->getMessage());
-            } catch (GuzzleException $e) {
-                $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
-            }
+
             $processingResult = 'inquire';
         } catch (Fail $e) {
             // fail request
@@ -160,11 +147,6 @@ abstract class FulfillmentAutomation extends AutomationEngine implements Fulfill
                 Constants::REQUESTS_PATH . $request->id . Constants::FAIL_SUFFIX,
                 json_encode(['reason' => $e->getMessage()])
             );
-            try {
-                $request->conversation()->addMessage($e->getMessage());
-            } catch (\Exception $e) {
-                $this->logger->error(Constants::GENERIC_CONVERSATION_ERROR_MESSAGE . $request->id);
-            }
             $processingResult = 'fail';
         } catch (Skip $e) {
             try {
