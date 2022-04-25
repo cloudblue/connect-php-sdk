@@ -26,7 +26,7 @@ This library can be utilized in your project for the automation of the fulfillme
 - Generate and upload usage files to report usage for active contracts and listings
 - Process usage file status changes
 - Work with Notes for requests
-- Generate logs
+- Generate meaningful logs
 - Collect debug logs in case of failure
 
 Your code may use any scheduler to execute, from a simple cron to a cloud scheduler like the ones available in Azure, Google, Amazon or other cloud platforms.
